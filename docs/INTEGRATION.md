@@ -19,6 +19,8 @@ The parent hub has **four media tiles** despite five repositories. Movies and TV
 ## Cross-repo package adoption
 Private npm workspaces work **inside Shared Core only**. `@taiyou/contracts` and `@taiyou/ui` cannot be assumed importable from another private repo. Do not publish them until a concrete versioning/distribution ADR covers access control, semver, release pipeline, update tooling and rollback. Consider private GitHub Packages with scoped read permissions or a dedicated release process only when at least two apps need identical stable functionality.
 
+**Mandatory RFC entry point:** [docs/rfcs/TEMPLATE.md](rfcs/TEMPLATE.md) and [the RFC process](rfcs/README.md). Require two independent media-app consumers, exact proposed interface, runtime validation, accessibility, release version, distribution/permissions, consumer tests, bundle-size impact, migration, rollback and separate owning-app approval. A Shared Core RFC does not authorise edits to the other repositories.
+
 ## Auth boundary
 Different Cloudflare `pages.dev` hostnames do not share origin-scoped sessions. The Novel app's encrypted OAuth cookie belongs only to that app. Future central SSO needs identity provider, redirect URL registry, CSRF, PKCE, logout, token lifetimes, per-app authorisation and failure isolation, documented in an ADR. No token storage in a Vite environment variable or hub URL.
 
