@@ -1,0 +1,23 @@
+*{box-sizing:border-box}
+:root{font-family:Inter,system-ui,sans-serif;color:#eee9de;background:#101b2b;
+font-synthesis:none;text-rendering:optimizeLegibility}
+body{margin:0;min-height:100vh}
+a{color:inherit}
+.hub-shell{max-width:1180px;margin:auto;padding:clamp(24px,5vw,72px)}
+.hub-header{display:flex;align-items:flex-start;gap:22px;margin-bottom:46px}
+.hub-sun{font-size:46px;color:#d9b975}
+.hub-eyebrow{font-size:11px;font-weight:800;letter-spacing:.24em;color:#e2c88e}
+h1{font-family:Georgia,serif;font-size:clamp(37px,6vw,66px);line-height:1.08;margin:8px 0 14px}
+.hub-intro{color:#bec9d8;line-height:1.6;margin:0}
+.hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.hub-card{display:flex;flex-direction:column;gap:12px;min-height:220px;padding:28px;
+border:1px solid #405269;border-radius:18px;background:#192b40;text-decoration:none}
+a.hub-card:hover{border-color:#e0c084;background:#213650}
+a.hub-card:focus-visible{outline:3px solid #e0c084;outline-offset:4px}
+.hub-card-icon{font-size:30px}.hub-card-title{font:700 27px Georgia,serif}
+.hub-card-description{color:#bdc8d7;line-height:1.5}
+.hub-card-status{margin-top:auto;color:#e3c788;font-size:12px;font-weight:750}
+.hub-card-planned{opacity:.78}
+.hub-footer{padding-top:40px;font-size:12px;color:#afbed0;line-height:1.6}
+@media(max-width:640px){.hub-grid{grid-template-columns:1fr}.hub-header{gap:12px}
+.hub-card{min-height:188px;padding:22px}}
