@@ -4,9 +4,9 @@
 - `packages/contracts/src/index.test.ts`: namespaced identities, invalid segments and 1–10 rating boundaries.
 - `apps/hub/src/catalogue.test.ts`: registry of four library tiles, known Novel URL, absent/planned destinations and rejection of unsafe URL inputs.
 - `apps/hub/src/App.test.tsx`: four semantic cards, skip link, verified live link only, passive planned tiles.
-- `apps/hub/tests/navigation.spec.ts`: Chromium viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
-- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px.
-- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium browser tests and production dependency advisory gate on Ubuntu.
+- `apps/hub/tests/navigation.spec.ts`: Chromium/Firefox/WebKit viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
+- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px. Verified cross-browser example: [PR #5 run 44316165382](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44316165382) passed 13 tests per engine (39 total) at SHA `c5d746070609f28f9975d4a68d9b8855e9bcd667`.
+- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium/Firefox/WebKit browser tests, per-engine non-sensitive screenshots and production dependency advisory gate on Ubuntu.
 
 ## Historical and latest verified evidence
 GitHub Actions initially failed to allocate runners. After source visibility changed, [run 44279776833 attempt 2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279776833) succeeded with 20 unit tests and build at `92ab67838f05a7a91b4511946ccb2df76aa51027`.
@@ -26,4 +26,4 @@ npm run test:browser
 Browser tests start a temporary local Vite server with all future module URLs explicitly blank, never navigate to private media APIs and cannot fetch user catalogue data.
 
 ## Additional release gates
-Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability, Firefox/Safari coverage, CSP and frame/referrer headers on the **actual future deployed** origin, destination domain ownership, performance/bundle review and owner-approved staging/deploy/rollback. Axe passing does not prove all accessibility requirements. A green CI run is **not** proof of production deployment or independent media-app integration.
+Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability, native macOS Safari coverage, CSP and frame/referrer headers on the **actual future deployed** origin, destination domain ownership, performance/bundle review and owner-approved staging/deploy/rollback. Axe passing does not prove all accessibility requirements. A green CI run is **not** proof of production deployment or independent media-app integration.

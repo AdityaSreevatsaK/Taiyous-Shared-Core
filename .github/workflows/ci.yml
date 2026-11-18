@@ -39,8 +39,12 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
 
   browser:
-    name: Chromium responsive, keyboard and WCAG A/AA tests
+    name: Browser (${{ matrix.browser }}) responsive, keyboard and WCAG A/AA tests
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
@@ -49,15 +53,19 @@ jobs:
           cache: npm
       - name: Install locked workspace dependencies
         run: npm ci --no-audit --no-fund
-      - name: Install Chromium and system libraries
-        run: npx playwright install --with-deps chromium
-      - name: Hub browser tests
-        run: npm run test:browser
+      - name: Install ${{ matrix.browser }} and system libraries
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Build local workspace libraries for the browser suite
+        run: |
+          npm run build -w @taiyou/contracts
+          npm run build -w @taiyou/ui
+      - name: Hub browser tests for the selected engine only
+        run: npm run test:browser -w @taiyou/hub -- --project=${{ matrix.browser }}
       - name: Upload visual-review screenshots
         if: success()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: hub-visual-review
+          name: hub-visual-review-${{ matrix.browser }}
           path: apps/hub/test-results/**/hub-*.png
           if-no-files-found: error
           retention-days: 7
@@ -65,7 +73,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: chromium-failure-report
+          name: browser-failure-${{ matrix.browser }}
           path: |
             apps/hub/playwright-report/
             apps/hub/test-results/

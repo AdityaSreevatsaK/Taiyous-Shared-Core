@@ -1,18 +1,19 @@
 # Shared Core and Personal Hub Roadmap
 
-## Phase 0: foundation (current)
+## Phase 0: foundation (implemented)
 - [x] Five-repository architecture chosen.
 - [x] Shared Core private npm workspace and navigation-only Hub scaffold.
 - [x] Experimental identity/rating contracts and pure media card component.
 - [x] Node 22 TypeScript/React/Vite build and initial tests.
 - [x] Agent, architecture, security, integration, operations and decision documentation.
-- [ ] Merge the already-generated workspace `package-lock.json` and locked Ubuntu/Windows/Chromium CI from Hub PR #2 into `master`.
+- [x] Merge real workspace `package-lock.json` and locked Ubuntu/Windows/Chromium CI through Hub PR #2 (master `62120926fca93d0f9be5b61d8d9c05d9bfda36fb`).
 - [x] Confirm a real GitHub runner and green Node 22 CI (see validation status; first green master SHA `c2fde47c1ad577c06540e40e1bf4175c6c8a77ae`).
 - [ ] Confirm GitHub description/topics manually.
 
 ## Phase 1: excellent parent hub
 - [ ] Owner approves design direction and responsive screenshot review.
-- [ ] Review the committed Chromium/axe/keyboard/responsive results and screenshots, then complete manual visual and screen-reader acceptance before release.
+- [x] Run automated Chromium, Firefox and WebKit keyboard/responsive/axe WCAG A/AA tests and inspect representative screenshots (PR #5).
+- [ ] Complete manual visual, 200% zoom and screen-reader acceptance before release.
 - [ ] Keep unavailable modules plainly planned; no dummy redirects.
 - [ ] Verify the Novel Library link remains valid without copying its data.
 
