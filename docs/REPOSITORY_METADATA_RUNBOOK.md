@@ -25,7 +25,7 @@ The connected GitHub app can edit code and pull requests but does not expose the
 - It does not clear existing homepage URLs for new apps; it only sets the known verified Novel Library homepage.
 - GitHub descriptions/topics are public metadata even when repository contents are private; they contain no credentials or user data.
 - If your GitHub CLI lacks permission, stop and use the GitHub About gear manually. Never paste tokens into repository files or an agent prompt.
-- The existing Novel Library source repository is currently PUBLIC. Four new repositories are PRIVATE. Visibility is a separate user decision and is not modified here.
+- Shared Core source and the existing Novel Library source are PUBLIC. The Manga, Anime and Movies & TV repositories were last recorded as PRIVATE. Only the owner controls visibility; this helper never changes it. Visibility is a separate user decision and is not modified here.
 
 ## Manual alternative
 Open each repo → About gear → Description, Website, Topics and paste the exact values in `docs/REPOSITORY_SETTINGS.md`. Verify the page after saving.

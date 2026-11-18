@@ -1,23 +1,29 @@
-# Cross-Repo Quality and Verification Matrix
+# Quality and Verification Matrix
 
-## Implemented tests
-- `packages/contracts/src/index.test.ts`: kind/provider ID namespacing, illegal segments and personal rating boundaries.
-- `apps/hub/src/catalogue.test.ts`: module registry contains exactly four modules and configured links must be HTTPS.
-- TypeScript strict checks for contracts, UI and hub; production build generates static hub assets.
-- CI does NOT currently perform browser automation, dependency-lock verification or external deployment checks; do not claim otherwise.
+## Automated coverage
+- `packages/contracts/src/index.test.ts`: namespaced identities, invalid segments and 1–10 rating boundaries.
+- `apps/hub/src/catalogue.test.ts`: registry of four library tiles, known Novel URL, absent/planned destinations and rejection of unsafe URL inputs.
+- `apps/hub/src/App.test.tsx`: four semantic cards, skip link, verified live link only, passive planned tiles.
+- `apps/hub/tests/navigation.spec.ts`: Chromium viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
+- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px.
+- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium browser tests and production dependency advisory gate on Ubuntu.
 
-## Tests to add before a hub release
-1. Render four cards across 320px, 390px, 768px and 1440px; no overflow, correct focus order, readable contrast.
-2. Verify configured external HTTPS links are correct, safe and open without unexpected token transfer.
-3. Verify unconfigured tiles are NOT buttons/links and communicate 'Coming later'.
-4. Keyboard/screen-reader label tests, reduced motion, zoom at 200%, colour contrast.
-5. Offline hub load after controlled asset caching (if a PWA is later approved), with a documented non-cached fallback.
-6. CSP/header tests on the actual Cloudflare Pages origin once deployed.
-7. Contract package consumer fixture build and backwards-compatible API tests before publishing.
-8. Regression test that four media apps do not require the hub's availability to start.
+## Historical and latest verified evidence
+GitHub Actions initially failed to allocate runners. After source visibility changed, [run 44279776833 attempt 2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279776833) succeeded with 20 unit tests and build at `92ab67838f05a7a91b4511946ccb2df76aa51027`.
 
-## Cross-app acceptance review
-When Shared Core supplies UI/contracts to another repo, the consuming app runs its own tests independently. Screenshot/component diffs, performance/bundle-size measurements and fallback to prior pinned version must be documented.
+[Run 44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935) passed at `68e55bfa22510733bed208e9fedeeb7038deefe4`: both OS quality jobs (20 unit tests each) plus Chromium browser job (7 tests), all using the real committed lockfile and `npm ci`. A later lockfile update added `@axe-core/playwright` via a temporary Node 22 workflow; new tests are **not** considered verified until their matching run succeeds. Read the actual latest job before reporting a pass.
 
-## Release gate
-Locked install, full build, unit and browser tests, verified domains, accessibility, privacy/security checks, owner-approved staging and rollback. A simple Vite build is insufficient.
+## Local reproduction
+```bash
+npm ci
+npm run typecheck
+npm test
+npm run build
+npx playwright install chromium
+npm run test:browser
+```
+
+Browser tests start a temporary local Vite server with all future module URLs explicitly blank, never navigate to private media APIs and cannot fetch user catalogue data.
+
+## Additional release gates
+Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability, Firefox/Safari coverage, CSP and frame/referrer headers on the **actual future deployed** origin, destination domain ownership, performance/bundle review and owner-approved staging/deploy/rollback. Axe passing does not prove all accessibility requirements. A green CI run is **not** proof of production deployment or independent media-app integration.

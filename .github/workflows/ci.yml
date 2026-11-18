@@ -1,20 +1,73 @@
 name: Verify Shared Core and Hub
+
 on:
   push:
     branches: [master]
   pull_request:
+
 permissions:
   contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality:
-    runs-on: ubuntu-latest
+    name: Build and unit tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '22'
-      # Generate and commit a workspace lockfile, then switch to npm ci.
-      - run: npm install --no-audit --no-fund
-      - run: npm run typecheck
-      - run: npm test
-      - run: npm run build
+          cache: npm
+      - name: Install locked workspace dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Production build
+        run: npm run build
+      - name: Audit production dependencies for high/critical advisories
+        if: matrix.os == 'ubuntu-latest'
+        run: npm audit --omit=dev --audit-level=high
+
+  browser:
+    name: Chromium responsive, keyboard and WCAG A/AA tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked workspace dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium and system libraries
+        run: npx playwright install --with-deps chromium
+      - name: Hub browser tests
+        run: npm run test:browser
+      - name: Upload visual-review screenshots
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: hub-visual-review
+          path: apps/hub/test-results/**/hub-*.png
+          if-no-files-found: error
+          retention-days: 7
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: chromium-failure-report
+          path: |
+            apps/hub/playwright-report/
+            apps/hub/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
