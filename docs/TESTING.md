@@ -5,8 +5,8 @@
 - `apps/hub/src/catalogue.test.ts`: registry of four library tiles, known Novel URL, absent/planned destinations and rejection of unsafe URL inputs.
 - `apps/hub/src/App.test.tsx`: four semantic cards, skip link, verified live link only, passive planned tiles.
 - `apps/hub/tests/navigation.spec.ts`: Chromium/Firefox/WebKit viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
-- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px. Cross-browser project configuration is a proposed follow-up; each new browser needs green CI evidence.
-- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium browser tests and production dependency advisory gate on Ubuntu.
+- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px. Verified cross-browser example: [PR #5 run 44316165382](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44316165382) passed 13 tests per engine (39 total) at SHA `c5d746070609f28f9975d4a68d9b8855e9bcd667`.
+- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium/Firefox/WebKit browser tests, per-engine non-sensitive screenshots and production dependency advisory gate on Ubuntu.
 
 ## Historical and latest verified evidence
 GitHub Actions initially failed to allocate runners. After source visibility changed, [run 44279776833 attempt 2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279776833) succeeded with 20 unit tests and build at `92ab67838f05a7a91b4511946ccb2df76aa51027`.

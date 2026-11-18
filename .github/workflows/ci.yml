@@ -53,7 +53,7 @@ jobs:
           cache: npm
       - name: Install locked workspace dependencies
         run: npm ci --no-audit --no-fund
-      - name: Install Chromium and system libraries
+      - name: Install ${{ matrix.browser }} and system libraries
         run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Build local workspace libraries for the browser suite
         run: |

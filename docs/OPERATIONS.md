@@ -26,7 +26,7 @@ The first Actions runs failed without executing steps. **That historical runner 
 - Playwright Chromium, Firefox and WebKit keyboard, responsive and automated WCAG A/AA checks, plus per-engine screenshot artifacts for visual review.
 - Read-only GITHUB_TOKEN in ordinary CI; pinned official action commits; no auto-deploy, publishing or paid API calls.
 
-Example verified Node 22 locked-install/quality/browser run: [44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935), PR branch commit `68e55bfa22510733bed208e9fedeeb7038deefe4`. Later changes require their **own** green run. Follow [validation status](VALIDATION_STATUS_2026-11-18.md) for history.
+Example verified Node 22 locked-install/quality/browser run: [44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935), PR branch commit `68e55bfa22510733bed208e9fedeeb7038deefe4`. Cross-browser extension passed [run 44316165382](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44316165382) with 39 browser tests across three engines. Later changes require their **own** green run. Follow [validation status](VALIDATION_STATUS_2026-11-18.md) for history.
 
 ## Public navigation destinations
 `.env.example` lists **public-only** `VITE_*` URLs. The existing Novel Library is the sole verified default; other apps remain non-interactive until the owning agent confirms a real, owner-controlled HTTPS deployment. URL parsing rejects non-HTTPS, embedded credentials, local/IP hosts, alternate ports, queries and fragments. URL syntax alone does **not** verify site ownership. Do not put OAuth tokens, private media, reading history or credentials in frontend environment variables.

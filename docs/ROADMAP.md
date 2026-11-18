@@ -12,7 +12,8 @@
 
 ## Phase 1: excellent parent hub
 - [ ] Owner approves design direction and responsive screenshot review.
-- [ ] Review the committed Chromium/axe/keyboard/responsive results and screenshots, then complete manual visual and screen-reader acceptance before release.
+- [x] Run automated Chromium, Firefox and WebKit keyboard/responsive/axe WCAG A/AA tests and inspect representative screenshots (PR #5).
+- [ ] Complete manual visual, 200% zoom and screen-reader acceptance before release.
 - [ ] Keep unavailable modules plainly planned; no dummy redirects.
 - [ ] Verify the Novel Library link remains valid without copying its data.
 
