@@ -39,3 +39,30 @@ test('reduced motion does not hide or disable navigation', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('a.hub-card')).toBeVisible();
 });
+
+test('Hub loads without requesting any third-party catalogue or media', async ({ page }) => {
+  const unexpectedOrigins = new Set<string>();
+  page.on('request', request => {
+    const origin = new URL(request.url()).origin;
+    if (origin !== 'http://127.0.0.1:5173') unexpectedOrigins.add(origin);
+  });
+  await page.goto('/');
+  await expect(page.locator('.hub-card')).toHaveCount(4);
+  expect([...unexpectedOrigins]).toEqual([]);
+});
+
+test('Novel link navigates without referrer or a live external request', async ({ page }) => {
+  let referrer: string | undefined;
+  await page.route('https://taiyous-personal-library.pages.dev/**', async route => {
+    referrer = route.request().headers()['referer'];
+    await route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: '<!doctype html><html lang="en"><head><title>Novel library stub</title></head><body>Test only</body></html>',
+    });
+  });
+  await page.goto('/');
+  await page.locator('a.hub-card').click();
+  await expect(page).toHaveURL('https://taiyous-personal-library.pages.dev/');
+  expect(referrer).toBeUndefined();
+});

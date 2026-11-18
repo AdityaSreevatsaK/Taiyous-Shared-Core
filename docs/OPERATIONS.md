@@ -10,7 +10,7 @@ npm ci --no-audit --no-fund
 npm run typecheck
 npm test
 npm run build
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm run test:browser
 npm run dev
 ```
@@ -23,7 +23,7 @@ The first Actions runs failed without executing steps. **That historical runner 
 `.github/workflows/ci.yml` now requires:
 - A clean `npm ci`, typecheck, unit tests and production build on Ubuntu and Windows.
 - Production-only high/critical npm audit on Ubuntu.
-- Chromium keyboard, responsive and automated WCAG A/AA checks, plus screenshot artifacts for visual review.
+- Playwright Chromium, Firefox and WebKit keyboard, responsive and automated WCAG A/AA checks, plus per-engine screenshot artifacts for visual review.
 - Read-only GITHUB_TOKEN in ordinary CI; pinned official action commits; no auto-deploy, publishing or paid API calls.
 
 Example verified Node 22 locked-install/quality/browser run: [44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935), PR branch commit `68e55bfa22510733bed208e9fedeeb7038deefe4`. Later changes require their **own** green run. Follow [validation status](VALIDATION_STATUS_2026-11-18.md) for history.
