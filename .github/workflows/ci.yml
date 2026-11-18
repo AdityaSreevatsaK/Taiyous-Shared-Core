@@ -55,8 +55,12 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Install Chromium and system libraries
         run: npx playwright install --with-deps ${{ matrix.browser }}
-      - name: Hub browser tests
-        run: npm run test:browser -- --project=${{ matrix.browser }}
+      - name: Build local workspace libraries for the browser suite
+        run: |
+          npm run build -w @taiyou/contracts
+          npm run build -w @taiyou/ui
+      - name: Hub browser tests for the selected engine only
+        run: npm run test:browser -w @taiyou/hub -- --project=${{ matrix.browser }}
       - name: Upload visual-review screenshots
         if: success()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
