@@ -17,7 +17,7 @@ The ecosystem has five GitHub repositories:
 
 ## What exists today
 ```text
-apps/hub/                   Vite + React parent site, accessible link tiles
+apps/hub/                   Vite + React responsive gateway, honest link states
 packages/contracts/         Version 0 experimental identity and rating contracts
 packages/ui/                Stateless reusable MediaHubCard presentation component
 docs/                       Authoritative architecture, security, operations and agent instructions
@@ -29,8 +29,9 @@ The hub links to the **verified existing Novel Library**. Other module tiles rem
 1. Clone this private repository and open in your editor.
 2. Run `npm install`. Initial scaffold has no committed lockfile; **generate and commit package-lock.json in the first dependency PR**.
 3. Run `npm run typecheck`, `npm test`, `npm run build`.
-4. Run `npm run dev` to build local shared packages and start the Vite hub (typically http://127.0.0.1:5173).
-5. Optional: copy `.env.example` to `.env.local` and add public HTTPS URLs only once the corresponding apps are deployed and verified.
+4. For browser checks, run `npx playwright install chromium` then `npm run test:browser` after installing dependencies.
+5. Run `npm run dev` to build local shared packages and start the Vite hub (typically http://127.0.0.1:5173).
+6. Optional: copy `.env.example` to `.env.local` and add public HTTPS URLs only once the corresponding apps are deployed and verified.
 
 ## Commands
 | Command | Meaning |
@@ -38,8 +39,9 @@ The hub links to the **verified existing Novel Library**. Other module tiles rem
 | `npm install` | Install npm workspaces and link private local packages |
 | `npm run dev` | Build contracts/UI then run hub locally |
 | `npm run typecheck` | Check all three workspaces |
-| `npm test` | Pure contracts and hub registry tests |
+| `npm test` | Contracts, URL-policy and server-rendered Hub tests |
 | `npm run build` | Build contracts, UI and production hub assets |
+| `npm run test:browser` | Chromium keyboard and responsive browser checks (install Playwright browser first) |
 
 ## Boundaries
 - No React component should read Hugging Face tokens, OAuth sessions, IndexedDB or private media without an explicit consuming-app boundary.

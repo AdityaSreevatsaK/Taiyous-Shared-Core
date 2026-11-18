@@ -28,7 +28,7 @@ The owner wants five repositories total. Hosting `apps/hub` in Shared Core avoid
 - `packages/contracts`: MediaKind and ModuleKey, namespaced ID builder with URL-safe segments, optional personal rating validator.
 - `packages/ui`: a pure `MediaHubCard` React component that returns a link only when a configured destination is available.
 - `apps/hub`: four module tiles, novels link to verified production address and other links are explicit 'Coming later', no data storage.
-- Tests for contract identifier and media module registry, typecheck/build.
+- Source tests for contracts, URL validation, server-rendered card semantics and Chromium keyboard/responsive behaviour. Typecheck/build/browser execution is still gated on a real install and working GitHub Actions runners.
 No login, datastore, media APIs, service worker or auto-deployment.
 
 ## Context boundaries

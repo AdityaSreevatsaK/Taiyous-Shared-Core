@@ -23,3 +23,6 @@ Example run: https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/run
 - GitHub About descriptions/topics have a documented, owner-run helper but are not programmatically applied.
 
 Do not enable automatic release or weaken a required quality gate merely to turn this result green.
+
+## Later work on the same date (not merged)
+Draft [Hub PR #2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/2) adds responsive UI, safe navigation, SSR/registry test sources and Chromium browser tests. Its PR run [44278961781](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44278961781) also failed before any step executed. [RFC PR #3](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/3) is documentation-only; [its run 44279189198](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279189198) also shows no job steps. Node v22.16.0 is available in the agent environment but npm registry DNS is unavailable, so the genuine workspace lockfile and build/test execution remain unverified. [Issue #4](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/4) tracks the release gate. No Hub deployment is claimed.

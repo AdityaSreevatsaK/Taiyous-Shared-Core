@@ -38,3 +38,6 @@ Write ADRs for auth, persistence, cross-media collections, cross-app search and 
 
 ## First milestone
 Finish and verify the hub scaffold and docs, generate a reproducible npm lockfile, add functional keyboard/mobile tests for link state, and consider the first small reused component only after another app requests it. No need to invent a central identity service.
+
+## Test evidence is not test code
+A committed Playwright, Vitest or typecheck configuration is not evidence of execution. Before approval, require successful Node 22 locked install, typecheck, unit tests, build and browser run with exact SHA. If GitHub Actions returns zero job steps, investigate account/runner entitlement rather than asserting code failure or passing checks. Keep all optional module links disabled until their owner-controlled HTTPS deployments have been checked.

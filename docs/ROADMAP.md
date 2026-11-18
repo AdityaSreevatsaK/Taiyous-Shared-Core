@@ -12,7 +12,7 @@
 
 ## Phase 1: excellent parent hub
 - [ ] Owner approves design direction and responsive screenshot review.
-- [ ] Add keyboard/mobile/browser tests, colour themes, accessible navigation and graceful error states.
+- [ ] Execute and review committed browser/keyboard/responsive test sources on a real Node 22 checkout; complete visual and accessibility acceptance before release.
 - [ ] Keep unavailable modules plainly planned; no dummy redirects.
 - [ ] Verify the Novel Library link remains valid without copying its data.
 

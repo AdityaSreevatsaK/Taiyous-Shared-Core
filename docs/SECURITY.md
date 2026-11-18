@@ -4,7 +4,7 @@
 The Hub is a static navigation app and currently holds NO user catalogue, credentials, media text or private images. Risks include linking to spoofed domains, leaking auth credentials in URLs, XSS from untrusted metadata, cross-origin cookies, malicious package publishing, dependency compromise, and accidental public release of private files.
 
 ## Controls implemented in the scaffold
-- Only HTTPS navigation links accepted for optional modules.
+- Hub registry accepts public-looking HTTPS navigation links only, rejecting credentials, local/IP hosts, non-default ports and URL queries/fragments. The shared card also prevents obvious invalid links. Domain ownership still needs manual deployment verification.
 - Planned modules without valid links render non-interactive cards.
 - No fetch of private media and no shared authentication.
 - Namespaced cross-media IDs validate safe segments.
