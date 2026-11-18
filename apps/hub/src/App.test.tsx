@@ -2,10 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MediaHubCard } from '@taiyou/ui';
 import App from './App';
+import { createHubModules } from './catalogue';
 
 describe('accessible Hub markup', () => {
   it('renders four named library tiles and a working skip link', () => {
-    const html = renderToStaticMarkup(<App />);
+    const html = renderToStaticMarkup(<App entries={createHubModules()} />);
     expect(html).toContain('href="#libraries"');
     expect(html).toContain('id="libraries"');
     expect((html.match(/class="hub-card hub-card-/g) ?? [])).toHaveLength(4);
@@ -15,11 +16,11 @@ describe('accessible Hub markup', () => {
   });
 
   it('renders only a live link for the default Novels destination', () => {
-    const html = renderToStaticMarkup(<App />);
+    const html = renderToStaticMarkup(<App entries={createHubModules()} />);
     expect(html).toContain('href="https://taiyous-personal-library.pages.dev/"');
     expect((html.match(/class="hub-card hub-card-available"/g) ?? [])).toHaveLength(1);
     expect((html.match(/class="hub-card hub-card-planned"/g) ?? [])).toHaveLength(3);
-    expect(html).toContain('referrerpolicy="no-referrer"');
+    expect(html.toLowerCase()).toContain('referrerpolicy="no-referrer"');
     expect(html).toContain('Coming later');
   });
 

@@ -1,11 +1,12 @@
 import { MediaHubCard } from '@taiyou/ui';
+import type { MediaModule } from '@taiyou/contracts';
 import { modules } from './catalogue';
 import './styles.css';
 
 const glyphs = ['✦', '◇', '◈', '▣'] as const;
 
-export default function App() {
-  const available = modules.filter(module => module.availability === 'available').length;
+export default function App({ entries = modules }: { entries?: readonly MediaModule[] }) {
+  const available = entries.filter(module => module.availability === 'available').length;
   return <>
     <a className="hub-skip-link" href="#libraries">Skip to libraries</a>
     <main className="hub-shell">
@@ -35,10 +36,10 @@ export default function App() {
             <p className="hub-eyebrow">THE COLLECTION</p>
             <h2 id="hub-libraries-title">Choose your library</h2>
           </div>
-          <p className="hub-section-count">{available} available · {modules.length - available} planned</p>
+          <p className="hub-section-count">{available} available · {entries.length - available} planned</p>
         </div>
         <ul className="hub-grid">
-          {modules.map((module, index) =>
+          {entries.map((module, index) =>
             <li key={module.key} className={`hub-tile hub-tile--${module.key}`}>
               <MediaHubCard title={module.title} description={module.description}
                 status={module.availability} href={module.href} icon={glyphs[index]} />

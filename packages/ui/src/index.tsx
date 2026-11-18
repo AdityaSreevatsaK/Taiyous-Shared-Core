@@ -19,7 +19,10 @@ export function MediaHubCard({ title, description, status, href, icon }: MediaHu
     try {
       const url = new URL(href);
       if (url.protocol === 'https:' && !url.username && !url.password &&
-        !url.search && !url.hash) safeHref = url.toString();
+        !url.search && !url.hash && !url.port &&
+        url.hostname.includes('.') && !/^\d+\.\d+\.\d+\.\d+$/.test(url.hostname)) {
+        safeHref = url.toString();
+      }
     } catch {
       // Invalid input is a planned card, never a dead or unsafe link.
     }
@@ -34,7 +37,7 @@ export function MediaHubCard({ title, description, status, href, icon }: MediaHu
       <h3 className="hub-card-title">{title}</h3>
       <p className="hub-card-description">{description}</p>
     </div>
-    <span className="hub-card-status" aria-label={available ? 'Open library' : undefined}>
+    <span className="hub-card-status">
       {available ? 'Enter library' : 'Coming later'}
       {available ? <span aria-hidden="true"> ↗</span> : null}
     </span>

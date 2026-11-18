@@ -14,7 +14,7 @@ export function publicHttpsDestination(value: string | undefined): string | unde
     // local hosts. Never forward query parameters or fragments from config.
     if (url.protocol !== 'https:' || url.username || url.password ||
       url.port || url.search || url.hash ||
-      !/^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(hostname) ||
+      !/^(?=.{1,253}$)[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/i.test(hostname) ||
       hostname === 'localhost' || hostname.endsWith('.localhost') ||
       /^\d+\.\d+\.\d+\.\d+$/.test(hostname)) return undefined;
     return url.toString();
