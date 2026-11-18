@@ -8,7 +8,7 @@ const [index, headers, assets] = await Promise.all([
   readFile(new URL('_headers', dist), 'utf8'),
   readdir(new URL('assets/', dist)),
 ]);
-assert.ok(headers.startsWith('/*\n'), 'Headers must apply to all static routes');
+assert.equal(headers.split(/\r?\n/, 1)[0], '/*', 'Headers must apply to all static routes');
 for (const header of [
   'Content-Security-Policy:', 'Referrer-Policy: no-referrer',
   'X-Content-Type-Options: nosniff', 'X-Frame-Options: DENY',
