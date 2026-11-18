@@ -1,19 +1,22 @@
 # Design Language, Themes and Accessibility
 
-## Vision
-A cohesive visual family across all Taiyou applications without identical layouts. Novel reading needs calm typography; Manga needs full-width immersive images; Anime needs episodic progress; Movies & TV needs flexible media detail views. Reuse tokens, spacing and stateless components, not whole pages.
+## Intent
+Share a coherent visual family without forcing identical layouts. The Hub is a lightweight editorial gateway; novels, manga, anime and films retain their own reading/viewing experiences. The Hub has no downloaded fonts, images or decorative network requests.
 
-## Initial tokens (scaffold)
-Hub CSS uses deep navy background (#101b2b), panels (#192b40), light body text and warm gold accents. This is a starting palette, not a locked design system. Future themes should use semantic variables such as `--surface`, `--surface-raised`, `--text`, `--text-muted`, `--focus`, and `--accent`. Avoid global element resets in a published UI package.
+## Hub-only semantic tokens
+The current Hub uses CSS variables in `apps/hub/src/styles.css`: `--background`, `--surface`, `--surface-raised`, `--text`, `--text-muted`, `--accent`, `--border` and `--focus`. These are scoped to the Hub bundle and **are not published as a shared cross-repo theme**. Card accent colours vary by media class but status is always conveyed in words, not colour alone. System sans-serif and a local serif heading avoid third-party font requests.
 
-## Shared component contract
-Every exported component requires a documented prop type, semantic purpose, focus/keyboard rules, high contrast, responsive behaviour, CSS isolation and story/test examples. `MediaHubCard` is presentational; it cannot open dead links or fetch data on render. Add optional theme slots rather than coupling components to one media's routes.
+## Current component boundary
+`MediaHubCard` is a stateless React component. It renders an anchor only when marked available with a safe HTTPS destination; planned/invalid destinations render non-interactive articles. Both states have a heading, description and text status. It has no data fetching, side effects, cookie access or ownership of media progress. Its `hub-card-*` CSS remains Hub-owned until a genuine second consumer justifies extracting styling.
 
-## Mobile and usability
-Validate 320/375/390px devices, tablet 768px and desktop 1280/1440px. No overlapping icons, offscreen dropdowns, inaccessible modal Close controls or fake dual-selected tabs. Keep touch targets 40–44 CSS px, keyboard focus visible and icons labelled when they perform actions. Use colour plus text/status for meaningful states.
+## Accessible interaction
+- A visible-on-focus Skip to libraries link precedes the content.
+- Real links provide a visible focus outline and no referrer.
+- Planned tiles cannot receive keyboard focus or trigger navigation.
+- Heading order: page H1, section H2, library H3; cards are an unordered list.
+- Breakpoints: 320, 390, 768 and 1280 px are browser-test targets.
+- Motion is decorative only and disabled on reduced-motion preference.
+- No fake buttons, autoplay assets, hover-only content or hidden destination links.
 
-## Motion and media
-Support `prefers-reduced-motion`, lazy-cover loading, small bundles and no autoplay. Respect real cover art provenance; do not fabricate covers while claiming originals. No giant ornamental background assets downloaded on every route change.
-
-## Adoption test
-Before changing a shared token or component, demonstrate at least two consuming layouts and check that their UI remains distinct, accessible and fast.
+## Before independent-app adoption
+Require two real consumers, API/ARIA examples, CSS isolation, accessibility and visual tests, bundle-size comparison, pinned package distribution, compatibility and rollback. A shared dark palette is not a mandate for identical application design.

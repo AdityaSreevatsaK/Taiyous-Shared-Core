@@ -1,34 +1,30 @@
 # Shared Core Development, Build and Release Runbook
 
-## Workspaces and prerequisites
-Node.js 22+, npm, Git; Windows PowerShell and Linux supported. No paid cloud account or token is required for the scaffold. Workspaces: `@taiyou/contracts`, `@taiyou/ui`, `@taiyou/hub`. The contracts and UI libraries compile before the hub imports their `dist` output.
+## Workspace setup
+Node.js 22+, npm and Git are required. This is a private three-workspace repository: `@taiyou/contracts`, `@taiyou/ui` and `@taiyou/hub`. No paid cloud service or secret is required.
 
-~~~powershell
-git clone https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core.git
-cd Taiyous-Shared-Core
-npm install
+```bash
+npm install --no-audit --no-fund
 npm run typecheck
 npm test
 npm run build
+npx playwright install chromium
+npm run test:browser
 npm run dev
-~~~
+```
 
-`npm run dev` builds libraries first, then starts Vite; change a shared package and rerun its build to refresh the current experimental hub. This is not HMR-connected workspace publishing.
+The root `test` and `test:browser` scripts build the local libraries first so standalone test invocations do not depend on stale `dist` files. The Vite dev server is local, usually at http://127.0.0.1:5173.
 
-## Lockfile and dependencies
-An initial lockfile was not committed with scaffolding. `npm install` generates `package-lock.json` covering **all npm workspaces**. Commit it in the first dependency PR and switch CI from `npm install` to `npm ci` with lockfile-backed caching. Review dependency advisories before a real deployment. Avoid silent 'latest' upgrades.
+## Reproducible dependencies and blocked Actions
+The initial scaffold did not commit a workspace `package-lock.json`. Generate the lockfile with a **real** Node 22 npm install from a trusted network, review it, commit it, and switch `.github/workflows/ci.yml` to `npm ci` with lockfile-backed caching. Never hand-craft a lockfile or claim CI is deterministic without it.
 
-## Quality checks
-`npm run typecheck`: all workspaces. `npm test`: pure contract and module-registry tests. `npm run build`: TypeScript build for contracts/UI followed by Vite hub. UI/browser E2E is NOT yet present and must be added before production.
+Initial GitHub Actions runs failed before a runner executed any steps. The observed job has an empty steps array; job logs are unavailable. Account-level Actions runner/billing/usage settings may require owner access. Once jobs can start, rerun and record job URLs and exact commit SHA. Do not disable required security gates as a workaround.
 
-## Environment and deployment
-`.env.example` contains only public optional URLs. Vite includes values of `VITE_*` variables in the browser; **never place secrets**. No automatic deployment is configured. To propose Cloudflare Pages: decide project name/domain, static output `apps/hub/dist`, build command `npm run build`, CSP/headers, custom-domain ownership, accessibility and manually gated production process. Owner approval required before creation or publishing.
+## Hub destination ownership
+`.env.example` lists **public** `VITE_*` destinations only. Never store secrets. The Novel Library URL is the only verified default. For an optional module: confirm a working HTTPS deployment belongs to the owner, check the destination with a normal browser, and only then set its `VITE_*` value. URL parsing rejects credentials, local hosts, non-HTTPS, query parameters and fragments; this is **not proof of site ownership**. Invalid/missing links render planned tiles.
 
-## PR conventions
-Feature branch from latest `master`, clear issue/ADR reference, tests, architecture impact and no implied changes to other repos. Changes to package APIs require a consumer-compatibility table, semver plan and manual migration/rollback. Never push directly to the Novel Library.
+## PR and release boundaries
+Feature branches from `master`; keep changes and reviews focused. Independent media repositories do not import this source automatically. No deployment, GitHub visibility changes, package publishing, live media access or SSO without separate owner approval. Future Cloudflare Pages release requires a domain choice, CSP/header review, screenshot/keyboard acceptance, `apps/hub/dist` output, manual production approval and a rollback.
 
-## Build failures
-Check Node version, root workspace installation, `packages/contracts/dist/index.js` and `packages/ui/dist/index.js` after build. Package workspaces are private and unpublished; external repos cannot resolve them without an approved distribution process. Do not work around this by copying artifacts blindly.
-
-## Recovery
-Code: revert commit/PR and re-run checks. Hub deployment (future): redeploy last known-good build, validate HTTPS links, avoid changing media repo DNS. No catalogue data lives in the hub and it must never become a hidden source of truth.
+## Troubleshooting
+After installing, verify `packages/contracts/dist/index.js` and `packages/ui/dist/index.js` exist. Running `npm test` from the root builds these automatically. If GitHub Actions still fails with no executed steps, investigate account/runner scheduling instead of treating it as a TypeScript failure. Revert a problematic PR as a code rollback; publishing and app deployment are independent.

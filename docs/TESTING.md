@@ -1,23 +1,30 @@
 # Cross-Repo Quality and Verification Matrix
 
-## Implemented tests
-- `packages/contracts/src/index.test.ts`: kind/provider ID namespacing, illegal segments and personal rating boundaries.
-- `apps/hub/src/catalogue.test.ts`: module registry contains exactly four modules and configured links must be HTTPS.
-- TypeScript strict checks for contracts, UI and hub; production build generates static hub assets.
-- CI does NOT currently perform browser automation, dependency-lock verification or external deployment checks; do not claim otherwise.
+## Tests committed
+- Contract unit tests cover namespaced identifiers, illegal segments and rating bounds.
+- Hub registry unit tests cover four keys, the verified Novel Library fallback, planned states, optional valid HTTPS links, and unsafe URL rejection (credentials, non-HTTPS, local hosts, tokens in queries/fragments).
+- React server-rendered markup tests cover the four cards, skip link, one live destination and three non-clickable planned cards.
+- Browser test sources in `apps/hub/tests/navigation.spec.ts` cover Chromium keyboard focus, status/link safety, reduced-motion smoke and no horizontal overflow at 320/390/768/1280 px.
 
-## Tests to add before a hub release
-1. Render four cards across 320px, 390px, 768px and 1440px; no overflow, correct focus order, readable contrast.
-2. Verify configured external HTTPS links are correct, safe and open without unexpected token transfer.
-3. Verify unconfigured tiles are NOT buttons/links and communicate 'Coming later'.
-4. Keyboard/screen-reader label tests, reduced motion, zoom at 200%, colour contrast.
-5. Offline hub load after controlled asset caching (if a PWA is later approved), with a documented non-cached fallback.
-6. CSP/header tests on the actual Cloudflare Pages origin once deployed.
-7. Contract package consumer fixture build and backwards-compatible API tests before publishing.
-8. Regression test that four media apps do not require the hub's availability to start.
+## How to validate with Node 22+
+1. `npm install --no-audit --no-fund`, then commit its generated `package-lock.json`.
+2. `npm run typecheck`
+3. `npm test`
+4. `npm run build`
+5. `npx playwright install chromium`
+6. `npm run test:browser`
 
-## Cross-app acceptance review
-When Shared Core supplies UI/contracts to another repo, the consuming app runs its own tests independently. Screenshot/component diffs, performance/bundle-size measurements and fallback to prior pinned version must be documented.
+Browser tests start a local Vite server and explicitly clear unverified destination environment variables. They do not visit the Novel Library or any private data store.
 
-## Release gate
-Locked install, full build, unit and browser tests, verified domains, accessibility, privacy/security checks, owner-approved staging and rollback. A simple Vite build is insufficient.
+## Execution status
+As of the scaffold audit on 18 November 2026, the GitHub Actions runner could not execute a job and no step logs existed. Local validation must not be marked passing unless dependencies were successfully installed and commands completed. The agent working on this PR should append precise results to the PR description and update the validation record when actual evidence exists. The browser suite is not yet a green CI gate.
+
+## Still required before a public hub release
+- Real browser/screen-reader review, zoom to 200%, contrast checks in current Chromium/Firefox/Safari.
+- External destination ownership and HTTPS deployment checks.
+- CSP, X-Frame-Options/frame-ancestors, Referrer-Policy and caching headers on the actual production origin.
+- Package consumer fixture and bundle-size comparison before shared component distribution.
+- Private-data and auth boundary review for any later integration.
+- Owner-approved staging, release and rollback.
+
+The Hub must remain optional: each media app functions even if the Hub is unavailable.
