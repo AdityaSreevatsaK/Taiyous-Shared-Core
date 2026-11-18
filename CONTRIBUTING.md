@@ -13,7 +13,7 @@ This repository owns npm workspaces, contract types, UI component and hub. Refer
 7. Merge only when acceptable under current owner policy and after correctly assessing CI outcomes. Record actual merge SHA and deployment separately.
 
 ## Local validation
-Node 22+, run `npm install`, `npm run typecheck`, `npm test`, `npm run build`. An initial lockfile is not yet committed; generate and commit it, then update CI to use `npm ci`.
+Node 22+, run `npm ci`, `npm run typecheck`, `npm test`, `npm run build` and `node scripts/verify-hub-static.mjs`. The workspace lockfile is committed; update it only in reviewed dependency changes.
 
 ## Security and data
 No private media, real personal records, credentials, OAuth tokens or owner passphrases in Git, log files, PR descriptions, screenshots or client-exposed environment variables. Don't bypass access restrictions. Destructive data operations require explicit owner approval and verified backup/revision protection.

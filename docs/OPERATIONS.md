@@ -10,6 +10,7 @@ npm ci --no-audit --no-fund
 npm run typecheck
 npm test
 npm run build
+node scripts/verify-hub-static.mjs
 npx playwright install chromium firefox webkit
 npm run test:browser
 npm run dev
@@ -30,6 +31,9 @@ Example verified Node 22 locked-install/quality/browser run: [44313286935](https
 
 ## Public navigation destinations
 `.env.example` lists **public-only** `VITE_*` URLs. The existing Novel Library is the sole verified default; other apps remain non-interactive until the owning agent confirms a real, owner-controlled HTTPS deployment. URL parsing rejects non-HTTPS, embedded credentials, local/IP hosts, alternate ports, queries and fragments. URL syntax alone does **not** verify site ownership. Do not put OAuth tokens, private media, reading history or credentials in frontend environment variables.
+
+## Staged-release policy
+Vite copies `apps/hub/public/_headers` into the built static output. CI checks the built file and assets, but only HTTP inspection after a future staging deployment can establish that Cloudflare actually serves the intended headers. See [Hub deployment preparation](HUB_DEPLOYMENT_PREPARATION.md).
 
 ## Release controls
 Never infer deployment from a passing build. The Hub has no live project/hostname, login server, shared database or synchronised data. Creating a Cloudflare Pages project requires owner approval, a reviewed access/privacy policy, verified custom domains, CSP/referrer/frame headers, manual visual/screen-reader testing, rollback and an independent release. No sibling-repository changes, force pushes, visibility changes or package publication are authorised here.
