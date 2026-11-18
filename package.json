@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run dev -w @taiyou/hub",
     "build": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run build -w @taiyou/hub",
-    "typecheck": "npm run typecheck -w @taiyou/contracts && npm run typecheck -w @taiyou/ui && npm run typecheck -w @taiyou/hub",
+    "typecheck": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run typecheck -w @taiyou/contracts && npm run typecheck -w @taiyou/ui && npm run typecheck -w @taiyou/hub",
     "test": "npm run test -w @taiyou/contracts && npm run test -w @taiyou/hub"
   },
   "devDependencies": {
