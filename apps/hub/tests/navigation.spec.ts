@@ -10,6 +10,7 @@ for (const width of [320, 390, 768, 1280]) {
     await expect(page.locator('article.hub-card')).toHaveCount(3);
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(scrollWidth).toBeLessThanOrEqual(width);
+    await page.screenshot({ path: test.info().outputPath(`hub-${width}.png`), fullPage: true });
   });
 }
 
