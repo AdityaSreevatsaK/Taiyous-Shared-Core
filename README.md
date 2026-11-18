@@ -1,6 +1,6 @@
 # Taiyou's Shared Core & Personal Hub
 
-> **Private, early-stage foundational repository.** This repository contains the experimental contracts package, one deliberately small React UI package, and a functioning, navigation-only Personal Hub. It does NOT implement shared authentication, private media storage, cross-library search, synchronisation or automatic deployment.
+> **Public, early-stage source repository with unpublished internal packages.** This repository contains the experimental contracts package, one deliberately small React UI package, and a functioning, navigation-only Personal Hub. It does NOT implement shared authentication, private media storage, cross-library search, synchronisation or automatic deployment.
 
 ## Mission and philosophy
 Build a beautiful parent gateway to the five-repository Taiyou media ecosystem and extract reusable source code only when a second independent media app proves the reuse is worthwhile. **Shared Core is primarily a versioned source-code library, not an always-online microservice.**
@@ -26,8 +26,8 @@ docs/                       Authoritative architecture, security, operations and
 The hub links to the **verified existing Novel Library**. Other module tiles remain plainly **Coming later** until actual HTTPS destinations are configured. There is no user data in the hub.
 
 ## Local setup (Node.js 22+)
-1. Clone this private repository and open in your editor.
-2. Run `npm install`. Initial scaffold has no committed lockfile; **generate and commit package-lock.json in the first dependency PR**.
+1. Clone this repository and open it in your editor.
+2. Run `npm ci`. The root workspace `package-lock.json` is committed and is verified in CI.
 3. Run `npm run typecheck`, `npm test`, `npm run build`.
 4. For browser checks, run `npx playwright install chromium` then `npm run test:browser` after installing dependencies.
 5. Run `npm run dev` to build local shared packages and start the Vite hub (typically http://127.0.0.1:5173).
@@ -36,7 +36,7 @@ The hub links to the **verified existing Novel Library**. Other module tiles rem
 ## Commands
 | Command | Meaning |
 | --- | --- |
-| `npm install` | Install npm workspaces and link private local packages |
+| `npm ci` | Reproducibly install all npm workspaces from the lockfile |
 | `npm run dev` | Build contracts/UI then run hub locally |
 | `npm run typecheck` | Check all three workspaces |
 | `npm test` | Contracts, URL-policy and server-rendered Hub tests |
@@ -46,7 +46,7 @@ The hub links to the **verified existing Novel Library**. Other module tiles rem
 ## Boundaries
 - No React component should read Hugging Face tokens, OAuth sessions, IndexedDB or private media without an explicit consuming-app boundary.
 - No shared database or mandatory runtime service. Each library must continue working if the hub is down.
-- The Hub is a public-navigation concept; a private repo does **not** make a deployed static website private.
+- This source repository is public. The Hub has **not** been deployed. Future deployments need their own access and privacy decisions; repository visibility does not protect a hosted website.
 - The Novel Library's origin-specific OAuth cannot become ecosystem-wide SSO by copying cookies.
 - Package adoption is not automatic: the first use of `@taiyou/contracts` or `@taiyou/ui` in another repository requires versioning, compatibility tests and a coordinated PR.
 - No monorepo migration of the working Novel Library and no forced dependency upgrades.
@@ -55,4 +55,4 @@ The hub links to the **verified existing Novel Library**. Other module tiles rem
 [Agent rules](AGENTS.md) · [Architecture](docs/ARCHITECTURE.md) · [Contracts](docs/DATA_CONTRACTS.md) · [Extraction inventory](docs/REUSABILITY_INVENTORY.md) · [Integration](docs/INTEGRATION.md) · [Security](docs/SECURITY.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Testing](docs/TESTING.md) · [Operations](docs/OPERATIONS.md) · [Roadmap](docs/ROADMAP.md) · [Decisions](docs/DECISIONS.md) · [Settings](docs/REPOSITORY_SETTINGS.md) · [Five-repo metadata updater](docs/REPOSITORY_METADATA_RUNBOOK.md) · [Current validation status](docs/VALIDATION_STATUS_2026-11-18.md) · [Agent handover](docs/SESSION_HANDOVER_PROMPT.md).
 
 ## Deployment status
-No Cloudflare Pages project or production hostname has been configured for this hub. Running a build proves only buildability, not a release. The four library repos deploy independently after owner approval.
+No Cloudflare Pages project or production hostname has been configured for this hub. The source is public, but `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still unpublished workspace code. Running a build proves only buildability, not a release. The four library repos deploy independently after owner approval.

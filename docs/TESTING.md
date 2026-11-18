@@ -1,30 +1,29 @@
-# Cross-Repo Quality and Verification Matrix
+# Quality and Verification Matrix
 
-## Tests committed
-- Contract unit tests cover namespaced identifiers, illegal segments and rating bounds.
-- Hub registry unit tests cover four keys, the verified Novel Library fallback, planned states, optional valid HTTPS links, and unsafe URL rejection (credentials, non-HTTPS, local hosts, tokens in queries/fragments).
-- React server-rendered markup tests cover the four cards, skip link, one live destination and three non-clickable planned cards.
-- Browser test sources in `apps/hub/tests/navigation.spec.ts` cover Chromium keyboard focus, status/link safety, reduced-motion smoke and no horizontal overflow at 320/390/768/1280 px.
+## Automated coverage
+- `packages/contracts/src/index.test.ts`: namespaced identities, invalid segments and 1–10 rating boundaries.
+- `apps/hub/src/catalogue.test.ts`: registry of four library tiles, known Novel URL, absent/planned destinations and rejection of unsafe URL inputs.
+- `apps/hub/src/App.test.tsx`: four semantic cards, skip link, verified live link only, passive planned tiles.
+- `apps/hub/tests/navigation.spec.ts`: Chromium viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
+- `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px.
+- `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium browser tests and production dependency advisory gate on Ubuntu.
 
-## How to validate with Node 22+
-1. `npm install --no-audit --no-fund`, then commit its generated `package-lock.json`.
-2. `npm run typecheck`
-3. `npm test`
-4. `npm run build`
-5. `npx playwright install chromium`
-6. `npm run test:browser`
+## Historical and latest verified evidence
+GitHub Actions initially failed to allocate runners. After source visibility changed, [run 44279776833 attempt 2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279776833) succeeded with 20 unit tests and build at `92ab67838f05a7a91b4511946ccb2df76aa51027`.
 
-Browser tests start a local Vite server and explicitly clear unverified destination environment variables. They do not visit the Novel Library or any private data store.
+[Run 44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935) passed at `68e55bfa22510733bed208e9fedeeb7038deefe4`: both OS quality jobs (20 unit tests each) plus Chromium browser job (7 tests), all using the real committed lockfile and `npm ci`. A later lockfile update added `@axe-core/playwright` via a temporary Node 22 workflow; new tests are **not** considered verified until their matching run succeeds. Read the actual latest job before reporting a pass.
 
-## Execution status
-As of the scaffold audit on 18 November 2026, the GitHub Actions runner could not execute a job and no step logs existed. Local validation must not be marked passing unless dependencies were successfully installed and commands completed. The agent working on this PR should append precise results to the PR description and update the validation record when actual evidence exists. The browser suite is not yet a green CI gate.
+## Local reproduction
+```bash
+npm ci
+npm run typecheck
+npm test
+npm run build
+npx playwright install chromium
+npm run test:browser
+```
 
-## Still required before a public hub release
-- Real browser/screen-reader review, zoom to 200%, contrast checks in current Chromium/Firefox/Safari.
-- External destination ownership and HTTPS deployment checks.
-- CSP, X-Frame-Options/frame-ancestors, Referrer-Policy and caching headers on the actual production origin.
-- Package consumer fixture and bundle-size comparison before shared component distribution.
-- Private-data and auth boundary review for any later integration.
-- Owner-approved staging, release and rollback.
+Browser tests start a temporary local Vite server with all future module URLs explicitly blank, never navigate to private media APIs and cannot fetch user catalogue data.
 
-The Hub must remain optional: each media app functions even if the Hub is unavailable.
+## Additional release gates
+Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability, Firefox/Safari coverage, CSP and frame/referrer headers on the **actual future deployed** origin, destination domain ownership, performance/bundle review and owner-approved staging/deploy/rollback. Axe passing does not prove all accessibility requirements. A green CI run is **not** proof of production deployment or independent media-app integration.

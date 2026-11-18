@@ -1,28 +1,21 @@
-# Scaffolding Validation Status (18 November 2026)
+# CI and Build Validation, 18 November 2026
 
-## What was actually committed
-npm workspaces, contract types, UI component and hub. The hub has a functioning source scaffold but no deployed URL or SSO.
-All documentation and source changes are on branch `chore/ecosystem-foundation-20261118` (with a PR); inspect `master` for merge state.
+## Outcome and history
+Earlier Actions runs failed before a runner executed a single step. They were **not** failed TypeScript tests. The owner subsequently changed **Shared Core** to a public GitHub repository, after which the runner successfully started. The specific former account-level scheduling cause was not independently confirmed.
 
-## Automated checks: blocked before execution
-GitHub Actions marked the PR checks **failure** on 18 November 2026 and returned **zero executed job steps / no runner logs**. That means **no typecheck, test, build or security check ran**. It is misleading to call these code/test failures or passing checks. The underlying scheduling/permissions/billing cause has not been verified by this session.
+## Real executed verification
+1. [Run 44279776833, attempt 2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279776833) passed at `92ab67838f05a7a91b4511946ccb2df76aa51027`: Node 22 install, TypeScript, 20 unit tests, Vite production build.
+2. [Temporary lockfile bootstrap](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44312830330) passed and the GitHub Actions bot committed the generated workspace `package-lock.json`. A clean `npm ci`, typecheck, unit tests and build passed on the runner. The temporary workflow was then removed.
+3. [Run 44313286935](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44313286935) passed at `68e55bfa22510733bed208e9fedeeb7038deefe4`: Ubuntu and Windows locked-install/typecheck/20 unit tests/build, plus 7 Chromium keyboard/responsive smoke tests.
+4. [Temporary accessibility dependency lockfile bootstrap](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44314221124) passed, including clean install, typecheck, unit tests and build. The bot committed a refreshed lockfile for `@axe-core/playwright` on the Hub branch. The temporary workflow is removed in the next commit.
+5. **The newer axe-core WCAG browser tests and npm production audit require their matching new CI run; never report them as passing from the older run.**
 
-Example run: https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44256448469
+## Current scope
+- Shared Core and Hub source public; `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` remain experimental, not published or adopted by sibling apps.
+- [RFC PR #3](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/3) merged at `c2fde47c1ad577c06540e40e1bf4175c6c8a77ae`, following a green workflow.
+- [Hub PR #2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/2) holds the accessible gateway and CI improvements, pending its final new checks.
+- There is **no Hub deployment, login server, shared search or private catalogue** in this repository. Passing CI does not publish a website.
+- [Former runner-blocker issue #4](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/4) should be closed only once the final PR gate remains green, with the historical cause labelled unconfirmed.
 
-## Required next verification
-1. In GitHub Actions inspect the failed job's annotations and repository/account Actions usage, runner and billing settings. Only the owner can view some account-level details.
-2. Restore runner execution without disabling security gates. Re-run the PR workflow.
-3. Generate and commit an npm lockfile (`npm install` in a trusted clone), switch CI to `npm ci` and re-run all three scripts.
-4. Fix genuine code/type/test problems surfaced by the first completed run, then record evidence and SHA.
-5. Verify UI on a narrow mobile and desktop viewport before a production claim.
-6. Reinspect actual repo state; this status file is a dated snapshot, not permanent proof of failure.
-
-## Other known limitations
-- No private storage/auth, production deployment, image/video playback or provider integrations exist in the new scaffold.
-- Shared Core's workspace packages are not published and cannot be imported by independent repos yet.
-- GitHub About descriptions/topics have a documented, owner-run helper but are not programmatically applied.
-
-Do not enable automatic release or weaken a required quality gate merely to turn this result green.
-
-## Later work on the same date (not merged)
-Draft [Hub PR #2](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/2) adds responsive UI, safe navigation, SSR/registry test sources and Chromium browser tests. Its PR run [44278961781](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44278961781) also failed before any step executed. [RFC PR #3](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/3) is documentation-only; [its run 44279189198](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44279189198) also shows no job steps. Node v22.16.0 is available in the agent environment but npm registry DNS is unavailable, so the genuine workspace lockfile and build/test execution remain unverified. [Issue #4](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/4) tracks the release gate. No Hub deployment is claimed.
+## Untested/manual release gates
+Manual screen-reader/200% zoom testing, Firefox and Safari, deployment CSP/frame/referrer response headers, domain-ownership review, production hostname/staging, independent-app resilience verification and actual visual acceptance remain outstanding. No cross-repository package adoption is approved.

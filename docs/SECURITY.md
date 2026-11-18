@@ -24,7 +24,7 @@ The Hub is a static navigation app and currently holds NO user catalogue, creden
 There is currently no cross-app SSO. Same-origin HttpOnly cookies from the Novel Library do not authenticate the other deployments. Do not weaken SameSite or copy OAuth tokens to browser storage to make the experience appear unified.
 
 ## Repo/public visibility
-Four newly created repos are private; existing Novel Library source is public while its HF dataset remains private. Do not modify repository visibility without explicit consent. A private source repo may deploy to a public Cloudflare Pages URL, which needs separate privacy controls.
+Shared Core source is now **public by explicit owner action**. The existing Novel Library source is also public, while its Hugging Face dataset is private. Manga, Anime and Movies & TV were last recorded as private; do not change their visibility. Public GitHub source and future Cloudflare Pages access are separate privacy decisions. Never put private data, source secrets or credentials in static assets, screenshots or Actions artifacts.
 
 ## External rights
 No movies, novels, manga images or anime assets may be copied into this repository for examples. Use text-only placeholders or clearly original/generated fixture assets where approved. Link to existing user-owned applications only.

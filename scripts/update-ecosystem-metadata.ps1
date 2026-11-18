@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 $repos = @(
   @{
     Repo = 'AdityaSreevatsaK/Taiyous-Shared-Core'
-    Description = "Private shared contracts, UI components and Personal Hub for Taiyou's novels, manga, anime, movies and TV libraries."
+    Description = "Shared contracts, UI components and Personal Hub for Taiyou's novels, manga, anime, movies and TV libraries."
     Homepage = ''
     Topics = @('personal-hub','shared-ui','typescript','react','monorepo','media-library','design-system')
   },

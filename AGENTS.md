@@ -13,7 +13,7 @@ This is the **cross-repository architecture coordination repository**, not the o
 1. Inspect latest `master`, branches, pull requests, workflows and deployment state.
 2. Read `README.md`, this `AGENTS.md` and every relevant `docs/*.md`.
 3. Build a source inventory with implemented vs planned behaviour; verify all links/versions.
-4. Run `npm install`, `npm run typecheck`, `npm test` and `npm run build`.
+4. With Node.js 22, run `npm ci`, `npm run typecheck`, `npm test`, `npm run build`, install Chromium and run `npm run test:browser`.
 5. State current blockers, then implement an approved increment with tests on a short-lived branch, review diff and make a PR.
 6. Report exact results, what was not exercised, links to PR and any integration changes other agents must adopt.
 
@@ -41,3 +41,6 @@ Finish and verify the hub scaffold and docs, generate a reproducible npm lockfil
 
 ## Test evidence is not test code
 A committed Playwright, Vitest or typecheck configuration is not evidence of execution. Before approval, require successful Node 22 locked install, typecheck, unit tests, build and browser run with exact SHA. If GitHub Actions returns zero job steps, investigate account/runner entitlement rather than asserting code failure or passing checks. Keep all optional module links disabled until their owner-controlled HTTPS deployments have been checked.
+
+## Visibility and build evidence (18 November 2026)
+Shared Core source is **public by owner choice**; this does not publish npm packages, authorise sibling-repo visibility changes or deploy the Hub. The workspace lockfile is generated on a trusted hosted Node 22 runner. CI uses locked npm installs on Ubuntu and Windows, a production dependency audit and Chromium browser/keyboard/automated WCAG checks. Require real green jobs with matching SHA before merging; manual screen-reader/visual review remains separate.

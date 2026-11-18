@@ -6,13 +6,13 @@
 - [x] Experimental identity/rating contracts and pure media card component.
 - [x] Node 22 TypeScript/React/Vite build and initial tests.
 - [x] Agent, architecture, security, integration, operations and decision documentation.
-- [ ] Commit generated workspace `package-lock.json` and use locked CI install.
-- [ ] Run and fix first GitHub CI on `master`, record its SHA.
+- [ ] Merge the already-generated workspace `package-lock.json` and locked Ubuntu/Windows/Chromium CI from Hub PR #2 into `master`.
+- [x] Confirm a real GitHub runner and green Node 22 CI (see validation status; first green master SHA `c2fde47c1ad577c06540e40e1bf4175c6c8a77ae`).
 - [ ] Confirm GitHub description/topics manually.
 
 ## Phase 1: excellent parent hub
 - [ ] Owner approves design direction and responsive screenshot review.
-- [ ] Execute and review committed browser/keyboard/responsive test sources on a real Node 22 checkout; complete visual and accessibility acceptance before release.
+- [ ] Review the committed Chromium/axe/keyboard/responsive results and screenshots, then complete manual visual and screen-reader acceptance before release.
 - [ ] Keep unavailable modules plainly planned; no dummy redirects.
 - [ ] Verify the Novel Library link remains valid without copying its data.
 
