@@ -8,14 +8,39 @@ export interface MediaHubCardProps {
   href?: string;
   icon?: ReactNode;
 }
-/** Pure presentation. No authentication, fetching, cookies or navigation side effects.
- * Do not pass a link until its destination is actually configured. */
+
+/**
+ * Stateless presentation only. Styling belongs to the consuming application
+ * until a second independent consumer justifies a shared styling contract.
+ */
 export function MediaHubCard({ title, description, status, href, icon }: MediaHubCardProps) {
-  const body = <><span className="hub-card-icon" aria-hidden="true">{icon}</span>
-    <span className="hub-card-title">{title}</span>
-    <span className="hub-card-description">{description}</span>
-    <span className="hub-card-status">{status === 'available' ? 'Open library' : 'Coming later'}</span></>;
-  return href && status === 'available'
-    ? <a className="hub-card" href={href}>{body}</a>
-    : <div className="hub-card hub-card-planned" aria-disabled="true">{body}</div>;
+  let safeHref: string | undefined;
+  if (status === 'available' && href) {
+    try {
+      const url = new URL(href);
+      if (url.protocol === 'https:' && !url.username && !url.password &&
+        !url.search && !url.hash) safeHref = url.toString();
+    } catch {
+      // Invalid input is a planned card, never a dead or unsafe link.
+    }
+  }
+  const available = Boolean(safeHref);
+  const body = <>
+    <div className="hub-card-top">
+      <span className="hub-card-icon" aria-hidden="true">{icon}</span>
+      <span className="hub-card-state">{available ? 'Available' : 'In preparation'}</span>
+    </div>
+    <div className="hub-card-copy">
+      <h3 className="hub-card-title">{title}</h3>
+      <p className="hub-card-description">{description}</p>
+    </div>
+    <span className="hub-card-status" aria-label={available ? 'Open library' : undefined}>
+      {available ? 'Enter library' : 'Coming later'}
+      {available ? <span aria-hidden="true"> ↗</span> : null}
+    </span>
+  </>;
+  return available
+    ? <a className="hub-card hub-card-available" href={safeHref}
+        rel="noopener noreferrer" referrerPolicy="no-referrer">{body}</a>
+    : <article className="hub-card hub-card-planned">{body}</article>;
 }
