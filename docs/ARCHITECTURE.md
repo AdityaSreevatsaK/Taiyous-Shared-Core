@@ -27,9 +27,9 @@ The owner wants five repositories total. Hosting `apps/hub` in Shared Core avoid
 - Node 22 npm workspaces, React 18, TypeScript strict, Vite.
 - `packages/contracts`: MediaKind and ModuleKey, namespaced ID builder with URL-safe segments, optional personal rating validator.
 - `packages/ui`: a pure `MediaHubCard` React component that returns a link only when a configured destination is available.
-- `apps/hub`: four module tiles, novels link to verified production address and other links are explicit 'Coming later', no data storage.
+- `apps/hub`: four module tiles with distinct original illustrations, six device-local visual themes; novels link to the known production address and other links are explicitly non-interactive, no personal media data.
 - Executed CI verifies contracts, URL validation, card semantics, and Chromium/Firefox/WebKit responsive, keyboard and accessibility behaviour. Node 22 locked builds pass on Ubuntu and Windows. The former runner allocation blocker is resolved.
-No login, datastore, media APIs, service worker or auto-deployment.
+No login, datastore, media APIs or service worker. Cloudflare Pages Git integration is now connected, independent of GitHub Actions verification.
 
 ## Context boundaries
 **Identity:** a shared MediaIdentity is only a candidate *reference*, not a universal storage row. Movie and TV differ, manga uses pages and anime uses episodes. Each app's detailed domain models and progress are authoritative locally.
@@ -44,4 +44,4 @@ No login, datastore, media APIs, service worker or auto-deployment.
 The novel, manga, anime and movies/TV apps MUST function independently when this hub is inaccessible. A planned module without a verified HTTPS link renders a non-interactive status tile rather than a dead button. A malformed or non-HTTPS public URL is rejected.
 
 ## Deployment
-The hub has no production deployment yet. CI typechecks/tests/builds with no credentials and no paid services. Future Cloudflare Pages deployments need manual owner approval, verified routes, CSP/accessibility review and a rollback plan. Private GitHub repo visibility has no bearing on whether a deployed Pages site is public.
+Cloudflare Pages reports successful deployment checks for the connected `master` branch. External HTTP/access-policy/served-header verification is still pending; never infer live website correctness from a green build or deployment status alone. CI typechecks/tests/builds with no credentials and no paid services. Repository visibility does not guarantee hosted site privacy.
