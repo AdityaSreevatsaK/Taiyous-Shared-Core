@@ -36,7 +36,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
     <a className="hub-skip-link" href="#libraries">Skip to libraries</a>
     <main className="hub-shell">
       <header className="hub-masthead" aria-label="Taiyou's Personal Hub">
-        <a className="hub-brand" href="/" aria-label="Taiyou's Personal Hub, Home">
+        <a className="hub-brand" href="/" aria-label="Taiyou / Personal Hub, Home">
           <span className="hub-brand-mark" aria-hidden="true">☼</span>
           <span>TAIYOU <span className="hub-brand-sub">/ PERSONAL HUB</span></span>
         </a>
