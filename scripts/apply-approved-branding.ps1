@@ -39,7 +39,7 @@ try {
   foreach ($relative in $assets.Keys) {
     $preparedPath = "apps/hub/public/$relative"
     $entry = $zip.GetEntry($preparedPath)
-    if ($null -eq $entry) { $entry = $zip.GetEntry($relative) }
+    if ($null -eq $entry) { $entry = $zip.GetEntry($relative.Replace('branding/', '')) }
     if ($null -eq $entry) {
       throw "Required archive entry missing: $relative"
     }
