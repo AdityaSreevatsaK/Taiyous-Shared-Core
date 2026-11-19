@@ -24,6 +24,7 @@
 - [ ] Add package consumer fixtures and contract compatibility tests.
 
 ## Phase 3: controlled hub deployment
+- [x] Prepare static response security headers with built-output CI verification (no deployment).
 - [ ] Approve verified HTTPS domain and privacy posture.
 - [ ] Manual Cloudflare Pages release, CSP, accessibility and rollback checks.
 - [ ] Set optional module URLs only when each app is genuinely deployed.
