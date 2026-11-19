@@ -11,11 +11,13 @@
 - [ ] Confirm GitHub description/topics manually.
 
 ## Phase 1: excellent parent hub
-- [ ] Owner approves design direction and responsive screenshot review.
+- [x] Implement six Hub-local persistent themes, original illustrations and four fixed-order media cards (PR #8).
+- [ ] Owner completes manual visual approval and responsive screenshot review.
+- [ ] Commit and integrate the final approved pair of transparent Sun logos and theme-matched favicons.
 - [x] Run automated Chromium, Firefox and WebKit keyboard/responsive/axe WCAG A/AA tests and inspect representative screenshots (PR #5).
 - [ ] Complete manual visual, 200% zoom and screen-reader acceptance before release.
-- [ ] Keep unavailable modules plainly planned; no dummy redirects.
-- [ ] Verify the Novel Library link remains valid without copying its data.
+- [x] Keep unavailable modules plainly planned; no dummy redirects.
+- [ ] Independently recheck the Novel Library destination from the live Hub without copying its data.
 
 ## Phase 2: identify REAL reusable code
 - [ ] Ask at least two owners of media apps for the same UI/API requirement.
@@ -26,7 +28,8 @@
 ## Phase 3: controlled hub deployment
 - [x] Prepare static response security headers with built-output CI verification (no deployment).
 - [ ] Approve verified HTTPS domain and privacy posture.
-- [ ] Manual Cloudflare Pages release, CSP, accessibility and rollback checks.
+- [x] Connect Cloudflare Pages to the `master` branch (GitHub deployment check succeeds).
+- [ ] Independently confirm the live HTTPS response, CSP, accessibility, routing and rollback readiness.
 - [ ] Set optional module URLs only when each app is genuinely deployed.
 - [ ] No shared private backend or SSO.
 

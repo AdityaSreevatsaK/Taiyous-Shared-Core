@@ -1,7 +1,7 @@
 # Shared Core Development, Build and Release Runbook
 
 ## Workspaces
-This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace, not a deployed product.
+This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace with Cloudflare Pages Git integration connected to `master`; final live external HTTP/header verification is still pending.
 
 Requirements: Node.js 22+, npm 10+, Git. No cloud token, paid API or media assets required.
 
@@ -33,10 +33,13 @@ Example verified Node 22 locked-install/quality/browser run: [44313286935](https
 `.env.example` lists **public-only** `VITE_*` URLs. The existing Novel Library is the sole verified default; other apps remain non-interactive until the owning agent confirms a real, owner-controlled HTTPS deployment. URL parsing rejects non-HTTPS, embedded credentials, local/IP hosts, alternate ports, queries and fragments. URL syntax alone does **not** verify site ownership. Do not put OAuth tokens, private media, reading history or credentials in frontend environment variables.
 
 ## Staged-release policy
-Vite copies `apps/hub/public/_headers` into the built static output. CI checks the built file and assets, but only HTTP inspection after a future staging deployment can establish that Cloudflare actually serves the intended headers. See [Hub deployment preparation](HUB_DEPLOYMENT_PREPARATION.md).
+Cloudflare Pages now reports green deployment checks for the Hub on `master`. The configured project is `taiyous-shared-core`; the proposed hostname is `https://taiyous-shared-core.pages.dev/`. After each safe merge, inspect the matching Cloudflare status and verify the live site, routing, HTTP security headers, JS console, CSP and Novel Library navigation from an independent browser. If access to Cloudflare settings or the deployed URL is unavailable, report that limitation rather than asserting success. Vite copies `apps/hub/public/_headers` into the built static output. CI checks the built file and assets, but only HTTP inspection after a future staging deployment can establish that Cloudflare actually serves the intended headers. See [Hub deployment preparation](HUB_DEPLOYMENT_PREPARATION.md).
 
 ## Release controls
-Never infer deployment from a passing build. The Hub has no live project/hostname, login server, shared database or synchronised data. Creating a Cloudflare Pages project requires owner approval, a reviewed access/privacy policy, verified custom domains, CSP/referrer/frame headers, manual visual/screen-reader testing, rollback and an independent release. No sibling-repository changes, force pushes, visibility changes or package publication are authorised here.
+Never infer a working production page solely from a passing GitHub build or Cloudflare check. The Hub has no login server, shared database or synchronised media data. The existing owner-configured Pages project must still be checked for actual live access, CSP/referrer/frame headers, manual visual/screen-reader quality and rollback. Merging a safe, green PR is approved; changes to authentication, site privacy posture, domains, secrets or paid infrastructure are not blanket-approved. No sibling-repository changes, force pushes, visibility changes or package publication are authorised here.
 
 ## Recovery
-Revert affected commits/PRs and rerun the matrix; package version `0.0.0` has no external subscribers. When a runner fails before steps, investigate GitHub Actions entitlement/usage rather than treating it as an application failure. Once deployed (future only), restore the previous reviewed static build independently of all media apps.
+Revert affected commits/PRs and rerun the matrix; package version `0.0.0` has no external subscribers. When a runner fails before steps, investigate GitHub Actions entitlement/usage rather than treating it as an application failure. On a deployed-site regression, restore a previous reviewed Pages deployment or revert the affected `master` commit and rerun checks, independently of all media apps.
+
+## Approved artwork pending integration
+See [Branding integration](BRANDING_INTEGRATION.md). The owner supplied the final original ZIP, but the exact logo and favicon binaries have not been committed. Do not point the deployed Hub at nonexistent assets or substitute older novel-reader branding.

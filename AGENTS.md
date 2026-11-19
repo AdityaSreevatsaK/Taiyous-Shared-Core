@@ -44,3 +44,10 @@ A committed Playwright, Vitest or typecheck configuration is not evidence of exe
 
 ## Visibility and build evidence (18 November 2026)
 Shared Core source is **public by owner choice**; this does not publish npm packages, authorise sibling-repo visibility changes or deploy the Hub. The workspace lockfile is generated on a trusted hosted Node 22 runner. CI uses locked npm installs on Ubuntu and Windows, a production dependency audit and three-browser keyboard/responsive/automated WCAG checks. Require real green jobs with matching SHA before merging; manual screen-reader/visual review remains separate.
+
+
+## Active Hub release workflow (20 November 2026)
+- The owner has approved progressing through focused development, review and safe merges after matching-SHA green CI without requesting repetitive approval. This does **not** waive the prohibitions on secrets, package publishing, sibling-repo changes, paid services, destructive operations or major architecture changes.
+- Cloudflare Pages integration is connected to `master` and may deploy automatically when it changes. Check BOTH green GitHub Actions and the Cloudflare Pages deployment result after each merge. A successful Cloudflare check is not a substitute for live HTTP/header inspection and manual accessibility review.
+- All six Hub themes and media-specific cards are implemented. The **exact approved two-logo/favicons pack is still pending commit**. Do not substitute former experimental branding, alter the raster designs, or claim that the final branding is already live. See `docs/BRANDING_INTEGRATION.md`.
+- Keep separate GitHub branches/PRs and check run SHA, and continue the next safe improvement after successful validation. Never force-push `master`.
