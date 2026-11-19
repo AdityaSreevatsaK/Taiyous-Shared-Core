@@ -43,3 +43,6 @@ Revert affected commits/PRs and rerun the matrix; package version `0.0.0` has no
 
 ## Approved artwork pending integration
 See [Branding integration](BRANDING_INTEGRATION.md). The owner supplied the final original ZIP, but the exact logo and favicon binaries have not been committed. Do not point the deployed Hub at nonexistent assets or substitute older novel-reader branding.
+
+## Proving the exact deployed revision
+The Cloudflare Pages build publishes a minimal `/release.json` from the injected `CF_PAGES_COMMIT_SHA` (GitHub CI uses `GITHUB_SHA`). The independent live workflow supplies its triggering `master` commit as `EXPECTED_COMMIT_SHA` and refuses to accept a stale live build, while respecting bounded Cloudflare propagation retries. Review this marker and the public Pages hostname after each merge. It contains no credentials or media data.
