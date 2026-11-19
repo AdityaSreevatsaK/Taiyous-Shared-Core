@@ -240,3 +240,85 @@ a.hub-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px;
   .hub-card { transition: none; }
   a.hub-card:hover { transform: none; }
 }
+
+
+/* Hub-only, opt-in theme tokens. The default remains Midnight without JS. */
+:root[data-theme="midnight"] {
+  --background: #0d1927; --surface: #162839; --surface-raised: #1b3042;
+  --text: #f5f0e6; --text-muted: #bfccd3; --accent: #edcf99;
+  --border: #344959; --focus: #ffe4a0; --planned: #142333;
+  --orbital: #324454; --orbital-secondary: #203345;
+  --book: #edcf99; --manga: #9ec8c2; --anime: #b8afdf; --film: #e4b3a9;
+}
+:root[data-theme="charcoal"] {
+  color-scheme: dark; --background: #17191e; --surface: #24272f; --surface-raised: #30343d;
+  --text: #f7f4ed; --text-muted: #c4c9d2; --accent: #f2d6a3;
+  --border: #4b535e; --focus: #ffe3a5; --planned: #20232b;
+  --orbital: #46444b; --orbital-secondary: #30313a;
+  --book: #f2d6a3; --manga: #a4d5ce; --anime: #d0baf3; --film: #efb8b0;
+}
+:root[data-theme="plum"] {
+  color-scheme: dark; --background: #22182e; --surface: #30233f; --surface-raised: #3d2d4d;
+  --text: #fbf4fc; --text-muted: #d5cae0; --accent: #ebc8fa;
+  --border: #594868; --focus: #ffe4b1; --planned: #281d36;
+  --orbital: #53415c; --orbital-secondary: #382744;
+  --book: #f4d9ac; --manga: #a4dbcd; --anime: #ebc8fa; --film: #f1bbc9;
+}
+:root[data-theme="sepia"] {
+  color-scheme: light; --background: #f3e8d5; --surface: #fff9ed; --surface-raised: #fffcf5;
+  --text: #352719; --text-muted: #605140; --accent: #79501a;
+  --border: #c9b79b; --focus: #574018; --planned: #f8efdf;
+  --orbital: #e3d5bf; --orbital-secondary: #eee4d4;
+  --book: #79501a; --manga: #236b66; --anime: #68488f; --film: #994f56;
+}
+:root[data-theme="paper"] {
+  color-scheme: light; --background: #f8f7f3; --surface: #fff; --surface-raised: #f9fcfc;
+  --text: #212d33; --text-muted: #4b5860; --accent: #72501d;
+  --border: #c9d0d2; --focus: #164d70; --planned: #f2f3f1;
+  --orbital: #e0e8e9; --orbital-secondary: #f2f5f6;
+  --book: #785821; --manga: #226b65; --anime: #5d4b90; --film: #9f4c59;
+}
+:root[data-theme="ocean"] {
+  color-scheme: light; --background: #e6f3f8; --surface: #f8fdff; --surface-raised: #fff;
+  --text: #18354b; --text-muted: #3e5b6b; --accent: #165b72;
+  --border: #aac6d2; --focus: #124c72; --planned: #edf8fb;
+  --orbital: #bdd9e7; --orbital-secondary: #d9edf3;
+  --book: #79551a; --manga: #21676b; --anime: #60518d; --film: #974c5d;
+}
+body { background: var(--background); color: var(--text); }
+.hub-brand { text-decoration: none; border-radius: 5px; }
+.hub-brand:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+.hub-masthead-controls { display: flex; align-items: center; gap: 12px; }
+.hub-theme-label { color: var(--text-muted); font-size: 12px; }
+.hub-theme-select {
+  max-width: 135px; min-height: 38px; padding: 6px 30px 6px 10px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--surface); color: var(--text); font: inherit; font-size: 13px;
+  cursor: pointer;
+}
+.hub-theme-select:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.hub-hero-art { background: radial-gradient(circle, var(--orbital) 0, var(--orbital-secondary) 32%, transparent 70%); }
+.hub-tile { --tile-accent: var(--book); }
+.hub-tile--manga { --tile-accent: var(--manga); }
+.hub-tile--anime { --tile-accent: var(--anime); }
+.hub-tile--movies-tv { --tile-accent: var(--film); }
+.hub-card-planned { background: var(--planned); }
+.hub-card-icon svg { display: block; width: 64px; height: 64px; }
+.hub-card-icon { display: block; }
+.hub-card-state { border-color: var(--border); }
+.hub-card-available .hub-card-state { border-color: var(--accent); color: var(--accent); }
+.hub-card { min-height: 260px; }
+@media (max-width: 760px) {
+  .hub-hero { padding: 42px 0 38px; }
+}
+@media (max-width: 640px) {
+  .hub-masthead-controls { gap: 7px; }
+  .hub-theme-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .hub-brand-sub { display: none; }
+  .hub-hero { padding: 39px 0 34px; }
+}
+@media (max-width: 360px) {
+  .hub-theme-select { max-width: 112px; padding-left: 6px; padding-right: 18px; }
+  .hub-brand { letter-spacing: .08em; gap: 6px; }
+  .hub-brand-mark { font-size: 26px; }
+}

@@ -19,6 +19,10 @@ test('keyboard navigation skips planned cards', async ({ page }) => {
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: 'Skip to libraries' })).toBeFocused();
   await page.keyboard.press('Tab');
+  await expect(page.locator('.hub-brand')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('combobox', { name: 'Hub theme' })).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(page.locator('a.hub-card')).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.locator('a.hub-card')).not.toBeFocused();
