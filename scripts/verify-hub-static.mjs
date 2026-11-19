@@ -35,5 +35,5 @@ if (sha) {
   const revision = JSON.parse(await readFile(new URL('release.json', dist), 'utf8'));
   assert.deepEqual(revision, { commit: sha.toLowerCase() }, 'Built release manifest must identify this exact commit');
 }
-assert.match(headers, /\\/release\\.json\\r?\\n  Cache-Control: no-store/, 'Deployment marker must not be cached');
+assert.ok(headers.replaceAll('\r\n', '\n').includes('/release.json\n  Cache-Control: no-store'), 'Deployment marker must not be cached');
 console.log('Verified built Hub assets, deployment revision and static security header policy.');
