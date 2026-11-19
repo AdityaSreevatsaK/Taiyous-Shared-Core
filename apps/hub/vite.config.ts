@@ -1,4 +1,5 @@
-import process from 'node:process';
+// This config executes in Node; Hub's TypeScript scope intentionally omits Node globals.
+declare const process: { env: Record<string, string | undefined> };
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 
