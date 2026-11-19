@@ -29,7 +29,8 @@
 - [x] Prepare static response security headers with built-output CI verification (no deployment).
 - [ ] Approve verified HTTPS domain and privacy posture.
 - [x] Connect Cloudflare Pages to the `master` branch (GitHub deployment check succeeds).
-- [ ] Independently confirm the live HTTPS response, CSP, accessibility, routing and rollback readiness.
+- [x] Independently verify the live HTTPS response, static CSP/security headers, React mount and six-theme bootstrap (run 44592153330).
+- [ ] Finish live visual, screen-reader, end-to-end routing/access-policy review and rollback readiness.
 - [ ] Set optional module URLs only when each app is genuinely deployed.
 - [ ] No shared private backend or SSO.
 
