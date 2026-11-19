@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MediaHubCard } from '@taiyou/ui';
 import type { MediaModule, ModuleKey } from '@taiyou/contracts';
 import { modules } from './catalogue';
-import { applyHubTheme, HUB_THEMES, readInitialHubTheme, type HubTheme } from './theme';
+import { applyHubTheme, HUB_THEMES, isDarkHubTheme, readInitialHubTheme, type HubTheme } from './theme';
 import './styles.css';
 
 function MediaIllustration({ kind }: { kind: ModuleKey }) {
@@ -30,6 +30,7 @@ function MediaIllustration({ kind }: { kind: ModuleKey }) {
 export default function App({ entries = modules }: { entries?: readonly MediaModule[] }) {
   const [theme, setTheme] = useState<HubTheme>(readInitialHubTheme);
   const available = entries.filter(module => module.availability === 'available').length;
+  const logoSrc = `/branding/logos/logo-${isDarkHubTheme(theme) ? 'dark' : 'light'}.png`;
   useEffect(() => { applyHubTheme(theme); }, [theme]);
 
   return <>
@@ -37,7 +38,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
     <main className="hub-shell">
       <header className="hub-masthead" aria-label="Taiyou's Personal Hub">
         <a className="hub-brand" href="/" aria-label="Taiyou / Personal Hub, Home">
-          <span className="hub-brand-mark" aria-hidden="true">☼</span>
+          <img className="hub-brand-logo" src={logoSrc} alt="" width={48} height={48} aria-hidden="true" />
           <span>TAIYOU <span className="hub-brand-sub">/ PERSONAL HUB</span></span>
         </a>
         <div className="hub-masthead-controls">
@@ -58,11 +59,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
             watch and return to. Choose a library to explore.</p>
         </div>
         <div className="hub-hero-art" aria-hidden="true">
-          <div className="hub-orbit hub-orbit-outer"></div>
-          <div className="hub-orbit hub-orbit-inner"></div>
-          <span className="hub-orbit-sun">☼</span>
-          <span className="hub-orbit-star hub-orbit-star-one">✦</span>
-          <span className="hub-orbit-star hub-orbit-star-two">✧</span>
+          <img className="hub-hero-logo" src={logoSrc} alt="" width={240} height={240} />
         </div>
       </div>
       <section className="hub-libraries" id="libraries" aria-labelledby="hub-libraries-title">

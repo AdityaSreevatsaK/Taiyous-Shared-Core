@@ -31,6 +31,8 @@ export const THEME_COLOURS: Record<HubTheme, string> = {
 export function applyHubTheme(theme: HubTheme): void {
   if (typeof document === 'undefined') return;
   document.documentElement.dataset.theme = theme;
+  const favicon = document.querySelector('link[rel="icon"]');
+  favicon?.setAttribute('href', `/branding/favicons/favicon-${isDarkHubTheme(theme) ? 'dark' : 'light'}.ico`);
   document.querySelector('meta[name="theme-color"]')
     ?.setAttribute('content', THEME_COLOURS[theme]);
   // A browser-native select needs no extra popover controls or Escape handling.

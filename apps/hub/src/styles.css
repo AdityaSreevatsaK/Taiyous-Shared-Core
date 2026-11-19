@@ -322,3 +322,14 @@ body { background: var(--background); color: var(--text); }
   .hub-brand { letter-spacing: .08em; gap: 6px; }
   .hub-brand-mark { font-size: 26px; }
 }
+
+/* Approved transparent Sun artwork: full-square contain-fit, never crop rays. */
+.hub-brand-logo {
+  display: block; width: 48px; height: 48px; object-fit: contain; flex: none;
+}
+.hub-hero-art {
+  display: grid; place-items: center; overflow: visible; min-height: 265px;
+  border-radius: 35%; background: radial-gradient(circle, var(--orbital-secondary), transparent 70%);
+}
+.hub-hero-logo { display: block; width: min(100%, 248px); height: auto; object-fit: contain; }
+@media (max-width: 360px) { .hub-brand-logo { width: 40px; height: 40px; } }
