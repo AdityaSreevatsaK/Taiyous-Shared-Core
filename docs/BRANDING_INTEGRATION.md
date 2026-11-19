@@ -23,3 +23,13 @@ Both primary PNGs are transparent 1024×1024 images. Do not replace them with ra
 6. Only after a PR with the real assets and verified checks is merged may docs describe the final branding as integrated.
 
 No private catalogue, Hugging Face access or independent media repo change is required.
+
+## One-command Windows installation of the approved assets
+
+From a clean checkout of `feat/hub-approved-sun-branding`, run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/apply-approved-branding.ps1 -Archive "C:\\Downloads\\Taiyou_Shared_Hub_Approved_Branding_Assets.zip"
+```
+
+The helper accepts either the prepared ZIP or the original final-logo ZIP. It checks each original SHA-256 **before writing any file**, extracts only the four public assets, commits them on the dedicated branding branch and pushes that branch for PR #12 CI. The script refuses to run on the wrong branch or a dirty checkout. Review PR #12 Actions before marking it ready or merging; never bypass the asset-integrity checks.
