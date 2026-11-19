@@ -26,6 +26,9 @@ if ($LASTEXITCODE -ne 0 -or $dirty.Count -gt 0) {
 }
 $zipPath = (Resolve-Path -LiteralPath $Archive).Path
 Add-Type -AssemblyName System.IO.Compression
+if ($PSVersionTable.PSVersion.Major -lt 6) {
+  Add-Type -AssemblyName System.IO.Compression.FileSystem
+}
 $assets = [ordered]@{
   'branding/logos/logo-dark.png' = '7876d5730d0622033d299f00b8ecd3c5d394f23c7d67c27538f247580bc7a2f6'
   'branding/logos/logo-light.png' = 'a8949f311d18f6f13567889ba0d3e3f8f398b75177fe306f08e7ceb9bcdd825b'
