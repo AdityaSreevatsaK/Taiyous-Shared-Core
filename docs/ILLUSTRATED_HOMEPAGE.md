@@ -48,16 +48,35 @@ The landscape is repositioned upward so that the tree canopy does not cover the 
 The artwork is still independent CSS, HTML and local SVG/AVIF assets, **not a screenshot of the entire webpage**. Genuine keyboard access, persistent themes, four/two/one-column reflow and desktop 100%-zoom fit remain unchanged.
 
 
-## Artwork-only library card release (follow-up, November 2026)
-The four old complete-card AVIF assets are now historical references rather than rendered library cards. The live library tiles reference four original, locally hosted portrait SVG artworks:
+## Original detailed artwork release (21 November 2026)
+The artwork-only layout remains, with four truly detailed illustrations from the
+**original generated four-panel image approved by the owner**. The previous
+simplified SVG replacements were a mistake and have been withdrawn.
 
-| Card | Text-free vector asset | Visible text beneath |
+| Card | Exact original artwork | Visible HTML title |
 | --- | --- | --- |
-| Novel | `novels-art.svg` | Novel Library |
-| Manga | `manga-art.svg` | Manga Library |
-| Anime | `anime-art.svg` | Anime Library |
-| Movies & TV | `movies-tv-art.svg` | Movies & TV Library |
+| Novel | `novels-art.webp` | Novel Library |
+| Manga | `manga-art.webp` | Manga Library |
+| Anime | `anime-art.webp` | Anime Library |
+| Movies & TV | `movies-tv-art.webp` | Movies & TV Library |
 
-All artwork uses the same portrait viewBox and rounded, bordered display surface. The titles are separate HTML `h3` headings, not duplicated inside the SVG. Only Novel and Manga have navigable links, wrapping both the artwork and heading. The other two retain non-interactive semantics and screen-reader-only planned states. Descriptions, status badges and action buttons are not displayed in this variant.
+Each image is a cropped, high-quality WebP portrait exported from its matching
+quarter of the approved original 2172 × 724 panorama. Final dimensions are
+1086 × 1448 with the 3:4 aspect ratio preserved. Each retains the full
+detailed scene without a headline, badge, action button or watermark inside it.
 
-The homepage landscape, approved sunrise branding, six persistent themes, security policies and default Sepia remain unchanged. The grid retains a compact four-column desktop layout, two columns on tablets and one column on phones. Reflow is permitted under browser zoom; normal desktop dimensions aim to fit the footer within the viewport. Old AVIF art is kept for safe rollback and original SHA integrity verification. The SVGs are script-free, text-free, dependency-free and resolution independent.
+The HTML `h3` label appears centred **below** the image, outside its rounded
+frame. The entire image and title are linked only for Novel and Manga. Planned
+libraries remain non-interactive and announce their status to screen readers
+through visually hidden text. No duplicate titles, subtitles or visible badges
+are rendered.
+
+The homepage composition, original sunrise SVG logo and favicon, sakura landscape,
+six persistent themes and strict CSP remain unchanged. The responsive layout
+stays four desktop columns, two tablet columns and one narrow-screen column.
+Zoomed layouts reflow naturally. The former complete-card AVIF artwork remains
+available for historical comparison and rollback.
+
+The production static verification checks the precise SHA-256 digest of **each
+original detailed WebP** to detect accidental artwork substitution. All assets
+are local. No external images or tracking are loaded.
