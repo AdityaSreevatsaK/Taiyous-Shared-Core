@@ -6,10 +6,10 @@ import { applyHubTheme, HUB_THEMES, readInitialHubTheme, type HubTheme } from '.
 import './styles.css';
 
 const artwork: Record<ModuleKey, string> = {
-  novels: '/art/novels-art.svg',
-  manga: '/art/manga-art.svg',
-  anime: '/art/anime-art.svg',
-  'movies-tv': '/art/movies-tv-art.svg',
+  novels: '/art/novels-art.webp',
+  manga: '/art/manga-art.webp',
+  anime: '/art/anime-art.webp',
+  'movies-tv': '/art/movies-tv-art.webp',
 };
 
 const cardCopy: Record<ModuleKey, { title: string; description: string }> = {

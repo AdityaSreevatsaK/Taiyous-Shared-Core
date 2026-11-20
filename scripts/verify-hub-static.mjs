@@ -64,13 +64,19 @@ for (const asset of ['branding/hub-sun.svg','branding/hub-sun-logo.svg','brandin
 console.log('Verified vector sunrise logo, favicon and header blossoms.');
 
 
-const artworkFiles = ['novels-art.svg', 'manga-art.svg', 'anime-art.svg', 'movies-tv-art.svg'];
-for (const filename of artworkFiles) {
-  const svg = await readFile(new URL('art/' + filename, dist), 'utf8');
-  assert.match(svg, /<svg\b/, 'Missing replacement artwork: ' + filename);
-  assert.match(svg, /viewBox="0 0 540 720"/, 'Incorrect artwork proportions: ' + filename);
-  assert.doesNotMatch(svg, /<(?:script|text|foreignObject)\b/i, 'Text or active content in art: ' + filename);
-  assert.doesNotMatch(svg, /(?:<image\b|\b(?:href|src)\s*=\s*["'](?:https?:|data:|javascript:))/i, 'External/inline resource in art: ' + filename);
-  assert.ok(svg.length > 5000, 'Insufficient illustrated artwork detail: ' + filename);
+// Exact SHA-256 hashes tie the visible cards to the approved detailed artwork,
+// preventing a simplified replacement from accidentally reaching production.
+const detailedArtworkHashes = {
+  'novels-art.webp': '2f426b4cd1203d69b64b4f991e1b60d6693d46928e3d18270dd24684c06aec11',
+  'manga-art.webp': '8a41a4b7826642376b9ce50561c44d5ec2a9fb547a9093275b6f006dd79d46e3',
+  'anime-art.webp': '53e2145d9c2dff1e6f1cc07eda1ca5e550c1db87cb13a2c99a45e13178196e1e',
+  'movies-tv-art.webp': 'ed165c245817afee91d8eb5653a9ae07cdd5251db75d345ddd97cf7392f6d90b',
+};
+for (const [filename, expectedHash] of Object.entries(detailedArtworkHashes)) {
+  const bytes = await readFile(new URL('art/' + filename, dist));
+  assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', 'Expected a WebP RIFF image: ' + filename);
+  assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', 'Expected a WebP image: ' + filename);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), expectedHash,
+    'Incorrect original detailed Hub artwork: ' + filename);
 }
-console.log('Verified four original text-free local SVG media illustrations.');
+console.log('Verified the four exact high-resolution original media artworks.');

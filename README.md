@@ -23,7 +23,7 @@ packages/ui/                Stateless reusable MediaHubCard presentation compone
 docs/                       Authoritative architecture, security, operations and agent instructions
 .github/workflows/ci.yml    Quality checks only; never deploys automatically
 ```
-The Hub links to the **verified Novel and Manga Libraries**. Anime and Movies & TV remain plainly **In preparation** until their own HTTPS deployments are verified. The four cards sit in a single desktop row (4 × 1), a two-column tablet grid or a single-column phone layout, with four original text-free SVG illustrations and centred HTML titles beneath them, an atmospheric sakura sunrise background and accessible HTML headings and planned-state announcements (see [homepage specification](docs/ILLUSTRATED_HOMEPAGE.md)). All six Hub themes are selectable, with the preference held only in local storage. There is no personal media data in the Hub.
+The Hub links to the **verified Novel and Manga Libraries**. Anime and Movies & TV remain plainly **In preparation** until their own HTTPS deployments are verified. The four cards sit in a single desktop row (4 × 1), a two-column tablet grid or a single-column phone layout, with four original detailed, text-free WebP illustrations and centred HTML titles beneath them, an atmospheric sakura sunrise background and accessible HTML headings and planned-state announcements (see [homepage specification](docs/ILLUSTRATED_HOMEPAGE.md)). All six Hub themes are selectable, with the preference held only in local storage. There is no personal media data in the Hub.
 
 ## Local setup (Node.js 22+)
 1. Clone this repository and open it in your editor.
