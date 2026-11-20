@@ -12,6 +12,7 @@
 
 ## Phase 1: excellent parent hub
 - [x] Implement six Hub-local persistent themes, original illustrations and four fixed-order media cards (PR #8).
+- [x] Lay out cards four across on desktop, two across on tablet, one across on mobile; enable the verified Manga Library destination.
 - [ ] Owner completes manual visual approval and responsive screenshot review.
 - [ ] Commit and integrate the final approved pair of transparent Sun logos and theme-matched favicons.
 - [x] Run automated Chromium, Firefox and WebKit keyboard/responsive/axe WCAG A/AA tests and inspect representative screenshots (PR #5).
@@ -29,7 +30,8 @@
 - [x] Prepare static response security headers with built-output CI verification (no deployment).
 - [ ] Approve verified HTTPS domain and privacy posture.
 - [x] Connect Cloudflare Pages to the `master` branch (GitHub deployment check succeeds).
-- [ ] Independently confirm the live HTTPS response, CSP, accessibility, routing and rollback readiness.
+- [x] Independently verify the live HTTPS response, static CSP/security headers, React mount and six-theme bootstrap (run 44592153330).
+- [ ] Finish live visual, screen-reader, end-to-end routing/access-policy review and rollback readiness.
 - [ ] Set optional module URLs only when each app is genuinely deployed.
 - [ ] No shared private backend or SSO.
 

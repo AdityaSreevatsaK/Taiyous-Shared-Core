@@ -1,6 +1,6 @@
 # Hub Deployment Preparation
 
-**Status: prepared, NOT deployed.** The static Hub has no Cloudflare Pages project, hostname, user catalogue, secret or authentication service. Its public repository is not evidence of a live website. Explicit owner approval is required before staging or production deployment.
+**Status: deployed.** The Hub is served from `https://taiyous-shared-core.pages.dev/` through Cloudflare Pages, with independent live smoke and exact-commit checks. This document retains the original deployment preparation requirements as historical guidance. The Hub still has no user catalogue, secret, central authentication or shared database.
 
 ## Proposed Cloudflare Pages settings
 
@@ -14,7 +14,7 @@
 | Framework | Static Vite |
 | Secrets / database | None |
 
-Only the existing Novel Library HTTPS destination is enabled by default. Do not configure Manga, Anime or Movies & TV links before those independent apps have verified owner-controlled deployments. All `VITE_*` values are public browser-bundle data; never store passwords, HF tokens, OAuth secrets or private media there.
+Novel and Manga Library HTTPS destinations are enabled by default after independent owner-controlled deployment verification. Do not configure Anime or Movies & TV links before those apps have verified deployments. All `VITE_*` values are public browser-bundle data; never store passwords, HF tokens, OAuth secrets or private media there.
 
 ## Static policy and verification
 

@@ -15,11 +15,12 @@ describe('accessible Hub markup', () => {
     }
   });
 
-  it('renders only a live link for the default Novels destination', () => {
+  it('renders verified Novel and Manga destinations but leaves Anime and Movies planned', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
     expect(html).toContain('href="https://taiyous-personal-library.pages.dev/"');
-    expect((html.match(/class="hub-card hub-card-available"/g) ?? [])).toHaveLength(1);
-    expect((html.match(/class="hub-card hub-card-planned"/g) ?? [])).toHaveLength(3);
+    expect(html).toContain('href="https://taiyous-manga-library.pages.dev/"');
+    expect((html.match(/class="hub-card hub-card-available"/g) ?? [])).toHaveLength(2);
+    expect((html.match(/class="hub-card hub-card-planned"/g) ?? [])).toHaveLength(2);
     expect(html.toLowerCase()).toContain('referrerpolicy="no-referrer"');
     expect(html).toContain('Coming later');
   });

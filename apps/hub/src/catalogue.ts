@@ -31,6 +31,7 @@ export interface HubDestinations {
 }
 
 const KNOWN_NOVELS_URL = 'https://taiyous-personal-library.pages.dev/';
+const KNOWN_MANGA_URL = 'https://taiyous-manga-library.pages.dev/';
 
 function moduleOf(
   key: ModuleKey, title: string, description: string, destination?: string,
@@ -46,7 +47,8 @@ export function createHubModules(destinations: HubDestinations = {}): MediaModul
       'Stories worth staying up for. Continue into your personal EPUB library.',
       publicHttpsDestination(destinations.novels) ?? KNOWN_NOVELS_URL),
     moduleOf('manga', 'Manga',
-      'Illustrated worlds, chapter by chapter.', destinations.manga),
+      'Illustrated worlds, chapter by chapter.',
+      publicHttpsDestination(destinations.manga) ?? KNOWN_MANGA_URL),
     moduleOf('anime', 'Anime',
       'Series, seasons and episodes, all in one place.', destinations.anime),
     moduleOf('movies-tv', 'Movies & TV',

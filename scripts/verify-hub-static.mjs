@@ -1,5 +1,5 @@
-import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 
 // Validate built static output, not a hypothetical deployed response.
@@ -29,7 +29,15 @@ for (const directive of [
 assert.ok(assets.some(name => name.endsWith('.js')), 'No bundled JavaScript');
 assert.match(index, /\/assets\/[^"'\s]+\.js/, 'HTML must reference bundled local JS');
 assert.doesNotMatch(index, /<script\b(?![^>]*\bsrc=)/i, 'Inline script would violate CSP');
-console.log('Verified built Hub assets and static security header policy.');
+// In GitHub Actions and Cloudflare Pages the build must identify its exact source SHA.
+const sha = process.env.CF_PAGES_COMMIT_SHA || process.env.GITHUB_SHA;
+if (sha) {
+  assert.match(sha, /^[0-9a-f]{40}$/i, 'Invalid deployment SHA in build environment');
+  const revision = JSON.parse(await readFile(new URL('release.json', dist), 'utf8'));
+  assert.deepEqual(revision, { commit: sha.toLowerCase() }, 'Built release manifest must identify this exact commit');
+}
+assert.ok(headers.replaceAll('\r\n', '\n').includes('/release.json\n  Cache-Control: no-store'), 'Deployment marker must not be cached');
+console.log('Verified built Hub assets, deployment revision and static security header policy.');
 
 const expectedApprovedAssets = {
   'branding/logos/logo-dark.png': '7876d5730d0622033d299f00b8ecd3c5d394f23c7d67c27538f247580bc7a2f6',
