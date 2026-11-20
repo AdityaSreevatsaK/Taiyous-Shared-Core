@@ -8,7 +8,7 @@ for (const [width, height] of [
   test(`whole homepage fits a ${width}x${height} desktop at 100% zoom`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.goto('/');
-    await expect(page.locator('.hub-card-image-complete')).toHaveCount(4);
+    await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
     const metrics = await page.evaluate(() => ({
       width: document.documentElement.scrollWidth,
       height: document.documentElement.scrollHeight,
@@ -29,9 +29,9 @@ for (const [width, height] of [
   });
 }
 
-test('cards use sharp native-resolution artwork rather than the former tiny crops', async ({ page }) => {
+test('cards use sharp native-resolution text-free illustration assets', async ({ page }) => {
   await page.goto('/');
-  const images = page.locator('.hub-card-image-complete');
+  const images = page.locator('.hub-card-image-illustration');
   await expect(images).toHaveCount(4);
   for (const image of await images.all()) {
     await expect.poll(() => image.evaluate(
@@ -48,7 +48,7 @@ for (const width of [320, 390, 640, 800]) {
   test(`narrow / zoom-equivalent layout reflows at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 720 });
     await page.goto('/');
-    await expect(page.locator('.hub-card-image-complete')).toHaveCount(4);
+    await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
     expect(await page.evaluate(() => document.documentElement.scrollWidth))
       .toBeLessThanOrEqual(width);
     const columnCount = await page.locator('.hub-grid').evaluate(element =>
