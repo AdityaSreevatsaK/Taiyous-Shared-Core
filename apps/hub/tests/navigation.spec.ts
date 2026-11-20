@@ -74,3 +74,45 @@ for(const [title,url] of [
     expect(referrer).toBeUndefined();
   });
 }
+
+
+/** Reference-image fidelity at normal desktop zoom: the artwork must not
+ * swallow the sakura landscape, and the full page must remain on one screen. */
+for (const { width, height } of [
+  { width:1280, height:720 },
+  { width:1366, height:768 },
+  { width:1600, height:900 },
+  { width:1920, height:768 },
+  { width:1920, height:1080 },
+]) {
+  test('reference-layout desktop fit '+width+'x'+height,async({page})=>{
+    await page.setViewportSize({width,height});
+    await page.goto('/');
+    const geometry=await page.evaluate(()=>{
+      const card=document.querySelector('.hub-card')!.getBoundingClientRect();
+      const hero=document.querySelector('.hub-hero')!.getBoundingClientRect();
+      const footer=document.querySelector('.hub-footer')!.getBoundingClientRect();
+      return {scrollWidth:document.documentElement.scrollWidth,
+        scrollHeight:document.documentElement.scrollHeight,
+        cardWidth:card.width,cardBottom:card.bottom,heroBottom:hero.bottom,
+        footerBottom:footer.bottom};
+    });
+    expect(geometry.scrollWidth).toBeLessThanOrEqual(width);
+    expect(geometry.scrollHeight).toBeLessThanOrEqual(height);
+    expect(geometry.cardWidth).toBeLessThanOrEqual(width*0.22);
+    expect(geometry.cardBottom).toBeLessThanOrEqual(geometry.footerBottom);
+    expect(geometry.cardBottom).toBeGreaterThan(geometry.heroBottom);
+    await expect(page.locator('.hub-card-image-complete')).toHaveCount(4);
+  });
+}
+test('simulated 200% zoom reflows to two columns without horizontal scrolling',async({page})=>{
+  await page.setViewportSize({width:800,height:900});
+  await page.goto('/');
+  const dimensions=await page.evaluate(()=>({
+    width:document.documentElement.scrollWidth,
+    cards:[...document.querySelectorAll('.hub-card')].map(element=>element.getBoundingClientRect().toJSON()),
+  }));
+  expect(dimensions.width).toBeLessThanOrEqual(800);
+  expect(Math.round(dimensions.cards[0]!.y)).toBe(Math.round(dimensions.cards[1]!.y));
+  expect(dimensions.cards[2]!.y).toBeGreaterThan(dimensions.cards[0]!.y);
+});

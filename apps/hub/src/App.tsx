@@ -27,8 +27,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
     <a className="hub-skip-link" href="#libraries">Skip to libraries</a>
     <header className="hub-masthead" aria-label="Taiyou's Personal Hub">
       <a className="hub-brand" href="/">
-        {/* The final approved Sun logo is integrated in its dedicated branding PR. */}
-        <span className="hub-brand-mark" aria-hidden="true">☼</span>
+        <span className="hub-brand-mark" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none" aria-hidden="true" focusable="false"><g stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M40 7v8M40 59v6M7 38h8M65 38h8M17 15l6 6M57 57l6 6M62 14l-6 7M17 60l6-6M26 9l3 7M53 9l-3 7M7 24l7 4M73 24l-7 4"/><path d="M18 46a23 23 0 1 1 44 0" strokeWidth="2.6"/><path d="M7 51c15 0 16-8 29-8 11 0 16 9 37 8M8 58c13-2 21 3 33 3 13 0 22-4 32-3"/><path d="M20 48l12-8 8 8 9-6 11 8"/></g><path fill="currentColor" d="M28 40a15 15 0 0 1 24 0Z" opacity=".85"/></svg></span>
         <span className="hub-brand-words">
           <strong>Taiyou’s Personal Hub</strong>
           <small>MY MEDIA GATEWAY</small>

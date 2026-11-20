@@ -27,3 +27,12 @@ The seigaiha pattern is an original tiny SVG at `apps/hub/public/art/waves.svg`.
 
 ## Release verification
 Run Node 22 typecheck, tests, build, built-asset digest verification, three-browser responsive/WCAG checks and live Cloudflare smoke checks after merge. Visual and manual screen-reader review remain distinct from automated tests. The exact owner-approved Sun branding remains in separate draft PR #12 until its asset bytes are transferred.
+
+
+## Reference-match refinement (follow-up release)
+- Warm brown/gold fixed-header identity across all six themes; theme selection still changes the rest of the page and persists.
+- A self-hosted, original code-defined sunrise-and-horizon SVG replaces the provisional glyph in the Hub header. A matching standalone SVG is also used as the favicon. This is explicitly a Hub-specific brand choice, not a modification of the logos used by the Novel or Manga apps.
+- The existing verified high-resolution 1086 × 1448 card illustrations remain unchanged and linked as entire cards only for Novel and Manga.
+- Desktop cards are deliberately smaller than before: the four-card row is constrained to roughly 78% of the window width and adjusted for viewport height, allowing more sakura and mountain scenery to remain visible. The illustrated backdrop now continues behind the complete row and fades into the background.
+- Validate single-screen composition at 1280×720, 1366×768, 1600×900, 1920×768 and 1920×1080. At 200% zoom or on tablets/phones, reflow vertically without horizontal overflow, rather than shrinking controls or clipping the cards.
+- The previously discussed antique-gold raster branding PR #12 is optional and superseded **for the Hub only** by the owner's later approval to use a distinctive coded sunrise mark.
