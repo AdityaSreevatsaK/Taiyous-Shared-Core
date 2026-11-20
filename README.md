@@ -11,7 +11,7 @@ The ecosystem has five GitHub repositories:
 | --- | --- | --- | --- |
 | Shared Core + Hub | [Taiyous-Shared-Core](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core) | Shared code and parent portal | Scaffold |
 | Novels | [Taiyous-Personal-Library](https://github.com/AdityaSreevatsaK/Taiyous-Personal-Library) | Existing EPUB novel reader | Existing production application |
-| Manga | [Taiyous-Manga-Library](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library) | Future comic reader | Scaffold |
+| Manga | [Taiyous-Manga-Library](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library) | Independent manga reader | Live production application |
 | Anime | [Taiyous-Anime-Library](https://github.com/AdityaSreevatsaK/Taiyous-Anime-Library) | Future anime tracker | Scaffold |
 | Movies & TV | [Taiyous-Movies-TV-Library](https://github.com/AdityaSreevatsaK/Taiyous-Movies-TV-Library) | Future films/TV tracker | Scaffold |
 
@@ -23,7 +23,7 @@ packages/ui/                Stateless reusable MediaHubCard presentation compone
 docs/                       Authoritative architecture, security, operations and agent instructions
 .github/workflows/ci.yml    Quality checks only; never deploys automatically
 ```
-The Hub links to the **known existing Novel Library**. Other module tiles remain plainly **In preparation** until verified HTTPS destinations are configured. The four cards use original decorative illustrations. All six Hub themes are selectable, with the preference held only in local storage. There is no personal media data in the Hub.
+The Hub links to the **verified Novel and Manga Libraries**. Anime and Movies & TV remain plainly **In preparation** until their own HTTPS deployments are verified. The four cards sit in a single desktop row (4 × 1), a two-column tablet grid or a single-column phone layout, with original decorative illustrations. All six Hub themes are selectable, with the preference held only in local storage. There is no personal media data in the Hub.
 
 ## Local setup (Node.js 22+)
 1. Clone this repository and open it in your editor.
@@ -55,6 +55,6 @@ The Hub links to the **known existing Novel Library**. Other module tiles remain
 [Agent rules](AGENTS.md) · [Architecture](docs/ARCHITECTURE.md) · [Contracts](docs/DATA_CONTRACTS.md) · [Extraction inventory](docs/REUSABILITY_INVENTORY.md) · [Integration](docs/INTEGRATION.md) · [Security](docs/SECURITY.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Testing](docs/TESTING.md) · [Operations](docs/OPERATIONS.md) · [Hub deployment preparation](docs/HUB_DEPLOYMENT_PREPARATION.md) · [Roadmap](docs/ROADMAP.md) · [Decisions](docs/DECISIONS.md) · [Settings](docs/REPOSITORY_SETTINGS.md) · [Five-repo metadata updater](docs/REPOSITORY_METADATA_RUNBOOK.md) · [Current validation status](docs/VALIDATION_STATUS_2026-11-18.md) · [Agent handover](docs/SESSION_HANDOVER_PROMPT.md).
 
 ## Deployment status (20 November 2026)
-Cloudflare Pages reports a successful deployment check for canonical `master` commit `f9e105672d357288a62d9cef853de1505c911c87`, following the merge of [PR #8](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/8). Its [post-merge Actions run](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44590641305) passed Ubuntu/Windows build and unit tests plus Chromium/Firefox/WebKit browser checks. The proposed URL is https://taiyous-shared-core.pages.dev/ and an independent [live HTTP smoke run](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44592153330) on 20 November 2026 confirmed HTTP 200, the required security response headers, the React mount and the six-theme bootstrap. Manual visual, screen-reader and access-policy review remain outstanding. The Cloudflare Git integration may automatically deploy `master`; GitHub Actions only verifies quality. See [Operations](docs/OPERATIONS.md), [Live deployment smoke check](docs/LIVE_HUB_SMOKE_CHECK.md) and [Branding integration](docs/BRANDING_INTEGRATION.md).
+Cloudflare Pages serves the Hub at https://taiyous-shared-core.pages.dev/. The [production smoke run](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44597152388) verified canonical `master` commit `832a1149fba3e50c9b8466f1b81861c2d6fa84b5` using the public release marker, HTTP 200, security headers and the six-theme bootstrap. The independently hosted Manga Library is verified by [its own production smoke test](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library/actions/runs/44744254072) and now has a live Hub tile. Manual visual, screen-reader and access-policy review remain outstanding. The Cloudflare Git integration may automatically deploy `master`; GitHub Actions only verifies quality. See [Operations](docs/OPERATIONS.md), [Live deployment smoke check](docs/LIVE_HUB_SMOKE_CHECK.md) and [Branding integration](docs/BRANDING_INTEGRATION.md).
 
 The approved Taiyou raster logo and favicon pack has been supplied but is **not committed**. The current Hub still displays its temporary sun glyph and does not claim to use the final artwork. Packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` remain experimental and unpublished.

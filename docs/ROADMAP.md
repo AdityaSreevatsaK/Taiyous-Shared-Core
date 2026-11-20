@@ -12,6 +12,7 @@
 
 ## Phase 1: excellent parent hub
 - [x] Implement six Hub-local persistent themes, original illustrations and four fixed-order media cards (PR #8).
+- [x] Lay out cards four across on desktop, two across on tablet, one across on mobile; enable the verified Manga Library destination.
 - [ ] Owner completes manual visual approval and responsive screenshot review.
 - [ ] Commit and integrate the final approved pair of transparent Sun logos and theme-matched favicons.
 - [x] Run automated Chromium, Firefox and WebKit keyboard/responsive/axe WCAG A/AA tests and inspect representative screenshots (PR #5).

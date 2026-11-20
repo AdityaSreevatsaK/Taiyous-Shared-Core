@@ -25,16 +25,17 @@ describe('safe public navigation', () => {
     expect(publicHttpsDestination(candidate)).toBeUndefined();
   });
 
-  it('falls back to the known Novel Library and keeps three modules planned', () => {
+  it('activates verified Novel and Manga Libraries while keeping two modules planned', () => {
     const entries = createHubModules();
     expect(entries.map(entry => entry.key)).toEqual([
       'novels', 'manga', 'anime', 'movies-tv',
     ]);
     expect(entries[0]?.href).toBe('https://taiyous-personal-library.pages.dev/');
+    expect(entries[1]?.href).toBe('https://taiyous-manga-library.pages.dev/');
     expect(entries.map(entry => entry.availability)).toEqual([
-      'available', 'planned', 'planned', 'planned',
+      'available', 'available', 'planned', 'planned',
     ]);
-    expect(entries.slice(1).every(entry => entry.href === undefined)).toBe(true);
+    expect(entries.slice(2).every(entry => entry.href === undefined)).toBe(true);
   });
 
   it('activates only destinations explicitly configured with safe URLs', () => {
