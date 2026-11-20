@@ -43,7 +43,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
   return <div className="hub-page">
     <a className="hub-skip-link" href="#libraries">Skip to libraries</a>
     <header className="hub-masthead" aria-label="Taiyou's Personal Hub">
-      <a className="hub-brand" href="/" aria-label="Taiyou's Personal Hub, Home">
+      <a className="hub-brand" href="/">
         {/* The exact approved Sun logo will replace the placeholder in the separate branding PR. */}
         <span className="hub-brand-mark" aria-hidden="true">☼</span>
         <span className="hub-brand-words">
