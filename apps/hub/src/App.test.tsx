@@ -18,7 +18,7 @@ describe('accessible illustrated Hub', () => {
     for (const title of ['Novel Library','Manga Library','Anime Library','Movies &amp; TV Library']) {
       expect(html).toContain(title);
     }
-    for (const file of ['novels-art.svg','manga-art.svg','anime-art.svg','movies-tv-art.svg']) {
+    for (const file of ['novels-art.webp','manga-art.webp','anime-art.webp','movies-tv-art.webp']) {
       expect(html).toContain('/art/' + file);
     }
     expect((html.match(/class="hub-card-image hub-card-image-illustration"/g) ?? [])).toHaveLength(4);
