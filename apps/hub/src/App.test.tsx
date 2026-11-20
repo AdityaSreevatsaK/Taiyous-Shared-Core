@@ -18,10 +18,14 @@ describe('accessible illustrated Hub', () => {
     for (const title of ['Novel Library','Manga Library','Anime Library','Movies &amp; TV Library']) {
       expect(html).toContain(title);
     }
-    for (const file of ['novels.avif','manga.avif','anime.avif','movies-tv.avif']) {
+    for (const file of ['novels-art.svg','manga-art.svg','anime-art.svg','movies-tv-art.svg']) {
       expect(html).toContain('/art/' + file);
     }
-    expect((html.match(/class="hub-card-image hub-card-image-complete"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="hub-card-image hub-card-image-illustration"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="hub-card-title hub-card-label"/g) ?? [])).toHaveLength(4);
+    expect(html).not.toContain('hub-card-state');
+    expect(html).not.toContain('hub-card-description');
+    expect(html).not.toContain('hub-card-status');
   });
   it('links Novel and Manga only, leaves two cards non-interactive', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
@@ -31,6 +35,11 @@ describe('accessible illustrated Hub', () => {
     expect((html.match(/class="hub-card hub-card-planned\b/g) ?? [])).toHaveLength(2);
     expect(html).toContain('In preparation');
     expect(html).toContain('Coming soon.');
+    expect((html.match(/>In preparation\. Coming soon\.<\/span>/g) ?? [])).toHaveLength(2);
+    expect((html.match(/>Novel Library<\/h3>/g) ?? [])).toHaveLength(1);
+    expect((html.match(/>Manga Library<\/h3>/g) ?? [])).toHaveLength(1);
+    expect((html.match(/>Anime Library<\/h3>/g) ?? [])).toHaveLength(1);
+    expect((html.match(/>Movies &amp; TV Library<\/h3>/g) ?? [])).toHaveLength(1);
     expect(html.toLowerCase()).toContain('referrerpolicy="no-referrer"');
   });
   it('never makes an unsafe or absent destination clickable', () => {

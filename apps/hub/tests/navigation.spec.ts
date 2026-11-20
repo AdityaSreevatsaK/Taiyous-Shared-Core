@@ -102,7 +102,8 @@ for (const { width, height } of [
     expect(geometry.cardWidth).toBeLessThanOrEqual(width*0.22);
     expect(geometry.cardBottom).toBeLessThanOrEqual(geometry.footerBottom);
     expect(geometry.cardBottom).toBeGreaterThan(geometry.heroBottom);
-    await expect(page.locator('.hub-card-image-complete')).toHaveCount(4);
+    await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
+    await expect(page.locator('.hub-card-label')).toHaveCount(4);
   });
 }
 test('simulated 200% zoom reflows to two columns without horizontal scrolling',async({page})=>{
@@ -131,4 +132,36 @@ test('the responsive SVG sunrise logo and sakura ornament load locally', async({
   expect(size!.width).toBeGreaterThanOrEqual(90);
   const favicon=page.locator('link[rel="icon"]');
   await expect(favicon).toHaveAttribute('href','/branding/hub-sun.svg');
+});
+
+
+test('image-only cards show real titles below the portraits', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.hub-card-artwork img')).toHaveCount(4);
+  await expect(page.locator('.hub-card-label')).toHaveText([
+    'Novel Library', 'Manga Library', 'Anime Library', 'Movies & TV Library',
+  ]);
+  await expect(page.locator('.hub-card-description, .hub-card-status, .hub-card-state')).toHaveCount(0);
+  const tiles = await page.locator('.hub-card').evaluateAll(cards => cards.map(card => {
+    const img = card.querySelector('img')!.getBoundingClientRect();
+    const title = card.querySelector('h3')!.getBoundingClientRect();
+    return { imgBottom: img.bottom, titleTop: title.top, imgWidth: img.width, imgHeight: img.height };
+  }));
+  for (const tile of tiles) {
+    expect(tile.titleTop).toBeGreaterThan(tile.imgBottom);
+    expect(Math.abs(tile.imgWidth / tile.imgHeight - 1086 / 1448)).toBeLessThan(0.025);
+  }
+  for (const image of await page.locator('.hub-card-image-illustration').all()) {
+    await expect.poll(() => image.evaluate(node => (node as HTMLImageElement).naturalWidth)).toBeGreaterThanOrEqual(1086);
+  }
+});
+test('planned library cards have neither links nor misleading pointer cursors', async ({page}) => {
+  await page.goto('/');
+  await expect(page.locator('article.hub-card')).toHaveCount(2);
+  for (const card of await page.locator('article.hub-card').all()) {
+    await expect(card).not.toHaveAttribute('href', /.+/);
+    await expect(card).toContainText('In preparation. Coming soon.');
+    expect(await card.evaluate(element => getComputedStyle(element).cursor)).not.toBe('pointer');
+  }
 });

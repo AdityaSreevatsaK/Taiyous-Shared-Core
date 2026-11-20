@@ -30,8 +30,9 @@ test('artwork is decorative and text/statuses remain accessible', async({page})=
     'Novel Library','Manga Library','Anime Library','Movies & TV Library',
   ]);
   await expect(page.locator('.hub-card-image-only')).toHaveCount(4);
-  await expect(page.locator('.hub-card-image-complete[alt=""]')).toHaveCount(4);
-  await expect(page.locator('.hub-sr-only .hub-card-title')).toHaveCount(4);
+  await expect(page.locator('.hub-card-image-illustration[alt=""]')).toHaveCount(4);
+  await expect(page.locator('.hub-card-label')).toHaveCount(4);
+  await expect(page.locator('article.hub-card .hub-sr-only')).toHaveCount(2);
   for(const art of await page.locator('.hub-card-image').all()) {
     await expect.poll(()=>art.evaluate(node=>(node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   }
