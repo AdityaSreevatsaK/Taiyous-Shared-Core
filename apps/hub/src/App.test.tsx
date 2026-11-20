@@ -11,6 +11,8 @@ describe('accessible illustrated Hub', () => {
     expect(html).toContain('href="#libraries"');
     expect(html).toContain('id="libraries"');
     expect(html).toContain('aria-label="Hub theme"');
+    expect(html).toContain('class="hub-brand-mark"');
+    expect(html).toContain('viewBox="0 0 80 80"');
     expect((html.match(/class="hub-card hub-card-/g) ?? [])).toHaveLength(4);
     for (const title of ['Novel Library','Manga Library','Anime Library','Movies &amp; TV Library']) {
       expect(html).toContain(title);

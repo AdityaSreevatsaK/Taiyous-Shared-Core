@@ -21,5 +21,5 @@ The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean** (Sepia def
 ## Before independent-app adoption
 Require two real consumers, API/ARIA examples, CSS isolation, accessibility and visual tests, bundle-size comparison, pinned package distribution, compatibility and rollback. A shared dark palette is not a mandate for identical application design.
 
-## Final Sun branding, not yet integrated
-The owner supplied two approved transparent 1024×1024 PNGs: Antique Gold on dark surfaces and Sapphire/Antique Gold on light/sepia surfaces, plus paired ICO favicons. The files are **not in the repository as of this update**, so the existing glyph must be treated as a temporary placeholder. Once the exact assets are committed under `apps/hub/public/branding/`, use the Hub-selected theme to choose the dark or light variant; do not key it exclusively to OS preference. Preserve transparency, contain-fit and the full rays, and make the Home brand link accessible. Full path/verification guidance is in [Branding integration](BRANDING_INTEGRATION.md).
+## Hub-specific sunrise branding
+The owner subsequently approved a distinct Sun mark for this Hub rather than requiring the earlier raster identity. An original inline SVG sunrise icon renders crisply in the Home link, and the favicon is a standalone, self-hosted SVG. The previous approved two-logo pack is kept as archival reference in [Branding integration](BRANDING_INTEGRATION.md), but is not a Hub release blocker.
