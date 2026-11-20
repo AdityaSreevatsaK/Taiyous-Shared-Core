@@ -5,14 +5,14 @@ Use the user's complete four illustrated tiles cropped from their approved homep
 
 Text equivalents in visually-hidden real headings, descriptions and statuses support screen readers. Images are decorative to accessibility APIs. This bitmap-first approval is intentional; at extreme zoom, text may be less sharp than native HTML.
 
-## Asset import
-Use the generated `Taiyou_Hub_Full_Tiles_Ready.zip` archive (not the older partial-artwork ZIP), and restore these exact paths:
+## Committed assets
+All four full-card AVIF files have been committed directly in this repository. They originate from the owner's approved one-page Hub mock-up and use these exact paths and SHA-256 digests:
 - apps/hub/public/art/novels.avif SHA-256 fffe541816cb11d83f2f5c7f68bc54bc5013b91870a5b6c2b75f769ab6c157e7
 - apps/hub/public/art/manga.avif SHA-256 fa5880aa684abbca6bba733c7dce1cb7102653aee14e7309622c93bc7a1a7109
 - apps/hub/public/art/anime.avif SHA-256 ebdb631f4d4ca024d0f451dd5f5a3d2ed3d8d73f7c66893c27523c170bad64c8
 - apps/hub/public/art/movies-tv.avif SHA-256 57c526634ed15ba5bf6484dffeeee2496c51b38d8132205da500117a04ea8649
 
-Run the checksum-verified Windows import helper in scripts/apply-illustrated-homepage.ps1 from the exact working branch if automatic binary transport is unavailable. The four card files are verified by scripts/verify-hub-static.mjs in CI.
+The source archive `Taiyou_Hub_Full_Tiles_Ready.zip` and checksum-verified `scripts/apply-illustrated-homepage.ps1` helper are retained for disaster recovery only; no manual upload is needed. The four assets are verified by `scripts/verify-hub-static.mjs` in CI.
 
 ## Preserved behaviour
 - The six Hub themes are retained; Sepia is the default on first visit.
