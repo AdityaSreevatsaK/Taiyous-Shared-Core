@@ -62,7 +62,8 @@ test('both verified Novel and Manga destinations are actionable', async ({ page 
 test('reduced motion does not hide or disable navigation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  await expect(page.locator('a.hub-card')).toBeVisible();
+  await expect(page.locator('a.hub-card').first()).toBeVisible();
+  await expect(page.locator('a.hub-card').nth(1)).toBeVisible();
 });
 
 test('Hub loads without requesting any third-party catalogue or media', async ({ page }) => {
@@ -87,7 +88,7 @@ test('Novel link navigates without referrer or a live external request', async (
     });
   });
   await page.goto('/');
-  await page.locator('a.hub-card').click();
+  await page.locator('a.hub-card').first().click();
   await expect(page).toHaveURL('https://taiyous-personal-library.pages.dev/');
   expect(referrer).toBeUndefined();
 });
