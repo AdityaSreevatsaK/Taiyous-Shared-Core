@@ -25,6 +25,11 @@ for (const width of [320,390,768,1280]) {
     await page.locator('.hub-card-image-illustration').evaluateAll(async elements => {
       await Promise.all(elements.map(element => (element as HTMLImageElement).decode()));
     });
+    // Give the compositor an opportunity to paint all four decoded images,
+    // rather than capturing blank frames during the initial raster update.
+    await page.evaluate(() => new Promise<void>(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+    await page.waitForTimeout(250);
     await page.screenshot({path:test.info().outputPath('hub-'+width+'.png'),fullPage:true});
   });
 }
