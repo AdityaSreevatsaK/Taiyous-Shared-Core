@@ -24,10 +24,10 @@ describe('accessible illustrated Hub', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
     expect(html).toContain('href="https://taiyous-personal-library.pages.dev/"');
     expect(html).toContain('href="https://taiyous-manga-library.pages.dev/"');
-    expect((html.match(/class="hub-card hub-card-available"/g) ?? [])).toHaveLength(2);
-    expect((html.match(/class="hub-card hub-card-planned"/g) ?? [])).toHaveLength(2);
+    expect((html.match(/class="hub-card hub-card-available\b/g) ?? [])).toHaveLength(2);
+    expect((html.match(/class="hub-card hub-card-planned\b/g) ?? [])).toHaveLength(2);
     expect(html).toContain('In preparation');
-    expect(html).toContain('Coming Soon');
+    expect(html).toContain('Coming soon.');
     expect(html.toLowerCase()).toContain('referrerpolicy="no-referrer"');
   });
   it('never makes an unsafe or absent destination clickable', () => {
