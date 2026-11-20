@@ -7,13 +7,13 @@ export interface MediaHubCardProps {
   status: ModuleAvailability;
   href?: string;
   icon?: ReactNode;
+  /** Self-hosted artwork; title, description and status remain accessible text. */
+  artworkSrc?: string;
+  actionLabel?: string;
 }
 
-/**
- * Stateless presentation only. Styling belongs to the consuming application
- * until a second independent consumer justifies a shared styling contract.
- */
-export function MediaHubCard({ title, description, status, href, icon }: MediaHubCardProps) {
+/** Stateless presentation. Styling is Hub-owned until another consumer requires it. */
+export function MediaHubCard({ title, description, status, href, icon, artworkSrc, actionLabel }: MediaHubCardProps) {
   let safeHref: string | undefined;
   if (status === 'available' && href) {
     try {
@@ -29,18 +29,23 @@ export function MediaHubCard({ title, description, status, href, icon }: MediaHu
   }
   const available = Boolean(safeHref);
   const body = <>
-    <div className="hub-card-top">
-      <span className="hub-card-icon" aria-hidden="true">{icon}</span>
-      <span className="hub-card-state">{available ? 'Available' : 'In preparation'}</span>
+    {artworkSrc ? <div className="hub-card-art" aria-hidden="true">
+      <img className="hub-card-image" src={artworkSrc} alt="" width="480" height="316" loading="lazy" decoding="async" />
+    </div> : null}
+    <div className="hub-card-content">
+      <div className="hub-card-top">
+        {icon ? <span className="hub-card-icon" aria-hidden="true">{icon}</span> : null}
+        <span className="hub-card-state">{available ? '✓ Available' : '◷ In preparation'}</span>
+      </div>
+      <div className="hub-card-copy">
+        <h3 className="hub-card-title">{title}</h3>
+        <p className="hub-card-description">{description}</p>
+      </div>
+      <span className="hub-card-status">
+        {available ? (actionLabel ?? 'Enter library') : 'Coming Soon'}
+        {available ? <span aria-hidden="true"> →</span> : null}
+      </span>
     </div>
-    <div className="hub-card-copy">
-      <h3 className="hub-card-title">{title}</h3>
-      <p className="hub-card-description">{description}</p>
-    </div>
-    <span className="hub-card-status">
-      {available ? 'Enter library' : 'Coming later'}
-      {available ? <span aria-hidden="true"> ↗</span> : null}
-    </span>
   </>;
   return available
     ? <a className="hub-card hub-card-available" href={safeHref}
