@@ -19,6 +19,12 @@ for (const width of [320,390,768,1280]) {
       for(let j=1;j<row.length;j++) expect(row[j]!.x).toBeGreaterThan(row[j-1]!.x);
     }
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    // A screenshot taken immediately after React mounts can capture blank
+    // image surfaces while high-resolution WebP decoding is still underway.
+    // Review actual painted artwork, not unloaded placeholders.
+    await page.locator('.hub-card-image-illustration').evaluateAll(async elements => {
+      await Promise.all(elements.map(element => (element as HTMLImageElement).decode()));
+    });
     await page.screenshot({path:test.info().outputPath('hub-'+width+'.png'),fullPage:true});
   });
 }
