@@ -46,3 +46,18 @@ This change redraws the sunrise as a **self-hosted transparent SVG**, also used 
 The landscape is repositioned upward so that the tree canopy does not cover the whole left side and the sun/mountain horizon appears behind the first part of the card row. Hero copy is larger and slightly lower, while the four original 1086 × 1448 card illustrations are preserved unchanged.
 
 The artwork is still independent CSS, HTML and local SVG/AVIF assets, **not a screenshot of the entire webpage**. Genuine keyboard access, persistent themes, four/two/one-column reflow and desktop 100%-zoom fit remain unchanged.
+
+
+## Artwork-only library card release (follow-up, November 2026)
+The four old complete-card AVIF assets are now historical references rather than rendered library cards. The live library tiles reference four original, locally hosted portrait SVG artworks:
+
+| Card | Text-free vector asset | Visible text beneath |
+| --- | --- | --- |
+| Novel | `novels-art.svg` | Novel Library |
+| Manga | `manga-art.svg` | Manga Library |
+| Anime | `anime-art.svg` | Anime Library |
+| Movies & TV | `movies-tv-art.svg` | Movies & TV Library |
+
+All artwork uses the same portrait viewBox and rounded, bordered display surface. The titles are separate HTML `h3` headings, not duplicated inside the SVG. Only Novel and Manga have navigable links, wrapping both the artwork and heading. The other two retain non-interactive semantics and screen-reader-only planned states. Descriptions, status badges and action buttons are not displayed in this variant.
+
+The homepage landscape, approved sunrise branding, six persistent themes, security policies and default Sepia remain unchanged. The grid retains a compact four-column desktop layout, two columns on tablets and one column on phones. Reflow is permitted under browser zoom; normal desktop dimensions aim to fit the footer within the viewport. Old AVIF art is kept for safe rollback and original SHA integrity verification. The SVGs are script-free, text-free, dependency-free and resolution independent.
