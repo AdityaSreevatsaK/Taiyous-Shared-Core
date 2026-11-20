@@ -1,16 +1,16 @@
-// Runs before the React bundle. Kept external to respect script-src 'self'.
+// Restore the selected theme before React paints; external for strict CSP.
 (() => {
   const choices = ['midnight', 'charcoal', 'plum', 'sepia', 'paper', 'ocean'];
-  let selected = 'midnight';
+  let selected = 'sepia';
   try {
     const candidate = window.localStorage.getItem('taiyou-hub-theme');
     if (choices.includes(candidate)) selected = candidate;
   } catch {
-    // Browsers may block storage. The default theme still renders.
+    // Privacy settings can disable storage.
   }
   document.documentElement.dataset.theme = selected;
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', ({
-    midnight: '#0d1927', charcoal: '#17191e', plum: '#22182e',
-    sepia: '#f3e8d5', paper: '#f8f7f3', ocean: '#e6f3f8',
+    midnight: '#121a2a', charcoal: '#1d1a22', plum: '#271a32',
+    sepia: '#fbf0e4', paper: '#faf9f4', ocean: '#e8f5f7',
   })[selected]);
 })();

@@ -37,3 +37,18 @@ if (sha) {
 }
 assert.ok(headers.replaceAll('\r\n', '\n').includes('/release.json\n  Cache-Control: no-store'), 'Deployment marker must not be cached');
 console.log('Verified built Hub assets, deployment revision and static security header policy.');
+
+const { createHash } = await import('node:crypto');
+const illustrationHashes = {
+  'novels.avif': 'fffe541816cb11d83f2f5c7f68bc54bc5013b91870a5b6c2b75f769ab6c157e7',
+  'manga.avif': 'fa5880aa684abbca6bba733c7dce1cb7102653aee14e7309622c93bc7a1a7109',
+  'anime.avif': 'ebdb631f4d4ca024d0f451dd5f5a3d2ed3d8d73f7c66893c27523c170bad64c8',
+  'movies-tv.avif': '57c526634ed15ba5bf6484dffeeee2496c51b38d8132205da500117a04ea8649',
+};
+for (const [filename, expected] of Object.entries(illustrationHashes)) {
+  const bytes = await readFile(new URL('art/' + filename, dist));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
+    'Unexpected card artwork contents: ' + filename);
+}
+assert.match(await readFile(new URL('art/hub-landscape.svg', dist), 'utf8'), /<svg/, 'Missing local landscape');
+console.log('Verified four approved card illustrations and self-hosted hero artwork.');
