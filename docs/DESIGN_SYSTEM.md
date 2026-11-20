@@ -1,7 +1,7 @@
 # Design Language, Themes and Accessibility
 
 ## Intent
-Share a coherent visual family without forcing identical layouts. The Hub is a lightweight editorial gateway; novels, manga, anime and films retain their own reading/viewing experiences. The Hub uses system fonts and no decorative requests to third-party origins. The four cards use the owner's complete approved illustrations, including their visual titles, descriptions and status labels. Semantically equivalent visually-hidden HTML headings, descriptions and statuses support assistive technologies. The sunrise/sakura hero is a self-hosted SVG. See [Illustrated homepage](ILLUSTRATED_HOMEPAGE.md).
+Share a coherent visual family without forcing identical layouts. The Hub is a lightweight editorial gateway; novels, manga, anime and films retain their own reading/viewing experiences. The Hub uses system fonts and no decorative requests to third-party origins. The four cards use the owner's complete approved illustrations, including their visual titles, descriptions and status labels. Semantically equivalent visually-hidden HTML headings, descriptions and statuses support assistive technologies. The sakura canopy, pastel sunrise and Mount Fuji-style mountains are one self-hosted high-resolution AVIF background extending behind the hero and cards. A small self-hosted seigaiha SVG decorates the footer. Dark and light themes retain the same artwork. See [Illustrated homepage](ILLUSTRATED_HOMEPAGE.md).
 
 ## Hub-only semantic tokens
 The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean** (Sepia default for first visits), implemented as Hub-local theme palettes under `:root[data-theme]`. The Hub tokens include `--background`, `--surface`, `--text`, `--text-muted`, `--accent`, `--border`, `--focus`, `--masthead` and `--masthead-text`. These are scoped to the Hub bundle and **are not published as a shared cross-repo theme**. Card accent colours vary by media class but status is always conveyed in words, not colour alone. The selector is a native, keyboard-accessible control. An early self-hosted script in `apps/hub/public/theme-bootstrap.js` restores the preference before the React bundle, preserving the strict `script-src 'self'` policy; storage access failures fall back to Sepia. Theme selection never syncs across apps. System sans-serif and a local serif heading avoid third-party font requests.
@@ -14,7 +14,7 @@ The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean** (Sepia def
 - Real links provide a visible focus outline and no referrer.
 - Planned tiles cannot receive keyboard focus or trigger navigation.
 - Heading order: page H1, section H2, library H3; cards are an unordered list.
-- Breakpoints: 320, 390, 768 and 1280 px are browser-test targets.
+- Breakpoints: 320, 390, 640, 768 and 1280 px are browser-test targets, alongside 1280×720, 1366×768, 1600×900 and 1920×1080 full desktop viewport tests. A normal desktop at 100% zoom shows all four full cards and the footer together; zoomed and mobile layouts reflow and scroll vertically with no horizontal overflow.
 - Motion is decorative only and disabled on reduced-motion preference.
 - The planned-card bitmaps contain their original decorative 'Coming Soon' button artwork, but the planned cards have no interactive controls. No autoplay assets or hover-only content.
 

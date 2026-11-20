@@ -44,7 +44,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
         </select>
       </div>
     </header>
-    <main>
+    <main className="hub-main">
       <section className="hub-hero" aria-labelledby="hub-welcome">
         <div className="hub-hero-copy">
           <h1 id="hub-welcome">Welcome to Taiyou’s Personal Hub!</h1>
