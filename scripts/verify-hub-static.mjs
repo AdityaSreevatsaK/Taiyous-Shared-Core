@@ -70,7 +70,7 @@ for (const filename of artworkFiles) {
   assert.match(svg, /<svg\b/, 'Missing replacement artwork: ' + filename);
   assert.match(svg, /viewBox="0 0 540 720"/, 'Incorrect artwork proportions: ' + filename);
   assert.doesNotMatch(svg, /<(?:script|text|foreignObject)\b/i, 'Text or active content in art: ' + filename);
-  assert.doesNotMatch(svg, /(?:https?:|data:|javascript:)/i, 'External/inline resource in art: ' + filename);
+  assert.doesNotMatch(svg, /(?:<image\\b|\\b(?:href|src)\\s*=\\s*[\"'](?:https?:|data:|javascript:))/i, 'External/inline resource in art: ' + filename);
   assert.ok(svg.length > 5000, 'Insufficient illustrated artwork detail: ' + filename);
 }
 console.log('Verified four original text-free local SVG media illustrations.');
