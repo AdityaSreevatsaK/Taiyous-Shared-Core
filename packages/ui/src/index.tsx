@@ -34,7 +34,7 @@ export function MediaHubCard({
   const available = Boolean(safeHref);
   const body = imageOnly && artworkSrc ? <>
     <img className="hub-card-image hub-card-image-complete" src={artworkSrc}
-      width="388" height="519" alt="" aria-hidden="true" decoding="async" loading="eager" />
+      width="1086" height="1448" alt="" aria-hidden="true" decoding="async" loading="eager" />
     <div className="hub-sr-only">
       <h3 className="hub-card-title">{title}</h3>
       <p>{description}</p>

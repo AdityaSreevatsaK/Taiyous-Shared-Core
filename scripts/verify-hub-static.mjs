@@ -40,15 +40,17 @@ console.log('Verified built Hub assets, deployment revision and static security 
 
 const { createHash } = await import('node:crypto');
 const illustrationHashes = {
-  'novels.avif': 'fffe541816cb11d83f2f5c7f68bc54bc5013b91870a5b6c2b75f769ab6c157e7',
-  'manga.avif': 'fa5880aa684abbca6bba733c7dce1cb7102653aee14e7309622c93bc7a1a7109',
-  'anime.avif': 'ebdb631f4d4ca024d0f451dd5f5a3d2ed3d8d73f7c66893c27523c170bad64c8',
-  'movies-tv.avif': '57c526634ed15ba5bf6484dffeeee2496c51b38d8132205da500117a04ea8649',
+  'novels.avif': '954608525c6478e3a70024db85a9cb265bb43c5428ddcaa5144dde9123d3c93f',
+  'manga.avif': 'adc208b8c9b4349ea8f238b6791fd60785fd99430ef9613fdcdd4bf6e70ab64f',
+  'anime.avif': '085fa725f5d0e4b6a4dc65e85002d4011c93bcee1de6e39ecd4f63e325f277f8',
+  'movies-tv.avif': '06064325fadf3f566f8b528a885c2a7c90ea2339b029ca0fabef0cec7351262b',
 };
 for (const [filename, expected] of Object.entries(illustrationHashes)) {
   const bytes = await readFile(new URL('art/' + filename, dist));
   assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
     'Unexpected card artwork contents: ' + filename);
 }
-assert.match(await readFile(new URL('art/hub-landscape.svg', dist), 'utf8'), /<svg/, 'Missing local landscape');
+const landscape = await readFile(new URL('art/landscape.avif', dist));
+assert.equal(createHash('sha256').update(landscape).digest('hex'), '674811f513949bbc447cb095a847add286ea125438a3c6e5b04ad79301491854', 'Unexpected sakura landscape artwork');
+assert.match(await readFile(new URL('art/waves.svg', dist), 'utf8'), /<svg/, 'Missing seigaiha decoration');
 console.log('Verified four approved card illustrations and self-hosted hero artwork.');

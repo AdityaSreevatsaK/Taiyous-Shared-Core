@@ -1,23 +1,29 @@
-# Illustrated Hub homepage using complete owner-approved cards (20 November 2026)
+# Taiyou illustrated homepage: sakura panorama and responsive cards (20 November 2026)
 
-## Design
-Use the user's complete four illustrated tiles cropped from their approved homepage mock-up, including the original printed titles, captions, statuses, and simulated buttons. There are no duplicate visible HTML overlays. The **entire Novel and Manga tiles** are real HTTPS anchors; Anime and Movies & TV are non-interactive articles, accurately marked In preparation.
+## Visual direction
+The approved homepage uses a single illustrated sakura sunrise scene behind the welcome message and top of the card row, fading smoothly into the selected background colour. The sunrise, layered mountains and cherry blossom canopy remain consistent across all six themes; the footer has a subtle seigaiha wave motif.
 
-Text equivalents in visually-hidden real headings, descriptions and statuses support screen readers. Images are decorative to accessibility APIs. This bitmap-first approval is intentional; at extreme zoom, text may be less sharp than native HTML.
+The original images are complete illustrated tiles including title, status and action artwork. Only Novel and Manga are real whole-card links. Anime and Movies & TV are non-interactive, and the status remains true in visually hidden HTML for screen readers. Never create fake links to planned products.
 
-## Committed assets
-All four full-card AVIF files have been committed directly in this repository. They originate from the owner's approved one-page Hub mock-up and use these exact paths and SHA-256 digests:
-- apps/hub/public/art/novels.avif SHA-256 fffe541816cb11d83f2f5c7f68bc54bc5013b91870a5b6c2b75f769ab6c157e7
-- apps/hub/public/art/manga.avif SHA-256 fa5880aa684abbca6bba733c7dce1cb7102653aee14e7309622c93bc7a1a7109
-- apps/hub/public/art/anime.avif SHA-256 ebdb631f4d4ca024d0f451dd5f5a3d2ed3d8d73f7c66893c27523c170bad64c8
-- apps/hub/public/art/movies-tv.avif SHA-256 57c526634ed15ba5bf6484dffeeee2496c51b38d8132205da500117a04ea8649
+## High-resolution assets
+Cards were regenerated using the approved design language at **1086 × 1448 pixels each** and compressed at AVIF quality 65 with transparent corners. All are self-hosted and subject to SHA-256 build verification:
 
-The source archive `Taiyou_Hub_Full_Tiles_Ready.zip` and checksum-verified `scripts/apply-illustrated-homepage.ps1` helper are retained for disaster recovery only; no manual upload is needed. The four assets are verified by `scripts/verify-hub-static.mjs` in CI.
+| Path under apps/hub/public/art | SHA-256 |
+| --- | --- |
+| novels.avif | 954608525c6478e3a70024db85a9cb265bb43c5428ddcaa5144dde9123d3c93f |
+| manga.avif | adc208b8c9b4349ea8f238b6791fd60785fd99430ef9613fdcdd4bf6e70ab64f |
+| anime.avif | 085fa725f5d0e4b6a4dc65e85002d4011c93bcee1de6e39ecd4f63e325f277f8 |
+| movies-tv.avif | 06064325fadf3f566f8b528a885c2a7c90ea2339b029ca0fabef0cec7351262b |
+| landscape.avif | 674811f513949bbc447cb095a847add286ea125438a3c6e5b04ad79301491854 |
 
-## Preserved behaviour
-- The six Hub themes are retained; Sepia is the default on first visit.
-- Existing Novel/Manga HTTPS URLs are preserved with no referrer leakage.
-- Four/two/one-column layout, keyboard operation, focus, reduced-motion preference, and three-browser WCAG A/AA checks are mandatory.
-- A self-hosted sunrise/sakura SVG continues as hero artwork.
-- The final approved Sun logo/favicons remain the responsibility of separate draft PR #12; do not substitute an approximation.
-- No shared sign-in, storage, private media catalogue or changes to sibling repositories.
+The seigaiha pattern is an original tiny SVG at `apps/hub/public/art/waves.svg`. The previous small, heavily compressed four-card artwork has been replaced; the previous decorative SVG landscape remains in the source solely as a historical legacy resource, not a rendered dependency.
+
+## Zoom and layout
+- At normal desktop 100% zoom with 1280×720, 1366×768, 1600×900, 1920×768 and 1920×1080 viewports, the page is designed to fit the four complete cards and footer without vertical scrolling.
+- CSS dynamically limits the four-column card row using both viewport width and available viewport height. This does **not** force a browser zoom level.
+- Below 1100 CSS pixels the cards reflow to two columns, and below 620 pixels to one. At higher browser zoom, vertical scrolling is correct, while horizontal overflow must not occur.
+- Layout tests check those cases and image naturalWidth at least 1000 pixels. The actual bitmap labels grow with the whole image; alternative headings, descriptions and statuses remain available to assistive technology.
+- No moving petals, autoplay, third-party media requests, new libraries, cross-app auth or storage.
+
+## Release verification
+Run Node 22 typecheck, tests, build, built-asset digest verification, three-browser responsive/WCAG checks and live Cloudflare smoke checks after merge. Visual and manual screen-reader review remain distinct from automated tests. The exact owner-approved Sun branding remains in separate draft PR #12 until its asset bytes are transferred.
