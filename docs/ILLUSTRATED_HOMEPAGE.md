@@ -36,3 +36,13 @@ Run Node 22 typecheck, tests, build, built-asset digest verification, three-brow
 - Desktop cards are deliberately smaller than before: the four-card row is constrained to roughly 78% of the window width and adjusted for viewport height, allowing more sakura and mountain scenery to remain visible. The illustrated backdrop now continues behind the complete row and fades into the background.
 - Validate single-screen composition at 1280×720, 1366×768, 1600×900, 1920×768 and 1920×1080. At 200% zoom or on tablets/phones, reflow vertically without horizontal overflow, rather than shrinking controls or clipping the cards.
 - The previously discussed antique-gold raster branding PR #12 is optional and superseded **for the Hub only** by the owner's later approval to use a distinctive coded sunrise mark.
+
+
+## Reference fidelity and coded sunrise logo (follow-up)
+Compared the approved 1672 × 941 Sepia reference against a 1600 × 900 rendering, including an enlarged crop of the brand mark. The reference has a broad, solid golden half-sun, uneven curved rays, a dark hill shape and three overlapping water ribbons. The earlier Hub logo had an outlined sun circle and a small centre disk, which looked too thin and small.
+
+This change redraws the sunrise as a **self-hosted transparent SVG**, also used in a dedicated dark-backed favicon. Its size and aspect ratio match the reference more closely. The three sakura blossoms in the masthead now use a local vector ornament instead of font glyphs. The header remains warm brown on all six themes.
+
+The landscape is repositioned upward so that the tree canopy does not cover the whole left side and the sun/mountain horizon appears behind the first part of the card row. Hero copy is larger and slightly lower, while the four original 1086 × 1448 card illustrations are preserved unchanged.
+
+The artwork is still independent CSS, HTML and local SVG/AVIF assets, **not a screenshot of the entire webpage**. Genuine keyboard access, persistent themes, four/two/one-column reflow and desktop 100%-zoom fit remain unchanged.

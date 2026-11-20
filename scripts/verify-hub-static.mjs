@@ -54,3 +54,11 @@ const landscape = await readFile(new URL('art/landscape.avif', dist));
 assert.equal(createHash('sha256').update(landscape).digest('hex'), '674811f513949bbc447cb095a847add286ea125438a3c6e5b04ad79301491854', 'Unexpected sakura landscape artwork');
 assert.match(await readFile(new URL('art/waves.svg', dist), 'utf8'), /<svg/, 'Missing seigaiha decoration');
 console.log('Verified four approved card illustrations and self-hosted hero artwork.');
+
+
+for (const asset of ['branding/hub-sun.svg','branding/hub-sun-logo.svg','branding/header-sakura.svg']) {
+  const svg=await readFile(new URL(asset,dist),'utf8');
+  assert.match(svg,/<svg\b/, 'Missing original local SVG artwork: '+asset);
+  assert.doesNotMatch(svg,/<script\b/i, 'Decorative SVG must not contain scripts: '+asset);
+}
+console.log('Verified vector sunrise logo, favicon and header blossoms.');
