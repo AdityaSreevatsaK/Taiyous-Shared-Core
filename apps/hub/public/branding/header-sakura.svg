@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 55" fill="none">
+ <defs>
+   <linearGradient id="pinkPetal" x1="0" y1="-19" x2="0" y2="4"><stop stop-color="#ffe4e8"/><stop offset=".55" stop-color="#ffabc4"/><stop offset="1" stop-color="#dc769b"/></linearGradient>
+   <g id="sakura"><g fill="url(#pinkPetal)" stroke="#ffe9de" stroke-width=".75">
+    <ellipse cx="0" cy="-10" rx="6.8" ry="10.4"/>
+    <ellipse cx="0" cy="-10" rx="6.8" ry="10.4" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-10" rx="6.8" ry="10.4" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-10" rx="6.8" ry="10.4" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-10" rx="6.8" ry="10.4" transform="rotate(288)"/>
+   </g><circle r="3.3" fill="#ffd36d"/><circle r="1.3" fill="#b2685c"/></g>
+ </defs>
+ <path d="M8 46Q36 26 69 25T122 15M40 32l-5-10M82 24l5-13" stroke="#ba7981" stroke-width="1.8" stroke-linecap="round"/>
+ <use href="#sakura" transform="translate(27 36) scale(.7)"/>
+ <use href="#sakura" transform="translate(70 27) scale(.94)"/>
+ <use href="#sakura" transform="translate(110 24) scale(.67)"/>
+ <g fill="#f5b1bc"><ellipse cx="49" cy="12" rx="4" ry="6" transform="rotate(-35 49 12)"/><ellipse cx="121" cy="43" rx="3" ry="5" transform="rotate(35 121 43)"/></g>
+</svg>

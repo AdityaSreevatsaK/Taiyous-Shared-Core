@@ -116,3 +116,19 @@ test('simulated 200% zoom reflows to two columns without horizontal scrolling',a
   expect(Math.round(dimensions.cards[0]!.y)).toBe(Math.round(dimensions.cards[1]!.y));
   expect(dimensions.cards[2]!.y).toBeGreaterThan(dimensions.cards[0]!.y);
 });
+
+
+test('the responsive SVG sunrise logo and sakura ornament load locally', async({page}) => {
+  await page.setViewportSize({width:1600,height:900});
+  await page.goto('/');
+  const logo=page.locator('.hub-brand-mark img');
+  const sakura=page.locator('.hub-header-florals img');
+  await expect(logo).toHaveAttribute('src','/branding/hub-sun-logo.svg');
+  await expect(sakura).toHaveAttribute('src','/branding/header-sakura.svg');
+  await expect.poll(()=>logo.evaluate(node=>(node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  await expect.poll(()=>sakura.evaluate(node=>(node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  const size=await logo.boundingBox();
+  expect(size!.width).toBeGreaterThanOrEqual(90);
+  const favicon=page.locator('link[rel="icon"]');
+  await expect(favicon).toHaveAttribute('href','/branding/hub-sun.svg');
+});

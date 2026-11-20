@@ -1,10 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
-  <rect width="80" height="80" rx="16" fill="#45271f"/>
-  <g fill="none" stroke="#f5cc7f" stroke-width="2.6" stroke-linecap="round">
-    <path d="M40 7v8M40 59v6M7 38h8M65 38h8M17 15l6 6M57 57l6 6M62 14l-6 7M17 60l6-6M26 9l3 7M53 9l-3 7"/>
-    <path d="M18 46a23 23 0 1 1 44 0"/>
-    <path d="M7 51c15 0 16-8 29-8 11 0 16 9 37 8M8 58c13-2 21 3 33 3 13 0 22-4 32-3"/>
-    <path d="M20 48l12-8 8 8 9-6 11 8"/>
-  </g>
-  <path fill="#f5cc7f" opacity=".85" d="M28 40a15 15 0 0 1 24 0Z"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="24" fill="#45251e"/><svg x="0" y="23" width="128" height="84" viewBox="0 0 128 84">
+<defs>
+  <linearGradient id="taiyou-sun-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff4bc"/><stop offset=".48" stop-color="#ffe091"/><stop offset="1" stop-color="#eca954"/></linearGradient>
+  <linearGradient id="taiyou-water" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#e4aa4c"/><stop offset=".45" stop-color="#ffe29a"/><stop offset="1" stop-color="#e9b15b"/></linearGradient>
+</defs>
+<g stroke="#f7ce79" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M63 4q-4 4 0 9t-1 7"/><path d="M36 13q1 5 6 8t5 5"/><path d="M92 12q-5 4-7 9t-5 6"/>
+  <path d="M16 29q6-1 10 5t9 5"/><path d="M112 29q-7-1-11 5t-9 5"/>
+  <path d="M9 52q8-5 17-3"/><path d="M119 52q-8-5-17-3"/>
+</g>
+<g stroke="#ffe2a0" stroke-width="2.2" stroke-linecap="round"><path d="M29 19l5 5M99 19l-5 5M19 44h7M109 44h-7"/><path d="M50 11l2 6M78 11l-2 6"/></g>
+<path d="M32 54a32 32 0 0 1 64 0Z" fill="url(#taiyou-sun-fill)" stroke="#ffe5a0" stroke-width="2.6"/>
+<path d="M48 55q17-19 34-6 6 4 8 8H44Z" fill="#613922" opacity=".97"/>
+<g stroke="url(#taiyou-water)" stroke-linejoin="round" stroke-linecap="round" fill="none">
+ <path stroke-width="3.3" d="M7 61q18-9 34-5 13 4 23 9 13 6 26-2t32-3"/>
+ <path stroke-width="3" d="M13 69q23-11 43-3 15 6 29 5 17-2 29-7"/>
+ <path stroke-width="2.7" d="M25 76q20-12 36-7 13 5 22 5 15-1 24-6"/>
+ <path stroke-width="2.3" d="M18 57q12-3 22 2M83 60q12-6 24-2"/>
+</g>
+</svg></svg>

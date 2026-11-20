@@ -371,3 +371,67 @@ a.hub-card-image-only:focus-visible { outline: 4px solid var(--focus); outline-o
 @media (min-width:1100px) and (min-height:640px) {
   .hub-page { height:100dvh; overflow:clip; }
 }
+
+
+/* Reference fidelity pass: horizontally stretched sunrise emblem, detailed
+   blossom ornament, earlier mountain horizon, and more breathing room. */
+.hub-masthead { background:linear-gradient(105deg,#49251b 0%,#4a271f 48%,#3a2328 100%); border-bottom-color:#edbd71; padding-left:clamp(16px,2.8vw,47px); }
+.hub-brand { gap:17px; }
+.hub-brand-mark { width:clamp(76px,6.4vw,105px); height:clamp(58px,7.2dvh,73px); color:#ffe0a0; }
+.hub-brand-mark img { display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 1px 2px #29160b); }
+.hub-brand-words strong { font-size:clamp(21px,2.2vw,34px); }
+.hub-brand-words small { display:flex; align-items:center; gap:9px; font-size:clamp(9px,.9vw,12px); letter-spacing:.26em; }
+.hub-brand-words small::before,.hub-brand-words small::after { content:''; flex:0 0 18px; height:1px; background:#cf9b64; }
+.hub-header-florals { display:flex; justify-content:center; width:118px; height:46px; margin-right:clamp(9px,2.8vw,45px); letter-spacing:normal; opacity:1; }
+.hub-header-florals img { display:block; width:100%; height:100%; object-fit:contain; }
+.hub-theme-label { font:600 15px Georgia,serif; }
+.hub-theme-label::after { content:':' }
+.hub-theme-select { border-color:#e7b96c; border-radius:24px; }
+/* Move the sky up while retaining the warm gradient and soft footer transition.
+   This brings the mountain and sun into the same visual band as the reference. */
+.hub-main::before {
+ background-image:linear-gradient(180deg,rgba(255,243,222,.04) 0%,rgba(255,236,219,.04) 44%,rgba(255,239,222,.19) 68%,rgba(255,238,226,.38) 90%),url('/art/landscape.avif');
+ background-size:100% 100%,cover;
+ background-position:center,center -145px;
+ background-repeat:no-repeat;
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.73) 68%,transparent 86%);
+ mask-image:linear-gradient(to bottom,#000 0%,#000 52%,rgba(0,0,0,.73) 68%,transparent 86%);
+}
+.hub-page { --hero-height:clamp(235px,34.7dvh,337px); }
+.hub-hero { padding-top:clamp(20px,3.2dvh,34px); padding-bottom:12px; }
+.hub-hero-copy {
+ padding:clamp(8px,1.2dvh,13px) clamp(14px,3vw,46px);
+ transform:translateY(11px);
+ background:radial-gradient(ellipse at center,#fff5e9e6 0%,#fff0e0a3 42%,#ffeddc33 70%,transparent 90%);
+}
+.hub-hero h1 { font-size:clamp(32px,3.3vw,54px); }
+.hub-hero p { font-size:clamp(16px,1.5vw,23px); line-height:1.25; margin-bottom:clamp(16px,2.25dvh,24px); }
+.hub-hero-motto { font-size:clamp(14px,1.36vw,21px); padding:8px 22px; }
+.hub-hero-motto span:first-child { font-size:23px; }
+.hub-grid { max-width:min(78vw,1270px,calc((100dvh - 332px) * 2.45)); }
+.hub-page::after { height:80px; background-size:260px 85px; opacity:.29; }
+@media (max-width:1099px) {
+ .hub-page { --hero-height:clamp(168px,24dvh,236px); }
+ .hub-main::before { background-position:center,38% -25px; }
+ .hub-grid { max-width:820px; }
+}
+@media (max-width:760px) { .hub-header-florals { display:none; } }
+@media (max-width:620px) {
+ .hub-masthead { padding-left:12px; gap:4px; }
+ .hub-brand { gap:6px; }
+ .hub-brand-mark { width:44px; height:47px; }
+ .hub-brand-words strong { font-size:clamp(14px,4vw,20px); }
+ .hub-brand-words small { gap:0; }
+ .hub-brand-words small::before,.hub-brand-words small::after { display:none; }
+ .hub-main::before { background-size:100% 100%,auto 540px; background-position:center,24% 0; }
+ .hub-hero { min-height:210px; }
+ .hub-hero-copy { transform:none; }
+ .hub-hero h1 { font-size:clamp(27px,7vw,37px); }
+ .hub-hero p { font-size:15px; }
+ .hub-hero-motto { font-size:12px; padding:7px 9px; }
+ .hub-theme-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+}
+@media (max-height:620px) and (min-width:1100px) {
+ .hub-page { --hero-height:clamp(110px,24dvh,140px); }
+ .hub-grid { max-width:min(78vw,1270px,calc((100dvh - 242px) * 2.45)); }
+}
