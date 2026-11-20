@@ -9,7 +9,7 @@ export interface MediaHubCardProps {
   icon?: ReactNode;
   artworkSrc?: string;
   actionLabel?: string;
-  /** Render the owner-approved complete card image as the full clickable surface. */
+  /** Render art above the visible title, without badges or action buttons. */
   imageOnly?: boolean;
 }
 
@@ -33,13 +33,12 @@ export function MediaHubCard({
 
   const available = Boolean(safeHref);
   const body = imageOnly && artworkSrc ? <>
-    <img className="hub-card-image hub-card-image-complete" src={artworkSrc}
-      width="1086" height="1448" alt="" aria-hidden="true" decoding="async" loading="eager" />
-    <div className="hub-sr-only">
-      <h3 className="hub-card-title">{title}</h3>
-      <p>{description}</p>
-      <span>{available ? 'Available. Open library.' : 'In preparation. Coming soon.'}</span>
-    </div>
+    <span className="hub-card-artwork" aria-hidden="true">
+      <img className="hub-card-image hub-card-image-illustration" src={artworkSrc}
+        width="1086" height="1448" alt="" decoding="async" loading="eager" />
+    </span>
+    <h3 className="hub-card-title hub-card-label">{title}</h3>
+    {!available ? <span className="hub-sr-only">In preparation. Coming soon.</span> : null}
   </> : <>
     {artworkSrc ? <div className="hub-card-art" aria-hidden="true">
       <img className="hub-card-image" src={artworkSrc} alt="" width="480" height="316" loading="lazy" decoding="async" />
