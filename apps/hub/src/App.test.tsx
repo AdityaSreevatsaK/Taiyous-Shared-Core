@@ -18,7 +18,7 @@ describe('accessible illustrated Hub', () => {
     for (const file of ['novels.avif','manga.avif','anime.avif','movies-tv.avif']) {
       expect(html).toContain('/art/' + file);
     }
-    expect((html.match(/class="hub-card-image"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="hub-card-image hub-card-image-complete"/g) ?? [])).toHaveLength(4);
   });
   it('links Novel and Manga only, leaves two cards non-interactive', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);

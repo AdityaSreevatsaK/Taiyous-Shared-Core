@@ -7,13 +7,16 @@ export interface MediaHubCardProps {
   status: ModuleAvailability;
   href?: string;
   icon?: ReactNode;
-  /** Self-hosted artwork; title, description and status remain accessible text. */
   artworkSrc?: string;
   actionLabel?: string;
+  /** Render the owner-approved complete card image as the full clickable surface. */
+  imageOnly?: boolean;
 }
 
-/** Stateless presentation. Styling is Hub-owned until another consumer requires it. */
-export function MediaHubCard({ title, description, status, href, icon, artworkSrc, actionLabel }: MediaHubCardProps) {
+/** Stateless presentation with an accessible link for available libraries only. */
+export function MediaHubCard({
+  title, description, status, href, icon, artworkSrc, actionLabel, imageOnly = false,
+}: MediaHubCardProps) {
   let safeHref: string | undefined;
   if (status === 'available' && href) {
     try {
@@ -24,11 +27,20 @@ export function MediaHubCard({ title, description, status, href, icon, artworkSr
         safeHref = url.toString();
       }
     } catch {
-      // Invalid input is a planned card, never a dead or unsafe link.
+      // Invalid and missing URLs always render non-interactive cards.
     }
   }
+
   const available = Boolean(safeHref);
-  const body = <>
+  const body = imageOnly && artworkSrc ? <>
+    <img className="hub-card-image hub-card-image-complete" src={artworkSrc}
+      width="388" height="519" alt="" aria-hidden="true" decoding="async" loading="eager" />
+    <div className="hub-sr-only">
+      <h3 className="hub-card-title">{title}</h3>
+      <p>{description}</p>
+      <span>{available ? 'Available. Open library.' : 'In preparation. Coming soon.'}</span>
+    </div>
+  </> : <>
     {artworkSrc ? <div className="hub-card-art" aria-hidden="true">
       <img className="hub-card-image" src={artworkSrc} alt="" width="480" height="316" loading="lazy" decoding="async" />
     </div> : null}
@@ -47,8 +59,10 @@ export function MediaHubCard({ title, description, status, href, icon, artworkSr
       </span>
     </div>
   </>;
+
+  const className = 'hub-card ' + (available ? 'hub-card-available' : 'hub-card-planned') + (imageOnly && artworkSrc ? ' hub-card-image-only' : '');
   return available
-    ? <a className="hub-card hub-card-available" href={safeHref}
+    ? <a className={className} href={safeHref}
         rel="noopener noreferrer" referrerPolicy="no-referrer">{body}</a>
-    : <article className="hub-card hub-card-planned">{body}</article>;
+    : <article className={className}>{body}</article>;
 }

@@ -179,3 +179,44 @@ a.hub-card:focus-visible { outline:4px solid var(--focus); outline-offset:5px; }
   .hub-card { transition:none; }
   a.hub-card:hover { transform:none; }
 }
+
+
+/* Approved artwork is the complete card, including its heading, state and CTA.
+   The whole image is the link, never an image with duplicate visual labels. */
+.hub-grid { align-items: start; }
+.hub-card-image-only {
+  display: block;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(14px, 1.7vw, 23px);
+  overflow: hidden;
+  background: transparent;
+  box-shadow: 0 5px 14px #2b1d2730;
+}
+.hub-card-image-only::before { display: none; }
+.hub-card-image-only .hub-card-image-complete {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 388 / 519;
+  object-fit: contain;
+  object-position: center;
+}
+.hub-card-image-only.hub-card-planned {
+  cursor: default;
+  box-shadow: 0 5px 14px #2b1d2720;
+}
+a.hub-card-image-only:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 11px 25px #29172244;
+  background: transparent;
+}
+a.hub-card-image-only:focus-visible {
+  outline: 4px solid var(--focus);
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  a.hub-card-image-only:hover { transform: none; }
+}

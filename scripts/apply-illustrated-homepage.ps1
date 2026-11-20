@@ -1,5 +1,5 @@
 # Import the four user-approved cropped card illustrations, then commit and push them.
-# Usage: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/apply-illustrated-homepage.ps1 -Archive "C:\Downloads\Taiyou_Hub_Illustrated_Cards_Assets.zip"
+# Usage: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/apply-illustrated-homepage.ps1 -Archive "C:\Downloads\Taiyou_Hub_Full_Tiles_Ready.zip"
 param([Parameter(Mandatory = $true)][string]$Archive)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -12,10 +12,10 @@ if ($LASTEXITCODE -ne 0 -or $branch -ne $targetBranch) {
 $dirty = & git -C $repo status --porcelain
 if ($LASTEXITCODE -ne 0 -or $dirty) { throw "Working tree must be clean to avoid unrelated changes." }
 $expected = [ordered]@{
-  'novels.avif' = '10ec9db58439c6b43a829f50cbbef7184730a21b59b987bacf9b772a8c67613e'
-  'manga.avif' = '5ac1c476c530e9e7f08967e1a0ff9db5a29191f74e5e30e3c16a9f00ecbd5c4f'
-  'anime.avif' = '19ffe64f326fffbb3ca6569d2bfb0dc29045b5ea8147d40b765a7c204d2ba6b8'
-  'movies-tv.avif' = '9998599afe35b60d839efca75c239f52fd109988a9a747617deb406d2e2bd1e1'
+  'novels.avif' = 'fffe541816cb11d83f2f5c7f68bc54bc5013b91870a5b6c2b75f769ab6c157e7'
+  'manga.avif' = 'fa5880aa684abbca6bba733c7dce1cb7102653aee14e7309622c93bc7a1a7109'
+  'anime.avif' = 'ebdb631f4d4ca024d0f451dd5f5a3d2ed3d8d73f7c66893c27523c170bad64c8'
+  'movies-tv.avif' = '57c526634ed15ba5bf6484dffeeee2496c51b38d8132205da500117a04ea8649'
 }
 $tmp = Join-Path ([IO.Path]::GetTempPath()) ('taiyou-hub-art-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $tmp | Out-Null

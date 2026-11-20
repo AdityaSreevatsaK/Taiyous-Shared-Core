@@ -29,11 +29,9 @@ test('artwork is decorative and text/statuses remain accessible', async({page})=
   await expect(page.locator('.hub-card-title')).toHaveText([
     'Novel Library','Manga Library','Anime Library','Movies & TV Library',
   ]);
-  await expect(page.locator('.hub-card-icon svg[aria-hidden="true"]')).toHaveCount(4);
-  await expect(page.locator('.hub-card-image[alt=""]')).toHaveCount(4);
-  await expect(page.locator('.hub-card-state')).toHaveText([
-    '✓ Available','✓ Available','◷ In preparation','◷ In preparation',
-  ]);
+  await expect(page.locator('.hub-card-image-only')).toHaveCount(4);
+  await expect(page.locator('.hub-card-image-complete[alt=""]')).toHaveCount(4);
+  await expect(page.locator('.hub-sr-only .hub-card-title')).toHaveCount(4);
   for(const art of await page.locator('.hub-card-image').all()) {
     await expect.poll(()=>art.evaluate(node=>(node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   }
