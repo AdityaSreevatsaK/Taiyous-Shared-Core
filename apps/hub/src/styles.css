@@ -294,7 +294,7 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   transition: box-shadow .28s ease, transform .28s ease, border-color .28s ease;
 }
 .hub-card-immersive::before {
-  content: ''; position: absolute; inset: 0; z-index: -1;
+  content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
     transparent 0%, #190e1400 33%, #190e141f 43%,
     color-mix(in srgb, var(--card-ink) 91%, transparent) 63%,
@@ -302,12 +302,12 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   pointer-events: none;
 }
 .hub-card-immersive::after {
-  content: ''; position: absolute; inset: 4px; z-index: 4;
+  content: ''; position: absolute; inset: 4px; z-index: 3;
   border: 1px solid #ffefca2f;
   border-radius: inherit; pointer-events: none;
 }
 .hub-card-artwork {
-  position: absolute; inset: 0; z-index: -2;
+  position: absolute; inset: 0; z-index: 0;
   display: block; width: 100%; height: 100%;
   overflow: hidden; background: var(--card-ink);
 }
@@ -317,7 +317,7 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   transition: transform .5s cubic-bezier(.2,.6,.25,1);
 }
 .hub-card-editorial {
-  position: relative; z-index: 1;
+  position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: flex-end;
   flex-direction: column; gap: clamp(6px, .86dvh, 11px);
   width: 100%;
