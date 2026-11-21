@@ -48,3 +48,7 @@ Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability
 The new `immersive` variant is tested independently from the legacy `imageOnly` variant. Assertions cover four real HTML headings, descriptions, statuses and CTA labels over exact unchanged WebP assets; two available anchors, two inert planned articles and a safe HTTPS/no-referrer policy. A 1600 × 900 browser test verifies that the four cards span the major portion of the desktop width, remain inside the viewport, and the full scenic background remains present. Playwright captures both **Sepia and Charcoal** review screenshots after image decoding and painting. Additional existing cross-browser (Chromium/Firefox/WebKit), viewport, 200% zoom, keyboard, theme persistence and axe A/AA tests remain required.
 
 Visual testing must compare the *resulting app* to the owner's reference image rather than accepting any green build as proof of aesthetic quality.
+
+### Prevent false-green screenshot evidence
+
+The visual evidence helper `apps/hub/tests/visual-evidence.ts` captures the **actual rendered screenshot**, then samples the upper illustrated area of all four posters using a local browser canvas. It accepts a screenshot only when all four panels have non-uniform painted pixels, retrying briefly after WebP decode if compositing is still in progress. This closes the real regression where screenshots contained plain blank colour panels even though `img.decode()` and image dimensions had passed. The helper does not fetch remote images and does not use OCR or production data.
