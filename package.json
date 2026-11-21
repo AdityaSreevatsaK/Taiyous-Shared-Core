@@ -3,14 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "engines": { "node": ">=22" },
-  "workspaces": ["apps/*", "packages/*"],
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run dev -w @taiyou/hub",
     "build": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run build -w @taiyou/hub",
     "typecheck": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run typecheck -w @taiyou/contracts && npm run typecheck -w @taiyou/ui && npm run typecheck -w @taiyou/hub",
     "test": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run test -w @taiyou/contracts && npm run test -w @taiyou/hub",
-    "test:browser": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run test:browser -w @taiyou/hub"
+    "test:browser": "npm run build -w @taiyou/contracts && npm run build -w @taiyou/ui && npm run test:browser -w @taiyou/hub",
+    "verify:docs": "node scripts/verify-docs.mjs"
   },
   "devDependencies": {
     "typescript": "~5.9.3",

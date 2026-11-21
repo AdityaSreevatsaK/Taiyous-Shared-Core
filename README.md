@@ -1,60 +1,107 @@
 # Taiyou's Shared Core & Personal Hub
 
-> **Public, early-stage source repository with unpublished internal packages.** This repository contains the experimental contracts package, one deliberately small React UI package, and a navigation-only Personal Hub with six selectable themes. It does NOT implement shared authentication, private media storage, cross-library search or synchronisation.
+> **A live, lightweight media gateway and an experimental, unpublished source-code library.** The Hub links to the independent Novel and Manga readers and reserves non-interactive tiles for future Anime and Movies & TV apps. There is **no** shared private-media database, authentication service, cross-library sync or published SDK.
 
-## Mission and philosophy
-Build a beautiful parent gateway to the five-repository Taiyou media ecosystem and extract reusable source code only when a second independent media app proves the reuse is worthwhile. **Shared Core is primarily a versioned source-code library, not an always-online microservice.**
+[**Live Personal Hub**](https://taiyous-shared-core.pages.dev/) · [**GitHub source**](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core) · [**Self-contained agent handover**](docs/SESSION_HANDOVER_PROMPT.md)
 
-The ecosystem has five GitHub repositories:
+## Why this repository exists
 
-| Owner | Repository | Product | State |
-| --- | --- | --- | --- |
-| Shared Core + Hub | [Taiyous-Shared-Core](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core) | Shared code and parent portal | Scaffold |
-| Novels | [Taiyous-Personal-Library](https://github.com/AdityaSreevatsaK/Taiyous-Personal-Library) | Existing EPUB novel reader | Existing production application |
-| Manga | [Taiyous-Manga-Library](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library) | Independent manga reader | Live production application |
-| Anime | [Taiyous-Anime-Library](https://github.com/AdityaSreevatsaK/Taiyous-Anime-Library) | Future anime tracker | Scaffold |
-| Movies & TV | [Taiyous-Movies-TV-Library](https://github.com/AdityaSreevatsaK/Taiyous-Movies-TV-Library) | Future films/TV tracker | Scaffold |
+The owner wanted one beautiful, Japanese-inspired entrance to different media libraries and a carefully governed place for any **proven** shared frontend/contracts functionality. Hosting `apps/hub` inside Shared Core avoids an extra repository and keeps the independently deployed readers free of central runtime dependencies.
 
-## What exists today
+The original five-repository plan is:
+- **This repository:** Shared Core and the Personal Hub.
+- [Taiyous-Personal-Library](https://github.com/AdityaSreevatsaK/Taiyous-Personal-Library): independent Novel Library, **live** at https://taiyous-personal-library.pages.dev/.
+- [Taiyous-Manga-Library](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library): independent Manga Library, **live** at https://taiyous-manga-library.pages.dev/.
+- [Taiyous-Anime-Library](https://github.com/AdityaSreevatsaK/Taiyous-Anime-Library): future/paused Anime application.
+- [Taiyous-Movies-TV-Library](https://github.com/AdityaSreevatsaK/Taiyous-Movies-TV-Library): future/paused Movies & TV application.
+
+This is **four Hub destinations across five repositories** because Movies and TV are one planned frontend. Future video-library implementation was paused in the wider ecosystem while storage/cost feasibility is unresolved; the Hub's placeholders remain deliberately honest.
+
+## Current product
+
+- **Four image-only portraits**, in order: Novel Library, Manga Library, Anime Library, Movies & TV Library. Each portrait has **exact approved detailed artwork**, with its only visible title centred **below** the image. No artwork-embedded labels/buttons or status badges.
+- **Real links** for Novel and Manga only, covering artwork and title. Anime and Movies & TV are non-interactive until verified.
+- **Responsive grid:** 4 × 1 on desktop, 2 × 2 on tablet, 1 × 4 on mobile; 100% desktop viewport-fit target, 200% zoom reflow and no horizontal overflow.
+- **Visual identity:** a distinct Hub-specific golden SVG sunrise logo, warm brown masthead, sakura tree, pastel mountain/sunrise landscape, ornamental wave footer and editorial typography.
+- **Six persistent themes:** Midnight, Charcoal, Plum, Sepia (**first-visit default**), Paper and Ocean. Preference stays **local to the Hub**.
+- **Accessibility and privacy:** semantic headings, skip link, keyboard/focus, reduced motion, screen-reader-only planned state, local self-hosted assets, strict static CSP/security headers. No private media fetch or cross-app credentials.
+
+**Important history:** PR [#19](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/19) had the correct layout but accidentally used simplified substitute drawings. PR [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) replaced them with the **actual detailed approved four-panel artwork** and verifies exact WebP digests. Never repeat that substitution. The previously proposed raster-logo pack was superseded for **the Hub only** by original SVG sunrise branding; independent readers keep their own branding.
+
+## Actual repository structure
+
 ```text
-apps/hub/                   Vite + React responsive six-theme gateway, honest link states
-packages/contracts/         Version 0 experimental identity and rating contracts
-packages/ui/                Stateless reusable MediaHubCard presentation component
-docs/                       Authoritative architecture, security, operations and agent instructions
-.github/workflows/ci.yml    Quality checks only; never deploys automatically
+apps/hub/                 React 18 + TypeScript + Vite static single-page Hub
+packages/contracts/       Private 0.0.0 minimal media types/IDs and 1–10 rating helper
+packages/ui/              Private 0.0.0 stateless MediaHubCard presentation component
+docs/                     System guide, history, decisions, roadmap, security, agent handover
+docs/rfcs/                Shared API proposal process, two-consumer requirement
+.github/workflows/        Quality CI + exact-commit public Cloudflare smoke
+scripts/                  Build/live verification and optional maintenance scripts
+AGENTS.md                 Mandatory instructions for AI agents
+CONTRIBUTING.md           Change process
+package-lock.json         Real committed npm-workspace lockfile
 ```
-The Hub links to the **verified Novel and Manga Libraries**. Anime and Movies & TV remain plainly **In preparation** until their own HTTPS deployments are verified. The four cards sit in a single desktop row (4 × 1), a two-column tablet grid or a single-column phone layout, with four original detailed, text-free WebP illustrations and centred HTML titles beneath them, an atmospheric sakura sunrise background and accessible HTML headings and planned-state announcements (see [homepage specification](docs/ILLUSTRATED_HOMEPAGE.md)). All six Hub themes are selectable, with the preference held only in local storage. There is no personal media data in the Hub.
 
-## Local setup (Node.js 22+)
-1. Clone this repository and open it in your editor.
-2. Run `npm ci`. The root workspace `package-lock.json` is committed and is verified in CI.
-3. Run `npm run typecheck`, `npm test`, `npm run build`.
-4. For browser checks, run `npx playwright install chromium firefox webkit` then `npm run test:browser` after installing dependencies.
-5. Run `npm run dev` to build local shared packages and start the Vite hub (typically http://127.0.0.1:5173).
-6. Optional: copy `.env.example` to `.env.local` and add public HTTPS URLs only once the corresponding apps are deployed and verified.
+**Tech stack:** Node 22+, npm workspaces, TypeScript strict, React 18, Vite 6, CSS variables/media queries, Vitest, Playwright (Chromium/Firefox/WebKit), axe-core, GitHub Actions and Cloudflare Pages. No central backend/database.
 
-## Commands
-| Command | Meaning |
+## Run locally
+
+```bash
+npm ci --no-audit --no-fund
+npm run typecheck
+npm test
+npm run build
+node scripts/verify-hub-static.mjs
+npm run verify:docs
+npx playwright install chromium firefox webkit
+npm run test:browser
+npm run dev
+```
+
+Local dev URL: `http://127.0.0.1:5173`. Use **Node 22+**. Do not regenerate or modify the lockfile casually; CI uses `npm ci`.
+
+The `.env.example` file contains **public HTTPS destination URLs only**, including blank future Anime/Movies entries. Every `VITE_*` setting is exposed in the client bundle and may **never** contain Hugging Face credentials, OAuth secrets or private catalogue data.
+
+## Build, CI and deployment
+
+- **Source:** public GitHub repository; `master` is canonical. Work on focused branches and PRs.
+- **Documentation gate:** `npm run verify:docs` checks the required handover files and relative Markdown links offline on every CI quality job.
+- **CI:** `.github/workflows/ci.yml` checks Node 22 quality on Ubuntu/Windows, production dependency advisories, static assets/security policy, and responsive/keyboard/WCAG tests on Chromium/Firefox/WebKit.
+- **Hosting:** Cloudflare Pages project `taiyous-shared-core`, connected to `master`. Build from repository root, output `apps/hub/dist`.
+- **Independent release verification:** `.github/workflows/live-hub.yml` tests public HTTPS 200, security headers, React mount, early six-theme bootstrap and **exact public `/release.json` commit SHA** after each master merge.
+- **Historical verified illustration release:** master `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, [CI run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live smoke run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465). This is a historical reference, **not a claim it remains the latest deployment**.
+
+A merged PR does not prove production deploy, and automated accessibility checks do not equal manual NVDA/VoiceOver acceptance.
+
+## Documentation: start here
+
+| Goal | Authoritative document |
 | --- | --- |
-| `npm ci` | Reproducibly install all npm workspaces from the lockfile |
-| `npm run dev` | Build contracts/UI then run hub locally |
-| `npm run typecheck` | Check all three workspaces |
-| `npm test` | Contracts, URL-policy and server-rendered Hub tests |
-| `npm run build` | Build contracts, UI and production hub assets |
-| `npm run test:browser` | Three-browser keyboard, responsive, theme and WCAG A/AA tests (install Playwright browser first) |
+| **Why this exists, original brainstorm, designs, failed attempts, PR milestones** | [Project history](docs/PROJECT_HISTORY.md) |
+| **Actual codebase, technical stack, components, source paths, tests, assets** | [Codebase reference](docs/CODEBASE_REFERENCE.md) |
+| **Mandatory AI agent boundaries and hard stops** | [AGENTS.md](AGENTS.md) |
+| **Future agent procedure, checklists, regressions, CI and releases** | [AI agent playbook](docs/AI_AGENT_PLAYBOOK.md) |
+| **Self-contained prompt for the next agent/session** | [Session handover](docs/SESSION_HANDOVER_PROMPT.md) |
+| Accepted vs superseded architectural/product choices | [Decisions](docs/DECISIONS.md) |
+| What is complete, pending, or deferred | [Roadmap](docs/ROADMAP.md) |
+| System and privacy boundaries | [Architecture](docs/ARCHITECTURE.md) · [Security](docs/SECURITY.md) |
+| Commands, releases, rollback and exact deployment verification | [Operations](docs/OPERATIONS.md) · [Live smoke](docs/LIVE_HUB_SMOKE_CHECK.md) |
+| UI composition and visual design chronology | [Illustrated homepage](docs/ILLUSTRATED_HOMEPAGE.md) · [Design system](docs/DESIGN_SYSTEM.md) |
+| Contract proposals and cross-repo governance | [Data contracts](docs/DATA_CONTRACTS.md) · [Reuse audit](docs/REUSABILITY_INVENTORY.md) · [Integration](docs/INTEGRATION.md) · [RFC process](docs/rfcs/README.md) |
+| Checks and known limitations | [Testing](docs/TESTING.md) · [Historic validation](docs/VALIDATION_STATUS_2026-11-18.md) |
+| Historical asset alternatives/deployment planning | [Branding archive](docs/BRANDING_INTEGRATION.md) · [Deployment preparation](docs/HUB_DEPLOYMENT_PREPARATION.md) |
+| GitHub metadata / optional maintenance | [Repository settings](docs/REPOSITORY_SETTINGS.md) · [Metadata updater](docs/REPOSITORY_METADATA_RUNBOOK.md) |
 
-## Boundaries
-- No React component should read Hugging Face tokens, OAuth sessions, IndexedDB or private media without an explicit consuming-app boundary.
-- No shared database or mandatory runtime service. Each library must continue working if the hub is down.
-- This source repository is public. Cloudflare Pages is connected to `master`; a successful deployment check is separate from the external HTTP verification, which is now exercised by a production smoke test. Visual and full access-policy review remain manual.
-- The Novel Library's origin-specific OAuth cannot become ecosystem-wide SSO by copying cookies.
-- Package adoption is not automatic: the first use of `@taiyou/contracts` or `@taiyou/ui` in another repository requires versioning, compatibility tests and a coordinated PR.
-- No monorepo migration of the working Novel Library and no forced dependency upgrades.
+The main docs are intended to keep future agents productive **without prior chat context**. If anything here disagrees with actual source, inspect the change and correct the docs.
 
-## Documentation index
-[Agent rules](AGENTS.md) · [Architecture](docs/ARCHITECTURE.md) · [Contracts](docs/DATA_CONTRACTS.md) · [Extraction inventory](docs/REUSABILITY_INVENTORY.md) · [Integration](docs/INTEGRATION.md) · [Security](docs/SECURITY.md) · [Design system](docs/DESIGN_SYSTEM.md) · [Testing](docs/TESTING.md) · [Operations](docs/OPERATIONS.md) · [Hub deployment preparation](docs/HUB_DEPLOYMENT_PREPARATION.md) · [Roadmap](docs/ROADMAP.md) · [Decisions](docs/DECISIONS.md) · [Settings](docs/REPOSITORY_SETTINGS.md) · [Five-repo metadata updater](docs/REPOSITORY_METADATA_RUNBOOK.md) · [Current validation status](docs/VALIDATION_STATUS_2026-11-18.md) · [Agent handover](docs/SESSION_HANDOVER_PROMPT.md).
+## Critical design and architecture boundaries
 
-## Deployment status (20 November 2026)
-Cloudflare Pages serves the Hub at https://taiyous-shared-core.pages.dev/. The [production smoke run](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44597152388) verified canonical `master` commit `832a1149fba3e50c9b8466f1b81861c2d6fa84b5` using the public release marker, HTTP 200, security headers and the six-theme bootstrap. The independently hosted Manga Library is verified by [its own production smoke test](https://github.com/AdityaSreevatsaK/Taiyous-Manga-Library/actions/runs/44744254072) and now has a live Hub tile. Manual visual, screen-reader and access-policy review remain outstanding. The Cloudflare Git integration may automatically deploy `master`; GitHub Actions only verifies quality. See [Operations](docs/OPERATIONS.md), [Live deployment smoke check](docs/LIVE_HUB_SMOKE_CHECK.md) and [Branding integration](docs/BRANDING_INTEGRATION.md).
+- Keep Novel, Manga and other apps independent: no forced monorepo migration, shared runtime auth or direct private-data access.
+- Experimental `0.0.0` packages are **not published**. A reusable API needs two independent real consumers, an [RFC](docs/rfcs/README.md), compatibility tests, versioning and rollback.
+- Only expose owner-verified HTTPS destinations. A syntactically valid URL is not proof of deployment ownership.
+- Keep original artwork bytes: the static build checks exact SHA-256 checksums.
+- Do not change other repositories' visibility, data, auth, deployment or media storage as part of Hub work.
+- A future universal library, SSO or media backend requires separate design and owner approval.
 
-The Hub now uses an approved independent SVG sunrise logo and favicon. The earlier approved raster-logo pack remains available as a separate optional brand reference. The illustrated card homepage was merged in PR #15, and the subsequent sakura/viewport refinement is validated separately before merging. The current Hub still displays its temporary sun glyph and does not claim to use the final artwork. Packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` remain experimental and unpublished.
+The project aims to remain small and well-governed rather than abstracting everything by default.

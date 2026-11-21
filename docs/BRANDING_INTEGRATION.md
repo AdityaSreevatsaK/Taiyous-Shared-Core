@@ -1,8 +1,8 @@
-# Integrating Taiyou's final approved Sun artwork
+# Archived proposal: alternate raster Sun logo and favicons
 
-**Status:** Source ZIP supplied by owner, but the four approved binary files are not yet committed in the Shared Core GitHub repository. Do not mark the branding milestone complete merely because the current Hub uses a temporary sun glyph.
+**Status: ARCHIVED, superseded, NOT a pending implementation task.** The current Hub deliberately ships the owner-approved `hub-sun-logo.svg` and `hub-sun.svg` from PRs #17/#18. The original raster ZIP was considered in closed-unmerged PR #12, then superseded for this Hub. Preserve the details below solely as historical alternatives; never imply the current mark is temporary.
 
-## Required public paths
+## Historical proposed raster asset paths (not required)
 Copy these **exact bytes** from `Taiyou_Final_Logos_Ready_For_Webapp.zip`:
 
 | Source in ZIP | Destination in this repository | SHA-256 |
@@ -14,7 +14,7 @@ Copy these **exact bytes** from `Taiyou_Final_Logos_Ready_For_Webapp.zip`:
 
 Both primary PNGs are transparent 1024×1024 images. Do not replace them with rasterised SVG guesses, previous assets, flat icons, a fake vector master or re-generated imitations.
 
-## Implementation contract after the assets exist
+## Historical unmerged implementation proposal (do not execute without a new request)
 1. Replace `☼` in `apps/hub/src/App.tsx` for the header (and any hero symbol retained) with the correct transparent PNG, using `width`/`height`, `object-fit: contain` and appropriate alt/accessible-link naming. Keep the brand as a real Home link.
 2. For **Midnight, Charcoal and Plum**, use the dark Antique Gold PNG and dark favicon. For **Sepia, Paper and Ocean**, use the light Sapphire/Antique Gold pair. Match the Hub's selected theme, never just OS light/dark.
 3. Maintain the external pre-React theme bootstrap and strict CSP. Set the initial favicon from the stored preference **before React** and update it on theme changes. Add or update `rel="icon"` in `apps/hub/index.html`. No invalid early asset requests or custom inline scripts.
@@ -23,3 +23,8 @@ Both primary PNGs are transparent 1024×1024 images. Do not replace them with ra
 6. Only after a PR with the real assets and verified checks is merged may docs describe the final branding as integrated.
 
 No private catalogue, Hugging Face access or independent media repo change is required.
+
+
+## Supersession notice, 21 November 2026
+
+**This entire raster-logo integration contract is archival and must not be treated as a pending requirement.** The owner later approved an original, distinct **Hub-specific SVG sunrise logo** and favicon; PR [#17](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/17) and [#18](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/18) implemented and refined it. The asset-blocked raster [PR #12](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/12) was **closed without merging**. The active logo is `apps/hub/public/branding/hub-sun-logo.svg`, with `hub-sun.svg` favicon. This decision does not alter the Sun logos used by the independent Novel/Manga readers. Reopen this raster alternative only on a **new explicit design request**.

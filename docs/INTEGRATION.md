@@ -11,7 +11,7 @@ The parent hub has **four media tiles** despite five repositories. Movies and TV
 
 ## How the hub links to apps
 - `VITE_NOVELS_URL` defaults to verified https://taiyous-personal-library.pages.dev/.
-- `VITE_MANGA_URL`, `VITE_ANIME_URL`, `VITE_MOVIES_TV_URL` are empty until the owner supplies tested HTTPS deployments.
+- `VITE_MANGA_URL` defaults to the verified https://taiyous-manga-library.pages.dev/; `VITE_ANIME_URL` and `VITE_MOVIES_TV_URL` remain empty/planned until the owner verifies actual HTTPS deployments.
 - `apps/hub/src/catalogue.ts` rejects non-HTTPS/malformed destinations.
 - No fake 'Launch' actions, iframe embedding or private query parameters.
 - An app does not need hub uptime to load, resume or work offline.
@@ -31,4 +31,4 @@ Begin with separate app-specific collections/tags and progress. A future unified
 For shared APIs send an RFC containing the owning app, exact consumer, interface definition, input validation, intended tests, package version, dependencies, compatibility issue and rollback. Shared Core reviews export impact, then each media session approves adoption in its own repo. No silent cross-repo edits.
 
 ## Release contract
-All five projects keep independent branch protections and build pipelines. No tag in Shared Core creates a Novel Library release. The owner must explicitly approve staging URLs, production deployment and privacy changes.
+All five projects keep independent branch protections and build pipelines. No tag in Shared Core creates a Novel Library release. The owner has approved safe, reviewed Hub PR merges and existing Cloudflare Pages Git-based deployments after matching-SHA green CI. **New hosting origins, privacy changes, secrets, paid infrastructure, cross-repo deployment and release publishing still require separate explicit approval.**
