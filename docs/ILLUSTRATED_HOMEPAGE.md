@@ -85,3 +85,19 @@ are local. No external images or tracking are loaded.
 
 
 > **Reading order for future agents:** This file preserves several historical visual versions. The latest accepted **artwork-only** design uses the exact original detailed `*-art.webp` portraits as documented in the **final section** and [Project history](PROJECT_HISTORY.md). Earlier descriptions of full poster cards with printed titles are deliberately archival, not current implementation instructions.
+
+
+## Latest direction: cinematic code-first homepage (21 November 2026)
+
+**Supersedes the title-below layout in the sections above.** The owner supplied two screenshots labelled *vision* and *current app* and requested a proper **code-built** restoration of the visual grandeur. No new image creation or screenshot-as-homepage implementation was wanted.
+
+- Restore **large, near edge-to-edge 4 × 1 poster tiles** on desktop, responsive 2 × 2 and 1 × 4 on tablet/phone.
+- Reduce excess hero whitespace; present the warm masthead, golden sunrise SVG, mountain/sakura panorama, hero motto and card row as a continuous editorial scene.
+- Keep the landscape visible behind the entire card row instead of fading into a solid dark band halfway down.
+- Use the **same exact approved 1086 × 1448 WebP files**, unchanged and protected by existing SHA-256 checks.
+- Recreate the reference's lower card panels **with CSS gradients and real HTML**: icon, heading, brief description, availability and visual CTA. Do not bake text/actions into the WebP; do not make another generated page image.
+- Novel/Manga remain genuine full-card anchors with an actual "Explore" label; Anime/Movies remain inert `article` elements. Their "Coming soon" text is an informational span, not a fake interactive button.
+- Six locally persisted themes continue to use the same rich illustrated scene, with a controlled bottom tint rather than the previous large, abrupt dark colour block.
+- Keep the original source and tests for accessibility, exact-art asset integrity, keyboard focus, reduced motion, local-only media and native HTML semantics.
+
+This modernisation is in `apps/hub/src/styles.css`, `App.tsx` and `packages/ui/src/index.tsx` under the new opt-in `immersive` variant. The old `imageOnly` presentation remains available for compatibility but is no longer the Hub's rendered card format.

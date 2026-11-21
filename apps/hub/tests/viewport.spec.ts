@@ -29,7 +29,7 @@ for (const [width, height] of [
   });
 }
 
-test('cards use sharp native-resolution text-free illustration assets', async ({ page }) => {
+test('editorial cards use exact original high-resolution illustration assets', async ({ page }) => {
   await page.goto('/');
   const images = page.locator('.hub-card-image-illustration');
   await expect(images).toHaveCount(4);

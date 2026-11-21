@@ -19,12 +19,14 @@ This is **four Hub destinations across five repositories** because Movies and TV
 
 ## Current product
 
-- **Four image-only portraits**, in order: Novel Library, Manga Library, Anime Library, Movies & TV Library. Each portrait has **exact approved detailed artwork**, with its only visible title centred **below** the image. No artwork-embedded labels/buttons or status badges.
+- **Four cinematic illustrated posters**, in order: Novel Library, Manga Library, Anime Library, Movies & TV Library. The exact approved text-free WebP illustrations remain unchanged; the visible titles, descriptions, availability labels and calls to action are **real accessible HTML/CSS overlaid on the lower half**, not baked into the artwork.
 - **Real links** for Novel and Manga only, covering artwork and title. Anime and Movies & TV are non-interactive until verified.
-- **Responsive grid:** 4 × 1 on desktop, 2 × 2 on tablet, 1 × 4 on mobile; 100% desktop viewport-fit target, 200% zoom reflow and no horizontal overflow.
+- **Reference-inspired full-width layout:** four dramatically larger posters across desktop, 2 × 2 tablet, 1 × 4 mobile. Compact welcome area, full-height atmospheric landscape, 100% desktop viewport-fit target and accessible 200% zoom reflow.
 - **Visual identity:** a distinct Hub-specific golden SVG sunrise logo, warm brown masthead, sakura tree, pastel mountain/sunrise landscape, ornamental wave footer and editorial typography.
 - **Six persistent themes:** Midnight, Charcoal, Plum, Sepia (**first-visit default**), Paper and Ocean. Preference stays **local to the Hub**.
 - **Accessibility and privacy:** semantic headings, skip link, keyboard/focus, reduced motion, screen-reader-only planned state, local self-hosted assets, strict static CSP/security headers. No private media fetch or cross-app credentials.
+
+**Visual direction:** Following a new side-by-side vision/current-app comparison on 21 November, the owner requested that the cinematic reference be implemented **in code**, not as a new generated illustration. The current editoral panel styling reuses the exact approved images, but builds all caption/pill/CTA UI in React/CSS. Older images-with-titles-below describe a superseded layout.
 
 **Important history:** PR [#19](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/19) had the correct layout but accidentally used simplified substitute drawings. PR [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) replaced them with the **actual detailed approved four-panel artwork** and verifies exact WebP digests. Never repeat that substitution. The previously proposed raster-logo pack was superseded for **the Hub only** by original SVG sunrise branding; independent readers keep their own branding.
 

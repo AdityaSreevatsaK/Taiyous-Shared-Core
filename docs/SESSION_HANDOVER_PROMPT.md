@@ -24,8 +24,8 @@ The working focus is **Novels + Manga**. Anime and Movies & TV remain illustrate
 
 ## Present implementation and non-negotiable visual specification
 
-1. Four portrait tiles in order: Novel, Manga, Anime, Movies & TV. Desktop 4 × 1; tablet 2 × 2; mobile 1 × 4. At 100% desktop zoom, aim to keep whole page in view; at 200% zoom/mobile allow vertical scrolling without horizontal overflow.
-2. The **exact detailed original artwork**, not approximate SVG alternatives, is committed to `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`, each 1086 × 1448. The images contain **no visible text/buttons/badges**. One actual HTML title, `Novel Library`, `Manga Library`, `Anime Library`, `Movies & TV Library`, appears centred **below each image**.
+1. Four **large, full-width cinematic editorial** posters in order: Novel, Manga, Anime, Movies & TV. Desktop 4 × 1; tablet 2 × 2; mobile 1 × 4. At 100% desktop zoom, aim to keep whole page in view; at 200% zoom/mobile allow vertical scrolling without horizontal overflow.
+2. The **exact detailed original artwork**, not approximate SVG alternatives, is committed to `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`, each 1086 × 1448. The images contain **no visible text/buttons/badges**. Native HTML headings (`Novel Library`, `Manga Library`, `Anime Library`, `Movies & TV Library`), short descriptions, availability indicators and CTA labels are composed **inside the bottom of each card with CSS**, not painted into the artwork. The older titles-below layout was superseded by the 21 November cinematic reference.
 3. Only **Novel** and **Manga** tiles are whole-card HTTPS links to their independent Cloudflare Pages apps. Anime and Movies/TV are non-interactive with screen-reader-only planned status. There is no shared app auth.
 4. Header is warm brown/gold with original Hub-specific sunrise-over-water SVG logo and blossom ornament, sakura-tree/mountain/sunrise background, a welcome hero and “Explore • Read • Watch • Discover” motto; footer is “Created by Taiyou”.
 5. Six Hub-local themes: Midnight, Charcoal, Plum, Sepia, Paper, Ocean. **Sepia default**, persistent via localStorage, restored before React to avoid flash with strict CSP.
@@ -42,7 +42,7 @@ Node.js 22+, npm workspaces with committed `package-lock.json`, TypeScript stric
 - `apps/hub/src/catalogue.ts`: four-module navigation registry; known Novel/Manga URLs and public HTTPS policy.
 - `apps/hub/src/theme.ts`, `apps/hub/public/theme-bootstrap.js`: selected theme and pre-React persistence.
 - `packages/contracts/src/index.ts`: experimental namespaced IDs, media kinds, availability and 1–10 rating helpers.
-- `packages/ui/src/index.tsx`: stateless `MediaHubCard` (available anchor, planned article, artwork-only variant).
+- `packages/ui/src/index.tsx`: stateless `MediaHubCard` (available anchor, planned article, live `immersive` editorial variant; legacy `imageOnly` retained).
 - `scripts/verify-hub-static.mjs`: built security policy and exact portrait asset SHA-256 checks.
 - `scripts/verify-hub-live.mjs`: HTTP/security response and exact live `/release.json` SHA.
 - `.github/workflows/ci.yml`: Ubuntu/Windows + three-browser quality.

@@ -27,3 +27,10 @@ The owner subsequently approved a distinct Sun mark for this Hub rather than req
 ## Final portrait art identity (21 November 2026)
 
 PR #19 had correct text placement but substituted simplified SVG illustrations for the detailed visual that had actually been shown to the owner. PR #20 fixed this with the original high-resolution four-panel generated art, exported as `novels-art.webp`, `manga-art.webp`, `anime-art.webp`, and `movies-tv-art.webp`. They remain text-free, with separate visible centred headings and noninteractive planned tiles. These exact bytes are protected by build SHA-256 checks. Do not replace them with new approximations. See [History](PROJECT_HISTORY.md) and [Codebase](CODEBASE_REFERENCE.md).
+
+
+## Current cinematic variant (21 November 2026)
+
+The owner's latest screenshot comparison explicitly supersedes the **small separate-caption cards** described earlier. The current Hub invokes `MediaHubCard immersive`: every card uses the exact approved text-free portrait image, but the lower illustrated panel, heading, short description, availability marker and CTA are **real HTML/CSS over a themed gradient**, never rasterised text. Novel/Manga are single whole-card links; Anime/Movies are non-interactive articles with a static "Coming soon" label. The older `imageOnly` rendering remains supported for compatibility only. 
+
+At normal desktop width, make the four cards fill most of the available landscape instead of appearing as tiny centred thumbnails. Preserve a compact hero, continuous visible sakura/mountain horizon, sunlight and themed footer transition. CSS is consolidated to eliminate many mutually overriding historical rules; responsive and reduced-motion states remain explicit. See [Design history](PROJECT_HISTORY.md) and [latest homepage direction](ILLUSTRATED_HOMEPAGE.md).

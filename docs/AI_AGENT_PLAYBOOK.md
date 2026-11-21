@@ -42,12 +42,12 @@ You do **not** own the Novel reader, Manga reader, their storage controllers/pri
 
 - Four media cards in this exact order: Novel, Manga, Anime, Movies & TV.
 - Desktop **4 × 1**, tablet **2 × 2**, phone **1 × 4**; 100%-desktop fit without clipping or forced zoom; correct 200% zoom reflow and no horizontal overflow.
-- **Exact detailed approved WebP portrait imagery** under `apps/hub/public/art/*-art.webp`, not rewritten SVG approximations. Card art contains no text or badges; one visible HTML title centred **beneath** each portrait.
+- **Exact detailed approved WebP portrait imagery** under `apps/hub/public/art/*-art.webp`, not rewritten SVG approximations. Card art itself contains no text or badges; the current cinematic view draws real HTML titles, description/status labels and calls to action over a lower CSS gradient. Never bake labels into art or substitute new approximate images.
 - Whole Novel/Manga card (image + title) is a safe HTTPS link. Planned cards are inert with accessible planned-state semantics.
 - Warm brown top bar, approved Hub-specific sunrise-over-water SVG logo, blossom ornament, continuous sakura/mountain/sunrise background.
 - Six theme choices, **Sepia default**, persistence and no-flash bootstrap with strict no-inline-script CSP.
 - Focusable skip link, proper heading levels, keyboard access, visible focus, reduced-motion support, appropriate contrast.
-- No “Explore”, “Launch”, “Coming soon” or other action text inside images; no misleading clickable planned tiles. Do not duplicate art labels in overlays.
+- Navigation prompts are real HTML within the code-rendered card, **not pixels inside images**. Available whole-card anchors may show Explore text. Planned cards may show Coming soon as static, unfocusable text only, never as a fake link/button. Avoid duplicate labels and misleading pointer cursors.
 - The independent readers, their auth, catalogue, themes and private datasets must remain untouched and functional without the Hub.
 
 If a proposed feature appears to conflict with these, write down the change in decision history and obtain a clear new design instruction instead of quietly overriding a previously approved outcome.

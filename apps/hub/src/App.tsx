@@ -15,9 +15,36 @@ const artwork: Record<ModuleKey, string> = {
 const cardCopy: Record<ModuleKey, { title: string; description: string }> = {
   novels: { title: 'Novel Library', description: 'A curated collection of novels across genres and worlds.' },
   manga: { title: 'Manga Library', description: 'A growing collection of manga series, from popular hits to hidden gems.' },
-  anime: { title: 'Anime Library', description: 'A home for anime series and films, coming soon.' },
-  'movies-tv': { title: 'Movies & TV Library', description: 'A collection of films and TV series to watch and enjoy, coming soon.' },
+  anime: { title: 'Anime Library', description: 'A home for anime series and films.' },
+  'movies-tv': { title: 'Movies & TV Library', description: 'A collection of films and TV series to watch and enjoy.' },
 };
+
+/** Lightweight, original inline vector linework. No remote icon library. */
+function MediaGlyph({ kind }: { kind: ModuleKey }) {
+  const shared = {
+    className: 'hub-media-glyph', viewBox: '0 0 32 32',
+    fill: 'none', stroke: 'currentColor', strokeWidth: 1.75,
+    strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+    'aria-hidden': true as const,
+  };
+  if (kind === 'novels') return <svg {...shared}>
+    <path d="M16 7c-4.2-3-9-3.6-13-2v21c4.2-1.4 8.8-.6 13 2 4.2-2.6 8.8-3.4 13-2V5c-4-1.6-8.8-1-13 2Z" />
+    <path d="M16 7v21M7 10c2-.4 4.3-.1 6 1M19 11c1.7-1.1 4-1.4 6-1" />
+  </svg>;
+  if (kind === 'manga') return <svg {...shared}>
+    <path d="M6 4h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+    <path d="M7 7h18v9H7zM7 19h8v6H7zM18 19h7M18 22h7M18 25h5" />
+    <path d="m10 13 3-3 3 3 3-4 3 4" />
+  </svg>;
+  if (kind === 'anime') return <svg {...shared}>
+    <rect x="3.5" y="5" width="25" height="22" rx="4" />
+    <path d="m13 11 9 5-9 5z" />
+  </svg>;
+  return <svg {...shared}>
+    <rect x="3" y="7" width="26" height="18" rx="2" />
+    <path d="M10 7v18M22 7v18M3 13h7M3 19h7M22 13h7M22 19h7" />
+  </svg>;
+}
 
 export default function App({ entries = modules }: { entries?: readonly MediaModule[] }) {
   const [theme, setTheme] = useState<HubTheme>(readInitialHubTheme);
@@ -61,7 +88,9 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
                 title={copy.title}
                 description={copy.description}
                 artworkSrc={artwork[module.key]}
-                imageOnly
+                icon={<MediaGlyph kind={module.key} />}
+                immersive
+                actionLabel={module.key === 'novels' ? 'Explore Novels' : 'Explore Manga'}
                 status={module.availability}
                 href={module.href}
               />

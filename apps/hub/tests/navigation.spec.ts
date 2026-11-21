@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { captureVerifiedArtwork } from './visual-evidence';
 
 for (const width of [320,390,768,1280]) {
   test('four cards, correct columns and no overflow at '+width+'px', async({page})=>{
@@ -19,18 +20,7 @@ for (const width of [320,390,768,1280]) {
       for(let j=1;j<row.length;j++) expect(row[j]!.x).toBeGreaterThan(row[j-1]!.x);
     }
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    // A screenshot taken immediately after React mounts can capture blank
-    // image surfaces while high-resolution WebP decoding is still underway.
-    // Review actual painted artwork, not unloaded placeholders.
-    await page.locator('.hub-card-image-illustration').evaluateAll(async elements => {
-      await Promise.all(elements.map(element => (element as HTMLImageElement).decode()));
-    });
-    // Give the compositor an opportunity to paint all four decoded images,
-    // rather than capturing blank frames during the initial raster update.
-    await page.evaluate(() => new Promise<void>(resolve =>
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
-    await page.waitForTimeout(250);
-    await page.screenshot({path:test.info().outputPath('hub-'+width+'.png'),fullPage:true});
+    await captureVerifiedArtwork(page, test.info().outputPath('hub-'+width+'.png'));
   });
 }
 test('keyboard skips planned cards',async({page})=>{
@@ -110,7 +100,7 @@ for (const { width, height } of [
     });
     expect(geometry.scrollWidth).toBeLessThanOrEqual(width);
     expect(geometry.scrollHeight).toBeLessThanOrEqual(height);
-    expect(geometry.cardWidth).toBeLessThanOrEqual(width*0.22);
+    expect(geometry.cardWidth).toBeGreaterThanOrEqual(260);
     expect(geometry.cardBottom).toBeLessThanOrEqual(geometry.footerBottom);
     expect(geometry.cardBottom).toBeGreaterThan(geometry.heroBottom);
     await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
@@ -146,21 +136,30 @@ test('the responsive SVG sunrise logo and sakura ornament load locally', async({
 });
 
 
-test('image-only cards show real titles below the portraits', async ({ page }) => {
+test('editorial cards render real HTML captions inside the four original portraits', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
   await page.goto('/');
   await expect(page.locator('.hub-card-artwork img')).toHaveCount(4);
   await expect(page.locator('.hub-card-label')).toHaveText([
     'Novel Library', 'Manga Library', 'Anime Library', 'Movies & TV Library',
   ]);
-  await expect(page.locator('.hub-card-description, .hub-card-status, .hub-card-state')).toHaveCount(0);
+  await expect(page.locator('.hub-card-editorial')).toHaveCount(4);
+  await expect(page.locator('.hub-card-description')).toHaveCount(4);
+  await expect(page.locator('.hub-card-state')).toHaveCount(4);
+  await expect(page.locator('.hub-card-cta')).toHaveCount(4);
+  await expect(page.locator('.hub-card-status')).toHaveCount(0);
   const tiles = await page.locator('.hub-card').evaluateAll(cards => cards.map(card => {
     const img = card.querySelector('img')!.getBoundingClientRect();
     const title = card.querySelector('h3')!.getBoundingClientRect();
-    return { imgBottom: img.bottom, titleTop: title.top, imgWidth: img.width, imgHeight: img.height };
+    const action = card.querySelector('.hub-card-cta')!.getBoundingClientRect();
+    return { imgTop: img.top, imgBottom: img.bottom, titleTop: title.top,
+      titleBottom: title.bottom, actionBottom: action.bottom,
+      imgWidth: img.width, imgHeight: img.height };
   }));
   for (const tile of tiles) {
-    expect(tile.titleTop).toBeGreaterThan(tile.imgBottom);
+    expect(tile.titleTop).toBeGreaterThan(tile.imgTop);
+    expect(tile.titleBottom).toBeLessThan(tile.imgBottom);
+    expect(tile.actionBottom).toBeLessThanOrEqual(tile.imgBottom);
     expect(Math.abs(tile.imgWidth / tile.imgHeight - 1086 / 1448)).toBeLessThan(0.025);
   }
   for (const image of await page.locator('.hub-card-image-illustration').all()) {
@@ -172,7 +171,35 @@ test('planned library cards have neither links nor misleading pointer cursors', 
   await expect(page.locator('article.hub-card')).toHaveCount(2);
   for (const card of await page.locator('article.hub-card').all()) {
     await expect(card).not.toHaveAttribute('href', /.+/);
-    await expect(card).toContainText('In preparation. Coming soon.');
+    await expect(card.locator('.hub-card-state')).toContainText('In preparation');
+    await expect(card.locator('.hub-card-cta-planned')).toHaveText('Coming soon');
     expect(await card.evaluate(element => getComputedStyle(element).cursor)).not.toBe('pointer');
+  }
+});
+
+
+test('reference-inspired full-width editorial composition, theme and working overlays', async ({page}) => {
+  await page.setViewportSize({width:1600,height:900});
+  await page.goto('/');
+  await expect(page.locator('.hub-card-immersive')).toHaveCount(4);
+  const dimensions = await page.evaluate(() => {
+    const first = document.querySelector('.hub-card')!.getBoundingClientRect();
+    const last = [...document.querySelectorAll('.hub-card')].at(-1)!.getBoundingClientRect();
+    const hero = document.querySelector('.hub-hero')!.getBoundingClientRect();
+    const scene = getComputedStyle(document.querySelector('.hub-main')!, '::before');
+    return {firstX:first.x,firstW:first.width,lastRight:last.right,heroH:hero.height,
+      background:scene.backgroundImage};
+  });
+  expect(dimensions.firstX).toBeLessThan(70);
+  expect(dimensions.firstW).toBeGreaterThan(340);
+  expect(dimensions.lastRight).toBeGreaterThan(1530);
+  expect(dimensions.heroH).toBeLessThan(250);
+  expect(dimensions.background).toContain('/art/landscape.avif');
+  await expect(page.locator('.hub-card-cta:not(.hub-card-cta-planned)')).toHaveText([
+    'Explore Novels →','Explore Manga →',
+  ]);
+  for (const theme of ['sepia','charcoal']) {
+    await page.getByRole('combobox',{name:'Hub theme'}).selectOption(theme);
+    await captureVerifiedArtwork(page, test.info().outputPath('hub-vision-'+theme+'-1600.png'));
   }
 });

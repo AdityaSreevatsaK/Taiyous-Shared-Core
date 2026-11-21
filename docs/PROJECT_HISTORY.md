@@ -142,3 +142,16 @@ The experimental types include hypothetical cross-media metadata; their existenc
 ## 8. Source/provenance and limits of this history
 
 This narrative reconciles repository history, linked PR descriptions, code and the owner's Hub design feedback through 21 November 2026. It records design directions at a useful level, **not** a verbatim transcript of every discussion. No unpublished technical details about the independent media apps are implied. At each future milestone, update this record with date, PR URL, decision, trade-offs, test run and rollback. If a fact here conflicts with actual code or later production evidence, **code and measured verification win**, and this document must be corrected.
+
+
+## 9. Cinematic, code-first visual restoration (21 November 2026)
+
+The owner compared **image(6), the ambitious full-page vision**, with **image(7), the live Hub**, and reported that the latter felt like a much cheaper duplicate. The most consequential differences were: the artwork row occupied only the central portion rather than nearly the full viewport; excessive hero spacing pushed the cards down; the scenic sky faded abruptly into a large dark band; and the tiny bare illustrations and separate captions lost the rich, integrated editorial feel of the reference.
+
+The updated instruction was **explicitly to implement the homepage in code**, not to generate or supply another standalone image. The solution is a rewritten, consolidated Hub stylesheet and a stateless `immersive` card variant rendered in React: large 3:4 original images, a progressive lower gradient, accessible live HTML captions, descriptions, statuses and calls to action, full-card links for Novel and Manga, and inert planned cards. It preserves the original approved exact WebP files, the SVG Sunrise brand, six themes, all safe link rules and responsive reflow. The reference's label panels are code, **not a composite screenshot or new generated raster**.
+
+This explicitly **supersedes the former titles-below composition** but does **not** reverse the earlier rejection of imitated/simplified art. The legacy `imageOnly` variant remains supported in Shared Core for compatibility; it is no longer the Hub's homepage presentation. At all times, the current approved code and verified deployed revision take precedence over this historical description.
+
+### I. Screenshot paint race during cinematic redesign
+
+During reference comparison, the browser occasionally captured blank purple/red third and fourth tiles even though the original WebP elements reported successfully decoded, causing misleading visual screenshots. The code now uses non-negative card stacking levels and `tests/visual-evidence.ts` validates **pixel variation in each rendered card** before saving CI screenshots. This test explicitly fails if the picture is still blank; it does not assume element presence or `naturalWidth` proves visual correctness.
