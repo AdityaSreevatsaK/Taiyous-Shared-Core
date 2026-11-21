@@ -84,6 +84,7 @@ There is no client router, no login route and no fetch to a media or Hugging Fac
 | `packages/contracts/src/index.ts` | Experimental MediaKind, ModuleKey, MediaIdentity, MediaModule, rating validator |
 | `packages/ui/src/index.tsx` | Pure `MediaHubCard`; safe available/planned markup and image-only vs legacy card variant |
 | `scripts/verify-hub-static.mjs` | Assertions on built assets, security policy and **exact approved artwork digests** |
+| `scripts/verify-docs.mjs` | Confirms mandatory handover files and all local Markdown targets exist (offline CI) |
 | `scripts/verify-hub-live.mjs` | External HTTPS/security response and deployed exact-commit check |
 | `.github/workflows/ci.yml` | Ubuntu/Windows quality plus Chromium/Firefox/WebKit browser jobs |
 | `.github/workflows/live-hub.yml` | `master`-push independent live Cloudflare smoke; also manual dispatch |
@@ -149,6 +150,7 @@ npm run typecheck
 npm test
 npm run build
 node scripts/verify-hub-static.mjs
+npm run verify:docs
 npx playwright install chromium firefox webkit
 npm run test:browser
 npm run dev
