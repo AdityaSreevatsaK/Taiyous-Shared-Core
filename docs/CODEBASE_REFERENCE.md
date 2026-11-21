@@ -119,7 +119,7 @@ The public `.env.example` contains `VITE_NOVELS_URL`, `VITE_MANGA_URL`, `VITE_AN
 
 ### Approved next branding references (not yet active in the Hub)
 - `docs/assets/sun-light.webp` and `docs/assets/sun-dark.webp` are exact copies of the shared Sun marks already used by the Novel and Manga apps. They are documentation references only; the current Hub still uses the SVG files above.
-- `docs/assets/golden-archive.webp` and `docs/assets/cinematic-passage.webp` are local Pexels photo references for ADR-015. They are not under `apps/hub/public`, are not copied into Vite output and are not requested by the live page.
+- `docs/assets/featured-visual-moodboard.webp` is a credited composite reference showing the two Pexels concepts for ADR-015. The original Pexels photos are not separately redistributed in the public repository. The moodboard is not under `apps/hub/public`, is not copied into Vite output and is not requested by the live page.
 
 ### Current card art, do not substitute
 - `apps/hub/public/art/novels-art.webp`
@@ -246,6 +246,6 @@ This guide is a **map**. It cannot replace inspecting the actual target file/dif
 
 ## 9. Latest approved visual exploration (21 November 2026)
 
-The owner is no longer committed to a Japanese/sakura theme. ADR-015 approves a **coded prototype only** for a split layout: a prominent Golden Archive or Cinematic Passage photograph on the left, four compact library tiles in a 2 × 2 group on the right, warm brown/pale-gold/glowing-gold colours, and the exact shared Sun mark already used by Novel and Manga. Full source, local asset paths, credits and licence notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md).
+The owner is no longer committed to a Japanese/sakura theme. ADR-015 approves a **coded prototype only** for a split layout: a prominent Golden Archive or Cinematic Passage photograph on the left, four compact library tiles in a 2 × 2 group on the right, warm brown/pale-gold/glowing-gold colours, and the exact shared Sun mark already used by Novel and Manga. The composite moodboard, original Pexels source links, credits and licence notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md).
 
 This is not part of the current React page. The current live release remains the PR #23 centred scenic gallery, using the original sakura/Mount Fuji background, Hub SVG logo, Georgia typography and existing HTML card overlays. The new photographs and shared logo WebPs are in `docs/assets/` only, not in `apps/hub/public`, and are not copied into the production bundle. Do not claim the prototype or new branding is implemented until source, tests, screenshots and release evidence prove it.

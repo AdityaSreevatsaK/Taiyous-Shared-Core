@@ -110,7 +110,7 @@ The latest owner instruction explicitly removes the large Welcome heading, suppo
 
 ## Latest owner-approved exploration: photographic split layout (21 November 2026)
 
-The owner is not committed to a Japanese theme and liked both **Golden Archive** (historic library, walnut and warm lamps) and **Cinematic Passage** (ornate corridor, golden sunlight and strong perspective). The owner also approved using the exact shared Sun logo already used by Novel and Manga. The two Pexels photos and the two shared Sun WebPs are stored under `docs/assets/` with credits, licence, dimensions and hashes in [Featured visual options](FEATURED_VISUAL_OPTIONS.md).
+The owner is not committed to a Japanese theme and liked both **Golden Archive** (historic library, walnut and warm lamps) and **Cinematic Passage** (ornate corridor, golden sunlight and strong perspective). The owner also approved using the exact shared Sun logo already used by Novel and Manga. A credited composite moodboard showing the two Pexels photos, plus the two shared Sun WebPs, is stored under `docs/assets/`. Source credits, original URLs, dimensions and licence notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). Raw Pexels photos are not separately redistributed.
 
 The next task is to build two responsive code prototypes using the same composition: one prominent photographic feature on the left and four compact media tiles on the right in a 2 × 2 group. Explore deep brown/walnut, pale gold and restrained glowing gold. The headline “A Place for Every Story.” is only a candidate. Japanese/sakura motifs are optional. Keep the exact four approved media card illustrations, real Novel/Manga links, inert planned cards, six themes and accessibility invariants.
 

@@ -82,6 +82,6 @@ For rollback, revert the focused PR or select an earlier reviewed Cloudflare dep
 - Report exact PR, head/merge SHA, tests actually executed, independent live status, manual checks still outstanding and next safe steps.
 - Do not overstate published packages, data integration, a video library or owner acceptance.
 
-**Approved next visual exploration:** [Golden Archive and Cinematic Passage references](docs/FEATURED_VISUAL_OPTIONS.md) · [ADR-015](docs/adr/ADR-015-photographic-split-layout-exploration.md). The photos and shared Sun logo variants are documentation assets only; do not assume the current app uses them.
+**Approved next visual exploration:** [Golden Archive and Cinematic Passage references](docs/FEATURED_VISUAL_OPTIONS.md) · [ADR-015](docs/adr/ADR-015-photographic-split-layout-exploration.md). The combined photographic moodboard and shared Sun logo variants are documentation assets only; raw Pexels photos are not separately redistributed. Do not assume the current app uses any of them.
 
 **Further reading:** [Complete agent playbook](docs/AI_AGENT_PLAYBOOK.md) · [Project history and mistakes](docs/PROJECT_HISTORY.md) · [Code/stack map](docs/CODEBASE_REFERENCE.md) · [Decisions](docs/DECISIONS.md) · [Operations](docs/OPERATIONS.md) · [Session handover](docs/SESSION_HANDOVER_PROMPT.md).

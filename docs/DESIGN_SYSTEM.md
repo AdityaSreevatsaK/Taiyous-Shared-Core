@@ -31,7 +31,7 @@ The owner is not committed to a Japanese aesthetic. The next prototype should co
 - **Golden Archive:** a historic library interior with walnut bookshelves and warm light.
 - **Cinematic Passage:** an ornate architectural corridor with golden sunlight and a vanishing point.
 
-Both are stored in docs/assets/ with photographer, source, dimensions and Pexels licence notes. They are local documentation references, not runtime assets. The exact shared sun-light.webp and sun-dark.webp marks already used by the Novel and Manga apps are also stored in docs/assets/; the Hub has not switched to them yet.
+Both are shown in one credited composite moodboard in docs/assets/; photographer, source URL, source dimensions and Pexels licence notes are documented. The raw photos are not separately redistributed. The moodboard is a documentation reference, not a runtime asset. The exact shared sun-light.webp and sun-dark.webp marks already used by the Novel and Manga apps are also stored in docs/assets/; the Hub has not switched to them yet.
 
 ### Proposed composition
 
@@ -70,8 +70,7 @@ Stock photography must be self-hosted if selected for the live app. Never hotlin
 | apps/hub/public/art/landscape.avif | Current sakura/Mount Fuji panorama | Yes |
 | apps/hub/public/branding/hub-sun-logo.svg | Current Hub header mark | Yes |
 | apps/hub/public/branding/hub-sun.svg | Current Hub favicon | Yes |
-| docs/assets/golden-archive.webp | Pexels visual reference | No |
-| docs/assets/cinematic-passage.webp | Pexels visual reference | No |
+| docs/assets/featured-visual-moodboard.webp | Combined Pexels visual reference board | No |
 | docs/assets/sun-light.webp, sun-dark.webp | Exact shared Novel/Manga logo references | No |
 
 Never move a documentation reference into the runtime bundle without updating provenance, static verification, CSP checks, visual tests and this document.

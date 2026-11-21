@@ -19,7 +19,7 @@
 - [x] Six persistent Hub themes; Sepia default and CSP-compliant theme bootstrap.
 - [x] Sakura sunrise landscape, warm brown/gold masthead and original Hub-specific Sunrise SVG/favicons.
 - [x] **Exact owner-approved detailed WebP artworks** remain unchanged and hash-verified (PR #20). The current hero-free midsize gallery and native HTML card overlays are implemented in PR #23.
-- [x] Golden Archive and Cinematic Passage licensed photo references, plus the exact shared Novel/Manga Sun marks, are stored locally in `docs/assets/` with provenance. They are documentation assets only.
+- [x] A credited composite moodboard showing Golden Archive and Cinematic Passage, plus the exact shared Novel/Manga Sun marks, is stored locally in `docs/assets/` with provenance. The raw Pexels photos are not separately redistributed; source pages and licence notes are documented.
 - [ ] Build both photographic split-layout prototypes using the same left-feature/right-2×2-card composition; compare actual browser screenshots and responsive crops.
 - [ ] Use the shared Sun mark in the prototype and remove the current redundant header subtitle; validate the logo variant across all six themes.
 - [ ] Obtain owner visual acceptance of the coded prototype before changing the live homepage. The current production design remains the PR #23 scenic gallery until then.

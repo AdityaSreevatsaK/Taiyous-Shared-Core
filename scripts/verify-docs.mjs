@@ -72,8 +72,7 @@ console.log('Verified ' + required.length + ' handover files and ' +
 
 // Design-reference assets are documentation-only, but must remain intact and locally renderable.
 const referenceAssets = {
-  'docs/assets/golden-archive.webp': { maxBytes: 1_000_000 },
-  'docs/assets/cinematic-passage.webp': { maxBytes: 500_000 },
+  'docs/assets/featured-visual-moodboard.webp': { maxBytes: 500_000 },
   'docs/assets/sun-light.webp': { sha256: 'd292f5b3f8306925b93f1db4b7bee77324072a01' },
   'docs/assets/sun-dark.webp': { sha256: '565156eb5da784cdf1c4117a5d300b05dae71d35' },
 };

@@ -1,6 +1,6 @@
 # Scenic homepage review and external artwork research
 
-**Earlier decision:** 21 November 2026. The original illustrated landscape was retained for the PR #23 release because it matched the approved portrait art. **Current status:** the owner subsequently approved exploring non-Japanese photographic feature visuals. Two licensed Pexels references are now stored locally under `docs/assets/`; they are not used by the live Hub.
+**Earlier decision:** 21 November 2026. The original illustrated landscape was retained for the PR #23 release because it matched the approved portrait art. **Current status:** the owner subsequently approved exploring non-Japanese photographic feature visuals. A credited composite moodboard showing two licensed Pexels references is stored locally under `docs/assets/`; raw Pexels photos are not separately redistributed and none are used by the live Hub.
 
 ## Owner's direction
 
@@ -45,4 +45,4 @@ The owner clarified that the Japanese concept is optional and approved a new pro
 - **Golden Archive:** Michael D Beckwith, [Pexels photo 36093623](https://www.pexels.com/photo/historic-library-room-with-rich-wooden-interiors-36093623/), source 8687 × 5791; local 2200 × 1467.
 - **Cinematic Passage:** Sefa Demirtaş, [Pexels photo 34882758](https://www.pexels.com/photo/architectural-perspective-of-a-sunlit-corridor-34882758/), source 4160 × 6240; local 1467 × 2200.
 
-Both are free under the [Pexels licence](https://www.pexels.com/license/); credits and exact local paths are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). They are design references, not production assets. The intended prototype places one featured photograph on the left and four compact media tiles on the right. No final photo, crop or design has been selected. Do not add a third-party runtime request; self-host any future production selection and preserve the current strict CSP.
+Both source pages identify the photos as free under the [Pexels licence](https://www.pexels.com/license/), which permits website use and modification but prohibits standalone redistribution. The combined credited moodboard is the local reference; source links and photographer credits are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). They are design references, not production assets. The intended prototype places one featured photograph on the left and four compact media tiles on the right. No final photo, crop or design has been selected. Do not add a third-party runtime request; self-host any future production selection and preserve the current strict CSP.

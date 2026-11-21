@@ -36,7 +36,7 @@ The owner likes the warm brown/pale-gold/glowing-gold mood from the supplied vid
 - **Golden Archive:** historic library, walnut bookshelves and warm light.
 - **Cinematic Passage:** ornate architectural corridor, golden sunlight and a vanishing point.
 
-Both optimised local WebP files are in docs/assets/. The exact shared Sun logo files used by Novel and Manga are also copied there:
+A credited composite moodboard showing both photo concepts is in docs/assets/; the raw Pexels photos are not separately redistributed. The exact shared Sun logo files used by Novel and Manga are also copied there:
 - sun-light.webp SHA-256 d292f5b3f8306925b93f1db4b7bee77324072a01
 - sun-dark.webp SHA-256 565156eb5da784cdf1c4117a5d300b05dae71d35
 
