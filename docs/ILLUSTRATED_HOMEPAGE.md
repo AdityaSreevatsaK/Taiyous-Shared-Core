@@ -80,3 +80,6 @@ available for historical comparison and rollback.
 The production static verification checks the precise SHA-256 digest of **each
 original detailed WebP** to detect accidental artwork substitution. All assets
 are local. No external images or tracking are loaded.
+
+
+> **Reading order for future agents:** This file preserves several historical visual versions. The latest accepted **artwork-only** design uses the exact original detailed `*-art.webp` portraits as documented in the **final section** and [Project history](PROJECT_HISTORY.md). Earlier descriptions of full poster cards with printed titles are deliberately archival, not current implementation instructions.
