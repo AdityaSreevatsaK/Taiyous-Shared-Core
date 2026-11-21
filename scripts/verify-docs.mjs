@@ -31,8 +31,9 @@ async function markdownFiles(directory) {
 const files = [
   ...await markdownFiles(path.join(root, 'docs')),
   ...await markdownFiles(path.join(root, '.github')),
-  ...await markdownFiles(root).then(all =>
-    all.filter(name => path.dirname(name) === root)),
+  ...(await readdir(root, { withFileTypes: true }))
+    .filter(entry => entry.isFile() && entry.name.endsWith('.md'))
+    .map(entry => path.join(root, entry.name)),
 ];
 let checked = 0;
 const missing = [];
