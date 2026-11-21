@@ -195,7 +195,8 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   background-image: url('/art/landscape.avif');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center 45%;
+  /* Lift the distant Fuji/sunrise above the posters; leave the sakura canopy at left. */
+  background-position: center calc(45% - 110px);
   filter: saturate(1.14) contrast(1.035);
 }
 .hub-main::after {
