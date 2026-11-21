@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-// At a normal 100% desktop viewport, the full welcome area, four cards and
+// At a normal 100% desktop viewport, the scenery, four cards and
 // footer must be visible together, without forcing users to zoom out.
 for (const [width, height] of [
   [1280, 720], [1366, 768], [1600, 900], [1920, 768], [1920, 1080],
@@ -21,7 +21,8 @@ for (const [width, height] of [
     expect(metrics.height).toBeLessThanOrEqual(height + 2);
     expect(metrics.cards).toHaveLength(4);
     for (const card of metrics.cards) {
-      expect(card.width).toBeGreaterThan(150);
+      expect(card.width).toBeGreaterThan(225);
+      expect(card.width).toBeLessThan(310);
       expect(card.bottom).toBeLessThanOrEqual(height + 2);
       expect(card.right).toBeLessThanOrEqual(width + 2);
     }

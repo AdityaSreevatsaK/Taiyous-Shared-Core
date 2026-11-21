@@ -91,7 +91,6 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
 /* Framing: landscape and four featured portraits share one screen on desktop. */
 .hub-page {
   --header-height: clamp(66px, 9dvh, 90px);
-  --hero-height: clamp(160px, 23dvh, 225px);
   --footer-height: clamp(52px, 7dvh, 68px);
   position: relative;
   isolation: isolate;
@@ -195,79 +194,35 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   background-image: url('/art/landscape.avif');
   background-repeat: no-repeat;
   background-size: cover;
-  /* Lift the distant Fuji/sunrise above the posters; leave the sakura canopy at left. */
-  background-position: center calc(45% - 180px);
+  /* Cover the entire main surface. A negative pixel offset left an abrupt blank
+     band above the footer in both light and dark themes. */
+  background-position: center 45%;
   filter: saturate(1.14) contrast(1.035);
 }
 .hub-main::after {
   content: ''; position: absolute; inset: 0; z-index: -1;
   pointer-events: none;
   background: linear-gradient(180deg,
-    #fff2e318 0%, #fff0df04 22%, transparent 46%,
-    transparent 77%, var(--scene-end) 100%);
+    #fff6ec0a 0%, transparent 38%, transparent 69%,
+    color-mix(in srgb, var(--scene-end) 34%, transparent) 87%, var(--scene-end) 100%);
 }
-.hub-hero {
-  flex: none; position: relative;
-  height: var(--hero-height);
-  display: grid; place-items: center;
-  padding: 10px 16px 6px;
-  color: #432720;
-}
-.hub-hero-copy {
-  width: fit-content; max-width: 100%;
-  text-align: center; padding: 12px clamp(12px, 3.3vw, 50px);
-  border-radius: 38%;
-  background: radial-gradient(ellipse at center,
-    #fff4e7e8 0%, #fff0dfba 38%, #fff0df42 72%, transparent 100%);
-}
-.hub-hero h1 {
-  display: flex; justify-content: center; align-items: center; gap: 18px;
-  margin: 0;
-  color: #43231f;
-  font: italic 700 clamp(30px, 3.15vw, 54px)/1.12 Georgia, serif;
-  letter-spacing: -.022em;
-  text-wrap: balance; text-shadow: 0 2px 1px #fff7eea8;
-}
-.hub-hero h1::before, .hub-hero h1::after {
-  content: '✧'; flex: none;
-  font: normal 28px/1 Georgia, serif;
-  color: #c57b36;
-  transform: rotate(-18deg);
-}
-.hub-hero h1::after { transform: rotate(18deg); }
-.hub-hero p {
-  margin: 5px 0 clamp(8px, 1.3dvh, 14px);
-  color: #392922;
-  font-size: clamp(15px, 1.48vw, 22px);
-  line-height: 1.34;
-  text-shadow: 0 1px 2px #fff8ebb0;
-}
-.hub-hero-motto {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 38px;
-  padding: 5px 20px;
-  border: 1.5px solid #c88943; border-radius: 999px;
-  background: #fff7e9e9;
-  box-shadow: 0 3px 8px #713a332b, inset 0 1px #ffffffc7;
-  color: #43291e;
-  font-size: clamp(13px, 1.28vw, 19px);
-  white-space: nowrap;
-}
-.hub-hero-motto span:first-child { color: #cb7b2c; font-size: 22px; line-height: 1; }
+/* The scene is the hero. No visible welcome copy competes with the sakura
+ * canopy, distant Fuji and the four library portraits. */
 
-/* Large, full-width illustrated posters, as in the approved vision.
- * The grid is height-limited only when necessary to keep a desktop whole page in view. */
+/* Four midsize illustrated gallery portraits leave room for the actual scenery.
+ * Poster scale is deliberately restrained instead of stretching edge to edge. */
 .hub-libraries {
   flex: 1 1 auto; min-height: 0; width: 100%;
   display: flex; align-items: center; justify-content: center;
-  padding: 8px clamp(18px, 2.15vw, 38px) 8px;
+  padding: clamp(16px, 2.3dvh, 25px) clamp(20px, 3vw, 50px);
   scroll-margin-top: 12px;
 }
 .hub-grid {
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start; gap: clamp(12px, 1.25vw, 22px);
   width: 100%;
-  max-width: min(1760px, calc((100dvh - var(--header-height) - var(--hero-height) - var(--footer-height) - 36px) * 3 + 52px));
+  max-width: min(1210px, calc(100vw - 80px),
+    calc((100dvh - var(--header-height) - var(--footer-height) - 105px) * 3));
   list-style: none; padding: 0; margin: 0 auto;
 }
 .hub-tile { min-width: 0; }
@@ -319,10 +274,10 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
 .hub-card-editorial {
   position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: flex-end;
-  flex-direction: column; gap: clamp(6px, .86dvh, 11px);
+  flex-direction: column; gap: clamp(4px, .7dvh, 8px);
   width: 100%;
-  min-height: 47%;
-  padding: 4px clamp(10px, 1.25vw, 23px) clamp(12px, 1.55dvh, 23px);
+  min-height: 46%;
+  padding: 4px clamp(9px, 1.1vw, 17px) clamp(10px, 1.3dvh, 17px);
 }
 .hub-card-title-row {
   display: flex; align-items: center; justify-content: center;
@@ -330,13 +285,13 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
 }
 .hub-card-icon {
   display: inline-flex; align-items: center; justify-content: center;
-  width: clamp(26px, 2.65vw, 43px); height: clamp(26px, 2.65vw, 43px);
+  width: clamp(24px, 2vw, 34px); height: clamp(24px, 2vw, 34px);
   flex: none; color: #ffe9bb;
 }
 .hub-media-glyph { display: block; width: 100%; height: 100%; }
 .hub-card-title {
   margin: 0;
-  font: 700 clamp(22px, 1.8vw, 33px)/1.08 Georgia, serif;
+  font: 700 clamp(20px, 1.55vw, 28px)/1.1 Georgia, serif;
   letter-spacing: -.027em; text-wrap: balance;
 }
 .hub-card-label {
@@ -346,7 +301,7 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
 .hub-card-description {
   margin: 0; max-width: 31ch;
   color: #fff2e9;
-  font: 400 clamp(13px, 1.04vw, 18px)/1.27 Georgia, serif;
+  font: 400 clamp(12px, .9vw, 15px)/1.3 Georgia, serif;
   text-wrap: balance;
   text-shadow: 0 1px 3px #160d1999;
 }
@@ -357,7 +312,7 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
   border: 1px solid #e7eecbde; border-radius: 999px;
   background: #294a3385; color: #f7ffdf;
   box-shadow: 0 2px 5px #160d1848, inset 0 1px #ffffff3a;
-  font: 600 clamp(12px, .98vw, 17px)/1.1 Georgia, serif;
+  font: 600 clamp(11px, .85vw, 15px)/1.13 Georgia, serif;
   white-space: nowrap;
 }
 .hub-card-planned .hub-card-state {
@@ -367,15 +322,15 @@ button, select, a { -webkit-tap-highlight-color: transparent; }
 .hub-card-state span { font-size: 1.15em; line-height: .9; }
 .hub-card-cta {
   display: inline-flex; align-items: center; justify-content: center;
-  width: min(90%, 235px);
+  width: min(90%, 215px);
   gap: 10px; padding: 8px 12px;
-  min-height: clamp(34px, 4.3dvh, 45px);
+  min-height: clamp(32px, 3.9dvh, 40px);
   border: 1.5px solid #fff2ba;
   border-radius: 999px;
   background: linear-gradient(#ffe8a3, #f7bd63);
   box-shadow: 0 3px 6px #1b102251, inset 0 1px #ffffffc4;
   color: #2d1e1a;
-  font: 700 clamp(13px, 1.05vw, 18px)/1.1 Georgia, serif;
+  font: 700 clamp(12px, .93vw, 16px)/1.1 Georgia, serif;
   white-space: nowrap; cursor: inherit;
 }
 .hub-card-cta span { font-size: 1.35em; line-height: .75; }
@@ -451,7 +406,6 @@ a.hub-card-immersive:focus-visible {
   .hub-page { height: auto; }
   .hub-masthead::after { display: none; }
   .hub-main { flex: 1 0 auto; }
-  .hub-hero { min-height: 195px; height: auto; padding: 27px 14px 19px; }
   .hub-libraries { flex: none; padding: 10px 18px 30px; }
   .hub-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -477,8 +431,6 @@ a.hub-card-immersive:focus-visible {
     position: absolute; width: 1px; height: 1px; overflow: hidden;
     clip-path: inset(50%);
   }
-  .hub-hero h1 { font-size: clamp(28px, 4.8vw, 40px); }
-  .hub-hero h1::before, .hub-hero h1::after { display: none; }
 }
 @media (max-width: 620px) {
   .hub-masthead { min-height: 75px; height: auto; padding: 8px 10px; gap: 5px; }
@@ -493,12 +445,6 @@ a.hub-card-immersive:focus-visible {
     min-height: 37px; min-width: 88px; max-width: 106px;
     padding: 4px 6px; font-size: 12px;
   }
-  .hub-hero { min-height: 204px; padding: 22px 10px 14px; }
-  .hub-hero-copy { max-width: 100%; border-radius: 23%; padding: 12px 8px; }
-  .hub-hero h1 { font-size: clamp(27px, 7vw, 37px); }
-  .hub-hero p { font-size: 15px; margin: 9px 0 13px; }
-  .hub-hero-motto { font-size: 12px; gap: 5px; padding: 6px 9px; }
-  .hub-hero-motto span:first-child { font-size: 17px; }
   .hub-libraries { padding: 13px 18px 32px; }
   .hub-grid { grid-template-columns: 1fr; max-width: 420px; gap: 20px; }
   .hub-card-editorial { padding: 5px 17px 19px; gap: 9px; }
@@ -519,15 +465,10 @@ a.hub-card-immersive:focus-visible {
   .hub-brand-mark { width: 34px; height: 41px; }
   .hub-brand-words strong { font-size: 13px; }
   .hub-theme-select { min-width: 81px; max-width: 90px; font-size: 11px; }
-  .hub-hero-motto { font-size: 11px; gap: 3px; }
 }
 @media (min-width: 1100px) and (max-height: 650px) {
-  .hub-page { --header-height: 59px; --hero-height: 132px; --footer-height: 45px; }
-  .hub-hero-copy { padding: 5px 18px; }
-  .hub-hero h1 { font-size: clamp(27px, 2.6vw, 42px); }
-  .hub-hero p { margin: 2px 0 5px; }
-  .hub-hero-motto { min-height: 30px; padding: 3px 13px; }
-  .hub-grid { max-width: min(1760px, calc((100dvh - 59px - 132px - 45px - 38px) * 3 + 52px)); }
+  .hub-page { --header-height: 59px; --footer-height: 45px; }
+  .hub-grid { max-width: min(1210px, calc((100dvh - 59px - 45px - 80px) * 3)); }
   .hub-card-editorial { gap: 5px; padding-bottom: 9px; }
   .hub-card-title { font-size: clamp(19px, 1.6vw, 26px); }
   .hub-card-description { font-size: clamp(12px, .98vw, 14px); }

@@ -71,13 +71,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
       </div>
     </header>
     <main className="hub-main">
-      <section className="hub-hero" aria-labelledby="hub-welcome">
-        <div className="hub-hero-copy">
-          <h1 id="hub-welcome">Welcome to Taiyou’s Personal Hub!</h1>
-          <p>Your cosy gateway to my world of novels, manga, anime, and films.</p>
-          <span className="hub-hero-motto"><span aria-hidden="true">☀</span> Explore <span aria-hidden="true">•</span> Read <span aria-hidden="true">•</span> Watch <span aria-hidden="true">•</span> Discover</span>
-        </div>
-      </section>
+      <h1 className="hub-sr-only">Taiyou’s Personal Hub</h1>
       <section className="hub-libraries" id="libraries" aria-labelledby="hub-libraries-title">
         <h2 id="hub-libraries-title" className="hub-sr-only">Choose your library</h2>
         <ul className="hub-grid">

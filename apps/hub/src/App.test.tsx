@@ -7,7 +7,11 @@ import { createHubModules } from './catalogue';
 describe('code-rendered cinematic Hub', () => {
   it('builds four large editorial cards with accessible, real HTML content', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
-    expect(html).toContain('Welcome to Taiyou');
+    expect(html).toContain('<h1 class="hub-sr-only">Taiyou’s Personal Hub</h1>');
+    expect(html).not.toContain('Welcome to Taiyou');
+    expect(html).not.toContain('Your cosy gateway');
+    expect(html).not.toContain('Explore • Read');
+    expect(html).not.toContain('hub-hero');
     expect(html).toContain('href="#libraries"');
     expect(html).toContain('id="libraries"');
     expect(html).toContain('aria-label="Hub theme"');
