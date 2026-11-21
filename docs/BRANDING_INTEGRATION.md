@@ -1,8 +1,8 @@
-# Integrating Taiyou's final approved Sun artwork
+# Archived proposal: alternate raster Sun logo and favicons
 
-**Status:** Source ZIP supplied by owner, but the four approved binary files are not yet committed in the Shared Core GitHub repository. Do not mark the branding milestone complete merely because the current Hub uses a temporary sun glyph.
+**Status: ARCHIVED, superseded, NOT a pending implementation task.** The current Hub deliberately ships the owner-approved `hub-sun-logo.svg` and `hub-sun.svg` from PRs #17/#18. The original raster ZIP was considered in closed-unmerged PR #12, then superseded for this Hub. Preserve the details below solely as historical alternatives; never imply the current mark is temporary.
 
-## Required public paths
+## Historical proposed raster asset paths (not required)
 Copy these **exact bytes** from `Taiyou_Final_Logos_Ready_For_Webapp.zip`:
 
 | Source in ZIP | Destination in this repository | SHA-256 |
@@ -14,7 +14,7 @@ Copy these **exact bytes** from `Taiyou_Final_Logos_Ready_For_Webapp.zip`:
 
 Both primary PNGs are transparent 1024×1024 images. Do not replace them with rasterised SVG guesses, previous assets, flat icons, a fake vector master or re-generated imitations.
 
-## Implementation contract after the assets exist
+## Historical unmerged implementation proposal (do not execute without a new request)
 1. Replace `☼` in `apps/hub/src/App.tsx` for the header (and any hero symbol retained) with the correct transparent PNG, using `width`/`height`, `object-fit: contain` and appropriate alt/accessible-link naming. Keep the brand as a real Home link.
 2. For **Midnight, Charcoal and Plum**, use the dark Antique Gold PNG and dark favicon. For **Sepia, Paper and Ocean**, use the light Sapphire/Antique Gold pair. Match the Hub's selected theme, never just OS light/dark.
 3. Maintain the external pre-React theme bootstrap and strict CSP. Set the initial favicon from the stored preference **before React** and update it on theme changes. Add or update `rel="icon"` in `apps/hub/index.html`. No invalid early asset requests or custom inline scripts.
