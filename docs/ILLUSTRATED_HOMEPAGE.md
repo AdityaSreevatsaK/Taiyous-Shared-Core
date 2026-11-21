@@ -1,5 +1,7 @@
 # Taiyou illustrated homepage: sakura panorama and responsive cards (20 November 2026)
 
+> **Current instruction:** The final section, dated 21 November 2026, takes precedence over earlier snapshots: exact detailed original WebP portraits with separate HTML titles underneath. Earlier complete-poster artwork and labels are preserved as project history only.
+
 ## Visual direction
 The approved homepage uses a single illustrated sakura sunrise scene behind the welcome message and top of the card row, fading smoothly into the selected background colour. The sunrise, layered mountains and cherry blossom canopy remain consistent across all six themes; the footer has a subtle seigaiha wave motif.
 
