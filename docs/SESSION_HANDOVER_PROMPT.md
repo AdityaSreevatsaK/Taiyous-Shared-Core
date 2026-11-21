@@ -1,99 +1,115 @@
-# Complete reusable AI-agent handover: Shared Core & Personal Hub
+# Self-contained AI agent handover: Taiyou's Shared Core & Personal Hub
 
-Copy the prompt below into the next engineering session. The full evidence and rationale is committed to this repository, so the next agent must not rely on memories from an earlier conversation.
+**Repository:** [AdityaSreevatsaK/Taiyous-Shared-Core](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core)  
+**Canonical branch:** master  
+**Last verified production baseline at this update:** 09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc  
+**Matching checks:** [CI 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985), both successful at that exact SHA.  
+**Live site:** https://taiyous-shared-core.pages.dev/
 
----
+This is a handover checkpoint, not a permanent statement of current state. Before acting, re-check Git, open PRs, workflow runs and the public release marker.
 
-## Role and objective
+## Mission and scope
 
-Act as the **Principal Software Architect, TypeScript/React Engineering Lead, Accessibility/Security Reviewer, GitHub CI Owner and Cross-Repository Coordination Owner** for:
+This repository contains:
+1. A static React Personal Hub that links to four independent media libraries.
+2. Experimental, local-only TypeScript packages for minimal cross-media contracts and stateless UI components.
 
-**Repository:** https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core  
-**Canonical branch:** `master`  
-**Public Hub:** https://taiyous-shared-core.pages.dev/  
-**Project:** Taiyou's Shared Core & Personal Hub  
-**Last documentation reconciliation:** 21 November 2026
+The Hub is **not** a central backend, shared private catalogue, SSO provider, data synchronisation service, media scraper or streaming host. Novel and Manga are independent live apps. Anime and Movies & TV are planned/paused. Do not modify sibling repositories or private Hugging Face datasets without a separate explicit request.
 
-Own **only this repo**: `apps/hub`, `packages/contracts`, `packages/ui`, tests, release checks and documentation. The Novel, Manga, Anime and Movies & TV apps belong to separate repositories and independently controlled agents. Do **not** edit their code, OAuth or private Hugging Face datasets unless separately and explicitly authorised.
+## Current production state (verified baseline)
 
-## Background and why this exists
+- Four tiles in order: Novel, Manga, Anime, Movies & TV.
+- Novel and Manga are whole-card HTTPS links to their independent public frontends. Anime and Movies & TV are inert planned tiles.
+- Four exact owner-approved, text-free detailed WebP portraits; real HTML/CSS renders headings, descriptions, availability and CTA content over the lower gradient.
+- The visible Welcome heading, supporting sentence and Explore/Read/Watch/Discover motto were removed. A screen-reader-only H1 remains.
+- Four midsize posters are centred in a desktop 4 × 1 row, with 2 × 2 tablet and 1 × 4 narrow mobile reflow.
+- The production background remains the original sakura/Mount Fuji panorama. The Hub header still uses its own SVG Sun logo/favicon, Georgia typography and the “MY MEDIA GATEWAY” subtitle.
+- Six persistent Hub-local themes: Midnight, Charcoal, Plum, Sepia (default), Paper and Ocean.
+- Strict self-only CSP, local theme bootstrap, keyboard focus, skip link, reduced-motion support and automated WCAG A/AA checks.
 
-The owner wanted a premium, Japanese-inspired single-page gateway to Novels, Manga, Anime and Movies & TV, with a place to incubate *proven* reusable cross-media TypeScript/React components. The ecosystem has five repositories in total; Shared Core contains the Hub rather than creating a sixth repository. This is **not** a shared backend, SSO service, common media database, central private catalogue or forced monorepo.
+The owner is not satisfied with the overall visual direction and has approved exploring a new non-Japanese direction. Do not describe that exploration as shipped.
 
-The working focus is **Novels + Manga**. Anime and Movies & TV remain illustrated but planned/paused because video storage/hosting was not considered practical under the current resources. Only activate those tiles after renewed product direction and verified owner-controlled deployment.
+## Approved next visual exploration (prototype only)
 
-## Present implementation and non-negotiable visual specification
+The owner likes the warm brown/pale-gold/glowing-gold mood from the supplied video, but the crane is not mandatory. Two real photographic concepts were selected:
 
-1. Four **balanced midsize cinematic editorial** posters in order: Novel, Manga, Anime, Movies & TV. No visible welcome/motto block; keep a hidden semantic H1 and a prominent Fuji/sakura background. Desktop 4 × 1; tablet 2 × 2; mobile 1 × 4. At 100% desktop zoom, aim to keep whole page in view; at 200% zoom/mobile allow vertical scrolling without horizontal overflow.
-2. The **exact detailed original artwork**, not approximate SVG alternatives, is committed to `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`, each 1086 × 1448. The images contain **no visible text/buttons/badges**. Native HTML headings (`Novel Library`, `Manga Library`, `Anime Library`, `Movies & TV Library`), short descriptions, availability indicators and CTA labels are composed **inside the bottom of each card with CSS**, not painted into the artwork. The older titles-below layout was superseded by the 21 November cinematic reference.
-3. Only **Novel** and **Manga** tiles are whole-card HTTPS links to their independent Cloudflare Pages apps. Anime and Movies/TV are non-interactive with screen-reader-only planned status. There is no shared app auth.
-4. Header is warm brown/gold with original Hub-specific sunrise-over-water SVG logo and blossom ornament, sakura-tree/mountain/sunrise background, a welcome hero and “Explore • Read • Watch • Discover” motto; footer is “Created by Taiyou”.
-5. Six Hub-local themes: Midnight, Charcoal, Plum, Sepia, Paper, Ocean. **Sepia default**, persistent via localStorage, restored before React to avoid flash with strict CSP.
-6. Accessible headings, skip link, focus/keyboard, reduced motion, theme contrast and responsive layout are release invariants.
+- **Golden Archive:** historic library, walnut bookshelves and warm light.
+- **Cinematic Passage:** ornate architectural corridor, golden sunlight and a vanishing point.
 
-**Important history:** In PR #19, an agent substituted simplified SVG illustrations for the detailed original design shown to the owner. The owner rejected that deviation. PR #20 fixed it using exact original WebP artwork with SHA-256 validation; **do not reintroduce the wrong artwork**. The earlier raster logo pack/PR #12 was superseded for the Hub by the approved coded SVG sunrise in PRs #17/#18. Those design decisions are separate from Novel/Manga apps' own logos.
+Both optimised local WebP files are in docs/assets/. The exact shared Sun logo files used by Novel and Manga are also copied there:
+- sun-light.webp SHA-256 d292f5b3f8306925b93f1db4b7bee77324072a01
+- sun-dark.webp SHA-256 565156eb5da784cdf1c4117a5d300b05dae71d35
 
-## Technology and source map
+Read [Featured visual options](FEATURED_VISUAL_OPTIONS.md) for images, authors, source URLs, licences, dimensions and crop notes, and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md) for the accepted scope.
 
-Node.js 22+, npm workspaces with committed `package-lock.json`, TypeScript strict, React 18, Vite 6, plain CSS variables, Vitest, Playwright (Chromium/Firefox/WebKit), axe-core, GitHub Actions and Cloudflare Pages. No backend or database in this repo.
+**Next design task:** build two code-rendered prototypes using the same split composition: one prominent photo on the left and four compact tiles on the right in a 2 × 2 group. Use the shared Sun logo in the prototype and remove the redundant header subtitle. Explore a walnut/brown and pale-gold palette. “A Place for Every Story.” is only candidate copy. Preserve the existing four approved card illustrations, links, six themes and accessibility requirements.
 
-- `apps/hub/src/App.tsx`: page layout, text and exact card asset paths.
-- `apps/hub/src/styles.css`: design tokens and layered media-query overrides. Read **the end of the file**.
-- `apps/hub/src/catalogue.ts`: four-module navigation registry; known Novel/Manga URLs and public HTTPS policy.
-- `apps/hub/src/theme.ts`, `apps/hub/public/theme-bootstrap.js`: selected theme and pre-React persistence.
-- `packages/contracts/src/index.ts`: experimental namespaced IDs, media kinds, availability and 1–10 rating helpers.
-- `packages/ui/src/index.tsx`: stateless `MediaHubCard` (available anchor, planned article, live `immersive` editorial variant; legacy `imageOnly` retained).
-- `scripts/verify-hub-static.mjs`: built security policy and exact portrait asset SHA-256 checks.
-- `scripts/verify-hub-live.mjs`: HTTP/security response and exact live `/release.json` SHA.
-- `.github/workflows/ci.yml`: Ubuntu/Windows + three-browser quality.
-- `.github/workflows/live-hub.yml`: `master` push smoke and manual dispatch.
+The two photos and shared Sun WebPs are **documentation references only**, not loaded by the current app. Do not hotlink Pexels. Any selected production photo/font must be self-hosted and locally verified. Do not deploy a new homepage until the owner has reviewed the actual browser screenshots and accepted the result.
 
-## Critical reading before any work
+## Repository architecture and technology
 
-Read the latest `README.md`, `AGENTS.md`, `CONTRIBUTING.md` and:
-- `docs/PROJECT_HISTORY.md`: original idea, brainstorming, visual evolution, PR timeline, failures and resolutions.
-- `docs/CODEBASE_REFERENCE.md`: complete technical inventory, runtime flow, tests/assets, security and deployment.
-- `docs/AI_AGENT_PLAYBOOK.md`: non-negotiable agent workflow, branch policy, quality/release gates and historical traps.
-- `docs/DECISIONS.md`: accepted/superseded ADR summary.
-- `docs/ROADMAP.md`: implemented versus deferred.
-- `docs/ARCHITECTURE.md`, `docs/OPERATIONS.md`, `docs/SECURITY.md`, `docs/TESTING.md`, `docs/DESIGN_SYSTEM.md`, `docs/INTEGRATION.md`, `docs/rfcs/README.md`, `docs/ILLUSTRATED_HOMEPAGE.md` as relevant.
+- apps/hub/: React 18, TypeScript, Vite 6 static app.
+- packages/contracts/: private/unpublished @taiyou/contracts@0.0.0 minimal media identity/types and helpers.
+- packages/ui/: private/unpublished @taiyou/ui@0.0.0 stateless MediaHubCard.
+- Node.js 22+, npm workspaces and committed package-lock.json.
+- Vitest unit tests; Playwright Chromium/Firefox/WebKit; axe-core accessibility checks.
+- GitHub Actions quality CI on Ubuntu and Windows; separate exact-SHA Cloudflare live smoke.
+- Cloudflare Pages is connected to master, build output apps/hub/dist.
+- No backend, database, private media access, OAuth, cross-app cookies or runtime shared services.
 
-Then **inspect actual latest master**, PRs, workflow runs, deployed SHA and source files. Documentation is an aid, not a substitute for live code or execution evidence.
+Read [Architecture](ARCHITECTURE.md), [Codebase reference](CODEBASE_REFERENCE.md), [Operations](OPERATIONS.md), [Security](SECURITY.md) and [Testing](TESTING.md) before changing these areas.
 
-## Mandatory implementation/check procedure
+## Mandatory dynamic-state inspection
 
-1. Find latest master SHA and open PRs/branches; avoid conflicting concurrent work.
-2. Reproduce the actual issue or identify the exact approved next task and acceptance criteria. Preserve current working visuals and external URLs.
-3. Use a focused branch. Do not force-push `master`, change sibling repos, make app visibility changes, publish npm packages, deploy private data or create paid services.
-4. Use the real Node 22 lockfile and run:
-   ```bash
-   npm ci --no-audit --no-fund
-   npm run typecheck
-   npm test
-   npm run build
-   node scripts/verify-hub-static.mjs
-   npm run verify:docs
-   npx playwright install chromium firefox webkit
-   npm run test:browser
-   ```
-5. Review screenshots after high-resolution images **decode and paint**. Check desktop viewport fit, mobile reflow and 200% zoom. Never substitute an imitation for approved image assets.
-6. Open a focused **Markdown-only** PR with code/asset diff, screenshot comparison where relevant, test evidence and rollback. Do not label commits as AI-generated.
-7. Require real **green matching-commit** Ubuntu, Windows, Chromium, Firefox and WebKit jobs before merging under the standing owner authorisation.
-8. After merge, check Cloudflare Pages serves the **exact new master commit**, validated by the independent live smoke and `/release.json`; green CI alone does not imply deployment.
-9. Preserve privacy, accessibility, correctness and security policy. Record newly discovered failures or changed decisions in docs.
-10. Report completed work concisely with PR, SHA, CI, live deployment and outstanding manual checks.
+Before every substantial task:
+1. Run git status --short --branch; inspect tracked, staged and untracked work. Never discard another agent's changes.
+2. Fetch/prune refs; inspect latest master, recent commits, branches, open PRs/issues and latest workflow runs.
+3. Read AGENTS.md, README.md, this playbook, project history, codebase reference, decisions, roadmap and task-relevant docs.
+4. Inspect the actual source, tests, final CSS rules, asset bytes, workflows and build output. Do not trust previous agent summaries or historical docs without checking.
+5. Fetch live /release.json and compare it with exact current master; inspect the matching live smoke and security headers.
+6. Classify relevant work as implemented and verified, implemented but unverified, partially implemented, approved for prototype only, planned/deferred, or deprecated/superseded.
+7. Define acceptance criteria and non-regression invariants before editing.
 
-## Historical baseline and outstanding roadmap
+**Evidence order:** current Git status/source/tests and freshly measured deployment > latest merged PR and explicit owner decisions > current docs > older history, screenshots and AI summaries. Direct new owner instructions take precedence.
 
-Last confirmed approved-artwork production merge before this docs update: `55046158c38b0ccb6fa6d80c37c2866ee3d676cd` ([PR #20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20)), [CI run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live smoke run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465). **Never** claim this historical SHA is current without checking.
+## Quality commands
 
-Next reasonable *in-scope* priorities: manual NVDA/VoiceOver and owner visual sign-off on the current live version, live/mobile/200% zoom performance review, targeted CSS cleanup only with visual evidence, and ongoing link/security/deployment maintenance.
+Use Node 22+ and the committed lockfile:
 
-Cross-repo package extraction **must wait** for at least two independent consuming media applications and a reviewed RFC covering versioning, security, migrations, tests and rollback. Any central SSO, common search, video library, private media backend or sibling changes are out of scope absent explicit separate approval.
+    npm ci --no-audit --no-fund
+    npm run typecheck
+    npm test
+    npm run build
+    node scripts/verify-hub-static.mjs
+    npm run verify:docs
+    npx playwright install chromium firefox webkit
+    npm run test:browser
 
-## Completion summary expected from the next agent
+Do not regenerate the lockfile casually. Require matching-SHA green Ubuntu/Windows and Chromium/Firefox/WebKit checks. Review actual screenshots after images decode and paint. Automated axe results are not manual screen-reader acceptance.
 
-Provide **what actually changed**, PR/merged SHA, matching-SHA executed checks (not merely files present), served release SHA, screenshots if visual, security/cross-repo impact, outstanding human accessibility checks, and the next safe task. When evidence is missing, report uncertainty rather than claiming completion.
+## Historical failures and lessons
 
----
-**This handover is intentionally self-contained; it should be refined in this repository as real architecture and product decisions change.**
+- PR #19 replaced detailed approved artwork with simplified SVGs; the owner rejected it. PR #20 restored exact original WebP bytes and added SHA-256 checks. Never substitute an approximation.
+- A previous image-only/titles-below design and later large cinematic cards were both superseded by subsequent owner feedback. Preserve chronology, but use current source and the latest explicit direction.
+- A negative fixed-pixel background offset caused a flat band above the footer; PR #23 restored a centred cover position and added a regression test.
+- CI runner allocation failures were infrastructure/visibility issues, not app failures. Diagnose whether a job actually started before interpreting it.
+- A green build or merged PR does not prove deployment. Verify exact live /release.json.
+- Do not infer implementation from documentation, screenshots, an open PR, or a prior agent summary.
+
+## Release and collaboration boundaries
+
+- Work on a focused branch and PR; no direct master pushes or force pushes.
+- Merge only after matching-SHA CI passes under the owner's standing approval; verify Cloudflare serves the exact new SHA afterward.
+- No paid services, new auth, SSO, shared database, publishing packages, repository visibility changes, private data handling or sibling-repository changes without separate explicit approval.
+- Keep all runtime image/font requests local and preserve CSP.
+- Do not create a fake link for planned Anime or Movies & TV.
+- Keep documentation aligned with source and mark old decisions superseded rather than silently deleting history.
+
+## Immediate next steps
+
+1. Prototype Golden Archive and Cinematic Passage with the same split layout and shared Sun header mark.
+2. Capture actual screenshots at 1600 × 900, 1366 × 768, 1280 × 720, 768px, 390px and 320px; inspect image crops, typography, balance, footer and theme variants.
+3. Validate keyboard, focus, screen-reader hierarchy, reduced motion, six themes, 200% zoom, CSP and no horizontal overflow.
+4. Present both real coded variants for owner selection. Only then prepare a focused production implementation PR.
+
+At handover, report exact PR/head SHA, matching CI, deployed SHA, screenshot evidence, what is truly implemented versus prototype-only, and any remaining manual accessibility checks.

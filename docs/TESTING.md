@@ -3,7 +3,7 @@
 ## Automated coverage
 - `packages/contracts/src/index.test.ts`: namespaced identities, invalid segments and 1–10 rating boundaries.
 - `apps/hub/src/catalogue.test.ts`: registry of four library tiles, known Novel URL, absent/planned destinations and rejection of unsafe URL inputs.
-- `apps/hub/src/App.test.tsx`: four text-free original artwork cards with visible HTML headings, skip link, **two verified live links**, and two passive planned tiles.
+- `apps/hub/src/App.test.tsx`: four exact text-free original artwork cards with visible HTML headings, descriptions, availability and CTA content rendered in HTML/CSS, skip link, **two verified live links**, and two passive planned tiles.
 - `apps/hub/tests/navigation.spec.ts`: Chromium/Firefox/WebKit viewport/no-overflow at 320/390/768/1280 CSS px, keyboard focus, reduced motion and exact destination semantics; creates local non-sensitive review screenshots.
 - `apps/hub/tests/accessibility.spec.ts`: automated axe-core WCAG 2.0/2.1 A/AA checks at 320/390/768/1280 CSS px. Verified cross-browser example: [PR #5 run 44316165382](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44316165382) passed 13 tests per engine (39 total) at SHA `c5d746070609f28f9975d4a68d9b8855e9bcd667`.
 - `.github/workflows/ci.yml`: clean Node 22 `npm ci`, typecheck, unit tests and builds on Ubuntu/Windows; Chromium/Firefox/WebKit browser tests, per-engine non-sensitive screenshots and production dependency advisory gate on Ubuntu.
@@ -34,7 +34,7 @@ Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability
 - `apps/hub/tests/viewport.spec.ts`: tests normal desktop viewport fit and zoom-equivalent reflow, plus 1086×1448 native artwork sizes.
 - `apps/hub/tests/navigation.spec.ts`: screenshots after WebP image decode and a compositor paint interval, preventing blank early visual captures. The tests verify Novel/Manga no-referrer navigation and planned tiles' noninteractive semantics.
 - `scripts/verify-hub-static.mjs`: checks the exact SHA-256 digests of each **approved detailed** `*-art.webp`, not merely image filename/width.
-- Last historically verified artwork release [PR #20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20), [quality run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465) at `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`.
+- Latest verified production baseline at this documentation update: [PR #23](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/23), [quality run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995), [live run 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) at `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`.
 
 **Do not conflate** historic green runs with the latest source revision or treat automated WCAG checks as manual NVDA/VoiceOver confirmation. For failures and lessons, see [Project history](PROJECT_HISTORY.md).
 
@@ -60,3 +60,8 @@ Unit tests assert the welcome copy and motto are absent, but a visually hidden H
 
 
 A first visual-review capture also exposed a large flat-colour band where a negatively offset `background-size:cover` image ended before the footer. The fix uses centred `50% 45%` positioning so scenery covers the entire main area; a Playwright computed-style check guards the placement. Screenshots in both Sepia and Charcoal are reviewed on every Hub visual PR.
+
+
+## Documentation-only design assets
+
+`npm run verify:docs` also verifies that the local WebP reference images under `docs/assets/` exist, have valid RIFF/WEBP signatures, remain within the documented size budget, and that the copied shared Sun marks retain their exact source SHA-256 values. These files are **not** app runtime assets and are not included in the Vite build. This gate protects the provenance package, not visual implementation. The future split-layout prototype still requires real browser screenshots and owner visual review.

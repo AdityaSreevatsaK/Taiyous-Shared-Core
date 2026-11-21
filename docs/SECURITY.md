@@ -26,8 +26,8 @@ There is currently no cross-app SSO. Same-origin HttpOnly cookies from the Novel
 ## Repo/public visibility
 Shared Core source is now **public by explicit owner action**. The existing Novel Library source is also public, while its Hugging Face dataset is private. Manga, Anime and Movies & TV were last recorded as private; do not change their visibility. Public GitHub source and future Cloudflare Pages access are separate privacy decisions. Never put private data, source secrets or credentials in static assets, screenshots or Actions artifacts.
 
-## External rights
-No movies, novels, manga images or anime assets may be copied into this repository for examples. Use text-only placeholders or clearly original/generated fixture assets where approved. Link to existing user-owned applications only.
+## External rights and stock-photo references
+Do not copy private media, novels, manga pages/covers, anime frames or film/TV stills into this repository. The two Pexels photographs in `docs/assets/` are **licensed stock-photo design references**, not private media content: their source URLs, photographer credits and the [Pexels licence](https://www.pexels.com/license/) are recorded in `docs/FEATURED_VISUAL_OPTIONS.md`. Pexels permits free use and modification under its licence; attribution is not required but is appreciated. Do not redistribute these files as standalone stock or hotlink them from the app. If a photo is chosen for production, self-host an optimised copy and preserve its provenance. The shared Sun logo WebPs are exact copies of public brand assets already used by the owner's Novel and Manga apps; do not modify those sibling repositories as part of Hub work.
 
 ## Emergency response
 If private content or credentials are accidentally committed, cease publishing, rotate/revoke affected tokens, inspect commit history and deployed assets, coordinate with the owner before history rewriting, and record remediation. Do not treat deleting a file in the newest commit as proof secrets are gone.

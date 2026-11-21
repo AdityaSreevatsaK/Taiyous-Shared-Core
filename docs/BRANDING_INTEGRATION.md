@@ -28,3 +28,19 @@ No private catalogue, Hugging Face access or independent media repo change is re
 ## Supersession notice, 21 November 2026
 
 **This entire raster-logo integration contract is archival and must not be treated as a pending requirement.** The owner later approved an original, distinct **Hub-specific SVG sunrise logo** and favicon; PR [#17](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/17) and [#18](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/18) implemented and refined it. The asset-blocked raster [PR #12](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/12) was **closed without merging**. The active logo is `apps/hub/public/branding/hub-sun-logo.svg`, with `hub-sun.svg` favicon. This decision does not alter the Sun logos used by the independent Novel/Manga readers. Reopen this raster alternative only on a **new explicit design request**.
+
+
+## New shared Sun mark direction (21 November 2026)
+
+The owner explicitly approved using the same Sun mark already present in the Novel and Manga applications to standardise the Hub branding. This is a new request and is **not** the old raster-logo ZIP/PR #12 proposal above.
+
+The exact shared WebP files have been copied byte-for-byte into documentation references:
+
+| Asset | Reference copy | Source SHA-256 |
+| --- | --- | --- |
+| Light mark | `docs/assets/sun-light.webp` | `d292f5b3f8306925b93f1db4b7bee77324072a01` |
+| Dark mark | `docs/assets/sun-dark.webp` | `565156eb5da784cdf1c4117a5d300b05dae71d35` |
+
+The source copies are `Taiyous-Personal-Library/public/branding/sun-light.webp` and `sun-dark.webp`; the Manga repository uses the same exact bytes. Source components are `src/components/BrandMark.tsx` in Novel and `src/components/MangaBrandMark.tsx` in Manga. No sibling repository was changed.
+
+**Current implementation truth:** the Hub still renders `apps/hub/public/branding/hub-sun-logo.svg` and uses `hub-sun.svg` as its favicon. The shared WebPs under `docs/assets/` are reference-only and are not shipped in the Hub. A future redesign PR should switch the Hub header to the exact shared mark, test the light/dark variants against all six Hub themes, and decide deliberately whether the favicon should be adapted or remain the existing SVG. Do not mistake the old raster logo ZIP for these approved shared assets.

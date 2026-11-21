@@ -1,6 +1,6 @@
 # Codebase reference and technical inventory
 
-**Last audited:** 21 November 2026, against `master` at `55046158c38b0ccb6fa6d80c37c2866ee3d676cd` before this documentation change. If code changes later, reassess the relevant source files and release checks. This document describes **implemented source**, not an architecture wish list.
+**Last audited:** 21 November 2026, against `master` and live release `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` before this documentation change. Matching CI run `44923073995` and live smoke `44923073985` passed. Recheck this SHA before relying on it. If code changes later, reassess the relevant source files and release checks. This document describes **implemented source**, not an architecture wish list.
 
 ## 1. In one paragraph
 
@@ -11,7 +11,8 @@ Taiyous-Shared-Core/
 ├── apps/hub/               Static Personal Hub, Vite + React + TS
 ├── packages/contracts/     Experimental namespaced shared types/helpers
 ├── packages/ui/            Experimental stateless MediaHubCard component
-├── docs/                   Architecture, history, decisions, security and handovers
+├── docs/                   Architecture, history, decisions, security, handovers and design references
+│   ├── assets/              Local-only photographic and shared-branding references (not Hub runtime assets)
 ├── scripts/                Build/live checks + optional maintainers' scripts
 ├── .github/workflows/      Quality CI and independent live deployment smoke
 ├── AGENTS.md               Mandatory agent rules
@@ -65,6 +66,7 @@ Page semantic structure:
 - Main: one **visually hidden semantic page H1** (no visible welcome/motto block), then the `#libraries` section with visually hidden H2.
 - One `<ul>` with **four** `<li>` cards in fixed order.
 - The current Hub uses `MediaHubCard immersive`: the 3:4 illustration fills each card, with a lower CSS gradient and **real HTML heading, description, availability and CTA**. The older `imageOnly` variation with title beneath remains available for potential consumers but is **not the live Hub layout**.
+- Current production composition: no visible welcome/motto hero; four midsize posters centred in one desktop row with sakura/Mount Fuji scenery behind them. The header currently uses a Hub-specific SVG logo and Georgia typography.
 - Footer: “Created by Taiyou”, ornamental seigaiha waves.
 
 There is no client router, no login route and no fetch to a media or Hugging Face dataset from Hub runtime. The external links leave the Hub origin.
@@ -108,12 +110,16 @@ The public `.env.example` contains `VITE_NOVELS_URL`, `VITE_MANGA_URL`, `VITE_AN
 
 ## 6. Visual system, assets and exact art provenance
 
-### Current Hub-specific branding
+### Current deployed Hub-specific branding
 - Header Sun: `apps/hub/public/branding/hub-sun-logo.svg`
 - SVG favicon: `apps/hub/public/branding/hub-sun.svg`
 - Header blossom ornament: `apps/hub/public/branding/header-sakura.svg`
 - Landscape: `apps/hub/public/art/landscape.avif`
 - Footer decoration: `apps/hub/public/art/waves.svg`
+
+### Approved next branding references (not yet active in the Hub)
+- `docs/assets/sun-light.webp` and `docs/assets/sun-dark.webp` are exact copies of the shared Sun marks already used by the Novel and Manga apps. They are documentation references only; the current Hub still uses the SVG files above.
+- `docs/assets/golden-archive.webp` and `docs/assets/cinematic-passage.webp` are local Pexels photo references for ADR-015. They are not under `apps/hub/public`, are not copied into Vite output and are not requested by the live page.
 
 ### Current card art, do not substitute
 - `apps/hub/public/art/novels-art.webp`
@@ -121,7 +127,7 @@ The public `.env.example` contains `VITE_NOVELS_URL`, `VITE_MANGA_URL`, `VITE_AN
 - `apps/hub/public/art/anime-art.webp`
 - `apps/hub/public/art/movies-tv-art.webp`
 
-All four visible portraits were cropped from the **approved detailed four-panel artwork**. They are self-hosted 1086 × 1448 WebP files, with **no text inside**. The new cinematic captions, status and labels are rendered as HTML/CSS inside each poster over a gradient, not part of the art. The exact SHA-256 values are in `scripts/verify-hub-static.mjs` and must remain the authoritative acceptance check. The old `novels.avif`, `manga.avif`, `anime.avif` and `movies-tv.avif` were earlier complete poster cards and are not the current UI. An older alternative raster logo/favicons pack is documented only for possible later choice; PR #12 is unmerged/superseded for the Hub.
+All four visible portraits were cropped from the **approved detailed four-panel artwork**. They are self-hosted 1086 × 1448 WebP files, with **no text inside**. The new cinematic captions, status and labels are rendered as HTML/CSS inside each poster over a gradient, not part of the art. The exact SHA-256 values are in `scripts/verify-hub-static.mjs` and must remain the authoritative acceptance check. The old `novels.avif`, `manga.avif`, `anime.avif` and `movies-tv.avif` were earlier complete poster cards and are not the current UI. The proposed shared Sun logo references are distinct from the archived raster logo pack in PR #12.
 
 ### Theme system
 `HUB_THEMES = ['midnight','charcoal','plum','sepia','paper','ocean']`.
@@ -236,3 +242,10 @@ Neither package has a cross-repository release, second consumer, published versi
 - **Release:** focused PR, matching-SHA green CI, merge, independent matching-SHA live smoke, manual visual/keyboard/accessibility inspection where applicable.
 
 This guide is a **map**. It cannot replace inspecting the actual target file/diff before touching code.
+
+
+## 9. Latest approved visual exploration (21 November 2026)
+
+The owner is no longer committed to a Japanese/sakura theme. ADR-015 approves a **coded prototype only** for a split layout: a prominent Golden Archive or Cinematic Passage photograph on the left, four compact library tiles in a 2 × 2 group on the right, warm brown/pale-gold/glowing-gold colours, and the exact shared Sun mark already used by Novel and Manga. Full source, local asset paths, credits and licence notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md).
+
+This is not part of the current React page. The current live release remains the PR #23 centred scenic gallery, using the original sakura/Mount Fuji background, Hub SVG logo, Georgia typography and existing HTML card overlays. The new photographs and shared logo WebPs are in `docs/assets/` only, not in `apps/hub/public`, and are not copied into the production bundle. Do not claim the prototype or new branding is implemented until source, tests, screenshots and release evidence prove it.

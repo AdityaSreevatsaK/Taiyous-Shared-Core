@@ -1,6 +1,6 @@
 # Scenic homepage review and external artwork research
 
-**Decision:** 21 November 2026. **Status:** evaluated and retained the current illustrated landscape. This is a research record, not a request to generate or download imagery.
+**Earlier decision:** 21 November 2026. The original illustrated landscape was retained for the PR #23 release because it matched the approved portrait art. **Current status:** the owner subsequently approved exploring non-Japanese photographic feature visuals. Two licensed Pexels references are now stored locally under `docs/assets/`; they are not used by the live Hub.
 
 ## Owner's direction
 
@@ -22,9 +22,9 @@ Sources describe reuse terms; a candidate would require provenance, attribution/
 
 ## Decision and implementation
 
-The existing **self-hosted, original `apps/hub/public/art/landscape.avif`** already has a matching warm sakura canopy, layered mountains and golden Fuji sunrise; it is more coherent with the exact four approved `*-art.webp` media panels than the discovered alternatives. No unrelated internet-hosted or externally requested image is added. The site retains its strict `img-src 'self' data:` policy, low background image transfer size, no external dependency and reproducible asset checks.
+The existing **self-hosted, original `apps/hub/public/art/landscape.avif`** already has a matching warm sakura canopy, layered mountains and golden Fuji sunrise; it is more coherent with the exact four approved `*-art.webp` media panels than the discovered alternatives. No unrelated internet-hosted or externally requested image is added. The site retains its strict `img-src 'self' data:` policy, low background image transfer size, no external runtime dependency and reproducible asset checks. The two Pexels photographs are local documentation references only; they are not hotlinked or included in the Hub build.
 
-The code now makes the scenery more important by **removing all visible hero copy**, limiting the four desktop posters to a **medium-size centred gallery** and leaving generous panoramic margins. The themed lower fade remains gentle, with the responsive portrait/text/CTA rendering all real React/CSS. The invisible page H1 preserves semantic heading structure. The original exact WebP and AVIF images are unmodified.
+The PR #23 production page makes the existing scenery more important by removing visible hero copy and limiting the four desktop posters to a medium-size centred gallery. This remains the deployed design. The later photographic split-layout exploration is documented separately below; it does not replace the production background until a coded prototype is reviewed.
 
 ## Acceptance checks
 
@@ -36,3 +36,13 @@ The code now makes the scenery more important by **removing all visible hero cop
 - No new image generation, hotlinked media, licence uncertainty or external network requests.
 
 If future research identifies a demonstrably better **licence-compatible panoramic painterly image**, introduce it with a separate reviewed PR containing source URL, author/licence, image digest, dimensions, optimised local asset and six-theme screenshot comparison. Never quietly replace approved imagery based only on a search thumbnail.
+
+
+## Later direction: Golden Archive and Cinematic Passage (21 November 2026)
+
+The owner clarified that the Japanese concept is optional and approved a new prototype exploration inspired by the video’s warm brown/pale-gold/glowing-gold palette. The two chosen photographic directions are now stored as optimised local WebP files:
+
+- **Golden Archive:** Michael D Beckwith, [Pexels photo 36093623](https://www.pexels.com/photo/historic-library-room-with-rich-wooden-interiors-36093623/), source 8687 × 5791; local 2200 × 1467.
+- **Cinematic Passage:** Sefa Demirtaş, [Pexels photo 34882758](https://www.pexels.com/photo/architectural-perspective-of-a-sunlit-corridor-34882758/), source 4160 × 6240; local 1467 × 2200.
+
+Both are free under the [Pexels licence](https://www.pexels.com/license/); credits and exact local paths are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). They are design references, not production assets. The intended prototype places one featured photograph on the left and four compact media tiles on the right. No final photo, crop or design has been selected. Do not add a third-party runtime request; self-host any future production selection and preserve the current strict CSP.

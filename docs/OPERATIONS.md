@@ -1,7 +1,7 @@
 # Shared Core Development, Build and Release Runbook
 
 ## Workspaces
-This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace with Cloudflare Pages Git integration connected to `master`; independently verified public HTTP/security headers as of the 20 November 2026 smoke run; manual visual and screen-reader checks remain pending.
+This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace with Cloudflare Pages Git integration connected to `master`; exact deployed SHA `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` was independently verified on 21 November 2026; manual visual and screen-reader checks remain pending.
 
 Requirements: Node.js 22+, npm 10+, Git. No cloud token, paid API or media assets required.
 
@@ -49,6 +49,11 @@ The Cloudflare Pages build publishes a minimal `/release.json` from the injected
 
 ## Last recorded production release and safeguards (21 November 2026)
 
-The approved exact-artwork release merged at `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`. [Quality CI 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532) and [independent live smoke 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465) both succeeded at that SHA. The live smoke observed the exact revision after Cloudflare propagation and checked response headers. This is **historical verified evidence**; after each later master merge, check its own CI/live jobs before claiming the new version is in production.
+The latest verified production baseline at the start of this documentation update is `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`. [Quality CI 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [independent live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) both succeeded at that exact SHA. The live smoke verified HTTP 200, required headers, React mount, six-theme bootstrap and the exact `/release.json` revision. This is **historical verified evidence**; after each later master merge, check its own CI/live jobs before claiming the new version is in production.
 
 For future visual changes, use the same art provenance and screenshot comparison. Manual screen-reader, owner visual acceptance and native-device testing are still distinct from automated CI.
+
+
+## Design-only photo and brand references
+
+`docs/assets/golden-archive.webp`, `cinematic-passage.webp`, `sun-light.webp` and `sun-dark.webp` are documentation/reference assets only. They are not under `apps/hub/public`, do not enter the Vite output and do not change the production bundle. Source attribution/licensing is recorded in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). If a photograph is selected for production, copy an optimised version into the app's public assets, preserve provenance and verify it is served locally under the strict CSP. Do not hotlink Pexels.

@@ -113,7 +113,7 @@ No direct pushes to canonical master except the normal PR merge. No surprise dep
 | “CSS screenshot looks wrong; rewrite all component styles.” | Inspect the **last** overriding `styles.css` rules and the approved visual reference |
 | “A test selector was renamed, so drop the test.” | Update all test files while preserving assertions |
 | “An SVG has an `http://www.w3.org/2000/svg` namespace so it loads an external resource.” | Scope external-resource validation to `href`/`src` and active elements |
-| “PR #12 says final raster logo is pending, so replace current Sun mark.” | PR #12 was **closed unmerged**; Hub SVG became owner-approved in PR #17/#18 |
+| “PR #12 says final raster logo is pending, so replace current Sun mark.” | PR #12 was **closed unmerged** and is unrelated to the shared Novel/Manga Sun WebPs. The owner has now approved those exact WebPs for the next Hub prototype; the current production header remains SVG until a separate redesign is accepted |
 | “Manga is planned because an old guide says so.” | Manga has a verified live link; inspect `catalogue.ts` and PR #14 |
 | “The presence of an Anime tile means Anime is deployable.” | Planned tile is intentional; video apps are paused/deferred |
 | “The packages are in the monorepo, so sibling apps can import them now.” | Private/unpublished 0.0.0 packages need RFC, distribution, two consumers and separate migrations |
