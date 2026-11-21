@@ -150,3 +150,8 @@ Before ending a development session, report concisely:
 6. Next **safe** focused tasks, without assuming permission for other repositories, data or major architecture.
 
 If something cannot be verified, state it explicitly; do not call it finished.
+
+
+### Latest home visual contract, 21 November 2026
+
+Remove the **visible welcome headline, subtitle and Explore/Read/Watch/Discover motto** entirely. Keep a visually hidden H1 and visually hidden library H2 for screen readers. The owner explicitly judged the earlier edge-to-edge cinematic posters too large: favour a **moderately sized centred 4 × 1 scenic gallery** with generous visible sakura and mountain margins. Preserve the exact original text-free WebP artwork and the code-rendered HTML caption panels. External sakura/Fuji alternatives were researched, but the existing original panorama better matches the visuals; see [Scenery research](SCENERY_RESEARCH.md). Do not reintroduce a new hero or hotlink stock imagery.
