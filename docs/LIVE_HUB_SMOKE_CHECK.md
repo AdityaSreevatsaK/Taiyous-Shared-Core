@@ -2,7 +2,7 @@
 
 `.github/workflows/live-hub.yml` runs on each merged `master` push and can also be started manually. It uses a **separate GitHub-hosted runner** to fetch `https://taiyous-shared-core.pages.dev/`, expecting HTTP 200, the React mount, the deployed six-theme bootstrap and all required security response headers. It retries transient failures for up to eight attempts while Cloudflare Pages finishes publishing.
 
-This check requires no credentials, does not read private catalogue data or cross-origin library contents, and does not alter an active deployment. It is independent from the build and Cloudflare's own deployment status. It cannot prove visual correctness, manual screen-reader compatibility, an exact deployed commit SHA or access policy for every viewer. Review Cloudflare's reported commit and manual responsive screenshots separately.
+This check requires no credentials, does not read private catalogue data or cross-origin library contents, and does not alter an active deployment. It is independent from the build and Cloudflare's own deployment status. It cannot prove visual correctness, manual screen-reader compatibility or access policy for every viewer. **Its current exact-commit comparison does establish the served `/release.json` SHA**, assuming the deployment marker build contract is followed. Review Cloudflare's reported commit and manual responsive screenshots separately.
 
 If it fails, read the `Verify live Cloudflare Hub` Actions logs for the actual HTTP status or missing header. Compare Cloudflare `_headers`, Pages project build settings and any access rules before reverting or changing production configuration. Never disable this check solely to hide a genuine deployment failure.
 
@@ -13,3 +13,7 @@ If it fails, read the `Verify live Cloudflare Hub` Actions logs for the actual H
 Cloudflare Pages injects `CF_PAGES_COMMIT_SHA` in its build environment. Vite emits a public, no-store `/release.json` containing just that SHA. The `master` push smoke workflow supplies its own GitHub commit SHA and retries until the served revision matches exactly. A successful Cloudflare deployment check or HTTP 200 from an older release is not sufficient.
 
 The marker is public build metadata only and never contains private user information, credentials or other environment values. Local builds without a CI commit can omit it. If Cloudflare stops supplying the documented SHA environment variable, release build fails rather than publishing an unverifiable production build.
+
+## Verified detailed-artwork release (21 November 2026)
+
+[Run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465) succeeded after the merge of [PR #20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20), proving live `release.json` matched `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, HTTP 200 and required headers/bootstrap. It observed stale previous art on early propagation attempts before the correct revision appeared; do not treat an initial stale response as a successful deployment. More recent merges need their own matching-SHA check.
