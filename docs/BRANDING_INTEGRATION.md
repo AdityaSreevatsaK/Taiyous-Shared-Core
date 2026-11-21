@@ -23,3 +23,8 @@ Both primary PNGs are transparent 1024×1024 images. Do not replace them with ra
 6. Only after a PR with the real assets and verified checks is merged may docs describe the final branding as integrated.
 
 No private catalogue, Hugging Face access or independent media repo change is required.
+
+
+## Supersession notice, 21 November 2026
+
+**This entire raster-logo integration contract is archival and must not be treated as a pending requirement.** The owner later approved an original, distinct **Hub-specific SVG sunrise logo** and favicon; PR [#17](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/17) and [#18](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/18) implemented and refined it. The asset-blocked raster [PR #12](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/12) was **closed without merging**. The active logo is `apps/hub/public/branding/hub-sun-logo.svg`, with `hub-sun.svg` favicon. This decision does not alter the Sun logos used by the independent Novel/Manga readers. Reopen this raster alternative only on a **new explicit design request**.
