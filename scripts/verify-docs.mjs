@@ -73,15 +73,19 @@ console.log('Verified ' + required.length + ' handover files and ' +
 // Design-reference assets are documentation-only, but must remain intact and locally renderable.
 const referenceAssets = {
   'docs/assets/featured-visual-moodboard.webp': { maxBytes: 500_000 },
-  'docs/assets/sun-light.webp': { sha256: 'd292f5b3f8306925b93f1db4b7bee77324072a01' },
-  'docs/assets/sun-dark.webp': { sha256: '565156eb5da784cdf1c4117a5d300b05dae71d35' },
+  'docs/assets/sun-light.webp': { gitBlobSha1: 'd292f5b3f8306925b93f1db4b7bee77324072a01' },
+  'docs/assets/sun-dark.webp': { gitBlobSha1: '565156eb5da784cdf1c4117a5d300b05dae71d35' },
 };
 for (const [relative, expected] of Object.entries(referenceAssets)) {
   const bytes = await readFile(path.join(root, relative));
   assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', 'Expected WebP RIFF header: ' + relative);
   assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', 'Expected WebP payload: ' + relative);
   if (expected.maxBytes) assert.ok(bytes.length <= expected.maxBytes, 'Reference asset exceeds size budget: ' + relative);
-  if (expected.sha256) assert.equal(createHash('sha256').update(bytes).digest('hex'), expected.sha256,
-    'Shared Sun logo must remain byte-identical to the sibling app asset: ' + relative);
+  if (expected.gitBlobSha1) {
+    const gitHeader = Buffer.from('blob ' + bytes.length + '\0');
+    const actualGitBlobSha1 = createHash('sha1').update(Buffer.concat([gitHeader, bytes])).digest('hex');
+    assert.equal(actualGitBlobSha1, expected.gitBlobSha1,
+      'Shared Sun logo must remain byte-identical to the sibling app asset: ' + relative);
+  }
 }
 console.log('Verified three local design-reference WebP assets and shared Sun logo digests.');

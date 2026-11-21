@@ -45,7 +45,7 @@ If either image is selected for the actual Hub, obtain it directly from its orig
 
 The owner also approved using the same Sun mark already used by the Novel and Manga applications, replacing the separate Hub-only logo during the future redesign. The exact shared files have been copied byte-for-byte into this repository for reference:
 
-| Variant | Local reference | Source SHA-256 |
+| Variant | Local reference | Source Git blob SHA-1 (byte-identical) |
 | --- | --- | --- |
 | Light | `docs/assets/sun-light.webp` | `d292f5b3f8306925b93f1db4b7bee77324072a01` |
 | Dark | `docs/assets/sun-dark.webp` | `565156eb5da784cdf1c4117a5d300b05dae71d35` |

@@ -37,8 +37,8 @@ The owner likes the warm brown/pale-gold/glowing-gold mood from the supplied vid
 - **Cinematic Passage:** ornate architectural corridor, golden sunlight and a vanishing point.
 
 A credited composite moodboard showing both photo concepts is in docs/assets/; the raw Pexels photos are not separately redistributed. The exact shared Sun logo files used by Novel and Manga are also copied there:
-- sun-light.webp SHA-256 d292f5b3f8306925b93f1db4b7bee77324072a01
-- sun-dark.webp SHA-256 565156eb5da784cdf1c4117a5d300b05dae71d35
+- sun-light.webp Git blob SHA-1 d292f5b3f8306925b93f1db4b7bee77324072a01
+- sun-dark.webp Git blob SHA-1 565156eb5da784cdf1c4117a5d300b05dae71d35
 
 Read [Featured visual options](FEATURED_VISUAL_OPTIONS.md) for images, authors, source URLs, licences, dimensions and crop notes, and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md) for the accepted scope.
 
@@ -89,7 +89,7 @@ Do not regenerate the lockfile casually. Require matching-SHA green Ubuntu/Windo
 
 ## Historical failures and lessons
 
-- PR #19 replaced detailed approved artwork with simplified SVGs; the owner rejected it. PR #20 restored exact original WebP bytes and added SHA-256 checks. Never substitute an approximation.
+- PR #19 replaced detailed approved artwork with simplified SVGs; the owner rejected it. PR #20 restored exact original WebP bytes and added Git blob SHA-1 checks. Never substitute an approximation.
 - A previous image-only/titles-below design and later large cinematic cards were both superseded by subsequent owner feedback. Preserve chronology, but use current source and the latest explicit direction.
 - A negative fixed-pixel background offset caused a flat band above the footer; PR #23 restored a centred cover position and added a regression test.
 - CI runner allocation failures were infrastructure/visibility issues, not app failures. Diagnose whether a job actually started before interpreting it.

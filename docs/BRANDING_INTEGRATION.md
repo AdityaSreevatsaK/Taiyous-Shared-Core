@@ -36,7 +36,7 @@ The owner explicitly approved using the same Sun mark already present in the Nov
 
 The exact shared WebP files have been copied byte-for-byte into documentation references:
 
-| Asset | Reference copy | Source SHA-256 |
+| Asset | Reference copy | Source Git blob SHA-1 (byte-identical) |
 | --- | --- | --- |
 | Light mark | `docs/assets/sun-light.webp` | `d292f5b3f8306925b93f1db4b7bee77324072a01` |
 | Dark mark | `docs/assets/sun-dark.webp` | `565156eb5da784cdf1c4117a5d300b05dae71d35` |
