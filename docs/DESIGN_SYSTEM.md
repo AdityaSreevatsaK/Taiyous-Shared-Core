@@ -22,4 +22,8 @@ The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean** (Sepia def
 Require two real consumers, API/ARIA examples, CSS isolation, accessibility and visual tests, bundle-size comparison, pinned package distribution, compatibility and rollback. A shared dark palette is not a mandate for identical application design.
 
 ## Hub-specific sunrise branding
-The owner subsequently approved a distinct Sun mark for this Hub rather than requiring the earlier raster identity. An original inline SVG sunrise icon renders crisply in the Home link, and the favicon is a standalone, self-hosted SVG. The previous approved two-logo pack is kept as archival reference in [Branding integration](BRANDING_INTEGRATION.md), but is not a Hub release blocker.
+The owner subsequently approved a distinct Sun mark for this Hub rather than requiring the earlier raster identity. The Home link displays the original local `/branding/hub-sun-logo.svg` **via an image element**, and the favicon uses the standalone self-hosted `/branding/hub-sun.svg`. The previous approved two-logo pack is kept as archival reference in [Branding integration](BRANDING_INTEGRATION.md), but is not a Hub release blocker.
+
+## Final portrait art identity (21 November 2026)
+
+PR #19 had correct text placement but substituted simplified SVG illustrations for the detailed visual that had actually been shown to the owner. PR #20 fixed this with the original high-resolution four-panel generated art, exported as `novels-art.webp`, `manga-art.webp`, `anime-art.webp`, and `movies-tv-art.webp`. They remain text-free, with separate visible centred headings and noninteractive planned tiles. These exact bytes are protected by build SHA-256 checks. Do not replace them with new approximations. See [History](PROJECT_HISTORY.md) and [Codebase](CODEBASE_REFERENCE.md).
