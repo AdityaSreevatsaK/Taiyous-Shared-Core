@@ -36,6 +36,8 @@ jobs:
         run: npm run build
       - name: Verify Hub built output includes static security policy
         run: node scripts/verify-hub-static.mjs
+      - name: Check agent handover documentation and local links
+        run: npm run verify:docs
       - name: Audit production dependencies for high/critical advisories
         if: matrix.os == 'ubuntu-latest'
         run: npm audit --omit=dev --audit-level=high
