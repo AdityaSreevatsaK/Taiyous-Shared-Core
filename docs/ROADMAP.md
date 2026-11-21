@@ -15,7 +15,7 @@
 ## P1. Personal Hub design: implemented, with manual follow-ups
 - [x] Four stable tiles: Novel, Manga, Anime, Movies & TV.
 - [x] Verified production links to independent Novel and Manga readers; planned cards remain noninteractive.
-- [x] Dramatically larger 4 × 1 full-width desktop editorial posters, 2 × 2 tablet, 1 × 4 phone and zoom-friendly reflow; scenic background continues behind cards.
+- [x] More balanced 4 × 1 desktop gallery of midsize illustrated posters, 2 × 2 tablet, 1 × 4 phone and zoom-friendly reflow; prominent scenic background, no visible welcome or motto.
 - [x] Six persistent Hub themes; Sepia default and CSP-compliant theme bootstrap.
 - [x] Sakura sunrise landscape, warm brown/gold masthead and original Hub-specific Sunrise SVG/favicons.
 - [x] **Exact owner-approved detailed WebP artworks** remain unchanged and hash-verified (PR #20). The original titles-below layout was superseded by the 21 November cinematic React/CSS composition using larger posters and native HTML overlays.
