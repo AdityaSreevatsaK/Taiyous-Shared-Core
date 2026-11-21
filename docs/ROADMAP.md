@@ -18,7 +18,11 @@
 - [x] More balanced 4 × 1 desktop gallery of midsize illustrated posters, 2 × 2 tablet, 1 × 4 phone and zoom-friendly reflow; prominent scenic background, no visible welcome or motto.
 - [x] Six persistent Hub themes; Sepia default and CSP-compliant theme bootstrap.
 - [x] Sakura sunrise landscape, warm brown/gold masthead and original Hub-specific Sunrise SVG/favicons.
-- [x] **Exact owner-approved detailed WebP artworks** remain unchanged and hash-verified (PR #20). The original titles-below layout was superseded by the 21 November cinematic React/CSS composition using larger posters and native HTML overlays.
+- [x] **Exact owner-approved detailed WebP artworks** remain unchanged and hash-verified (PR #20). The current hero-free midsize gallery and native HTML card overlays are implemented in PR #23.
+- [x] A credited composite moodboard showing Golden Archive and Cinematic Passage, plus the exact shared Novel/Manga Sun marks, is stored locally in `docs/assets/` with provenance. The raw Pexels photos are not separately redistributed; source pages and licence notes are documented.
+- [ ] Build both photographic split-layout prototypes using the same left-feature/right-2×2-card composition; compare actual browser screenshots and responsive crops.
+- [ ] Use the shared Sun mark in the prototype and remove the current redundant header subtitle; validate the logo variant across all six themes.
+- [ ] Obtain owner visual acceptance of the coded prototype before changing the live homepage. The current production design remains the PR #23 scenic gallery until then.
 - [x] Real semantic links, keyboard focus, skip link, reduced motion and automated accessibility.
 - [x] Desktop viewport-fit/no-horizontal-overflow Playwright tests and image-decoded screenshots.
 - [ ] Manual NVDA/VoiceOver walkthrough with recorded results, across representative themes.
@@ -31,7 +35,7 @@
 - [x] Live Hub at `https://taiyous-shared-core.pages.dev/`.
 - [x] Strict `_headers` security response policy, static verifier and live HTTP/security smoke.
 - [x] Public `/release.json` contains exact deployed SHA; smoke compares it with the triggering `master` commit.
-- [x] CI verified last documented approved-artwork merge `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, including successful [CI run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532) and [live smoke run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465).
+- [x] Latest verified production baseline at the start of this update: `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`, with successful [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke run 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985). Recheck exact SHA after every later merge.
 - [ ] Verify and document Cloudflare dashboard settings/rollback mechanism from the operator account when access is available.
 - [ ] Periodically inspect live links/headers/asset loading and update only with new evidence.
 - [ ] Investigate any real performance, CSP, visual or accessibility regression before accepting a new release.
@@ -57,8 +61,8 @@
 There is **no** unified private dataset, owner profile, universal watched/read progress, shared login, source-level imports into sibling applications, video server, media scraper or published library package. They remain explicitly out of scope or future proposals.
 
 ## Suggested next safe increments
-1. Complete owner-reviewed live visual + manual screen-reader/accessibility acceptance without changing the approved art.
-2. Fix any findings in focused, test-backed PRs, keeping exact-original artwork checks.
-3. Consolidate style overrides only with screenshot comparison and rollback evidence; avoid unrelated CSS churn.
-4. Maintain a current exact-commit deployment status and coherent documentation after every UI change.
-5. Tackle a minimal truly shared component **only after** independently documented consumer demand.
+1. Build two coded variants of the approved split layout, using the source photographs linked in the moodboard documentation and the shared Sun mark; keep the current production site unchanged.
+2. Compare real browser screenshots at desktop, tablet, mobile and 200% zoom, across light and dark themes; inspect crop, typography, card balance and accessibility.
+3. Ask the owner to select the visual direction and final copy before a production implementation PR.
+4. Keep the exact approved media-card artwork, verified Novel/Manga links, six themes, CSP and independent release checks intact.
+5. Continue manual NVDA/VoiceOver and native-device acceptance; tackle shared components only after two independent media-app consumers provide evidence.

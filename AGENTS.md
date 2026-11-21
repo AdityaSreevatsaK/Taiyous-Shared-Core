@@ -16,24 +16,27 @@ The Hub is **not** the backend for other apps, a replacement for the Novel or Ma
 
 - Canonical branch: **`master`**. Public repo and deployed Hub: `https://taiyous-shared-core.pages.dev/`.
 - **Four tiles in order:** Novel, Manga, Anime, Movies & TV. Novel and Manga link to existing independent Cloudflare Pages deployments. Anime and Movies & TV remain **planned/paused** with noninteractive tiles. Do not reactivate them without owner-controlled HTTPS deployment verification and explicit product direction.
-- Desktop **4 × 1** **midsize, centred** posters (~230–310 CSS px each at tested desktop widths), tablet **2 × 2**, phone **1 × 4**. No visible welcome/intro/motto block; preserve an accessible hidden H1. Give sakura and Fuji panorama ample side margins. At 200% zoom/mobile allow vertical scroll, never horizontal overflow.
-- **Exact approved detailed WebP illustrations** at `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`; don't use simplified SVG replacements or the old complete poster AVIF cards. Each art image remains **text-free**; the current cinematic Hub renders real HTML headings, descriptions, status and visual calls to action **within a bottom CSS gradient over each card**. Novel/Manga whole cards are links; planned cards are inert (their Coming soon text is a label, never a button).
-- Warm brown top bar, **Hub-specific original Sun SVG** (`branding/hub-sun-logo.svg`) and matching favicon, sakura ornament, original landscape background. Historical raster branding PR #12 was **closed unmerged** and superseded by approved Hub SVG PRs #17/#18.
+- Current deployed desktop layout is a **centred midsize 4 × 1 poster gallery**, tablet **2 × 2**, phone **1 × 4**. The visible welcome/intro/motto block is absent; keep the accessible hidden H1. The sakura/Fuji panorama remains the current production background. At 200% zoom/mobile allow vertical scroll, never horizontal overflow.
+- **Exact approved detailed WebP illustrations** at `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`; don't use simplified SVG replacements or the old complete poster AVIF cards. Each art image remains **text-free**; the current `MediaHubCard immersive` variant renders real HTML headings, descriptions, status and CTA content over a bottom CSS gradient. Novel/Manga whole cards are links; planned cards are inert.
+- Current deployed header uses the **Hub-specific original Sun SVG** (`hub-sun-logo.svg`) and matching favicon, sakura ornament, original landscape background, Georgia type and the “MY MEDIA GATEWAY” subtitle. This describes the current release only; it is not a permanent design requirement.
 - Six themes Midnight, Charcoal, Plum, **Sepia (default)**, Paper and Ocean. LocalStorage only, early no-flash theme bootstrap, strict CSP, no global cross-app theme state.
 - Preserve semantic headings, screen-reader planned states, skip link, visible focus, keyboard navigation, reduced motion and good contrast.
 - No personal media data, OAuth, central auth, unified search, collection state, cross-library syncing, streaming service or shared runtime server.
 
 **Historical warning:** PR #19 accidentally substituted simplistic SVG art for the detailed generated design shown to the owner. PR #20 corrected it with exact-original portraits and hash verification. Never repeat this visual fidelity failure.
 
-## 3. Mandatory first steps every session
+## 3. Mandatory dynamic-state inspection (every session, before substantial work)
 
-1. Inspect latest master commit, open PRs/branches/CI and deployment marker; check concurrent work.
-2. Read `README.md`, `AGENTS.md`, `CONTRIBUTING.md`, `docs/AI_AGENT_PLAYBOOK.md`, `docs/PROJECT_HISTORY.md`, `docs/CODEBASE_REFERENCE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md` and relevant architecture/security/operations/testing docs.
-3. Inspect the **actual source**, tests, final CSS overrides and relevant assets before design or code changes; do not trust stale PR prose.
-4. Define concrete acceptance checks and invariants; distinguish implemented vs merely planned behaviour.
-5. For source changes, reproduce/build on Node 22+ with the real lockfile and run checks below.
-6. Create a focused branch and Markdown-only PR; explain the change, risk, tests and rollback. Never use HTML in PR descriptions.
-7. Merge only after *executed* matching-SHA successful CI under the owner's standing approval, then independently confirm the exact production SHA if Cloudflare deploys.
+1. Run `git status --short --branch` and inspect all tracked, untracked and staged changes. Never overwrite or reset another agent's work. If no local checkout is available, state that limitation and inspect the remote refs/PRs instead.
+2. Fetch current refs (`git fetch --prune origin`), inspect `git log -8 --oneline --decorate --all`, resolve `origin/master`, list open PRs/issues and active branches, and inspect the latest workflow runs. Do not assume the default branch, last session's branch, or prior summary is current.
+3. Read `README.md`, `AGENTS.md`, `CONTRIBUTING.md`, `docs/AI_AGENT_PLAYBOOK.md`, `docs/PROJECT_HISTORY.md`, `docs/CODEBASE_REFERENCE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md` and the task-relevant design, architecture, security, operations and testing documents.
+4. Inspect the actual source, tests, final CSS rules, asset bytes, workflows and build output affected by the task. Compare the documentation with the code and the newest matching-SHA CI/live evidence.
+5. For the deployed product, fetch the public `/release.json` and compare it with the exact current `master` SHA; separately inspect the live smoke workflow and response headers. A green build, merged PR or old release note is not deployment proof.
+6. Classify each relevant item explicitly as **implemented and verified**, **implemented but not yet verified**, **partially implemented**, **approved for prototype only**, **planned/deferred**, or **deprecated/superseded**. Never promote a brainstorm, design reference, AI summary or PR description into an implementation fact.
+7. Define acceptance checks and invariants before editing. Preserve current working behaviour unless the owner has explicitly approved a new direction.
+8. If the local checkout contains changes, do not clean, reset, stash, rebase or overwrite them without first identifying ownership and obtaining permission.
+
+**Evidence precedence:** current Git status/source/tests and freshly measured production evidence > latest merged PR and explicit owner decision > current documentation > older docs, screenshots, previous agent summaries and historical brainstorms. Direct new owner instructions always take precedence.
 
 ## 4. Reproducible quality gate
 
@@ -67,7 +70,7 @@ Screenshots must capture **fully decoded and painted** images. Inspect real visu
 
 Cloudflare Pages is Git-connected to `master` and may deploy after merge; ordinary `ci.yml` never performs direct deployment. The separate `live-hub.yml` fetches the public Hub, verifies HTTP/security headers, mount/bootstrap and `/release.json` matching the merged SHA. **Do not claim deployed merely because CI is green or the PR is merged.**
 
-Last *historically verified* exact-artwork release prior to this documentation update: `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, [CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465). Recheck on every new merge.
+Latest verified production baseline at the start of this documentation update: `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`, [CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) both passed at that exact SHA. Recheck on every new merge; this value is a historical checkpoint, not a substitute for a fresh lookup.
 
 For rollback, revert the focused PR or select an earlier reviewed Cloudflare deployment; re-run CI/live smoke and verify restored public SHA.
 
@@ -78,5 +81,7 @@ For rollback, revert the focused PR or select an earlier reviewed Cloudflare dep
 - If a new feature would affect another media repo, document an RFC and hand it to the owning agent instead of silently changing that repo.
 - Report exact PR, head/merge SHA, tests actually executed, independent live status, manual checks still outstanding and next safe steps.
 - Do not overstate published packages, data integration, a video library or owner acceptance.
+
+**Approved next visual exploration:** [Golden Archive and Cinematic Passage references](docs/FEATURED_VISUAL_OPTIONS.md) · [ADR-015](docs/adr/ADR-015-photographic-split-layout-exploration.md). The combined photographic moodboard and shared Sun logo variants are documentation assets only; raw Pexels photos are not separately redistributed. Do not assume the current app uses any of them.
 
 **Further reading:** [Complete agent playbook](docs/AI_AGENT_PLAYBOOK.md) · [Project history and mistakes](docs/PROJECT_HISTORY.md) · [Code/stack map](docs/CODEBASE_REFERENCE.md) · [Decisions](docs/DECISIONS.md) · [Operations](docs/OPERATIONS.md) · [Session handover](docs/SESSION_HANDOVER_PROMPT.md).

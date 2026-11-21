@@ -1,6 +1,6 @@
-# Taiyou illustrated homepage: sakura panorama and responsive cards (20 November 2026)
+# Taiyou illustrated homepage: visual evolution and current status
 
-> **Current instruction:** The final section, dated 21 November 2026, takes precedence over earlier snapshots: exact detailed original WebP portraits with separate HTML titles underneath. Earlier complete-poster artwork and labels are preserved as project history only.
+> **Historical design record:** this file preserves earlier visual iterations. The current production state is the hero-free midsize scenic gallery from PR #23, with immersive HTML/CSS card captions. The latest owner-approved next direction is the photographic split-layout prototype in [Featured visual options](FEATURED_VISUAL_OPTIONS.md), not a Japanese-themed redesign already shipped. Read [AGENTS.md](../AGENTS.md) and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md) before implementing visual changes.
 
 ## Visual direction
 The approved homepage uses a single illustrated sakura sunrise scene behind the welcome message and top of the card row, fading smoothly into the selected background colour. The sunrise, layered mountains and cherry blossom canopy remain consistent across all six themes; the footer has a subtle seigaiha wave motif.
@@ -106,3 +106,12 @@ This modernisation is in `apps/hub/src/styles.css`, `App.tsx` and `packages/ui/s
 ## Scenic-gallery iteration: no hero, smaller tiles (21 November 2026)
 
 The latest owner instruction explicitly removes the large Welcome heading, supporting sentence and motto, scales the code-rendered posters down from the oversized edge-to-edge four-card row, and gives the sakura canopy and Fuji mountain **visual precedence**. Four cards still use exact original WebP art and real HTML lower captions. The page retains a screen-reader-only H1. A [licence-aware web search](SCENERY_RESEARCH.md) examined freely reusable mountain/cherry blossom images; the original painterly panorama was kept because the candidates were photographic, too flat, or inconsistent with the approved poster artwork. No new image generation was requested or performed.
+
+
+## Latest owner-approved exploration: photographic split layout (21 November 2026)
+
+The owner is not committed to a Japanese theme and liked both **Golden Archive** (historic library, walnut and warm lamps) and **Cinematic Passage** (ornate corridor, golden sunlight and strong perspective). The owner also approved using the exact shared Sun logo already used by Novel and Manga. A credited composite moodboard showing the two Pexels photos, plus the two shared Sun WebPs, is stored under `docs/assets/`. Source credits, original URLs, dimensions and licence notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). Raw Pexels photos are not separately redistributed.
+
+The next task is to build two responsive code prototypes using the same composition: one prominent photographic feature on the left and four compact media tiles on the right in a 2 × 2 group. Explore deep brown/walnut, pale gold and restrained glowing gold. The headline “A Place for Every Story.” is only a candidate. Japanese/sakura motifs are optional. Keep the exact four approved media card illustrations, real Novel/Manga links, inert planned cards, six themes and accessibility invariants.
+
+**Not implemented:** the live Hub still uses its sakura/Mount Fuji panorama, Hub-specific SVG Sun logo, Georgia typography and centred midsize four-card gallery. The new photographs and shared logo WebPs are in `docs/assets/` only, not in the runtime bundle. Compare actual browser screenshots and obtain owner visual acceptance before a production switch. See [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md).

@@ -1,41 +1,76 @@
-# Design Language, Themes and Accessibility
+# Personal Hub design system
 
-## Intent
-Share a coherent visual family without forcing identical layouts. The Hub is a lightweight editorial gateway; novels, manga, anime and films retain their own reading/viewing experiences. The Hub uses system fonts and no decorative requests to third-party origins. The four cards use original detailed, text-free, self-hosted WebP illustrations. Their only visible labels are centred HTML headings below each portrait. Novel and Manga use full illustration-and-title hyperlinks; planned cards are non-interactive with visually hidden status announcements. The sakura canopy, pastel sunrise and Mount Fuji-style mountains are one self-hosted high-resolution AVIF background extending behind the hero and cards. A small self-hosted seigaiha SVG decorates the footer. Dark and light themes retain the same artwork. See [Illustrated homepage](ILLUSTRATED_HOMEPAGE.md).
+**Audited:** 21 November 2026. This document separates the deployed design from the next approved prototype so historical visual ideas are not mistaken for current code.
 
-## Hub-only semantic tokens
-The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean** (Sepia default for first visits), implemented as Hub-local theme palettes under `:root[data-theme]`. The Hub tokens include `--background`, `--surface`, `--text`, `--text-muted`, `--accent`, `--border`, `--focus`, `--masthead` and `--masthead-text`. These are scoped to the Hub bundle and **are not published as a shared cross-repo theme**. Card accent colours vary by media class but status is always conveyed in words, not colour alone. The selector is a native, keyboard-accessible control. An early self-hosted script in `apps/hub/public/theme-bootstrap.js` restores the preference before the React bundle, preserving the strict `script-src 'self'` policy; storage access failures fall back to Sepia. Theme selection never syncs across apps. System sans-serif and a local serif heading avoid third-party font requests.
+## 1. Current production design
 
-## Current component boundary
-`MediaHubCard` is a stateless React component. It renders an anchor only when marked available with a safe HTTPS destination; planned/invalid destinations render non-interactive articles. The artwork-only variant gives both states a visible heading below the picture, with status announced accessibly only for planned tiles; the legacy detailed variant retains its descriptive fallback. It has no data fetching, side effects, cookie access or ownership of media progress. Its `hub-card-*` CSS remains Hub-owned until a genuine second consumer justifies extracting styling.
+The live Hub is the hero-free scenic gallery from PR #23:
 
-## Accessible interaction
-- A visible-on-focus Skip to libraries link precedes the content.
-- Real links provide a visible focus outline and no referrer.
-- Planned tiles cannot receive keyboard focus or trigger navigation.
-- Heading order: page H1, section H2, library H3; cards are an unordered list.
-- Breakpoints: 320, 390, 640, 768 and 1280 px are browser-test targets, alongside 1280×720, 1366×768, 1600×900 and 1920×1080 full desktop viewport tests. A normal desktop at 100% zoom shows all four full cards and the footer together; zoomed and mobile layouts reflow and scroll vertically with no horizontal overflow.
-- Motion is decorative only and disabled on reduced-motion preference.
-- The planned-card illustrations contain no badges or button artwork and the planned cards have no interactive controls. No autoplay assets or hover-only content.
+- Four exact owner-approved detailed WebP portraits, ordered Novel, Manga, Anime, Movies & TV.
+- Four midsize posters centred in one desktop row; two columns on tablet and one column on narrow mobile.
+- No visible welcome heading, introduction or Explore/Read/Watch/Discover motto. A screen-reader-only page H1 and library H2 remain.
+- Each poster uses the original text-free illustration. The MediaHubCard immersive variant renders the title, description, availability and CTA as real HTML/CSS over a lower gradient. Novel and Manga are whole-card links; Anime and Movies & TV are non-interactive planned cards.
+- A full-page sakura/Mount Fuji sunrise panorama, Hub-specific SVG Sun logo and SVG favicon, sakura masthead ornament and seigaiha footer.
+- The header currently contains “Taiyou’s Personal Hub” and the “MY MEDIA GATEWAY” subtitle.
+- Current CSS uses Georgia/Times New Roman serif. There are no externally loaded fonts or third-party image requests.
 
-## Before independent-app adoption
-Require two real consumers, API/ARIA examples, CSS isolation, accessibility and visual tests, bundle-size comparison, pinned package distribution, compatibility and rollback. A shared dark palette is not a mandate for identical application design.
+The exact production asset hashes are checked by scripts/verify-hub-static.mjs. Do not substitute approximate artwork or regenerate the four approved portraits.
 
-## Hub-specific sunrise branding
-The owner subsequently approved a distinct Sun mark for this Hub rather than requiring the earlier raster identity. The Home link displays the original local `/branding/hub-sun-logo.svg` **via an image element**, and the favicon uses the standalone self-hosted `/branding/hub-sun.svg`. The previous approved two-logo pack is kept as archival reference in [Branding integration](BRANDING_INTEGRATION.md), but is not a Hub release blocker.
+## 2. Hub-local themes
 
-## Final portrait art identity (21 November 2026)
+The Hub supports **Midnight, Charcoal, Plum, Sepia, Paper and Ocean**. Sepia is the first-visit and invalid-preference fallback. The preference is stored locally under taiyou-hub-theme; theme-bootstrap.js restores it before React to avoid a flash. Themes are local to this app and are not synced to sibling applications.
 
-PR #19 had correct text placement but substituted simplified SVG illustrations for the detailed visual that had actually been shown to the owner. PR #20 fixed this with the original high-resolution four-panel generated art, exported as `novels-art.webp`, `manga-art.webp`, `anime-art.webp`, and `movies-tv-art.webp`. They remain text-free, with separate visible centred headings and noninteractive planned tiles. These exact bytes are protected by build SHA-256 checks. Do not replace them with new approximations. See [History](PROJECT_HISTORY.md) and [Codebase](CODEBASE_REFERENCE.md).
+CSS variables in apps/hub/src/styles.css define the palette. Keep focus colours, readable text, card contrast and browser theme colour coherent. The native theme select remains keyboard-accessible. Any visual redesign must be checked in light and dark themes, not just Sepia.
 
+## 3. Approved next visual exploration (not implemented)
 
-## Current cinematic variant (21 November 2026)
+See [Featured visual options](FEATURED_VISUAL_OPTIONS.md) and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md).
 
-The owner's latest screenshot comparison explicitly supersedes the **small separate-caption cards** described earlier. The current Hub invokes `MediaHubCard immersive`: every card uses the exact approved text-free portrait image, but the lower illustrated panel, heading, short description, availability marker and CTA are **real HTML/CSS over a themed gradient**, never rasterised text. Novel/Manga are single whole-card links; Anime/Movies are non-interactive articles with a static "Coming soon" label. The older `imageOnly` rendering remains supported for compatibility only. 
+The owner is not committed to a Japanese aesthetic. The next prototype should compare two real photographs:
 
-At normal desktop width, make the four cards fill most of the available landscape instead of appearing as tiny centred thumbnails. Preserve a compact hero, continuous visible sakura/mountain horizon, sunlight and themed footer transition. CSS is consolidated to eliminate many mutually overriding historical rules; responsive and reduced-motion states remain explicit. See [Design history](PROJECT_HISTORY.md) and [latest homepage direction](ILLUSTRATED_HOMEPAGE.md).
+- **Golden Archive:** a historic library interior with walnut bookshelves and warm light.
+- **Cinematic Passage:** an ornate architectural corridor with golden sunlight and a vanishing point.
 
+Both are shown in one credited composite moodboard in docs/assets/; photographer, source URL, source dimensions and Pexels licence notes are documented. The raw photos are not separately redistributed. The moodboard is a documentation reference, not a runtime asset. The exact shared sun-light.webp and sun-dark.webp marks already used by the Novel and Manga apps are also stored in docs/assets/; the Hub has not switched to them yet.
 
-## Scenic-gallery refinement (21 November 2026)
+### Proposed composition
 
-The owner requested removal of the welcome headline, introductory copy and Explore/Read/Watch/Discover motto, plus **smaller editorial tiles**. Those elements no longer render visibly. The page retains a visually hidden H1 for accessible heading hierarchy. The four original WebP panels now form a centred, restrained 4-column gallery, leaving much more of the existing sakura-and-Fuji illustration visible. The rich HTML/CSS lower panel treatment, safe Novel/Manga links, inert planned cards and six themes remain. See [External sakura/Fuji artwork review](SCENERY_RESEARCH.md): public alternatives were evaluated, but the existing coordinated painterly landscape remains a better design fit. No internet-hosted media or new image was added.
+- One prominent photographic feature on the **left**, approximately 52–58% of the content width.
+- Four compact library tiles on the **right**, arranged 2 × 2 on desktop.
+- Shared Taiyou Sun logo in the header; remove the redundant “MY MEDIA GATEWAY” subtitle.
+- Deep walnut/brown, pale gold and a restrained glowing-gold accent.
+- Candidate headline: “A Place for Every Story.” This is not final copy.
+- Preserve the exact existing four media illustrations and honest navigation semantics.
+- Reflow deliberately for tablet, mobile and 200% zoom. Do not merely shrink the desktop split.
+- Compare both photos in the same layout so the image choice is the main variable.
+
+The owner has approved building and comparing a coded prototype, **not** a production switch. The selected photo, crop, typeface, copy and final palette remain open.
+
+## 4. Typography and external resources
+
+Current font stack is Georgia/Times New Roman. Cormorant Garamond or Newsreader for display text and Inter for controls are possible future candidates, not selected dependencies. The current static Content Security Policy is intentionally self-only. If a web font is chosen, verify its licence and self-host it locally; do not add Google Fonts or a runtime network dependency.
+
+Stock photography must be self-hosted if selected for the live app. Never hotlink Pexels. The combined moodboard remains under docs/assets/. If a photo is selected, obtain it from its original Pexels page and self-host it as part of the production website, retaining source/licence notes.
+
+## 5. Accessibility and responsive invariants
+
+- Semantic page H1, library H2, card H3s and an unordered list.
+- Visible-on-focus skip link, keyboard-operable theme selector, real links for Novel/Manga only, visible focus indicators.
+- Planned tiles remain inert and announce their state accessibly.
+- Sufficient text/background contrast in all six themes.
+- Respect reduced-motion preference; no essential information depends on animation or hover.
+- Desktop viewport fit where practical; tablet/mobile reflow and 200% zoom must not create horizontal scrolling or clipped controls.
+- Use actual browser screenshots after images decode and paint. Automated axe checks are necessary but not equivalent to manual NVDA/VoiceOver acceptance.
+
+## 6. Asset boundaries
+
+| Location | Purpose | Runtime? |
+| --- | --- | --- |
+| apps/hub/public/art/*-art.webp | Exact approved media card artwork | Yes |
+| apps/hub/public/art/landscape.avif | Current sakura/Mount Fuji panorama | Yes |
+| apps/hub/public/branding/hub-sun-logo.svg | Current Hub header mark | Yes |
+| apps/hub/public/branding/hub-sun.svg | Current Hub favicon | Yes |
+| docs/assets/featured-visual-moodboard.webp | Combined Pexels visual reference board | No |
+| docs/assets/sun-light.webp, sun-dark.webp | Exact shared Novel/Manga logo references | No |
+
+Never move a documentation reference into the runtime bundle without updating provenance, static verification, CSP checks, visual tests and this document.

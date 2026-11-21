@@ -27,30 +27,38 @@ Your write scope is:
 
 You do **not** own the Novel reader, Manga reader, their storage controllers/private datasets, Anime app or Movies/TV app. Use their source only for comparative review where authorised. Propose cross-repo changes via RFC; let their owning sessions implement independently.
 
-## 2. Mandatory fresh-state investigation (every session)
+## 2. Mandatory dynamic-state investigation (every session)
 
-1. Check `master` latest SHA and whether the repo/branch is clean, PRs and issues are open, and another agent is already editing a relevant file.
-2. Read `README.md`, `AGENTS.md`, `CONTRIBUTING.md`, this playbook, [History](PROJECT_HISTORY.md), [Codebase](CODEBASE_REFERENCE.md), [Decisions](DECISIONS.md), [Roadmap](ROADMAP.md), [Operations](OPERATIONS.md), [Security](SECURITY.md), [Testing](TESTING.md) and relevant RFCs.
-3. Re-read **actual source** for requested changes: App, catalogue, theme, CSS overrides, UI component, assets, unit tests, browser tests, static verifier, CI workflows.
-4. Compare README/docs claims to actual source and latest merged/live test evidence. Do not copy stale “only Novel is live”, “temporary Sun logo”, “run npm install/generate a lockfile”, or “do not deploy without permission” instructions from old historical sections.
-5. Confirm active external destinations belong to the owner and respond as expected; **do not** inspect private media stores or put credentials in test output.
-6. Write a small acceptance checklist describing what will change, which existing behaviour cannot regress and what proves success.
+1. Run `git status --short --branch` and inspect staged, unstaged and untracked changes. Never overwrite another agent's work. If no local checkout is available, say so and inspect remote refs/PRs instead.
+2. Run `git fetch --prune origin`, inspect `git log -8 --oneline --decorate --all`, resolve `origin/master`, inspect active branches, open PRs/issues and the newest workflow runs. Do not assume a previous session's branch or summary is current.
+3. Read `README.md`, `AGENTS.md`, `CONTRIBUTING.md`, this playbook, [History](PROJECT_HISTORY.md), [Codebase](CODEBASE_REFERENCE.md), [Decisions](DECISIONS.md), [Roadmap](ROADMAP.md), [Operations](OPERATIONS.md), [Security](SECURITY.md), [Testing](TESTING.md), [Featured visual options](FEATURED_VISUAL_OPTIONS.md) and relevant RFCs.
+4. Re-read actual source for the task: App, catalogue, theme, complete final CSS, UI component, asset bytes, unit/browser tests, static verifier, CI workflows and built output. Compare docs to code rather than assuming either is automatically current.
+5. Fetch the public `/release.json`, compare it with exact current `master`, and inspect the matching live smoke job and HTTP headers. A merged PR, green build or previous release note is not production proof.
+6. Classify relevant work as **implemented and verified**, **implemented but unverified**, **partially implemented**, **approved for prototype only**, **planned/deferred**, or **deprecated/superseded**. Never describe a brainstorm, screenshot, local reference asset, AI summary or PR body as a shipped feature.
+7. Confirm public Novel/Manga destinations without accessing private catalogues, Hugging Face datasets or user reading data. Do not put credentials in logs.
+8. Write acceptance checks and non-regression invariants before editing.
 
-**Source precedence when contradictions exist:** latest source and measured current deployment > latest approved decision/PR > updated agent charter > historical PRs > old prose. Preserve intentional design decisions; never use this ordering to overrule direct new owner instructions.
+**Evidence precedence:** current Git status/source/tests and freshly measured production evidence > latest merged PR and explicit owner decision > current documentation > older docs, screenshots, previous agent summaries and brainstorms. Direct new owner instructions always take precedence.
 
-## 3. Current non-negotiable user-facing contract
+## 3. Current production contract versus next approved prototype
 
-- Four media cards in this exact order: Novel, Manga, Anime, Movies & TV.
-- Desktop **4 × 1**, tablet **2 × 2**, phone **1 × 4**; 100%-desktop fit without clipping or forced zoom; correct 200% zoom reflow and no horizontal overflow.
-- **Exact detailed approved WebP portrait imagery** under `apps/hub/public/art/*-art.webp`, not rewritten SVG approximations. Card art itself contains no text or badges; the current cinematic view draws real HTML titles, description/status labels and calls to action over a lower CSS gradient. Never bake labels into art or substitute new approximate images.
-- Whole Novel/Manga card (image + title) is a safe HTTPS link. Planned cards are inert with accessible planned-state semantics.
-- Warm brown top bar, approved Hub-specific sunrise-over-water SVG logo, blossom ornament, continuous sakura/mountain/sunrise background.
-- Six theme choices, **Sepia default**, persistence and no-flash bootstrap with strict no-inline-script CSP.
-- Focusable skip link, proper heading levels, keyboard access, visible focus, reduced-motion support, appropriate contrast.
-- Navigation prompts are real HTML within the code-rendered card, **not pixels inside images**. Available whole-card anchors may show Explore text. Planned cards may show Coming soon as static, unfocusable text only, never as a fake link/button. Avoid duplicate labels and misleading pointer cursors.
-- The independent readers, their auth, catalogue, themes and private datasets must remain untouched and functional without the Hub.
+**Verified production baseline (PR #23, master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` at the time of this review):**
+- Four media cards in this exact order: Novel, Manga, Anime, Movies & TV. Novel and Manga are safe whole-card HTTPS links; Anime and Movies & TV are inert planned cards.
+- Desktop **4 × 1 midsize centred gallery**, tablet **2 × 2**, phone **1 × 4**; no visible welcome/motto hero, a visually hidden H1, 200% zoom reflow and no horizontal overflow.
+- Exact detailed, text-free WebP art under `apps/hub/public/art/*-art.webp`; real HTML headings, descriptions, availability and CTA content are rendered over the lower card gradient. Never replace the original art with approximations.
+- Current live backdrop is the original sakura/Mount Fuji panorama. Current header uses the Hub-specific `hub-sun-logo.svg`/`hub-sun.svg`, Georgia type and the “MY MEDIA GATEWAY” subtitle.
+- Six Hub-local themes, **Sepia default**, local persistence, pre-React no-flash bootstrap, strict self-only CSP, keyboard/focus, skip link and reduced motion.
+- The independent readers, their auth, catalogue, themes and private datasets remain outside this repository.
 
-If a proposed feature appears to conflict with these, write down the change in decision history and obtain a clear new design instruction instead of quietly overriding a previously approved outcome.
+**Approved next exploration (ADR-015, not yet implemented):**
+- Explore a non-Japanese visual identity using warm walnut/brown, pale gold and restrained glowing gold.
+- Compare **Golden Archive** and **Cinematic Passage** in the credited composite moodboard at `docs/assets/featured-visual-moodboard.webp`; original Pexels source pages, photographers, dimensions and licence are linked in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). Do not redistribute raw Pexels photographs as standalone repository files.
+- Build the same coded desktop composition for both concepts: featured visual on the left, four compact library tiles on the right in a 2 × 2 grid.
+- Use the exact shared Sun logo variants already used by Novel and Manga. Their copies in `docs/assets/` are reference files only; the Hub has not switched to them.
+- Candidate copy “A Place for Every Story.” is not final. Display typography candidates must respect the self-only font CSP; self-host properly licensed fonts if selected.
+- Build a responsive React/HTML/CSS prototype and inspect actual browser screenshots. The final image, crop, typography and production change require owner visual acceptance.
+
+See [Featured visual options](FEATURED_VISUAL_OPTIONS.md). Do not hotlink Pexels or infer that the proposed split layout is already shipped.
 
 ## 4. Local quality gate
 
@@ -113,7 +121,7 @@ No direct pushes to canonical master except the normal PR merge. No surprise dep
 | “CSS screenshot looks wrong; rewrite all component styles.” | Inspect the **last** overriding `styles.css` rules and the approved visual reference |
 | “A test selector was renamed, so drop the test.” | Update all test files while preserving assertions |
 | “An SVG has an `http://www.w3.org/2000/svg` namespace so it loads an external resource.” | Scope external-resource validation to `href`/`src` and active elements |
-| “PR #12 says final raster logo is pending, so replace current Sun mark.” | PR #12 was **closed unmerged**; Hub SVG became owner-approved in PR #17/#18 |
+| “PR #12 says final raster logo is pending, so replace current Sun mark.” | PR #12 was **closed unmerged** and is unrelated to the shared Novel/Manga Sun WebPs. The owner has now approved those exact WebPs for the next Hub prototype; the current production header remains SVG until a separate redesign is accepted |
 | “Manga is planned because an old guide says so.” | Manga has a verified live link; inspect `catalogue.ts` and PR #14 |
 | “The presence of an Anime tile means Anime is deployable.” | Planned tile is intentional; video apps are paused/deferred |
 | “The packages are in the monorepo, so sibling apps can import them now.” | Private/unpublished 0.0.0 packages need RFC, distribution, two consumers and separate migrations |
@@ -152,6 +160,6 @@ Before ending a development session, report concisely:
 If something cannot be verified, state it explicitly; do not call it finished.
 
 
-### Latest home visual contract, 21 November 2026
+### Latest design direction, 21 November 2026
 
-Remove the **visible welcome headline, subtitle and Explore/Read/Watch/Discover motto** entirely. Keep a visually hidden H1 and visually hidden library H2 for screen readers. The owner explicitly judged the earlier edge-to-edge cinematic posters too large: favour a **moderately sized centred 4 × 1 scenic gallery** with generous visible sakura and mountain margins. Preserve the exact original text-free WebP artwork and the code-rendered HTML caption panels. External sakura/Fuji alternatives were researched, but the existing original panorama better matches the visuals; see [Scenery research](SCENERY_RESEARCH.md). Do not reintroduce a new hero or hotlink stock imagery.
+The **current production** remains the hero-free, centred midsize scenic gallery from PR #23. The owner has now approved a new **prototype exploration**, not a production switch: a non-Japanese brown/gold design with one featured photograph on the left and four compact library tiles on the right. The credited moodboard and exact shared Novel/Manga Sun marks are stored under `docs/assets/`; original photo source URLs and licence/provenance notes are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). Raw Pexels photographs are not separately redistributed. Compare both concepts in the same coded layout, keep runtime assets self-hosted, and obtain owner visual acceptance before changing the live page. The current Hub SVG logo and sakura panorama remain active until a separate implementation is approved.

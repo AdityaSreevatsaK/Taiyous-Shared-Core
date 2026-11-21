@@ -36,14 +36,14 @@ The distinction matters: a repository named Shared Core is **not** permission to
 | Four cards in a 2 × 2 desktop layout | Superseded | Owner explicitly chose a **4 × 1 desktop row** |
 | Text, descriptions, buttons and status labels overlaid on card artwork | Superseded | Owner chose **image-only portraits with a separate title underneath** |
 | Convert final homepage into one screenshot | Rejected | Preserve real responsive CSS, accessible links, separate assets and keyboard focus |
-| Raster Sapphire/Antique Gold logo pack | Optional, superseded for the Hub | A distinct owner-approved coded sunrise SVG was adopted for Hub only; it does not redefine the Novel/Manga branding |
+| Raster Sapphire/Antique Gold logo pack | Optional, superseded for the Hub | A distinct owner-approved coded sunrise SVG was adopted for Hub only; it does not redefine the Novel/Manga branding. The owner later explicitly approved exploring the exact shared Novel/Manga Sun WebPs for a future Hub redesign; see ADR-015 |
 | New Anime and Movies/TV storage/catalogue now | Paused/deferred | Large media-storage requirements proved impractical for the current plan; prioritise Novels and Manga |
 
 **Scope note:** The Anime and Movies & TV *Hub placeholders* exist, but this repository does not implement their applications, hosting or media storage. The owner's decision to pause large-video work does not imply deletion of their future roadmap.
 
 ## 3. Visual design evolution and approved principles
 
-The owner progressively refined the homepage against a Japanese-inspired sakura/sunrise reference and live screenshots:
+The early homepage direction used a Japanese-inspired sakura/sunrise reference and was refined against live screenshots. This describes the original visual evolution, **not a permanent cultural requirement**: the owner later explicitly said the Hub need not be Japanese-themed and approved the broader photographic exploration in section 10.
 
 - Warm **brown-and-gold top masthead**, a distinct Sunrise-over-water symbol, subtle blossom ornament.
 - **Sakura tree canopy from the upper-left**, mountain/sunrise horizon and soft pastel landscape behind hero and card row. The page should feel designed and illustrated, not like a plain dashboard.
@@ -77,6 +77,9 @@ The final portrait illustrations are **the exact high-detail generated artwork s
 | [#18](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/18) | Larger, more faithful gold half-sun, water ribbons, floral ornament and background positioning |
 | [#19](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/19) | Correct **layout** concept (art-only, titles underneath) but an incorrect simplified set of SVG illustrations; merged then superseded |
 | [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) | **Artwork correction:** exact high-detail approved illustrations, not simplistic substitutes; removes wrong SVGs, verifies hashes, passes CI, live deployed |
+| [#21](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/21) | Comprehensive project documentation, AI-agent playbook and dynamic documentation checks |
+| [#22](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/22) | Large cinematic code-rendered poster composition; the implementation used real HTML/CSS but was later judged too large/busy |
+| [#23](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/23) | Removed visible welcome/motto and reduced posters to a centred midsize scenic gallery; fixed a background cutoff; latest verified production SHA `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` |
 
 This list tracks merged milestones and the noteworthy superseded PR. For exact merge dates, commits and checks, consult each GitHub PR/run; do not infer unrecorded outcomes from a title.
 
@@ -96,10 +99,10 @@ This list tracks merged milestones and the noteworthy superseded PR. For exact m
 **Resolution:** `apps/hub/vite.config.ts` emits `/release.json` from `CF_PAGES_COMMIT_SHA`/`GITHUB_SHA`; `scripts/verify-hub-live.mjs` compares it with the exact merged `master` SHA and checks security headers. Transient propagation is retried before failure.  
 **Rule:** green CI, merged PR, Cloudflare build and verified served revision are different claims.
 
-### D. Multiple versions of the approved Sun mark
+### D. Multiple versions of the Sun mark
 **Observed:** changing design direction left an asset-blocked raster-logo PR and stale “temporary logo still pending” documentation.  
-**Resolution:** owner approved a **distinct Hub-specific original SVG** later refined in PRs #17/#18. PR #12 was closed without merging.  
-**Rule:** use the present coded Hub SVG; retain raster alternatives only as archived reference. Do not restart old branding work without an explicit new request. Do not change independent apps' logos.
+**Resolution:** the owner approved a **distinct Hub-specific original SVG** later refined in PRs #17/#18; PR #12 was closed without merging. In November 2026, the owner explicitly approved a new exploration using the exact shared Sun WebP marks already used by Novel and Manga. Those files are copied byte-for-byte into `docs/assets/` as reference assets; the Hub still uses its SVG until a separate implementation is reviewed.  
+**Rule:** do not confuse the archived raster ZIP with the shared Sun WebPs. Do not change independent apps' logos. Use the current Hub SVG in production until the new prototype is accepted.
 
 ### E. Incorrect artwork substituted for artwork shown to the owner
 **Observed:** PR #19 introduced simplified SVG drawings while the owner had approved a much richer detailed four-panel illustration. The titles-under-art layout was correct, but the **art itself did not match the supplied example**. The owner challenged the mismatch.  
@@ -123,7 +126,7 @@ This list tracks merged milestones and the noteworthy superseded PR. For exact m
 
 ## 6. What exists now and what does not
 
-**Verified in this repository as of the last documented production release:** a static React Hub, four responsive art-and-title cards, Novel/Manga public links, planned Anime/Movies cards, six local themes, original Hub-specific logo, optional build-time contracts/UI, strict static headers, CI and exact-commit live smoke.
+**Verified production baseline at the start of this update:** master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` is a static React Hub with four responsive immersive cards, Novel/Manga public links, planned Anime/Movies cards, six local themes, Hub-specific SVG logo, optional build-time contracts/UI, strict static headers, CI and exact-commit live smoke. Matching [CI 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) passed. The Golden Archive/Cinematic Passage and shared Sun logo assets in `docs/assets/` are prototype references, not implemented UI.
 
 **Not present:** central auth/SSO; account profile; synced themes across apps; unified progress, tags, ratings, search or collections; media files/streaming; shared private-data backend; published packages; enforced cross-app adoption; true functional Anime and Movies & TV apps.
 
@@ -165,3 +168,17 @@ After the full-width cinematic rebuild, the owner found the four posters **too l
 ### Avoiding clipped landscape backgrounds in dark and light themes
 
 The initial hero-free screenshot showed an abrupt horizontal colour band above the footer because the prior `background-position: center calc(45% - 180px)` moved the cover-sized AVIF **up beyond the painted main surface**, exposing the underlying theme background. It was especially obvious in Charcoal. The fix restores `background-position: center 45%` while keeping `background-size: cover`, and the browser regression now asserts both properties. Actual 1600×900 Sepia and Charcoal screenshots confirm a continuous painterly landscape fading naturally into the footer.
+
+
+## 10. Non-Japanese photographic design exploration (21 November 2026)
+
+After PR #23, the owner remained dissatisfied with the overall aesthetic and explicitly clarified that a Japanese theme was not a requirement. The warm brown/pale-gold/glowing-gold treatment from the supplied “Still Waters” video was attractive, but a crane was not required. The owner liked two broader concepts:
+
+- **Golden Archive:** a historic library interior with dark walnut bookshelves and warm light. Photograph by Michael D Beckwith, [Pexels photo 36093623](https://www.pexels.com/photo/historic-library-room-with-rich-wooden-interiors-36093623/), original dimensions 8687 × 5791.
+- **Cinematic Passage:** an ornate corridor with golden sunlight, deep shadows and a vanishing point. Photograph by Sefa Demirtaş, [Pexels photo 34882758](https://www.pexels.com/photo/architectural-perspective-of-a-sunlit-corridor-34882758/), original dimensions 4160 × 6240.
+
+A credited composite moodboard showing both photographs is stored at `docs/assets/featured-visual-moodboard.webp`. Photographer credits, original source URLs and Pexels licence details are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). The raw stock photographs are not separately redistributed as standalone repository files because the Pexels licence prohibits standalone redistribution. The exact shared `sun-light.webp` and `sun-dark.webp` files used by the Novel and Manga applications were copied byte-for-byte into `docs/assets/` with their original Git blob SHA-1 values. No sibling repository was changed.
+
+The approved next prototype is a code-built split composition with a prominent featured photograph on the left and four compact library tiles on the right. The final photo, crop, headline, typography and palette are not yet selected. The current live site remains the PR #23 hero-free scenic gallery, with the original sakura/Mount Fuji background and Hub-specific SVG Sun logo. The moodboard and shared Sun WebPs are **reference-only**, not runtime assets. See [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md).
+
+The latest production baseline at this review is master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`; matching [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) passed. Future agents must recheck current refs and release markers rather than treating this recorded SHA as permanent.

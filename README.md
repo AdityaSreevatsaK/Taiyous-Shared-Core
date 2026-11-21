@@ -6,7 +6,7 @@
 
 ## Why this repository exists
 
-The owner wanted one beautiful, Japanese-inspired entrance to different media libraries and a carefully governed place for any **proven** shared frontend/contracts functionality. Hosting `apps/hub` inside Shared Core avoids an extra repository and keeps the independently deployed readers free of central runtime dependencies.
+The owner wanted one beautiful personal entrance to different media libraries and a carefully governed place for any **proven** shared frontend/contracts functionality. The visual identity is deliberately not tied to one culture or motif. Hosting `apps/hub` inside Shared Core avoids an extra repository and keeps the independently deployed readers free of central runtime dependencies.
 
 The original five-repository plan is:
 - **This repository:** Shared Core and the Personal Hub.
@@ -19,14 +19,13 @@ This is **four Hub destinations across five repositories** because Movies and TV
 
 ## Current product
 
-- **Four cinematic illustrated posters**, in order: Novel Library, Manga Library, Anime Library, Movies & TV Library. The exact approved text-free WebP illustrations remain unchanged; the visible titles, descriptions, availability labels and calls to action are **real accessible HTML/CSS overlaid on the lower half**, not baked into the artwork.
-- **Real links** for Novel and Manga only, covering artwork and title. Anime and Movies & TV are non-interactive until verified.
-- **Scenic gallery composition:** four moderately sized posters centred across desktop, 2 × 2 tablet, 1 × 4 mobile. No welcome/motto hero; the existing original sakura and Mount Fuji sunset fills the scene. Maintains 100% desktop viewport fit and accessible 200% zoom reflow.
-- **Visual identity:** a distinct Hub-specific golden SVG sunrise logo, warm brown masthead, sakura tree, pastel mountain/sunrise landscape, ornamental wave footer and editorial typography.
-- **Six persistent themes:** Midnight, Charcoal, Plum, Sepia (**first-visit default**), Paper and Ocean. Preference stays **local to the Hub**.
-- **Accessibility and privacy:** semantic headings, skip link, keyboard/focus, reduced motion, screen-reader-only planned state, local self-hosted assets, strict static CSP/security headers. No private media fetch or cross-app credentials.
+- **Current deployed layout:** four moderately sized illustrated posters centred in a 4 × 1 desktop row, 2 × 2 tablet and 1 × 4 phone. The visible welcome block and motto are removed; a screen-reader-only H1 remains. The exact approved text-free WebP art is unchanged, with real HTML titles, descriptions, availability and CTA content composed over each card.
+- **Navigation:** Novel and Manga are whole-card HTTPS links. Anime and Movies & TV remain non-interactive planned tiles.
+- **Current visual identity:** the deployed page still uses the sakura/Mount Fuji panorama, Hub-specific sunrise SVG logo/favicon, Georgia typography and the existing header subtitle. This is the verified production baseline, not the final design direction.
+- **Themes:** Midnight, Charcoal, Plum, Sepia (**first-visit default**), Paper and Ocean; preference is local to the Hub.
+- **Accessibility and privacy:** semantic headings, skip link, keyboard/focus, reduced motion, planned-state semantics, self-hosted runtime assets, strict CSP/security headers. No private media fetch or cross-app credentials.
 
-**Visual direction:** After the cinematic code-first redesign, the owner requested a quieter homepage: remove the welcome/motto entirely and reduce tile scale to let sakura and Mount Fuji lead. A [licence-aware external scenery review](docs/SCENERY_RESEARCH.md) compared online alternatives; the existing panoramic illustration was retained for superior stylistic consistency. The redesign remains **code, not a generated image**. Earlier in the day, the owner requested that the cinematic reference be implemented **in code**, not as a new generated illustration. The current editoral panel styling reuses the exact approved images, but builds all caption/pill/CTA UI in React/CSS. Older images-with-titles-below describe a superseded layout.
+**Next visual direction, approved for prototyping only:** the owner wants to explore a non-Japanese, warm brown/pale-gold/glowing-gold composition with one prominent photographic feature on the left and four compact library tiles on the right. A credited composite moodboard showing **Golden Archive** and **Cinematic Passage**, plus the exact shared Sun logo variants used by Novel and Manga, is stored under docs/assets and documented in [Featured visual options](docs/FEATURED_VISUAL_OPTIONS.md). The raw Pexels photographs are not redistributed as standalone files; their original source pages and licence are recorded for future use. None of these references are loaded by the current app. Do not treat either photo or the split layout as production until a coded prototype has been visually reviewed and accepted.
 
 **Important history:** PR [#19](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/19) had the correct layout but accidentally used simplified substitute drawings. PR [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) replaced them with the **actual detailed approved four-panel artwork** and verifies exact WebP digests. Never repeat that substitution. The previously proposed raster-logo pack was superseded for **the Hub only** by original SVG sunrise branding; independent readers keep their own branding.
 
@@ -72,7 +71,7 @@ The `.env.example` file contains **public HTTPS destination URLs only**, includi
 - **CI:** `.github/workflows/ci.yml` checks Node 22 quality on Ubuntu/Windows, production dependency advisories, static assets/security policy, and responsive/keyboard/WCAG tests on Chromium/Firefox/WebKit.
 - **Hosting:** Cloudflare Pages project `taiyous-shared-core`, connected to `master`. Build from repository root, output `apps/hub/dist`.
 - **Independent release verification:** `.github/workflows/live-hub.yml` tests public HTTPS 200, security headers, React mount, early six-theme bootstrap and **exact public `/release.json` commit SHA** after each master merge.
-- **Historical verified illustration release:** master `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, [CI run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live smoke run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465). This is a historical reference, **not a claim it remains the latest deployment**.
+- **Latest verified production baseline:** master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`, [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke run 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) both succeeded at that exact SHA. The live smoke verified HTTP 200, required security headers, React mount, six-theme bootstrap and the exact deployed commit.
 
 A merged PR does not prove production deploy, and automated accessibility checks do not equal manual NVDA/VoiceOver acceptance.
 
@@ -89,7 +88,8 @@ A merged PR does not prove production deploy, and automated accessibility checks
 | What is complete, pending, or deferred | [Roadmap](docs/ROADMAP.md) |
 | System and privacy boundaries | [Architecture](docs/ARCHITECTURE.md) · [Security](docs/SECURITY.md) |
 | Commands, releases, rollback and exact deployment verification | [Operations](docs/OPERATIONS.md) · [Live smoke](docs/LIVE_HUB_SMOKE_CHECK.md) |
-| UI composition and visual design chronology | [Illustrated homepage](docs/ILLUSTRATED_HOMEPAGE.md) · [Design system](docs/DESIGN_SYSTEM.md) |
+| Current UI and visual design chronology | [Illustrated homepage](docs/ILLUSTRATED_HOMEPAGE.md) · [Design system](docs/DESIGN_SYSTEM.md) |
+| Approved next photographic concepts and shared Sun mark references | [Featured visual options](docs/FEATURED_VISUAL_OPTIONS.md) · [ADR-015](docs/adr/ADR-015-photographic-split-layout-exploration.md) |
 | Contract proposals and cross-repo governance | [Data contracts](docs/DATA_CONTRACTS.md) · [Reuse audit](docs/REUSABILITY_INVENTORY.md) · [Integration](docs/INTEGRATION.md) · [RFC process](docs/rfcs/README.md) |
 | Checks and known limitations | [Testing](docs/TESTING.md) · [Historic validation](docs/VALIDATION_STATUS_2026-11-18.md) |
 | Historical asset alternatives/deployment planning | [Branding archive](docs/BRANDING_INTEGRATION.md) · [Deployment preparation](docs/HUB_DEPLOYMENT_PREPARATION.md) |
