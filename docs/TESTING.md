@@ -57,3 +57,6 @@ The visual evidence helper `apps/hub/tests/visual-evidence.ts` captures the **ac
 ## Hero-free gallery regression checks (21 November 2026)
 
 Unit tests assert the welcome copy and motto are absent, but a visually hidden H1 still exists. Browser tests at 1600 × 900 bound the four-card poster width to a balanced 255–310 CSS px and check that substantial margins expose the background. Existing one-screen desktop fit, tablet/mobile reflow, local-only image requests, painted-pixel screenshot verification, theme persistence and WCAG checks remain mandatory.
+
+
+A first visual-review capture also exposed a large flat-colour band where a negatively offset `background-size:cover` image ended before the footer. The fix uses centred `50% 45%` positioning so scenery covers the entire main area; a Playwright computed-style check guards the placement. Screenshots in both Sepia and Charcoal are reviewed on every Hub visual PR.
