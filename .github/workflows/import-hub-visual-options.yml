@@ -41,19 +41,64 @@ jobs:
           python -m pip install --disable-pip-version-check Pillow==11.1.0
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image, ImageOps
-          sources = [
-              (Path('/tmp/hub-visual-source/golden-archive.jpg'),
-               Path('docs/assets/golden-archive.webp')),
-              (Path('/tmp/hub-visual-source/cinematic-passage.jpg'),
-               Path('docs/assets/cinematic-passage.webp')),
+          from PIL import Image, ImageDraw, ImageFont, ImageOps
+          
+          W, H = 2400, 1600
+          canvas = Image.new('RGB', (W, H), '#211811')
+          draw = ImageDraw.Draw(canvas)
+          serif = '/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+          serif_bold = '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
+          sans = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+          sans_bold = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          def font(path, size): return ImageFont.truetype(path, size)
+          
+          draw.text((90, 58), "TAIYOU'S PERSONAL HUB", font=font(sans_bold, 28), fill='#d6b57d')
+          draw.text((90, 112), "Two worlds. One place for every story.", font=font(serif_bold, 58), fill='#f5e4c7')
+          draw.line((90, 205, W-90, 205), fill='#9b7445', width=3)
+          
+          cards = [
+              {
+                  'path': '/tmp/hub-visual-source/golden-archive.jpg',
+                  'x': 80, 'title': 'Golden Archive',
+                  'subtitle': 'A private world of stories, gathered in warm walnut and golden light.',
+                  'credit': 'Photo by Michael D Beckwith  |  Pexels photo 36093623',
+                  'source': 'pexels.com/photo/historic-library-room-with-rich-wooden-interiors-36093623',
+                  'centering': (0.5, 0.5),
+              },
+              {
+                  'path': '/tmp/hub-visual-source/cinematic-passage.jpg',
+                  'x': 1220, 'title': 'Cinematic Passage',
+                  'subtitle': 'A threshold into other worlds, framed by shadow and sunlight.',
+                  'credit': 'Photo by Sefa Demirtas  |  Pexels photo 34882758',
+                  'source': 'pexels.com/photo/architectural-perspective-of-a-sunlit-corridor-34882758',
+                  'centering': (0.5, 0.52),
+              },
           ]
-          for source, target in sources:
-              with Image.open(source) as original:
-                  image = ImageOps.exif_transpose(original).convert('RGB')
-                  image.thumbnail((2200, 2200), Image.Resampling.LANCZOS)
-                  image.save(target, 'WEBP', quality=82, method=6)
-                  print(f'{target}: {image.width}x{image.height}, {target.stat().st_size} bytes')
+          card_y, card_w, card_h = 250, 1100, 1210
+          for item in cards:
+              x = item['x']
+              draw.rounded_rectangle((x, card_y, x+card_w, card_y+card_h), radius=30,
+                                     fill='#3a291e', outline='#b18a52', width=3)
+              with Image.open(item['path']) as src:
+                  photo = ImageOps.fit(src.convert('RGB'), (1040, 760),
+                                       method=Image.Resampling.LANCZOS,
+                                       centering=item['centering'])
+              mask = Image.new('L', photo.size, 0)
+              ImageDraw.Draw(mask).rounded_rectangle((0, 0, 1039, 759), radius=22, fill=255)
+              canvas.paste(photo, (x+30, card_y+30), mask)
+              draw.text((x+38, card_y+830), item['title'], font=font(serif_bold, 48), fill='#f5dfb6')
+              draw.text((x+38, card_y+900), item['subtitle'], font=font(sans, 24), fill='#e3d0b2')
+              draw.text((x+38, card_y+980), item['credit'], font=font(sans_bold, 19), fill='#d9b77e')
+              draw.text((x+38, card_y+1025), item['source'], font=font(sans, 17), fill='#c7b49b')
+              palette = ['#3b281c', '#765239', '#b58a5b', '#e2c18b', '#f3dfbd']
+              for i, colour in enumerate(palette):
+                  px = x+38+i*92
+                  draw.rounded_rectangle((px, card_y+1090, px+68, card_y+1142), radius=10, fill=colour)
+          draw.text((90, 1510), "Pexels-licensed photo references • source and licence details in docs/FEATURED_VISUAL_OPTIONS.md",
+                    font=font(sans, 19), fill='#c9b99f')
+          out = Path('docs/assets/featured-visual-moodboard.webp')
+          canvas.save(out, 'WEBP', quality=84, method=6)
+          print(f'{out}: {W}x{H}, {out.stat().st_size} bytes')
           PY
       - name: Commit imported local reference assets
         shell: bash
@@ -61,6 +106,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/assets/*.webp
+          git rm -f --ignore-unmatch docs/assets/golden-archive.webp docs/assets/cinematic-passage.webp apps/hub/public/art/featured-options/golden-archive.webp apps/hub/public/art/featured-options/cinematic-passage.webp
+          git add docs/assets/featured-visual-moodboard.webp
           git commit -m "Add licensed photographic concepts for Hub redesign"
           git push origin "HEAD:${{ github.ref_name }}"
