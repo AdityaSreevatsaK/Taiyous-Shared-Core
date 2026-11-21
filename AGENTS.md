@@ -1,53 +1,81 @@
-# AI Agent Rules for Shared Core and the Personal Hub
+# AI Agent Rules: Taiyou's Shared Core & Personal Hub
 
-This is the **cross-repository architecture coordination repository**, not the owner of every media application's product development. Your session must actively prevent unnecessary shared abstractions and coupling.
+**Canonical engineering instructions, last reconciled 21 November 2026.** Apply to this repository only. For the complete history and exact code map, read [AI playbook](docs/AI_AGENT_PLAYBOOK.md), [Project history](docs/PROJECT_HISTORY.md), [Codebase reference](docs/CODEBASE_REFERENCE.md) and [Roadmap](docs/ROADMAP.md). Older project docs may contain historical plans that have been superseded.
 
-## Exact responsibilities
-- Own `packages/contracts`: carefully versioned common primitives, namespaced media references and documented compatibility rules.
-- Own `packages/ui`: **stateless** reusable presentational components with accessible semantics and minimal peer dependencies.
-- Own `apps/hub`: premium responsive personal gateway, honest active/planned link states, no private media data or central authentication.
-- Own cross-app design/integration documentation and architectural decision records.
-- Coordinate proposals from Manga, Anime, Movies & TV and Novel Library agents without editing those repos from this session.
+## 1. Mission and ownership
 
-## Mandatory onboarding every session
-1. Inspect latest `master`, branches, pull requests, workflows and deployment state.
-2. Read `README.md`, this `AGENTS.md` and every relevant `docs/*.md`.
-3. Build a source inventory with implemented vs planned behaviour; verify all links/versions.
-4. With Node.js 22, run `npm ci`, `npm run typecheck`, `npm test`, `npm run build`, install Playwright Chromium/Firefox/WebKit and run `npm run test:browser`.
-5. State current blockers, then implement an approved increment with tests on a short-lived branch, review diff and make a PR.
-6. Report exact results, what was not exercised, links to PR and any integration changes other agents must adopt.
+You own **only** the `AdityaSreevatsaK/Taiyous-Shared-Core` repository:
+- `apps/hub`: a premium but deliberately light **static** React navigation gateway.
+- `packages/contracts`: experimental minimal type definitions/identity/rating helpers.
+- `packages/ui`: experimental **stateless** presentational React components.
+- This repository's tests, CI, deployment verification and cross-app coordination/docs.
 
-## Non-negotiable separation
-- Shared Core must not contain EPUB, manga page parsing, anime season tracking, film watch status, storage repositories or OAuth handlers that are specific to one application.
-- Never move Novel Library code just because it has a useful name. Prefer a careful **adapter boundary**, extraction proposal, tests and staged migration.
-- No runtime dependency from any app to the live hub. A broken hub must not block opening novels or tracking media directly.
-- No cross-repo code edits without explicit authorisation. Each owning session independently reviews shared API adoption.
-- No Git submodules or floating Git dependencies. No shared backend until a specific ADR with genuine measurable value is approved.
+The Hub is **not** the backend for other apps, a replacement for the Novel or Manga libraries, or a unified private catalogue. It lives alongside four independent media applications (Novels, Manga, Anime, Movies & TV) but shares no required runtime backend. Do not independently modify another repository or private Hugging Face dataset.
 
-## Shared package release policy
-Current packages are private workspaces at version 0.0.0. They are NOT published, stable or installed by independent apps. Proposals require: name, concrete two-consumer need, source API and tests, privacy/permissions, package boundary, semantic version, migration, rollback, bundle-size impact and integration PR plan. A change to exported types is a potential breaking change even if TypeScript compiles locally.
+## 2. Current verified product contract
 
-## Security and user data
-No secrets, private media, OAuth sessions, owner passphrases, personal tags/ratings/comments or library catalogues in the hub or shared code. Only verified HTTPS public app destinations may be shown. No client-side aggregation of private datasets across origins. Never claim the user is globally authenticated without an authorised identity service. Vite `VITE_*` variables are public. No auto-deploy or production secret handling without owner approval.
+- Canonical branch: **`master`**. Public repo and deployed Hub: `https://taiyous-shared-core.pages.dev/`.
+- **Four tiles in order:** Novel, Manga, Anime, Movies & TV. Novel and Manga link to existing independent Cloudflare Pages deployments. Anime and Movies & TV remain **planned/paused** with noninteractive tiles. Do not reactivate them without owner-controlled HTTPS deployment verification and explicit product direction.
+- Desktop **4 × 1**, tablet **2 × 2**, phone **1 × 4**. Normal desktop should fit header, hero, cards and footer; at 200% zoom/mobile permit scrolling but **never horizontal overflow**.
+- **Exact approved detailed WebP illustrations** at `apps/hub/public/art/{novels,manga,anime,movies-tv}-art.webp`; don't use simplified SVG replacements or the old complete poster AVIF cards. Each art image is **text-free**, with exactly one real, visible library heading **underneath**. Novel/Manga image+heading is a whole-card link.
+- Warm brown top bar, **Hub-specific original Sun SVG** (`branding/hub-sun-logo.svg`) and matching favicon, sakura ornament, original landscape background. Historical raster branding PR #12 was **closed unmerged** and superseded by approved Hub SVG PRs #17/#18.
+- Six themes Midnight, Charcoal, Plum, **Sepia (default)**, Paper and Ocean. LocalStorage only, early no-flash theme bootstrap, strict CSP, no global cross-app theme state.
+- Preserve semantic headings, screen-reader planned states, skip link, visible focus, keyboard navigation, reduced motion and good contrast.
+- No personal media data, OAuth, central auth, unified search, collection state, cross-library syncing, streaming service or shared runtime server.
 
-## Design/quality principles
-React 18 and TypeScript strict, minimal dependencies, semantic UI, keyboard navigation, clear focus, colour contrast, mobile-first layout, zero decorative fake controls and honest offline/error/loading states. CSS must not leak global styling into consuming apps: make future shared style tokens semantic and opt-in. Accessibility tests at 320/390/768/1280 widths. Do not over-engineer simple route links into service orchestration.
+**Historical warning:** PR #19 accidentally substituted simplistic SVG art for the detailed generated design shown to the owner. PR #20 corrected it with exact-original portraits and hash verification. Never repeat this visual fidelity failure.
 
-## Safe workflow and hard stops
-Write ADRs for auth, persistence, cross-media collections, cross-app search and package publishing. No force pushes, publicisation of private repositories, release tags, commercial services, paid APIs in CI, or destructive data operations without approval. If a plan requires altering the live Novel Library, submit a proposal to its owning session rather than making the change here.
+## 3. Mandatory first steps every session
 
-## First milestone
-Finish and verify the hub scaffold and docs, generate a reproducible npm lockfile, add functional keyboard/mobile tests for link state, and consider the first small reused component only after another app requests it. No need to invent a central identity service.
+1. Inspect latest master commit, open PRs/branches/CI and deployment marker; check concurrent work.
+2. Read `README.md`, `AGENTS.md`, `CONTRIBUTING.md`, `docs/AI_AGENT_PLAYBOOK.md`, `docs/PROJECT_HISTORY.md`, `docs/CODEBASE_REFERENCE.md`, `docs/DECISIONS.md`, `docs/ROADMAP.md` and relevant architecture/security/operations/testing docs.
+3. Inspect the **actual source**, tests, final CSS overrides and relevant assets before design or code changes; do not trust stale PR prose.
+4. Define concrete acceptance checks and invariants; distinguish implemented vs merely planned behaviour.
+5. For source changes, reproduce/build on Node 22+ with the real lockfile and run checks below.
+6. Create a focused branch and Markdown-only PR; explain the change, risk, tests and rollback. Never use HTML in PR descriptions.
+7. Merge only after *executed* matching-SHA successful CI under the owner's standing approval, then independently confirm the exact production SHA if Cloudflare deploys.
 
-## Test evidence is not test code
-A committed Playwright, Vitest or typecheck configuration is not evidence of execution. Before approval, require successful Node 22 locked install, typecheck, unit tests, build and browser run with exact SHA. If GitHub Actions returns zero job steps, investigate account/runner entitlement rather than asserting code failure or passing checks. Keep all optional module links disabled until their owner-controlled HTTPS deployments have been checked.
+## 4. Reproducible quality gate
 
-## Visibility and build evidence (18 November 2026)
-Shared Core source is **public by owner choice**; this does not publish npm packages, authorise sibling-repo visibility changes or deploy the Hub. The workspace lockfile is generated on a trusted hosted Node 22 runner. CI uses locked npm installs on Ubuntu and Windows, a production dependency audit and three-browser keyboard/responsive/automated WCAG checks. Require real green jobs with matching SHA before merging; manual screen-reader/visual review remains separate.
+```bash
+npm ci --no-audit --no-fund
+npm run typecheck
+npm test
+npm run build
+node scripts/verify-hub-static.mjs
+npx playwright install chromium firefox webkit
+npm run test:browser
+```
 
+CI must pass Node 22 quality on **Ubuntu and Windows**, all three Playwright browsers and production advisory checks. Static verification asserts strict header policy, required assets and the **exact original artwork hashes**. Browser tests check fixed titles/links, keyboard, WCAG automation, native image loading, dimensions, zoom and responsive screenshots.
 
-## Active Hub release workflow (20 November 2026)
-- The owner has approved progressing through focused development, review and safe merges after matching-SHA green CI without requesting repetitive approval. This does **not** waive the prohibitions on secrets, package publishing, sibling-repo changes, paid services, destructive operations or major architecture changes.
-- Cloudflare Pages integration is connected to `master` and may deploy automatically when it changes. Check BOTH green GitHub Actions and the Cloudflare Pages deployment result after each merge. A successful Cloudflare check is not a substitute for live HTTP/header inspection and manual accessibility review.
-- All six Hub themes and media-specific cards are implemented. The **exact approved two-logo/favicons pack is still pending commit**. Do not substitute former experimental branding, alter the raster designs, or claim that the final branding is already live. See `docs/BRANDING_INTEGRATION.md`.
-- Keep separate GitHub branches/PRs and check run SHA, and continue the next safe improvement after successful validation. Never force-push `master`.
+Screenshots must capture **fully decoded and painted** images. Inspect real visual output before asserting design fidelity; `naturalWidth` alone does not prove nonblank pictures. Automated axe checks do not establish manual screen-reader acceptance.
+
+## 5. Security, privacy and architecture hard stops
+
+- No credentials, tokens, private datasets, personal history, notes, auth cookies or owner passphrases in source, public Vite variables, GitHub Actions logs, browser bundle, screenshots or documentation.
+- Only public owner-verified HTTPS link targets. URL syntax checking is **not** ownership verification. No query/fragment redirects, insecure protocols or local/IP destinations.
+- Do not copy OAuth/session implementations across distinct Pages origins or claim SSO.
+- Do not publish shared packages (`0.0.0`), add a mandatory microservice, mutate sibling repos, create a database, change visibility/privacy/access policy or provision paid services without explicit separate approval.
+- No force pushes, release tags, destructive data operations, private dataset access or bypass of failing tests.
+- No cross-app shared code until **two independent consuming media applications** need the identical interface and an [RFC](docs/rfcs/README.md) covers versioning, security, validation, tests and rollback.
+- Keep independent Novel/Manga apps usable if the Hub is offline.
+- Commit messages should describe engineering work; do not include “AI-generated” labels. Use Markdown-only PR descriptions.
+
+## 6. Release and deployment truth
+
+Cloudflare Pages is Git-connected to `master` and may deploy after merge; ordinary `ci.yml` never performs direct deployment. The separate `live-hub.yml` fetches the public Hub, verifies HTTP/security headers, mount/bootstrap and `/release.json` matching the merged SHA. **Do not claim deployed merely because CI is green or the PR is merged.**
+
+Last *historically verified* exact-artwork release prior to this documentation update: `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`, [CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465). Recheck on every new merge.
+
+For rollback, revert the focused PR or select an earlier reviewed Cloudflare deployment; re-run CI/live smoke and verify restored public SHA.
+
+## 7. Documentation and collaboration hygiene
+
+- When behaviour changes, update codebase reference, roadmap, history/decision notes and agent handover so a new session needs no conversational context.
+- Preserve failures, regressions and superseded alternatives as dated history rather than deleting lessons.
+- If a new feature would affect another media repo, document an RFC and hand it to the owning agent instead of silently changing that repo.
+- Report exact PR, head/merge SHA, tests actually executed, independent live status, manual checks still outstanding and next safe steps.
+- Do not overstate published packages, data integration, a video library or owner acceptance.
+
+**Further reading:** [Complete agent playbook](docs/AI_AGENT_PLAYBOOK.md) · [Project history and mistakes](docs/PROJECT_HISTORY.md) · [Code/stack map](docs/CODEBASE_REFERENCE.md) · [Decisions](docs/DECISIONS.md) · [Operations](docs/OPERATIONS.md) · [Session handover](docs/SESSION_HANDOVER_PROMPT.md).
