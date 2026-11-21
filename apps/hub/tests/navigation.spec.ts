@@ -91,18 +91,18 @@ for (const { width, height } of [
     await page.goto('/');
     const geometry=await page.evaluate(()=>{
       const card=document.querySelector('.hub-card')!.getBoundingClientRect();
-      const hero=document.querySelector('.hub-hero')!.getBoundingClientRect();
+      const masthead=document.querySelector('.hub-masthead')!.getBoundingClientRect();
       const footer=document.querySelector('.hub-footer')!.getBoundingClientRect();
       return {scrollWidth:document.documentElement.scrollWidth,
         scrollHeight:document.documentElement.scrollHeight,
-        cardWidth:card.width,cardBottom:card.bottom,heroBottom:hero.bottom,
+        cardWidth:card.width,cardBottom:card.bottom,mastheadBottom:masthead.bottom,
         footerBottom:footer.bottom};
     });
     expect(geometry.scrollWidth).toBeLessThanOrEqual(width);
     expect(geometry.scrollHeight).toBeLessThanOrEqual(height);
     expect(geometry.cardWidth).toBeGreaterThanOrEqual(260);
     expect(geometry.cardBottom).toBeLessThanOrEqual(geometry.footerBottom);
-    expect(geometry.cardBottom).toBeGreaterThan(geometry.heroBottom);
+    expect(geometry.cardBottom).toBeGreaterThan(geometry.mastheadBottom);
     await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
     await expect(page.locator('.hub-card-label')).toHaveCount(4);
   });
@@ -178,28 +178,32 @@ test('planned library cards have neither links nor misleading pointer cursors', 
 });
 
 
-test('reference-inspired full-width editorial composition, theme and working overlays', async ({page}) => {
+test('scenic gallery keeps midsize cards and original local background', async ({page}) => {
   await page.setViewportSize({width:1600,height:900});
   await page.goto('/');
   await expect(page.locator('.hub-card-immersive')).toHaveCount(4);
   const dimensions = await page.evaluate(() => {
     const first = document.querySelector('.hub-card')!.getBoundingClientRect();
     const last = [...document.querySelectorAll('.hub-card')].at(-1)!.getBoundingClientRect();
-    const hero = document.querySelector('.hub-hero')!.getBoundingClientRect();
+    const main = document.querySelector('.hub-main')!.getBoundingClientRect();
     const scene = getComputedStyle(document.querySelector('.hub-main')!, '::before');
-    return {firstX:first.x,firstW:first.width,lastRight:last.right,heroH:hero.height,
+    return {firstX:first.x,firstW:first.width,lastRight:last.right,mainH:main.height,
       background:scene.backgroundImage};
   });
-  expect(dimensions.firstX).toBeLessThan(70);
-  expect(dimensions.firstW).toBeGreaterThan(340);
-  expect(dimensions.lastRight).toBeGreaterThan(1530);
-  expect(dimensions.heroH).toBeLessThan(250);
+  expect(dimensions.firstX).toBeGreaterThan(160);
+  expect(dimensions.firstW).toBeGreaterThan(255);
+  expect(dimensions.firstW).toBeLessThan(310);
+  expect(dimensions.lastRight).toBeLessThan(1450);
+  expect(dimensions.mainH).toBeGreaterThan(600);
+  await expect(page.locator('.hub-hero')).toHaveCount(0);
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Taiyou’s Personal Hub');
+  await expect(page.getByText('Your cosy gateway')).toHaveCount(0);
   expect(dimensions.background).toContain('/art/landscape.avif');
   await expect(page.locator('.hub-card-cta:not(.hub-card-cta-planned)')).toHaveText([
     'Explore Novels →','Explore Manga →',
   ]);
   for (const theme of ['sepia','charcoal']) {
     await page.getByRole('combobox',{name:'Hub theme'}).selectOption(theme);
-    await captureVerifiedArtwork(page, test.info().outputPath('hub-vision-'+theme+'-1600.png'));
+    await captureVerifiedArtwork(page, test.info().outputPath('hub-gallery-'+theme+'-1600.png'));
   }
 });
