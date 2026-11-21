@@ -62,7 +62,7 @@ apps/hub/index.html
 Page semantic structure:
 - First-focus skip link to `#libraries`.
 - Header: real `/` brand link, SVG sunrise image, decorative sakura, native theme `<select>`.
-- Main: one hero H1 and the `#libraries` section with a visually hidden H2.
+- Main: one **visually hidden semantic page H1** (no visible welcome/motto block), then the `#libraries` section with visually hidden H2.
 - One `<ul>` with **four** `<li>` cards in fixed order.
 - The current Hub uses `MediaHubCard immersive`: the 3:4 illustration fills each card, with a lower CSS gradient and **real HTML heading, description, availability and CTA**. The older `imageOnly` variation with title beneath remains available for potential consumers but is **not the live Hub layout**.
 - Footer: “Created by Taiyou”, ornamental seigaiha waves.
@@ -133,7 +133,7 @@ All four visible portraits were cropped from the **approved detailed four-panel 
 
 ## 7. Behaviour at different viewport sizes
 
-- Desktop `>=1100px`: one row, **4 × 1**, compact enough to reveal sakura landscape and footer at normal zoom.
+- Desktop `>=1100px`: **4 × 1 midsize gallery** (around 230–310 CSS px per poster), centred in the landscape; welcome/motto hero removed to give Fuji/sakura more breathing room.
 - Tablet `>620px` and below desktop breakpoint: **2 × 2**.
 - Phone `<=620px`: **1 × 4** vertical stack.
 - Widths at minimum **320, 390, 640/768, 800 and 1280** are covered in browser tests, plus desktop 1280×720, 1366×768, 1600×900, 1920×768 and 1920×1080.
