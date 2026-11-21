@@ -62,6 +62,7 @@ npm run typecheck
 npm test
 npm run build
 node scripts/verify-hub-static.mjs
+npm run verify:docs
 npx playwright install chromium firefox webkit
 npm run test:browser
 ```
