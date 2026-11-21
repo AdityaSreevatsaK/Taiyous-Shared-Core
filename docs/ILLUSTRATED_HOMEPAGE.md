@@ -101,3 +101,8 @@ are local. No external images or tracking are loaded.
 - Keep the original source and tests for accessibility, exact-art asset integrity, keyboard focus, reduced motion, local-only media and native HTML semantics.
 
 This modernisation is in `apps/hub/src/styles.css`, `App.tsx` and `packages/ui/src/index.tsx` under the new opt-in `immersive` variant. The old `imageOnly` presentation remains available for compatibility but is no longer the Hub's rendered card format.
+
+
+## Scenic-gallery iteration: no hero, smaller tiles (21 November 2026)
+
+The latest owner instruction explicitly removes the large Welcome heading, supporting sentence and motto, scales the code-rendered posters down from the oversized edge-to-edge four-card row, and gives the sakura canopy and Fuji mountain **visual precedence**. Four cards still use exact original WebP art and real HTML lower captions. The page retains a screen-reader-only H1. A [licence-aware web search](SCENERY_RESEARCH.md) examined freely reusable mountain/cherry blossom images; the original painterly panorama was kept because the candidates were photographic, too flat, or inconsistent with the approved poster artwork. No new image generation was requested or performed.
