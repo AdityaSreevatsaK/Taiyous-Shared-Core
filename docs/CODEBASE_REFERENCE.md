@@ -89,6 +89,7 @@ There is no client router, no login route and no fetch to a media or Hugging Fac
 | `.github/workflows/ci.yml` | Ubuntu/Windows quality plus Chromium/Firefox/WebKit browser jobs |
 | `.github/workflows/live-hub.yml` | `master`-push independent live Cloudflare smoke; also manual dispatch |
 | `apps/hub/tests/*.spec.ts` | Browser geometry, accessibility, theme, real-link policy, screenshot evidence |
+| `apps/hub/tests/visual-evidence.ts` | Image-decode/compositor-safe screenshot helper with per-card painted-pixel checks |
 | `docs/ILLUSTRATED_HOMEPAGE.md` | Evolution of approved visual composition and final exact-artwork requirement |
 
 A style edit must inspect the **bottom of `styles.css`**, which includes successive reference-fidelity refinements. Do not assume an earlier selector declaration wins.
