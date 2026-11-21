@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/hub-visual-source apps/hub/public/art/featured-options
+          mkdir -p /tmp/hub-visual-source docs/assets
           curl --fail --location --retry 3 --retry-all-errors --user-agent "TaiyouHubAssetImport/1.0" \
             'https://images.pexels.com/photos/36093623/pexels-photo-36093623.jpeg?cs=srgb&dl=pexels-michael-d-beckwith-2150568551-36093623.jpg&fm=jpg' \
             --output /tmp/hub-visual-source/golden-archive.jpg
@@ -44,15 +44,15 @@ jobs:
           from PIL import Image, ImageOps
           sources = [
               (Path('/tmp/hub-visual-source/golden-archive.jpg'),
-               Path('apps/hub/public/art/featured-options/golden-archive.webp')),
+               Path('docs/assets/golden-archive.webp')),
               (Path('/tmp/hub-visual-source/cinematic-passage.jpg'),
-               Path('apps/hub/public/art/featured-options/cinematic-passage.webp')),
+               Path('docs/assets/cinematic-passage.webp')),
           ]
           for source, target in sources:
               with Image.open(source) as original:
                   image = ImageOps.exif_transpose(original).convert('RGB')
-                  image.thumbnail((2600, 2600), Image.Resampling.LANCZOS)
-                  image.save(target, 'WEBP', quality=86, method=6)
+                  image.thumbnail((2200, 2200), Image.Resampling.LANCZOS)
+                  image.save(target, 'WEBP', quality=82, method=6)
                   print(f'{target}: {image.width}x{image.height}, {target.stat().st_size} bytes')
           PY
       - name: Commit imported local reference assets
@@ -61,6 +61,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/hub/public/art/featured-options/*.webp
+          git add docs/assets/*.webp
           git commit -m "Add licensed photographic concepts for Hub redesign"
           git push origin "HEAD:${{ github.ref_name }}"
