@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { captureVerifiedArtwork } from './visual-evidence';
 
 for (const width of [320,390,768,1280]) {
   test('four cards, correct columns and no overflow at '+width+'px', async({page})=>{
@@ -19,18 +20,7 @@ for (const width of [320,390,768,1280]) {
       for(let j=1;j<row.length;j++) expect(row[j]!.x).toBeGreaterThan(row[j-1]!.x);
     }
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    // A screenshot taken immediately after React mounts can capture blank
-    // image surfaces while high-resolution WebP decoding is still underway.
-    // Review actual painted artwork, not unloaded placeholders.
-    await page.locator('.hub-card-image-illustration').evaluateAll(async elements => {
-      await Promise.all(elements.map(element => (element as HTMLImageElement).decode()));
-    });
-    // Give the compositor an opportunity to paint all four decoded images,
-    // rather than capturing blank frames during the initial raster update.
-    await page.evaluate(() => new Promise<void>(resolve =>
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
-    await page.waitForTimeout(250);
-    await page.screenshot({path:test.info().outputPath('hub-'+width+'.png'),fullPage:true});
+    await captureVerifiedArtwork(page, test.info().outputPath('hub-'+width+'.png'));
   });
 }
 test('keyboard skips planned cards',async({page})=>{
@@ -210,11 +200,6 @@ test('reference-inspired full-width editorial composition, theme and working ove
   ]);
   for (const theme of ['sepia','charcoal']) {
     await page.getByRole('combobox',{name:'Hub theme'}).selectOption(theme);
-    await page.locator('.hub-card-image-illustration').evaluateAll(async elements => {
-      await Promise.all(elements.map(element => (element as HTMLImageElement).decode()));
-    });
-    await page.evaluate(() => new Promise<void>(resolve =>
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
-    await page.screenshot({path:test.info().outputPath('hub-vision-'+theme+'-1600.png'),fullPage:true});
+    await captureVerifiedArtwork(page, test.info().outputPath('hub-vision-'+theme+'-1600.png'));
   }
 });
