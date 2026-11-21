@@ -52,3 +52,8 @@ Visual testing must compare the *resulting app* to the owner's reference image r
 ### Prevent false-green screenshot evidence
 
 The visual evidence helper `apps/hub/tests/visual-evidence.ts` captures the **actual rendered screenshot**, then samples the upper illustrated area of all four posters using a local browser canvas. It accepts a screenshot only when all four panels have non-uniform painted pixels, retrying briefly after WebP decode if compositing is still in progress. This closes the real regression where screenshots contained plain blank colour panels even though `img.decode()` and image dimensions had passed. The helper does not fetch remote images and does not use OCR or production data.
+
+
+## Hero-free gallery regression checks (21 November 2026)
+
+Unit tests assert the welcome copy and motto are absent, but a visually hidden H1 still exists. Browser tests at 1600 × 900 bound the four-card poster width to a balanced 255–310 CSS px and check that substantial margins expose the background. Existing one-screen desktop fit, tablet/mobile reflow, local-only image requests, painted-pixel screenshot verification, theme persistence and WCAG checks remain mandatory.
