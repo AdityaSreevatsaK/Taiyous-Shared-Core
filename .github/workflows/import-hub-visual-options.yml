@@ -1,0 +1,63 @@
+name: Import licensed Hub visual exploration assets
+
+on:
+  push:
+    branches:
+      - feat/hub-featured-visual-options-20261121
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-hub-visual-assets
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Download source photographs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/hub-visual-source apps/hub/public/art/featured-options
+          curl --fail --location --retry 3 --retry-all-errors --user-agent "TaiyouHubAssetImport/1.0" \
+            'https://images.pexels.com/photos/36093623/pexels-photo-36093623.jpeg?cs=srgb&dl=pexels-michael-d-beckwith-2150568551-36093623.jpg&fm=jpg' \
+            --output /tmp/hub-visual-source/golden-archive.jpg
+          curl --fail --location --retry 3 --retry-all-errors --user-agent "TaiyouHubAssetImport/1.0" \
+            'https://images.pexels.com/photos/34882758/pexels-photo-34882758.jpeg?cs=srgb&dl=pexels-sefa-demirtas-2152709769-34882758.jpg&fm=jpg' \
+            --output /tmp/hub-visual-source/cinematic-passage.jpg
+          file /tmp/hub-visual-source/*.jpg
+      - name: Optimise local reference copies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check Pillow==11.1.0
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          sources = [
+              (Path('/tmp/hub-visual-source/golden-archive.jpg'),
+               Path('apps/hub/public/art/featured-options/golden-archive.webp')),
+              (Path('/tmp/hub-visual-source/cinematic-passage.jpg'),
+               Path('apps/hub/public/art/featured-options/cinematic-passage.webp')),
+          ]
+          for source, target in sources:
+              with Image.open(source) as original:
+                  image = ImageOps.exif_transpose(original).convert('RGB')
+                  image.thumbnail((2600, 2600), Image.Resampling.LANCZOS)
+                  image.save(target, 'WEBP', quality=86, method=6)
+                  print(f'{target}: {image.width}x{image.height}, {target.stat().st_size} bytes')
+          PY
+      - name: Commit imported local reference assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/hub/public/art/featured-options/*.webp
+          git commit -m "Add licensed photographic concepts for Hub redesign"
+          git push origin "HEAD:${{ github.ref_name }}"
