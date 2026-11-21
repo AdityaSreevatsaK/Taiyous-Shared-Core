@@ -50,7 +50,7 @@ The owner has approved building and comparing a coded prototype, **not** a produ
 
 Current font stack is Georgia/Times New Roman. Cormorant Garamond or Newsreader for display text and Inter for controls are possible future candidates, not selected dependencies. The current static Content Security Policy is intentionally self-only. If a web font is chosen, verify its licence and self-host it locally; do not add Google Fonts or a runtime network dependency.
 
-Stock photography must be self-hosted if selected for the live app. Never hotlink Pexels. The two local reference photos remain under docs/assets/ until a production implementation PR moves an optimised copy into apps/hub/public/.
+Stock photography must be self-hosted if selected for the live app. Never hotlink Pexels. The combined moodboard remains under docs/assets/. If a photo is selected, obtain it from its original Pexels page and self-host it as part of the production website, retaining source/licence notes.
 
 ## 5. Accessibility and responsive invariants
 

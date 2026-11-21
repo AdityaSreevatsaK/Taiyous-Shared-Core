@@ -18,7 +18,7 @@
 | ADR-012 | Cloudflare Pages auto-builds `master`, but deployment must be independently validated at exact SHA | Accepted; `/release.json`, `verify-hub-live.mjs`, [#13](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/13) |
 | ADR-013 | Prioritise Novel/Manga; leave Anime and Movies & TV paused/planned until viable storage plan | Owner direction from ecosystem planning; not an implemented service |
 | ADR-014 | Recreate the large, richly layered reference in React/CSS using the exact approved WebP art and real HTML card captions | Implemented in PR #22, then superseded by PR #23's hero-free, smaller centred gallery. It is historical, not the current next direction |
-| ADR-015 | Explore a non-Japanese, brown/gold photographic split layout: Golden Archive or Cinematic Passage feature visual on the left, four media tiles on the right, and the shared Novel/Manga Sun logo | **Approved for a coded prototype only**, not production. Both photographs and shared Sun marks are stored with provenance in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). The current live gallery remains unchanged until visual review and owner acceptance |
+| ADR-015 | Explore a non-Japanese, brown/gold photographic split layout: Golden Archive or Cinematic Passage feature visual on the left, four media tiles on the right, and the shared Novel/Manga Sun logo | **Approved for a coded prototype only**, not production. The credited composite moodboard and shared Sun marks are stored with provenance in [Featured visual options](FEATURED_VISUAL_OPTIONS.md); raw Pexels photos are not separately redistributed. The current live gallery remains unchanged until visual review and owner acceptance |
 
 ## Rationale that must not get lost
 

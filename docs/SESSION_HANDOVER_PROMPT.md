@@ -44,7 +44,7 @@ Read [Featured visual options](FEATURED_VISUAL_OPTIONS.md) for images, authors, 
 
 **Next design task:** build two code-rendered prototypes using the same split composition: one prominent photo on the left and four compact tiles on the right in a 2 × 2 group. Use the shared Sun logo in the prototype and remove the redundant header subtitle. Explore a walnut/brown and pale-gold palette. “A Place for Every Story.” is only candidate copy. Preserve the existing four approved card illustrations, links, six themes and accessibility requirements.
 
-The two photos and shared Sun WebPs are **documentation references only**, not loaded by the current app. Do not hotlink Pexels. Any selected production photo/font must be self-hosted and locally verified. Do not deploy a new homepage until the owner has reviewed the actual browser screenshots and accepted the result.
+The combined photo moodboard and shared Sun WebPs are **documentation references only**, not loaded by the current app. Do not hotlink Pexels. Any selected production photo/font must be self-hosted and locally verified. Do not deploy a new homepage until the owner has reviewed the actual browser screenshots and accepted the result.
 
 ## Repository architecture and technology
 

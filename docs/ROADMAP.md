@@ -61,7 +61,7 @@
 There is **no** unified private dataset, owner profile, universal watched/read progress, shared login, source-level imports into sibling applications, video server, media scraper or published library package. They remain explicitly out of scope or future proposals.
 
 ## Suggested next safe increments
-1. Build two coded variants of the approved split layout, using the stored Golden Archive and Cinematic Passage photographs and the shared Sun mark; keep the current production site unchanged.
+1. Build two coded variants of the approved split layout, using the source photographs linked in the moodboard documentation and the shared Sun mark; keep the current production site unchanged.
 2. Compare real browser screenshots at desktop, tablet, mobile and 200% zoom, across light and dark themes; inspect crop, typography, card balance and accessibility.
 3. Ask the owner to select the visual direction and final copy before a production implementation PR.
 4. Keep the exact approved media-card artwork, verified Novel/Manga links, six themes, CSP and independent release checks intact.

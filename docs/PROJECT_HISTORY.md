@@ -168,3 +168,17 @@ After the full-width cinematic rebuild, the owner found the four posters **too l
 ### Avoiding clipped landscape backgrounds in dark and light themes
 
 The initial hero-free screenshot showed an abrupt horizontal colour band above the footer because the prior `background-position: center calc(45% - 180px)` moved the cover-sized AVIF **up beyond the painted main surface**, exposing the underlying theme background. It was especially obvious in Charcoal. The fix restores `background-position: center 45%` while keeping `background-size: cover`, and the browser regression now asserts both properties. Actual 1600×900 Sepia and Charcoal screenshots confirm a continuous painterly landscape fading naturally into the footer.
+
+
+## 10. Non-Japanese photographic design exploration (21 November 2026)
+
+After PR #23, the owner remained dissatisfied with the overall aesthetic and explicitly clarified that a Japanese theme was not a requirement. The warm brown/pale-gold/glowing-gold treatment from the supplied “Still Waters” video was attractive, but a crane was not required. The owner liked two broader concepts:
+
+- **Golden Archive:** a historic library interior with dark walnut bookshelves and warm light. Photograph by Michael D Beckwith, [Pexels photo 36093623](https://www.pexels.com/photo/historic-library-room-with-rich-wooden-interiors-36093623/), original dimensions 8687 × 5791.
+- **Cinematic Passage:** an ornate corridor with golden sunlight, deep shadows and a vanishing point. Photograph by Sefa Demirtaş, [Pexels photo 34882758](https://www.pexels.com/photo/architectural-perspective-of-a-sunlit-corridor-34882758/), original dimensions 4160 × 6240.
+
+A credited composite moodboard showing both photographs is stored at `docs/assets/featured-visual-moodboard.webp`. Photographer credits, original source URLs and Pexels licence details are in [Featured visual options](FEATURED_VISUAL_OPTIONS.md). The raw stock photographs are not separately redistributed as standalone repository files because the Pexels licence prohibits standalone redistribution. The exact shared `sun-light.webp` and `sun-dark.webp` files used by the Novel and Manga applications were copied byte-for-byte into `docs/assets/` with their original SHA-256 digests. No sibling repository was changed.
+
+The approved next prototype is a code-built split composition with a prominent featured photograph on the left and four compact library tiles on the right. The final photo, crop, headline, typography and palette are not yet selected. The current live site remains the PR #23 hero-free scenic gallery, with the original sakura/Mount Fuji background and Hub-specific SVG Sun logo. The moodboard and shared Sun WebPs are **reference-only**, not runtime assets. See [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md).
+
+The latest production baseline at this review is master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`; matching [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) passed. Future agents must recheck current refs and release markers rather than treating this recorded SHA as permanent.

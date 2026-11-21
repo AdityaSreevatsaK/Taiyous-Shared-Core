@@ -84,4 +84,4 @@ for (const [relative, expected] of Object.entries(referenceAssets)) {
   if (expected.sha256) assert.equal(createHash('sha256').update(bytes).digest('hex'), expected.sha256,
     'Shared Sun logo must remain byte-identical to the sibling app asset: ' + relative);
 }
-console.log('Verified four local design-reference WebP assets and shared Sun logo digests.');
+console.log('Verified three local design-reference WebP assets and shared Sun logo digests.');
