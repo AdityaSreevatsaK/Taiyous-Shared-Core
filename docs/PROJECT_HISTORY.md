@@ -155,3 +155,8 @@ This explicitly **supersedes the former titles-below composition** but does **no
 ### I. Screenshot paint race during cinematic redesign
 
 During reference comparison, the browser occasionally captured blank purple/red third and fourth tiles even though the original WebP elements reported successfully decoded, causing misleading visual screenshots. The code now uses non-negative card stacking levels and `tests/visual-evidence.ts` validates **pixel variation in each rendered card** before saving CI screenshots. This test explicitly fails if the picture is still blank; it does not assume element presence or `naturalWidth` proves visual correctness.
+
+
+## J. Removing excess copy and tuning the scene-first homepage (21 November 2026)
+
+After the full-width cinematic rebuild, the owner found the four posters **too large** and the visible welcome headline, supporting sentence and motto unnecessary. The next refinement removed the entire visual hero, left an accessible hidden H1, reduced the 4 × 1 desktop poster row to a moderate centred gallery size and gave the original sakura/Fuji landscape more surrounding space. The online image investigation and explicit **keep existing original licensed art** decision are preserved in [Scenery research](SCENERY_RESEARCH.md). This choice does not reopen the earlier simplified-SVG mistake or alter the exact WebP artwork hashes.
