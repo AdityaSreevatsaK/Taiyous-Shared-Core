@@ -160,3 +160,8 @@ During reference comparison, the browser occasionally captured blank purple/red 
 ## J. Removing excess copy and tuning the scene-first homepage (21 November 2026)
 
 After the full-width cinematic rebuild, the owner found the four posters **too large** and the visible welcome headline, supporting sentence and motto unnecessary. The next refinement removed the entire visual hero, left an accessible hidden H1, reduced the 4 × 1 desktop poster row to a moderate centred gallery size and gave the original sakura/Fuji landscape more surrounding space. The online image investigation and explicit **keep existing original licensed art** decision are preserved in [Scenery research](SCENERY_RESEARCH.md). This choice does not reopen the earlier simplified-SVG mistake or alter the exact WebP artwork hashes.
+
+
+### Avoiding clipped landscape backgrounds in dark and light themes
+
+The initial hero-free screenshot showed an abrupt horizontal colour band above the footer because the prior `background-position: center calc(45% - 180px)` moved the cover-sized AVIF **up beyond the painted main surface**, exposing the underlying theme background. It was especially obvious in Charcoal. The fix restores `background-position: center 45%` while keeping `background-size: cover`, and the browser regression now asserts both properties. Actual 1600×900 Sepia and Charcoal screenshots confirm a continuous painterly landscape fading naturally into the footer.
