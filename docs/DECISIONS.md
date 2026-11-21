@@ -14,15 +14,16 @@
 | ADR-008 | Six Hub-local themes with persistence and Sepia as first-visit default | Accepted; [PR #15](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/15) supersedes older Midnight-default references |
 | ADR-009 | Four portrait tiles across desktop, two on tablet, one on phone; no forced zoom | Accepted; [PRs #14](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/14), [#17](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/17) |
 | ADR-010 | Hub-specific coded Sunrise logo and SVG favicon are the current Hub brand | Accepted; [#17](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/17), [#18](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/18). **Supersedes** raster draft [#12](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/12), closed unmerged |
-| ADR-011 | Tiles show exact **original detailed artwork** only, with separate visible titles underneath; no text/buttons baked into image | Accepted; [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) corrects the incorrect simplified art merged in #19 |
+| ADR-011 | Tiles show exact **original detailed artwork**; labels are HTML rather than text baked into image. Original titles-below composition has since been superseded by ADR-014. | Historically accepted; [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) corrects the incorrect simplified art merged in #19 |
 | ADR-012 | Cloudflare Pages auto-builds `master`, but deployment must be independently validated at exact SHA | Accepted; `/release.json`, `verify-hub-live.mjs`, [#13](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/13) |
 | ADR-013 | Prioritise Novel/Manga; leave Anime and Movies & TV paused/planned until viable storage plan | Owner direction from ecosystem planning; not an implemented service |
+| ADR-014 | Recreate the **large, richly layered visual reference in React/CSS**, retaining exact approved WebP art but returning to **code-rendered editorial captions/availability/CTA inside each card**. No page screenshots or new generated images. Whole-card links only for live destinations | New explicit owner direction (21 November 2026); supersedes the former small-portrait titles-below presentation. Planned CTA is a static label, not a fake link |
 
 ## Rationale that must not get lost
 
 **Independent applications:** Novel and Manga control their own private storage, authentication, reading data, progress, offline behaviour, and release process. Shared Core is a build-time library candidate and optional public gateway. Do not introduce coupling by accident.
 
-**Design fidelity:** A replacement drawing that is “similar” to approved detailed imagery is insufficient. The exact generated illustrations in `apps/hub/public/art/*-art.webp` are versioned and hash-checked. The image-and-title UI is distinct from old full poster cards with printed titles and fake buttons.
+**Design fidelity:** A replacement drawing that is “similar” to approved detailed imagery is insufficient. The exact generated illustrations in `apps/hub/public/art/*-art.webp` are versioned and hash-checked. The new code-rendered poster UI is distinct from old full poster-card bitmaps with printed titles and fake buttons. The real interactive unit remains each verified available card link; planned cards remain inert.
 
 **Accessibility:** Future planned modules are not links and cannot be made keyboard-clickable by decorative UI alone. Real links cover the portrait and heading. The page is real HTML/CSS, not a single composited screenshot.
 
