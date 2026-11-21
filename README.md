@@ -53,6 +53,7 @@ npm run typecheck
 npm test
 npm run build
 node scripts/verify-hub-static.mjs
+npm run verify:docs
 npx playwright install chromium firefox webkit
 npm run test:browser
 npm run dev
@@ -65,6 +66,7 @@ The `.env.example` file contains **public HTTPS destination URLs only**, includi
 ## Build, CI and deployment
 
 - **Source:** public GitHub repository; `master` is canonical. Work on focused branches and PRs.
+- **Documentation gate:** `npm run verify:docs` checks the required handover files and relative Markdown links offline on every CI quality job.
 - **CI:** `.github/workflows/ci.yml` checks Node 22 quality on Ubuntu/Windows, production dependency advisories, static assets/security policy, and responsive/keyboard/WCAG tests on Chromium/Firefox/WebKit.
 - **Hosting:** Cloudflare Pages project `taiyous-shared-core`, connected to `master`. Build from repository root, output `apps/hub/dist`.
 - **Independent release verification:** `.github/workflows/live-hub.yml` tests public HTTPS 200, security headers, React mount, early six-theme bootstrap and **exact public `/release.json` commit SHA** after each master merge.
