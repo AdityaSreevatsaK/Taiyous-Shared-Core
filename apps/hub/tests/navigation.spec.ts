@@ -199,6 +199,14 @@ test('scenic gallery keeps midsize cards and original local background', async (
   await expect(page.getByRole('heading',{level:1})).toHaveText('Taiyou’s Personal Hub');
   await expect(page.getByText('Your cosy gateway')).toHaveCount(0);
   expect(dimensions.background).toContain('/art/landscape.avif');
+  // A negative fixed-pixel background offset previously exposed a flat-colour
+  // band before the footer, particularly on dark themes. Keep full coverage.
+  const backdrop = await page.locator('.hub-main').evaluate(element => {
+    const style = getComputedStyle(element, '::before');
+    return {size: style.backgroundSize, position: style.backgroundPosition};
+  });
+  expect(backdrop.size).toBe('cover');
+  expect(backdrop.position).toBe('50% 45%');
   await expect(page.locator('.hub-card-cta:not(.hub-card-cta-planned)')).toHaveText([
     'Explore Novels →','Explore Manga →',
   ]);
