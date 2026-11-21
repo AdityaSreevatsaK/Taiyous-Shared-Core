@@ -64,7 +64,7 @@ Page semantic structure:
 - Header: real `/` brand link, SVG sunrise image, decorative sakura, native theme `<select>`.
 - Main: one hero H1 and the `#libraries` section with a visually hidden H2.
 - One `<ul>` with **four** `<li>` cards in fixed order.
-- Each tile has exactly one visible H3 underneath its portrait. Descriptions/status/action buttons are not visibly rendered in the `imageOnly` variant.
+- The current Hub uses `MediaHubCard immersive`: the 3:4 illustration fills each card, with a lower CSS gradient and **real HTML heading, description, availability and CTA**. The older `imageOnly` variation with title beneath remains available for potential consumers but is **not the live Hub layout**.
 - Footer: “Created by Taiyou”, ornamental seigaiha waves.
 
 There is no client router, no login route and no fetch to a media or Hugging Face dataset from Hub runtime. The external links leave the Hub origin.
@@ -74,7 +74,7 @@ There is no client router, no login route and no fetch to a media or Hugging Fac
 | File | Why agents must inspect it before changes |
 | --- | --- |
 | `apps/hub/src/App.tsx` | Exact text, card ordering, live artwork paths, page semantics and theme control |
-| `apps/hub/src/styles.css` | Header/hero/grid/landscape/portrait layout, responsive fit, theme tokens, reduced motion; later appended rules can override earlier ones |
+| `apps/hub/src/styles.css` | Header/hero/grid/landscape/portrait layout, responsive fit, theme tokens, reduced motion; the 21 November stylesheet was consolidated to remove stacked historical overrides |
 | `apps/hub/src/catalogue.ts` | Public URL registry, known Novel/Manga destinations and validation |
 | `apps/hub/src/theme.ts` | `HUB_THEMES`, Sepia fallback, localStorage update, meta theme colour |
 | `apps/hub/public/theme-bootstrap.js` | Pre-React persisted-theme restoration; strict CSP forbids inline scripts |
@@ -82,7 +82,7 @@ There is no client router, no login route and no fetch to a media or Hugging Fac
 | `apps/hub/index.html` | Root mount, boot script, meta theme colour, favicon |
 | `apps/hub/vite.config.ts` | Injects public SHA-only `release.json` from trusted build variables |
 | `packages/contracts/src/index.ts` | Experimental MediaKind, ModuleKey, MediaIdentity, MediaModule, rating validator |
-| `packages/ui/src/index.tsx` | Pure `MediaHubCard`; safe available/planned markup and image-only vs legacy card variant |
+| `packages/ui/src/index.tsx` | Pure `MediaHubCard`; safe available/planned markup and immersive, legacy portrait-only and fallback variants |
 | `scripts/verify-hub-static.mjs` | Assertions on built assets, security policy and **exact approved artwork digests** |
 | `scripts/verify-docs.mjs` | Confirms mandatory handover files and all local Markdown targets exist (offline CI) |
 | `scripts/verify-hub-live.mjs` | External HTTPS/security response and deployed exact-commit check |
@@ -120,7 +120,7 @@ The public `.env.example` contains `VITE_NOVELS_URL`, `VITE_MANGA_URL`, `VITE_AN
 - `apps/hub/public/art/anime-art.webp`
 - `apps/hub/public/art/movies-tv-art.webp`
 
-All four visible portraits were cropped from the **approved detailed four-panel artwork**. They are self-hosted 1086 × 1448 WebP files, with **no text inside**. The separate titles are rendered as HTML below. The exact SHA-256 values are in `scripts/verify-hub-static.mjs` and must remain the authoritative acceptance check. The old `novels.avif`, `manga.avif`, `anime.avif` and `movies-tv.avif` were earlier complete poster cards and are not the current UI. An older alternative raster logo/favicons pack is documented only for possible later choice; PR #12 is unmerged/superseded for the Hub.
+All four visible portraits were cropped from the **approved detailed four-panel artwork**. They are self-hosted 1086 × 1448 WebP files, with **no text inside**. The new cinematic captions, status and labels are rendered as HTML/CSS inside each poster over a gradient, not part of the art. The exact SHA-256 values are in `scripts/verify-hub-static.mjs` and must remain the authoritative acceptance check. The old `novels.avif`, `manga.avif`, `anime.avif` and `movies-tv.avif` were earlier complete poster cards and are not the current UI. An older alternative raster logo/favicons pack is documented only for possible later choice; PR #12 is unmerged/superseded for the Hub.
 
 ### Theme system
 `HUB_THEMES = ['midnight','charcoal','plum','sepia','paper','ocean']`.
@@ -172,7 +172,7 @@ Unit:
 - `packages/contracts/src/index.test.ts`: namespaced IDs, rating limits.
 - `apps/hub/src/catalogue.test.ts`: fixed module order, validated URLs, planned vs live.
 - `apps/hub/src/theme.test.ts`: valid themes, fallback and theme behaviour.
-- `apps/hub/src/App.test.tsx`: semantic artwork-only cards, titles, links, skip/theme control.
+- `apps/hub/src/App.test.tsx`: semantic code-rendered editorial cards, titles, links, skip/theme control.
 
 Browser:
 - `apps/hub/tests/navigation.spec.ts`: 4/2/1 grid, keyboard, link navigation and no-referrer, reduced motion, image load and screenshot capture.
@@ -219,7 +219,7 @@ If the current build is healthy but production remains stale: check Cloudflare P
 
 `@taiyou/ui@0.0.0`:
 - Presentational `MediaHubCard`, no data fetch/auth/persistence.
-- `imageOnly` makes an artwork portrait and separate title; default older variant retains detailed card copy.
+- `immersive` is the live code-rendered editorial card with lower gradient/title/description/status/CTA; `imageOnly` is a preserved legacy portrait-with-title-below variant; default older variant retains detailed card copy.
 - Available links only when a syntactically safe HTTPS destination exists; planned cards do not navigate.
 
 Neither package has a cross-repository release, second consumer, published version, independent adoption pipeline or implied semver compatibility. Read [Data contracts](DATA_CONTRACTS.md), [Reuse inventory](REUSABILITY_INVENTORY.md) and the [RFC process](rfcs/README.md) before extraction.
