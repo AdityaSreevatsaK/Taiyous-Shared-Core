@@ -37,3 +37,7 @@ Manual browser/screen-reader review (VoiceOver/NVDA), 200% zoom, touch usability
 - Last historically verified artwork release [PR #20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20), [quality run 44805000532](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000532), [live run 44805000465](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44805000465) at `55046158c38b0ccb6fa6d80c37c2866ee3d676cd`.
 
 **Do not conflate** historic green runs with the latest source revision or treat automated WCAG checks as manual NVDA/VoiceOver confirmation. For failures and lessons, see [Project history](PROJECT_HISTORY.md).
+
+## Documentation integrity gate
+
+`npm run verify:docs` runs `scripts/verify-docs.mjs` without network or dependencies. It fails CI if mandatory handover/architecture files disappear or a Markdown relative link points outside the repository or to a nonexistent file. It does **not** validate external website URLs or prove content freshness; future agents must still reconcile docs with current code and CI/deployment evidence.
