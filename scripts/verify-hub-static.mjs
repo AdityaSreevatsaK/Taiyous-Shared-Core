@@ -81,8 +81,20 @@ for (const [filename, expectedHash] of Object.entries(detailedArtworkHashes)) {
 }
 console.log('Verified the four exact high-resolution original media artworks.');
 
-const observatory = await readFile(new URL('art/amber-observatory.svg', dist), 'utf8');
-assert.match(observatory, /<svg[^>]*viewBox="0 0 900 1050"/, 'Missing original observatory illustration');
-assert.ok(!observatory.includes('<script') && !observatory.includes('<foreignObject'), 'No script or foreign markup in illustration');
-assert.ok(index.includes('amber-observatory.svg'), 'Preload the local observatory background');
-console.log('Verified original code-rendered observatory illustration and preload.');
+
+const cinematicArtworkHashes = {
+  'hero-grand-library.webp': '414db23991bbb82787c2c4fc8365044bc5f0584b40e96c76966d6df694cce8c6',
+  'reference-novel.webp': '3c515a691352ff0c50cef254d85e44c431ce4a1805fe349d6cce9f46e2cb220d',
+  'reference-manga.webp': '428da12ed7e9aa1d3b72e22f339ecadfa8918b2cabb224d4b332fba784f17f5f',
+  'reference-anime.webp': 'cf30325c6347c946dee6053844dec0d272512ea0380a62dca2b613108afe6772',
+  'reference-movies-tv.webp': 'ba5f57a87b74fad385e8d5922f6a8ebd7b5d0667f0705b4a4de0c2f1dbfc3218',
+};
+for (const [filename, expected] of Object.entries(cinematicArtworkHashes)) {
+  const bytes = await readFile(new URL('art/' + filename, dist));
+  assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF');
+  assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP');
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
+    'Modified reference cinematic artwork: ' + filename);
+}
+assert.ok(index.includes('hero-grand-library.webp'), 'Preload the local cinematic environment');
+console.log('Verified independently composited original cinematic environment and portal image assets.');

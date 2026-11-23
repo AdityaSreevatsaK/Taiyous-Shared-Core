@@ -1,55 +1,56 @@
 import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { MediaHubCard } from '@taiyou/ui';
 import App from './App';
 import { createHubModules } from './catalogue';
 
-describe('amber observatory Hub', () => {
-  it('renders a real accessible four-destination gateway, not a screenshot', () => {
+describe('cinematic library world', () => {
+  it('renders the approved fantasy architecture and four separately interactive HTML portals', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
-    expect(html).toContain('<h1 class="hub-sr-only">Taiyou’s Personal Hub</h1>');
-    expect(html).toContain('href="#libraries"');
+    expect(html).toContain('Taiyou Hub: Choose your library');
     expect(html).toContain('id="libraries"');
+    expect(html).toContain('href="#libraries"');
+    expect(html).toContain('class="environment-image"');
+    expect(html).toContain('class="brand-symbol"');
     expect(html).toContain('aria-label="Hub theme"');
-    expect(html).toContain('hub-observatory');
-    expect(html).toContain('Taiyou Hub');
-    expect(html).not.toContain('MY MEDIA GATEWAY');
-    expect(html).not.toContain('hub-header-florals');
+    expect(html).toContain('Amber Classic');
     for (const title of ['Novel', 'Manga', 'Anime', 'Movies &amp; TV']) {
       expect(html).toContain('<h3>' + title + '</h3>');
     }
-    for (const file of ['novels-art.webp','manga-art.webp','anime-art.webp','movies-tv-art.webp']) {
+    for (const file of ['reference-novel.webp','reference-manga.webp','reference-anime.webp','reference-movies-tv.webp']) {
       expect(html).toContain('/art/' + file);
     }
-    expect((html.match(/class="destination-art"/g) ?? [])).toHaveLength(4);
-    expect((html.match(/class="destination-heading"/g) ?? [])).toHaveLength(4);
-    expect((html.match(/class="destination-icon"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="portal-border"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="portal-mask"/g) ?? [])).toHaveLength(4);
+    expect(html).not.toContain('MY MEDIA GATEWAY');
+    expect(html).not.toContain('hub-sun-logo.svg');
+    expect(html).not.toContain('novels-art.webp');
   });
 
-  it('keeps Novel and Manga interactive and future modules inert', () => {
+  it('only allows Novel and Manga to navigate, with owner-verified HTTPS URLs', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
-    expect(html).toContain('href="https://taiyous-personal-library.pages.dev/"');
-    expect(html).toContain('href="https://taiyous-manga-library.pages.dev/"');
-    expect((html.match(/<a class="destination destination--/g) ?? [])).toHaveLength(2);
-    expect((html.match(/<article class="destination destination--/g) ?? [])).toHaveLength(2);
+    expect(html).toContain('https://taiyous-personal-library.pages.dev/');
+    expect(html).toContain('https://taiyous-manga-library.pages.dev/');
+    expect((html.match(/<a class="portal-surface"/g) ?? [])).toHaveLength(2);
+    expect((html.match(/<article class="portal-surface"/g) ?? [])).toHaveLength(2);
+    expect((html.match(/referrer[Pp]olicy="no-referrer"/g) ?? [])).toHaveLength(4); // Portals + shortcuts
     expect(html).toContain('Planned');
-    expect(html).toContain('Coming soon');
-    expect((html.match(/Enter library/g) ?? [])).toHaveLength(2);
-    expect((html.match(/referrer[Pp]olicy="no-referrer"/g) ?? [])).toHaveLength(2);
+    expect(html).toContain('Coming Soon');
   });
 
-  it('rejects unsafe destinations rather than rendering active links', () => {
-    const malformed = createHubModules().map(entry => entry.key === 'manga'
-      ? { ...entry, href: 'javascript:alert(1)' } : entry);
-    const html = renderToStaticMarkup(<App entries={malformed} />);
-    expect((html.match(/<a class="destination destination--/g) ?? [])).toHaveLength(1);
-    expect((html.match(/<article class="destination destination--/g) ?? [])).toHaveLength(3);
+  it('never activates an unsafe destination, even when marked available', () => {
+    const entries = createHubModules().map(module => module.key === 'manga'
+      ? { ...module, href: 'javascript:alert(1)' } : module);
+    const html = renderToStaticMarkup(<App entries={entries} />);
+    expect((html.match(/<a class="portal-surface"/g) ?? [])).toHaveLength(1);
+    expect((html.match(/<article class="portal-surface"/g) ?? [])).toHaveLength(3);
   });
 
-  it('preserves the reusable stateless package variant for other consumers', () => {
-    const html = renderToStaticMarkup(<MediaHubCard
-      title="Novel Library" description="A reader" status="planned"
-      artworkSrc="/art/novels-art.webp" imageOnly />);
-    expect(html).toContain('hub-card-image-only');
+  it('makes the reference search and library-shortcut icons genuine controls', () => {
+    const html = renderToStaticMarkup(<App entries={createHubModules()} />);
+    expect(html).toContain('aria-label="Search libraries"');
+    expect(html).toContain('aria-label="Library shortcuts"');
+    expect(html).toContain('id="search-panel"');
+    expect(html).toContain('id="shortcut-panel"');
+    expect(html).toContain('hidden=""');
   });
 });
