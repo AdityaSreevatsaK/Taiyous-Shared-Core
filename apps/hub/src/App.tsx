@@ -54,17 +54,17 @@ function Destination({ module }: { module: MediaModule }) {
     <img className="destination-art" src={illustrations[module.key]}
       alt="" width="1086" height="1448" decoding="async" loading="eager" />
     <span className="destination-scrim" aria-hidden="true" />
-    <span className="destination-content">
-      <span className="destination-heading"><DestinationIcon kind={module.key} />
+    <div className="destination-content">
+      <div className="destination-heading"><DestinationIcon kind={module.key} />
         <h3>{copy.title}</h3>
-      </span>
+      </div>
       <span className="destination-rule" aria-hidden="true" />
       <span className="destination-action">
         {available ? <>Enter library <span aria-hidden="true">↗</span></>
           : <><span aria-hidden="true">◷</span> {module.key === 'anime' ? 'Planned' : 'Coming soon'}</>}
       </span>
       <span className="hub-sr-only">{copy.description}</span>
-    </span>
+    </div>
   </>;
   const className = 'destination destination--' + module.key +
     (available ? ' destination--available' : ' destination--planned');
