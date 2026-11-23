@@ -31,7 +31,7 @@ export async function captureVerifiedArtwork(page: Page, outputPath: string): Pr
       const ctx = sample.getContext('2d', { willReadFrequently: true });
       if (!ctx) throw new Error('Canvas 2D is unavailable for visual verification');
       const factor = screenshot.naturalWidth / document.documentElement.clientWidth;
-      const cards = [...document.querySelectorAll<HTMLElement>('.hub-card-immersive')];
+      const cards = [...document.querySelectorAll<HTMLElement>('.destination')];
       return cards.map(card => {
         const box = card.getBoundingClientRect();
         ctx.clearRect(0, 0, 32, 32);
