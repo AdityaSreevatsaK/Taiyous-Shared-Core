@@ -6,7 +6,7 @@ import { createHubModules } from './catalogue';
 describe('cinematic library world', () => {
   it('renders the approved fantasy architecture and four separately interactive HTML portals', () => {
     const html = renderToStaticMarkup(<App entries={createHubModules()} />);
-    expect(html).toContain('Taiyou Hub: Choose your library');
+    expect(html).toContain('Taiyou’s Personal Hub');
     expect(html).toContain('id="libraries"');
     expect(html).toContain('href="#libraries"');
     expect(html).toContain('class="environment-image"');
