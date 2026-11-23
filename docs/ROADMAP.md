@@ -1,4 +1,4 @@
-# Shared Core and Personal Hub roadmap
+> **Prototype update (23 November 2026):** The owner selected the new Amber Observatory concept after a fresh creative-direction exploration. The first code-rendered review version is proposed on branch \`design/amber-observatory-hub-20261123\`; see [ADR-016](adr/ADR-016-amber-observatory-hub.md). Previous Golden Archive/Cinematic Passage tasks below are historical and no longer the immediate design priority. Production remains the scenic gallery until the owner reviews the PR and approves release.\n\n# Shared Core and Personal Hub roadmap
 
 **Reconciled: 21 November 2026.** Status keys: `[x]` implemented and verified in code/history; `[ ]` pending or requires additional evidence. For historic reasoning, see [History](PROJECT_HISTORY.md). This roadmap is **not** authorisation to implement deferred features.
 
