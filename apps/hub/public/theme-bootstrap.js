@@ -10,7 +10,7 @@
   }
   document.documentElement.dataset.theme = selected;
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', ({
-    midnight: '#121a2a', charcoal: '#1d1a22', plum: '#271a32',
-    sepia: '#fbf0e4', paper: '#faf9f4', ocean: '#e8f5f7',
+    midnight: '#0e1522', charcoal: '#141316', plum: '#1e1225',
+    sepia: '#120c0a', paper: '#f5eadc', ocean: '#dcecf0',
   })[selected]);
 })();
