@@ -35,7 +35,7 @@ describe('amber observatory Hub', () => {
     expect(html).toContain('Planned');
     expect(html).toContain('Coming soon');
     expect((html.match(/Enter library/g) ?? [])).toHaveLength(2);
-    expect((html.match(/referrerpolicy="no-referrer"/g) ?? [])).toHaveLength(2);
+    expect((html.match(/referrer[Pp]olicy="no-referrer"/g) ?? [])).toHaveLength(2);
   });
 
   it('rejects unsafe destinations rather than rendering active links', () => {
