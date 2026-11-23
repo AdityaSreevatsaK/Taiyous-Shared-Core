@@ -1,4 +1,4 @@
-# Quality and Verification Matrix
+> **23 November 2026 prototype:** Amber Observatory branch replaces the old four-across gallery assumptions with a left feature/right 2 × 2 desktop composition. Browser tests now verify 2 columns on desktop/tablet, 1 on phone, original art hashes and painted screenshots, valid target URLs, planned inertness and no third-party media, plus all six themes. See [ADR-016](adr/ADR-016-amber-observatory-hub.md). Tests are pending matching-head CI evidence and are not yet claims of successful execution.\n\n# Quality and Verification Matrix
 
 ## Automated coverage
 - `packages/contracts/src/index.test.ts`: namespaced identities, invalid segments and 1–10 rating boundaries.
