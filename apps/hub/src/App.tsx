@@ -182,7 +182,7 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
       </div>
     </header>
     <main className="world" id="libraries">
-      <h1 className="visually-hidden">Taiyou Hub: Choose your library</h1>
+      <h1 className="visually-hidden">Taiyou’s Personal Hub</h1>
       <div className="environment" aria-hidden="true"><div className="environment-image" /><div className="environment-glow" /></div>
       <svg className="world-sweep" viewBox="0 0 1672 780" preserveAspectRatio="none" aria-hidden="true">
         <defs><linearGradient id="sweepG" x1="0" x2="1">
