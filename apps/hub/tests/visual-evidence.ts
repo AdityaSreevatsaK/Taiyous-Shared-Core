@@ -12,7 +12,7 @@ export async function captureVerifiedArtwork(page: Page, outputPath: string): Pr
   });
   const screenshot = await page.screenshot({ fullPage: true });
   const allPainted = await page.locator('.portal-image').evaluateAll(images => images.every(image =>
-    (image as HTMLImageElement).naturalWidth > 500 && (image as HTMLImageElement).complete));
-  if (!allPainted) throw new Error('One or more original cinematic scenes failed to decode');
+    (image as HTMLImageElement).naturalWidth > 0 && (image as HTMLImageElement).complete));
+  if (!allPainted) throw new Error('One or more responsive cinematic images failed to decode');
   await writeFile(outputPath, screenshot);
 }

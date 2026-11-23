@@ -41,8 +41,12 @@ test('original cinematic panel artwork is locally available, decoded and indepen
   const art = page.locator('.portal-image');
   await expect(art).toHaveCount(4);
   for (const image of await art.all()) {
-    await expect.poll(() => image.evaluate(node => (node as HTMLImageElement).naturalWidth))
-      .toBeGreaterThanOrEqual(900);
+    await expect.poll(() => image.evaluate(async node => {
+      const resource = new Image();
+      resource.src = (node as HTMLImageElement).currentSrc;
+      await resource.decode();
+      return resource.naturalWidth;
+    })).toBeGreaterThanOrEqual(900);
     await expect(image).toHaveAttribute('alt', '');
   }
   const background = await page.locator('.environment-image').evaluate(
@@ -59,8 +63,12 @@ test('high-DPI desktop selects 1600px art with unchanged panel geometry', async 
     const page = await context.newPage();
     await page.goto('/');
     for (const img of await page.locator('.portal-image').all()) {
-      await expect.poll(() => img.evaluate(node => (node as HTMLImageElement).naturalWidth))
-        .toBeGreaterThanOrEqual(1586);
+      await expect.poll(() => img.evaluate(async node => {
+        const resource = new Image();
+        resource.src = (node as HTMLImageElement).currentSrc;
+        await resource.decode();
+        return resource.naturalWidth;
+      })).toBeGreaterThanOrEqual(1586);
       expect(await img.evaluate(node => (node as HTMLImageElement).currentSrc))
         .toContain('-1600.webp');
     }

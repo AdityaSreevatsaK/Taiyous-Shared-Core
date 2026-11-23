@@ -94,8 +94,12 @@ test('actual React page paints the restored cinematic panels at 1648x928', async
   await expect(page.locator('.portal-image')).toHaveCount(4);
   for (const image of await page.locator('.portal-image').all()) {
     await expect(image).toHaveAttribute('src', /cinematic-.*-1600\.webp/);
-    await expect.poll(() => image.evaluate(node => (node as HTMLImageElement).naturalWidth))
-      .toBeGreaterThanOrEqual(900);
+    await expect.poll(() => image.evaluate(async node => {
+      const resource = new Image();
+      resource.src = (node as HTMLImageElement).currentSrc;
+      await resource.decode();
+      return resource.naturalWidth;
+    })).toBeGreaterThanOrEqual(900);
   }
   await captureVerifiedArtwork(page, test.info().outputPath('hub-reference-comparison-1648x928.png'));
 });
