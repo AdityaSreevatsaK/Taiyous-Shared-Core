@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-for (const [width, height] of [[1280,720],[1366,768],[1672,851],[1920,900],[1920,1080]] as const) {
+for (const [width, height] of [[1280,720],[1366,768],[1648,928],[1672,851],[1920,900],[1920,1080]] as const) {
   test('cinematic environment fits desktop ' + width + 'x' + height, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.goto('/');
@@ -42,12 +42,28 @@ test('original cinematic panel artwork is locally available, decoded and indepen
   await expect(art).toHaveCount(4);
   for (const image of await art.all()) {
     await expect.poll(() => image.evaluate(node => (node as HTMLImageElement).naturalWidth))
-      .toBeGreaterThan(500);
+      .toBeGreaterThanOrEqual(900);
     await expect(image).toHaveAttribute('alt', '');
   }
   const background = await page.locator('.environment-image').evaluate(
     element => getComputedStyle(element).backgroundImage,
   );
-  expect(background).toContain('hero-grand-library.webp');
+  expect(background).toContain('hero-clean.webp');
   await expect(page.locator('.portal-content h3')).toHaveText(['Novel','Manga','Anime','Movies & TV']);
+});
+
+// Two physical pixels per CSS pixel must use a suitably detailed, local asset.
+test('high-DPI desktop selects 1600px art with unchanged panel geometry', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: {width: 1648, height: 928}, deviceScaleFactor: 2 });
+  try {
+    const page = await context.newPage();
+    await page.goto('/');
+    for (const img of await page.locator('.portal-image').all()) {
+      await expect.poll(() => img.evaluate(node => (node as HTMLImageElement).naturalWidth))
+        .toBeGreaterThanOrEqual(1586);
+      expect(await img.evaluate(node => (node as HTMLImageElement).currentSrc))
+        .toContain('-1600.webp');
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(1648);
+  } finally { await context.close(); }
 });

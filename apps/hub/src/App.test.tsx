@@ -16,10 +16,14 @@ describe('cinematic library world', () => {
     for (const title of ['Novel', 'Manga', 'Anime', 'Movies &amp; TV']) {
       expect(html).toContain('<h3>' + title + '</h3>');
     }
-    for (const file of ['reference-novel.webp','reference-manga.webp','reference-anime.webp','reference-movies-tv.webp']) {
+    for (const file of ['cinematic-novel-1600.webp','cinematic-manga-1600.webp','cinematic-anime-1600.webp','cinematic-movies-tv-1600.webp']) {
       expect(html).toContain('/art/' + file);
     }
     expect((html.match(/class="portal-border"/g) ?? [])).toHaveLength(4);
+    for (const file of ['cinematic-novel-900.webp', 'cinematic-manga-900.webp', 'cinematic-anime-900.webp', 'cinematic-movies-tv-900.webp']) {
+      expect(html).toContain(file);
+    }
+    expect(html).not.toContain('reference-novel.webp');
     expect((html.match(/class="portal-mask"/g) ?? [])).toHaveLength(4);
     expect(html).not.toContain('MY MEDIA GATEWAY');
     expect(html).not.toContain('hub-sun-logo.svg');

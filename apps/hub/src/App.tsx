@@ -8,19 +8,19 @@ type PanelKey = 'novel' | 'manga' | 'anime' | 'movies';
 
 const portalInfo: Record<ModuleKey, { title: string; key: PanelKey; image: string; description: string }> = {
   novels: {
-    title: 'Novel', key: 'novel', image: '/art/reference-novel.webp',
+    title: 'Novel', key: 'novel', image: '/art/cinematic-novel-1600.webp',
     description: 'Enter your personal collection of novels and stories.',
   },
   manga: {
-    title: 'Manga', key: 'manga', image: '/art/reference-manga.webp',
+    title: 'Manga', key: 'manga', image: '/art/cinematic-manga-1600.webp',
     description: 'Read manga from your independent library.',
   },
   anime: {
-    title: 'Anime', key: 'anime', image: '/art/reference-anime.webp',
+    title: 'Anime', key: 'anime', image: '/art/cinematic-anime-1600.webp',
     description: 'An anime library is planned for the future.',
   },
   'movies-tv': {
-    title: 'Movies & TV', key: 'movies', image: '/art/reference-movies-tv.webp',
+    title: 'Movies & TV', key: 'movies', image: '/art/cinematic-movies-tv-1600.webp',
     description: 'A film and television library is coming soon.',
   },
 };
@@ -98,7 +98,11 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
   const available = Boolean(safeHref);
   const contents = <>
     <div className="portal-mask" aria-hidden="true">
-      <img className="portal-image" src={info.image} alt="" width="602" height="400" loading="eager" decoding="async" />
+      <img className="portal-image" src={info.image}
+        srcSet={info.image.replace('-1600.webp', '-900.webp') + ' 900w, ' + info.image + (info.key === 'movies' ? ' 1683w' : ' 1586w')}
+        sizes="(max-width: 670px) 95vw, (max-width: 1100px) 47vw, 36vw"
+        alt="" width={info.key === 'movies' ? 1683 : 1586}
+        height={info.key === 'movies' ? 935 : 992} loading="eager" decoding="async" />
       <div className="portal-vignette" />
     </div>
     <svg className="portal-border" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">

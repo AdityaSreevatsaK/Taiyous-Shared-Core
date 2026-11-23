@@ -96,5 +96,26 @@ for (const [filename, expected] of Object.entries(cinematicArtworkHashes)) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
     'Modified reference cinematic artwork: ' + filename);
 }
-assert.ok(index.includes('hero-grand-library.webp'), 'Preload the local cinematic environment');
+assert.ok(index.includes('hero-clean.webp'), 'Preload the repaired cinematic environment');
 console.log('Verified independently composited original cinematic environment and portal image assets.');
+
+// Reference-guided reconstructions are individually packaged, byte-verified WebP assets.
+// Original production and prototype artwork above is deliberately kept intact for rollback.
+const highDensityHashes = {
+  'cinematic-novel-1600.webp': '54d1645bf80c634d9d8e419c39854699bb4effb783ce8b1700b7a67b07513d56',
+  'cinematic-novel-900.webp': '37b61fd8dda713d5198b82ccb338dca334567401a0983f25b4e5383c5c33b9fd',
+  'cinematic-manga-1600.webp': '0b11355d178583531ac4e78fe471cc71c0e21a3300dd4c2c42d27732fbafc003',
+  'cinematic-manga-900.webp': '43b1f439492015793959261f3da10c028781d918c697859a50de1c079efc320f',
+  'cinematic-anime-1600.webp': 'afdf911cafeffb129d07ee4c0c1e174c68bab1ac919c6614a996e157c7a11bdd',
+  'cinematic-anime-900.webp': 'b46b3b952cba4ee7380219a375c8980cb62692f484a8e8295477ee3c30bd0fba',
+  'cinematic-movies-tv-1600.webp': '4978b75b0a7795fe05f0cdcf1746b8b27145d298fb06cacae80c71601dfec9e1',
+  'cinematic-movies-tv-900.webp': '6e08c2481693511a71a85d4985f03d6cfeeca01a6a9c908ece0b62a60370a402',
+  'hero-clean.webp': '288431f734ec8be1054e5f5f1dd4d0fb92e13b08b30b43aa7c8216b316c1a7e9',
+};
+for (const [name, digest] of Object.entries(highDensityHashes)) {
+  const bytes = await readFile(new URL('art/' + name, dist));
+  assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', 'Expected WebP RIFF header: ' + name);
+  assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', 'Expected WebP encoding: ' + name);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), digest, 'Unexpected restored media bytes: ' + name);
+}
+console.log('Verified four responsive high-density cinematic artwork pairs and repaired background.');

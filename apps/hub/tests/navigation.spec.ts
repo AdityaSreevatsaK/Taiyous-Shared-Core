@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { captureVerifiedArtwork } from './visual-evidence';
 
-for (const width of [320, 390, 768, 1280, 1672]) {
+for (const width of [320, 390, 768, 1280, 1648, 1672]) {
   test('four sculpted panels and no overflow at ' + width + 'px', async ({ page }) => {
-    await page.setViewportSize({ width, height: 851 });
+    await page.setViewportSize({ width, height: width === 1648 ? 928 : 851 });
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'Choose your library' })).toBeAttached();
     await expect(page.locator('.portal-item')).toHaveCount(4);
@@ -85,4 +85,17 @@ test('reduced motion removes animated panel transitions', async ({ page }) => {
   expect(await page.locator('.portal-image').first().evaluate(
     element => getComputedStyle(element).transitionDuration,
   )).toContain('0s');
+});
+
+// Exact 1648×928 reference comparison belongs to the deployed React app, not an offline illustration.
+test('actual React page paints the restored cinematic panels at 1648x928', async ({ page }) => {
+  await page.setViewportSize({width:1648, height:928});
+  await page.goto('/');
+  await expect(page.locator('.portal-image')).toHaveCount(4);
+  for (const image of await page.locator('.portal-image').all()) {
+    await expect(image).toHaveAttribute('src', /cinematic-.*-1600\.webp/);
+    await expect.poll(() => image.evaluate(node => (node as HTMLImageElement).naturalWidth))
+      .toBeGreaterThanOrEqual(900);
+  }
+  await captureVerifiedArtwork(page, test.info().outputPath('hub-reference-comparison-1648x928.png'));
 });
