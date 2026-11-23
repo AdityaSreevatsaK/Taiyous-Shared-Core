@@ -116,8 +116,8 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
   </>;
   return <li className={`portal-item portal-${info.key}${dimmed ? ' portal-dimmed' : ''}`}>
     {available ? <a className="portal-surface" href={safeHref} rel="noopener noreferrer"
-      referrerPolicy="no-referrer" aria-label={`${info.title}, enter library`}>{contents}</a>
-      : <article className="portal-surface" aria-label={`${info.title}, planned`}>{contents}</article>}
+      referrerPolicy="no-referrer">{contents}</a>
+      : <article className="portal-surface">{contents}</article>}
   </li>;
 }
 
