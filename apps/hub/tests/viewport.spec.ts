@@ -1,28 +1,27 @@
 import { expect, test } from '@playwright/test';
 
-// At a normal 100% desktop viewport, the scenery, four cards and
-// footer must be visible together, without forcing users to zoom out.
 for (const [width, height] of [
   [1280, 720], [1366, 768], [1600, 900], [1920, 768], [1920, 1080],
 ] as const) {
-  test(`whole homepage fits a ${width}x${height} desktop at 100% zoom`, async ({ page }) => {
+  test('observatory and four destinations fit the ' + width + 'x' + height + ' desktop', async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.goto('/');
-    await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
     const metrics = await page.evaluate(() => ({
       width: document.documentElement.scrollWidth,
       height: document.documentElement.scrollHeight,
-      cards: [...document.querySelectorAll<HTMLElement>('.hub-card')].map(
+      cards: [...document.querySelectorAll<HTMLElement>('.destination')].map(
         card => card.getBoundingClientRect().toJSON(),
       ),
+      hero: document.querySelector<HTMLElement>('.hub-observatory')!.getBoundingClientRect().toJSON(),
       footer: document.querySelector<HTMLElement>('.hub-footer')!.getBoundingClientRect().toJSON(),
     }));
     expect(metrics.width).toBeLessThanOrEqual(width);
     expect(metrics.height).toBeLessThanOrEqual(height + 2);
+    expect(metrics.hero.width).toBeGreaterThan(width * .38);
     expect(metrics.cards).toHaveLength(4);
     for (const card of metrics.cards) {
       expect(card.width).toBeGreaterThan(225);
-      expect(card.width).toBeLessThan(310);
+      expect(card.height).toBeGreaterThan(155);
       expect(card.bottom).toBeLessThanOrEqual(height + 2);
       expect(card.right).toBeLessThanOrEqual(width + 2);
     }
@@ -30,9 +29,9 @@ for (const [width, height] of [
   });
 }
 
-test('editorial cards use exact original high-resolution illustration assets', async ({ page }) => {
+test('exact original high-resolution media illustrations are preserved', async ({ page }) => {
   await page.goto('/');
-  const images = page.locator('.hub-card-image-illustration');
+  const images = page.locator('.destination-art');
   await expect(images).toHaveCount(4);
   for (const image of await images.all()) {
     await expect.poll(() => image.evaluate(
@@ -43,18 +42,17 @@ test('editorial cards use exact original high-resolution illustration assets', a
   }
 });
 
-// 640 CSS pixels approximates a 1280px-wide display at 200% browser zoom.
-// Reflow and vertical scrolling are intentional here; horizontal overflow is not.
-for (const width of [320, 390, 640, 800]) {
-  test(`narrow / zoom-equivalent layout reflows at ${width}px`, async ({ page }) => {
+for (const width of [320, 390, 640, 800, 1024]) {
+  test('phone, tablet and zoom equivalent reflow at ' + width + 'px', async ({ page }) => {
     await page.setViewportSize({ width, height: 720 });
     await page.goto('/');
-    await expect(page.locator('.hub-card-image-illustration')).toHaveCount(4);
     expect(await page.evaluate(() => document.documentElement.scrollWidth))
       .toBeLessThanOrEqual(width);
-    const columnCount = await page.locator('.hub-grid').evaluate(element =>
+    const columns = await page.locator('.hub-grid').evaluate(element =>
       getComputedStyle(element).gridTemplateColumns.split(' ').length,
     );
-    expect(columnCount).toBe(width <= 620 ? 1 : 2);
+    expect(columns).toBe(width <= 640 ? 1 : 2);
+    const hero = page.locator('.hub-observatory');
+    await expect(hero).toBeVisible();
   });
 }
