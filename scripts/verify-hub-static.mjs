@@ -80,3 +80,9 @@ for (const [filename, expectedHash] of Object.entries(detailedArtworkHashes)) {
     'Incorrect original detailed Hub artwork: ' + filename);
 }
 console.log('Verified the four exact high-resolution original media artworks.');
+
+const observatory = await readFile(new URL('art/amber-observatory.svg', dist), 'utf8');
+assert.match(observatory, /<svg[^>]*viewBox="0 0 900 1050"/, 'Missing original observatory illustration');
+assert.doesNotMatch(observatory, /<(?:script|foreignObject)\\b/i, 'No executable or embedded foreign markup in illustration');
+assert.match(index, /amber-observatory\\.svg/, 'Preload the local observatory background');
+console.log('Verified original code-rendered observatory illustration and preload.');
