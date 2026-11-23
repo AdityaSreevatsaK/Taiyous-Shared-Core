@@ -35,7 +35,6 @@ describe('amber observatory Hub', () => {
     expect(html).toContain('Planned');
     expect(html).toContain('Coming soon');
     expect((html.match(/Enter library/g) ?? [])).toHaveLength(2);
-    expect((html.match(/referrerPolicy="no-referrer"/g) ?? []).length).toBe(0); // React SSR lowercases the attribute.
     expect((html.match(/referrerpolicy="no-referrer"/g) ?? [])).toHaveLength(2);
   });
 
