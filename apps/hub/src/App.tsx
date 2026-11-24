@@ -76,10 +76,13 @@ function SunSymbol() {
         <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
       </filter>
     </defs>
-    <g fill="url(#sun-fill)" stroke="#ffda78" strokeWidth="1.2">
-      <path d="M50 1 54 27 50 22 46 27Z M50 99 54 73 50 78 46 73Z M1 50 27 46 22 50 27 54Z M99 50 73 46 78 50 73 54Z" />
-      <path d="M15 15 34 31 31 34 15 15ZM85 15 69 34 66 31ZM15 85 31 66 34 69ZM85 85 66 69 69 66Z" />
-      <path d="M30 4 39 28 36 30ZM70 4 64 30 61 28ZM4 30 30 36 28 39ZM96 30 72 39 70 36ZM4 70 28 61 30 64ZM96 70 70 64 72 61ZM30 96 36 70 39 72ZM70 96 61 72 64 70Z" />
+    <g fill="url(#sun-fill)" stroke="#ffd58d" strokeWidth=".44">
+      {Array.from({ length: 24 }, (_, index) =>
+        <path key={index}
+          d={index % 2 === 0
+            ? 'M50 1.5 52.6 29 50 25 47.4 29Z'
+            : 'M50 9 51.7 29 50 25.9 48.3 29Z'}
+          transform={`rotate(${index * 15} 50 50)`} />)}
     </g>
     <circle cx="50" cy="50" r="23" fill="url(#sun-fill)" stroke="#fff0b0" strokeWidth="2" filter="url(#sun-bloom)" />
     <circle cx="50" cy="50" r="19" fill="none" stroke="#d98e33" strokeWidth="1" />
