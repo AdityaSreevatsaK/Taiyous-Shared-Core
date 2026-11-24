@@ -1,4 +1,4 @@
-# Codebase reference and technical inventory
+> **Proposed change (23 November 2026, not production):** Branch \`design/amber-observatory-hub-20261123\` introduces a code-rendered Amber Observatory split gateway with original local SVG art, real React/HTML destination links/cards, shared Novel/Manga Sun WebP imports, six restyled Hub themes and responsive layouts. Details and deployment gate: [ADR-016](adr/ADR-016-amber-observatory-hub.md). The historical master inventory below remains the verified production description until an approved merge and exact-SHA smoke.\n\n# Codebase reference and technical inventory
 
 **Last audited:** 21 November 2026, against `master` and live release `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` before this documentation change. Matching CI run `44923073995` and live smoke `44923073985` passed. Recheck this SHA before relying on it. If code changes later, reassess the relevant source files and release checks. This document describes **implemented source**, not an architecture wish list.
 

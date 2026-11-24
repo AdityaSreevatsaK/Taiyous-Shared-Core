@@ -4,20 +4,19 @@ export const THEME_STORAGE_KEY = 'taiyou-hub-theme';
 
 export function parseHubTheme(value: unknown): HubTheme {
   return typeof value === 'string' && HUB_THEMES.some(theme => theme === value)
-    ? value as HubTheme
-    : 'sepia';
+    ? value as HubTheme : 'sepia';
 }
 export function isDarkHubTheme(theme: HubTheme): boolean {
-  return theme === 'midnight' || theme === 'charcoal' || theme === 'plum';
+  return theme === 'midnight' || theme === 'charcoal' || theme === 'plum' || theme === 'sepia';
 }
 export function readInitialHubTheme(): HubTheme {
   return typeof document === 'undefined'
-    ? 'sepia'
-    : parseHubTheme(document.documentElement.dataset.theme);
+    ? 'sepia' : parseHubTheme(document.documentElement.dataset.theme);
 }
+/** Theme colours match the surrounding observatory canvas and early bootstrap. */
 export const THEME_COLOURS: Record<HubTheme, string> = {
-  midnight: '#121a2a', charcoal: '#1d1a22', plum: '#271a32',
-  sepia: '#fbf0e4', paper: '#faf9f4', ocean: '#e8f5f7',
+  midnight: '#0e1522', charcoal: '#141316', plum: '#1e1225',
+  sepia: '#120c0a', paper: '#f5eadc', ocean: '#dcecf0',
 };
 export function applyHubTheme(theme: HubTheme): void {
   if (typeof document === 'undefined') return;
