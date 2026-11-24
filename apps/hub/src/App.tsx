@@ -52,6 +52,12 @@ function PortalDefinitions() {
         <stop offset=".86" stopColor="#ffd277" />
         <stop offset="1" stopColor="#8b491e" />
       </linearGradient>
+      <linearGradient id="portal-glint" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop stopColor="#e3a457" stopOpacity="0" />
+        <stop offset=".3" stopColor="#ffe9b4" />
+        <stop offset=".64" stopColor="#ffc578" stopOpacity=".7" />
+        <stop offset="1" stopColor="#e3a457" stopOpacity="0" />
+      </linearGradient>
       <linearGradient id="sun-fill" x1="0" y1="0" x2="1" y2="1">
         <stop stopColor="#fff6c4" />
         <stop offset=".28" stopColor="#ffd889" />
@@ -92,6 +98,30 @@ function ShortcutsIcon() {
   </svg>;
 }
 
+
+/** Small, original line-work marks echo the cinematic reference without hiding artwork. */
+function PortalGlyph({ kind }: { kind: PanelKey }) {
+  const common = { className: 'portal-glyph', viewBox: '0 0 32 32',
+    fill: 'none', stroke: 'currentColor', strokeWidth: 1.65,
+    strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const,
+    'aria-hidden': true as const };
+  if (kind === 'novel') return <svg {...common}>
+    <path d="M16 7.5C12.6 5.2 8.6 4.8 4.5 5.7v20c4.2-1 8-.3 11.5 2.1 3.5-2.4 7.5-3.1 11.5-2.1v-20c-4-1-8-.5-11.5 1.8Z" />
+    <path d="M16 7.5v20.3M7.5 10.1c2-.4 4-.2 5.8.7m5.4 0c1.8-.9 3.8-1.1 5.8-.7" />
+  </svg>;
+  if (kind === 'manga') return <svg {...common}>
+    <rect x="4.5" y="4.5" width="23" height="23" rx="2" />
+    <path d="M8 8h16v11H8zM9 23h8M20 23h4m-13-8 3-3 3 2 3-3" />
+  </svg>;
+  if (kind === 'anime') return <svg {...common}>
+    <rect x="3.5" y="6.5" width="25" height="19" rx="5" />
+    <path d="m13 11 9 5-9 5z" />
+  </svg>;
+  return <svg {...common}>
+    <path d="M5 11h22v15H5zM5 11l21-6 2 6M5 16h22M9 9l5 6m5-8 4 6" />
+  </svg>;
+}
+
 function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
   const info = portalInfo[module.key];
   const safeHref = module.availability === 'available' ? publicHttpsDestination(module.href) : undefined;
@@ -107,9 +137,10 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
     </div>
     <svg className="portal-border" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
       <path d={portalBorders[info.key]} />
+      <path className="portal-border-glint" d={portalBorders[info.key]} />
     </svg>
     <div className="portal-content">
-      <h3>{info.title}</h3>
+      <div className="portal-title"><PortalGlyph kind={info.key} /><h3>{info.title}</h3></div>
       <span className="ornament" aria-hidden="true" />
       {available
         ? <span className="action-pill">Enter Library <span aria-hidden="true">›</span></span>
@@ -204,6 +235,9 @@ export default function App({ entries = modules }: { entries?: readonly MediaMod
             dimmed={Boolean(query.trim()) && !(portalInfo[module.key].title + ' ' + portalInfo[module.key].description).toLowerCase().includes(query.trim().toLowerCase())} />)}
         </ul>
       </section>
+      <div className="world-signature" aria-hidden="true">
+        <span>Created by Taiyou</span>
+      </div>
     </main>
   </div>;
 }
