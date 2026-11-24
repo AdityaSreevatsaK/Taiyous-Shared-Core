@@ -36,6 +36,16 @@ for (const width of [320, 390, 640, 768, 1024]) {
   });
 }
 
+test('the default Sepia scene retains its intended cinematic exposure', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
+  const filter = await page.locator('.environment-image').evaluate(
+    element => getComputedStyle(element).filter,
+  );
+  expect(filter).toContain('brightness(1.15)');
+  expect(filter).toContain('contrast(1.055)');
+});
+
 test('original cinematic panel artwork is locally available, decoded and independent of captions', async ({ page }) => {
   await page.goto('/');
   const art = page.locator('.portal-image');
