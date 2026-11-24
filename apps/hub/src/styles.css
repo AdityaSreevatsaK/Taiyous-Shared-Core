@@ -1,6 +1,6 @@
 :root{
  --scene-bg:#130a08;--ink:#f9ead2;--muted:#e6c79c;--gold:#f1bc70;--gold-bright:#ffe5aa;--gold-dim:#a3632e;--focus:#fff0ae;
- --sun-saturation:1;--scene-filter:none;--panel-filter:none;
+ --sun-saturation:1;--scene-filter:brightness(1);--panel-filter:none;
  color-scheme:dark;font-family:Georgia,'Times New Roman',serif;font-synthesis:none;line-height:1.4;
 }
 :root[data-theme=midnight]{--scene-bg:#111627;--ink:#ecf1ff;--muted:#bfcaf3;--gold:#c5cfff;--gold-bright:#edf0ff;--gold-dim:#7689c2;--scene-filter:hue-rotate(155deg) saturate(.85);--panel-filter:hue-rotate(150deg) saturate(.88)}
