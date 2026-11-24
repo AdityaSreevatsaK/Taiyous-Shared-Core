@@ -223,3 +223,17 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
   .world-signature { font-size:9px; gap:10px; }
 }
 @media(prefers-reduced-motion:reduce) { .action-pill { transition:none; } }
+
+
+/* Final detailing pass: finely engraved sun and directional highlights rather than flat neon. */
+.brand-symbol { filter: drop-shadow(0 0 4px rgba(255,184,85,.20)); }
+.portal-border .portal-border-glint {
+  stroke-width:2; opacity:.72;
+  filter:drop-shadow(0 0 1.3px rgba(255,216,148,.55));
+}
+.portal-border { filter:drop-shadow(0 0 .75px rgba(255,196,101,.20)); }
+.world-signature {
+  font-size:11px; letter-spacing:.24em;
+  color:rgba(246,200,143,.80);
+}
+@media(max-width:670px){.world-signature{font-size:9px;}}
