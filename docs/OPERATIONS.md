@@ -1,7 +1,7 @@
 # Shared Core Development, Build and Release Runbook
 
 ## Workspaces
-This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace with Cloudflare Pages Git integration connected to `master`; exact deployed SHA `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc` was independently verified on 21 November 2026; manual visual and screen-reader checks remain pending.
+This GitHub repository is **public**; source packages `@taiyou/contracts@0.0.0` and `@taiyou/ui@0.0.0` are still private, unpublished npm workspaces. The Hub (`@taiyou/hub`) is a separate workspace with Cloudflare Pages Git integration connected to `master`; cinematic product SHA `f497b62eab04d67b3f2652f9bf55131417d2b708` was independently verified on 24 November 2026; manual visual and screen-reader checks remain pending.
 
 Requirements: Node.js 22+, npm 10+, Git. No cloud token, paid API or media assets required.
 
@@ -33,7 +33,7 @@ Example verified Node 22 locked-install/quality/browser run: [44313286935](https
 `.env.example` lists **public-only** `VITE_*` URLs. The existing Novel **and Manga** libraries are verified default HTTPS destinations. Anime and Movies & TV remain non-interactive until their owning agents verify real HTTPS deployments and product direction. URL parsing rejects non-HTTPS, embedded credentials, local/IP hosts, alternate ports, queries and fragments. URL syntax alone does **not** verify site ownership. Do not put OAuth tokens, private media, reading history or credentials in frontend environment variables.
 
 ## Staged-release policy
-Cloudflare Pages is connected to `master`; the live project is `taiyous-shared-core` at `https://taiyous-shared-core.pages.dev/`. After each safe merge, inspect the matching Cloudflare status and [live GitHub-hosted HTTP/header smoke check](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44592153330). Then manually inspect visual layout, JS console, keyboard/screen-reader navigation and the independent Novel Library link from a real browser. If access to Cloudflare settings or the deployed URL is unavailable, report that limitation rather than asserting success. Vite copies `apps/hub/public/_headers` into the built output. Static CI checks the file; the **independent live smoke** verifies the actual served HTTP/security headers and exact deployed SHA after each `master` merge. See [Hub deployment preparation](HUB_DEPLOYMENT_PREPARATION.md).
+Cloudflare Pages is connected to `master`; the live project is `taiyous-shared-core` at `https://taiyous-shared-core.pages.dev/`. After each safe merge, inspect the matching Cloudflare status and [live GitHub-hosted HTTP/header smoke check](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238). Then manually inspect visual layout, JS console, keyboard/screen-reader navigation and the independent Novel Library link from a real browser. If access to Cloudflare settings or the deployed URL is unavailable, report that limitation rather than asserting success. Vite copies `apps/hub/public/_headers` into the built output. Static CI checks the file; the **independent live smoke** verifies the actual served HTTP/security headers and exact deployed SHA after each `master` merge. See [Hub deployment preparation](HUB_DEPLOYMENT_PREPARATION.md).
 
 ## Release controls
 Never infer a working production page solely from a passing GitHub build or Cloudflare check. The Hub has no login server, shared database or synchronised media data. The existing owner-configured Pages project must still be checked for actual live access, CSP/referrer/frame headers, manual visual/screen-reader quality and rollback. Merging a safe, green PR is approved; changes to authentication, site privacy posture, domains, secrets or paid infrastructure are not blanket-approved. No sibling-repository changes, force pushes, visibility changes or package publication are authorised here.
@@ -47,12 +47,11 @@ The currently approved **Hub-specific sunrise logo and favicon are local SVG ass
 ## Proving the exact deployed revision
 The Cloudflare Pages build publishes a minimal `/release.json` from the injected `CF_PAGES_COMMIT_SHA` (GitHub CI uses `GITHUB_SHA`). The independent live workflow supplies its triggering `master` commit as `EXPECTED_COMMIT_SHA` and refuses to accept a stale live build, while respecting bounded Cloudflare propagation retries. Review this marker and the public Pages hostname after each merge. It contains no credentials or media data.
 
-## Last recorded production release and safeguards (21 November 2026)
+## Latest verified cinematic production release (24 November 2026)
 
-The latest verified production baseline at the start of this documentation update is `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`. [Quality CI 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [independent live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) both succeeded at that exact SHA. The live smoke verified HTTP 200, required headers, React mount, six-theme bootstrap and the exact `/release.json` revision. This is **historical verified evidence**; after each later master merge, check its own CI/live jobs before claiming the new version is in production.
+[PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) squash-merged to `master` as `f497b62eab04d67b3f2652f9bf55131417d2b708`. [Post-merge quality run 45443821106](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) passed on Ubuntu/Windows and Chromium/Firefox/WebKit. [Live HTTPS/security smoke 45443821238](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238) independently verified HTTP 200, security headers, React/bootstrap and exact live `/release.json`. The smoke briefly saw the previous SHA during normal Cloudflare propagation and then passed once the new revision became public. See [release details](RELEASE_2026-11-24_CINEMATIC_HUB.md).
 
-For future visual changes, use the same art provenance and screenshot comparison. Manual screen-reader, owner visual acceptance and native-device testing are still distinct from automated CI.
-
+Built UI bundle sizes were 155.64 kB JavaScript (50.61 kB gzip) and 15.88 kB CSS (4.62 kB gzip), **not** a Lighthouse score or measured user bandwidth. Native-device Safari, touch, manual screen-reader and real-user Web Vitals acceptance remain open. Always recheck latest SHA and public release after any newer merge.
 
 ## Design-only photo and brand references
 

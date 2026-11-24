@@ -17,17 +17,20 @@ The original five-repository plan is:
 
 This is **four Hub destinations across five repositories** because Movies and TV are one planned frontend. Future video-library implementation was paused in the wider ecosystem while storage/cost feasibility is unresolved; the Hub's placeholders remain deliberately honest.
 
-## Current product
+## Current product: cinematic library gateway (24 November 2026)
 
-- **Current deployed layout:** four moderately sized illustrated posters centred in a 4 × 1 desktop row, 2 × 2 tablet and 1 × 4 phone. The visible welcome block and motto are removed; a screen-reader-only H1 remains. The exact approved text-free WebP art is unchanged, with real HTML titles, descriptions, availability and CTA content composed over each card.
-- **Navigation:** Novel and Manga are whole-card HTTPS links. Anime and Movies & TV remain non-interactive planned tiles.
-- **Current visual identity:** the deployed page still uses the sakura/Mount Fuji panorama, Hub-specific sunrise SVG logo/favicon, Georgia typography and the existing header subtitle. This is the verified production baseline, not the final design direction.
-- **Themes:** Midnight, Charcoal, Plum, Sepia (**first-visit default**), Paper and Ocean; preference is local to the Hub.
-- **Accessibility and privacy:** semantic headings, skip link, keyboard/focus, reduced motion, planned-state semantics, self-hosted runtime assets, strict CSP/security headers. No private media fetch or cross-app credentials.
+The owner-approved cinematic redesign is **live**, introduced by [PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) at product commit `f497b62eab04d67b3f2652f9bf55131417d2b708`. [Exact-SHA public HTTPS/security smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238) and [post-merge CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) both passed. This is a dated release checkpoint; always re-check current `master` and live `/release.json` when needed.
 
-**Next visual direction, approved for prototyping only:** the owner wants to explore a non-Japanese, warm brown/pale-gold/glowing-gold composition with one prominent photographic feature on the left and four compact library tiles on the right. A credited composite moodboard showing **Golden Archive** and **Cinematic Passage**, plus the exact shared Sun logo variants used by Novel and Manga, is stored under docs/assets and documented in [Featured visual options](docs/FEATURED_VISUAL_OPTIONS.md). The raw Pexels photographs are not redistributed as standalone files; their original source pages and licence are recorded for future use. None of these references are loaded by the current app. Do not treat either photo or the split layout as production until a coded prototype has been visually reviewed and accepted.
+- **Art direction:** an immersive, amber-lit fantasy library and large radiant Sun window with four organically curved, gold-edged destinations. The imagery is separately hosted and the controls, headings and statuses remain real React/HTML/CSS, not a webpage screenshot.
+- **Art quality:** local responsive high-resolution WebP pairs (`cinematic-*-900.webp` and `cinematic-*-1600.webp`) and a repaired architectural image (`hero-clean.webp`). The exact historical artwork remains available for rollback and protected by static integrity checks.
+- **Navigation:** Novel and Manga are active, independent HTTPS library links; Anime and Movies & TV are deliberately noninteractive planned destinations.
+- **Themes:** Midnight, Charcoal, Plum, **Sepia** (first-visit default), Paper and Ocean; Hub-only local persistence and pre-paint restoration.
+- **Interaction and access:** semantic headings, skip link, native theme control, header-local destination search and reading shortcuts, keyboard/focus, reduced motion, CSP and no private-data requests. The Hub does not share authentication, history, data or a runtime backend with the readers.
+- **Responsive:** sculpted desktop gallery, tablet two-column panels and mobile single-column reflow. The verified CI matrix covers Chromium, Firefox and WebKit plus relevant viewport and axe checks.
 
-**Important history:** PR [#19](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/19) had the correct layout but accidentally used simplified substitute drawings. PR [#20](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/20) replaced them with the **actual detailed approved four-panel artwork** and verifies exact WebP digests. Never repeat that substitution. The previously proposed raster-logo pack was superseded for **the Hub only** by original SVG sunrise branding; independent readers keep their own branding.
+**Manual items remain open:** physical Safari/touch, NVDA/VoiceOver, real-device 200% zoom, real-user Core Web Vitals and reader-return navigation. Do not conflate passing automation with those checks. See [the cinematic release record](docs/RELEASE_2026-11-24_CINEMATIC_HUB.md) and [release gate issue #7](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/7).
+
+The older 4 × 1 sakura poster gallery, Golden Archive/Cinematic Passage moodboard and flat vector-observatory prototype are **historical superseded designs**, not the current production UI. PRs #19/#20 also document an earlier simplified-artwork regression and correction. Those lessons remain relevant: never substitute lower-fidelity artwork for approved subject compositions.
 
 ## Actual repository structure
 

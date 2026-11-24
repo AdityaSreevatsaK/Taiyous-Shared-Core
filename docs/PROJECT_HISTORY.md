@@ -1,6 +1,6 @@
 # Project charter, design evolution, decisions and failure history
 
-**Maintained record, last reconciled: 21 November 2026.** This is the narrative record of *why* the project exists. For the executable present-day truth, prefer the source files, tests, `AGENTS.md`, [codebase guide](CODEBASE_REFERENCE.md), and the latest matching-SHA CI run. A feature recorded as an idea in this history is not necessarily implemented.
+**Maintained record, last reconciled: 24 November 2026.** This is the narrative record of *why* the project exists. For the executable present-day truth, prefer the source files, tests, `AGENTS.md`, [codebase guide](CODEBASE_REFERENCE.md), and the latest matching-SHA CI run. A feature recorded as an idea in this history is not necessarily implemented.
 
 ## 1. The original idea
 
@@ -182,3 +182,11 @@ A credited composite moodboard showing both photographs is stored at `docs/asset
 The approved next prototype is a code-built split composition with a prominent featured photograph on the left and four compact library tiles on the right. The final photo, crop, headline, typography and palette are not yet selected. The current live site remains the PR #23 hero-free scenic gallery, with the original sakura/Mount Fuji background and Hub-specific SVG Sun logo. The moodboard and shared Sun WebPs are **reference-only**, not runtime assets. See [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md).
 
 The latest production baseline at this review is master `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`; matching [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985) passed. Future agents must recheck current refs and release markers rather than treating this recorded SHA as permanent.
+
+## 24 November 2026: owner-approved cinematic Hub production release
+
+The earlier Golden Archive/Cinematic Passage photographic split and hand-drawn vector observatory were provisional explorations. The owner subsequently selected the independently generated **cinematic fantasy-library** screenshot as the authoritative direction. The initial React/CSS version used a custom vector scene; the owner rejected its flatness. Iterations then moved to a detailed sunlit architectural environment with four independent curved portals and separately hosted imagery, not a flattened webpage screenshot. Later passes removed ghosted panels, restored large serif headings, used restrained glowing-gold borders, repaired the architectural edge and added higher-density reference-guided artwork.
+
+The four regenerated reference-guided image masters are **not pixel-preserving super-resolution**, but were compared with the original image for subjects, direction and framing; the old approved detailed `*-art.webp` artwork and intermediate assets remain for provenance and rollback. All new portal titles, action labels and statuses are semantic React/HTML elements. The only active links are Novel and Manga; Anime and Movies & TV stay planned. The six Hub-local themes and security policy remain independent of reader applications.
+
+The owner approved the release next steps on 24 November. [Cinematic PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) was merged at `f497b62eab04d67b3f2652f9bf55131417d2b708`. The [matching post-merge quality matrix](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) passed, as did [public HTTPS/security smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238) verifying the **exact production commit** after Cloudflare propagation. Unverified manual accessibility, native device and performance tasks remain tracked in issue #7. [Release record](RELEASE_2026-11-24_CINEMATIC_HUB.md) captures deployment, imagery and rollback constraints.

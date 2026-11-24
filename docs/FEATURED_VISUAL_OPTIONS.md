@@ -1,4 +1,6 @@
-> **23 November 2026 update:** This document describes the older Golden Archive/Cinematic Passage exploration. The owner has now selected the separate Amber Observatory generated concept as the direction for the working Hub prototype. See [ADR-016](adr/ADR-016-amber-observatory-hub.md). The old photo references remain here for provenance and history, not as a requirement for the new design.\n\n# Featured visual exploration: Golden Archive and Cinematic Passage
+> **24 November 2026, historical design reference only:** This Golden Archive/Cinematic Passage moodboard is **superseded** by the owner's selected cinematic fantasy-library screenshot. [PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) is released, with actual code and image provenance in [ADR-017](adr/ADR-017-cinematic-target-reconstruction.md), [ADR-018](adr/ADR-018-cinematic-artwork-high-density.md) and the [production release record](RELEASE_2026-11-24_CINEMATIC_HUB.md). The Pexels sources and shared Sun assets described below remain credited historical references. Their prototype-only status text is a period record, not an outstanding deliverable.
+
+# Featured visual exploration: Golden Archive and Cinematic Passage
 
 **Status: owner-approved for a coded prototype; neither option is yet the production design.**  
 **Last reviewed:** 21 November 2026.

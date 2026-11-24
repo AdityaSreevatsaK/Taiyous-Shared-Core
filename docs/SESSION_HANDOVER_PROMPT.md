@@ -2,8 +2,8 @@
 
 **Repository:** [AdityaSreevatsaK/Taiyous-Shared-Core](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core)  
 **Canonical branch:** master  
-**Last verified production baseline at this update:** 09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc  
-**Matching checks:** [CI 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985), both successful at that exact SHA.  
+**Verified cinematic release checkpoint at this update:** f497b62eab04d67b3f2652f9bf55131417d2b708  
+**Matching checks:** [post-merge CI 45443821106](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) and [live HTTPS/security smoke 45443821238](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238), both successful at that exact SHA.  
 **Live site:** https://taiyous-shared-core.pages.dev/
 
 This is a handover checkpoint, not a permanent statement of current state. Before acting, re-check Git, open PRs, workflow runs and the public release marker.
@@ -16,35 +16,19 @@ This repository contains:
 
 The Hub is **not** a central backend, shared private catalogue, SSO provider, data synchronisation service, media scraper or streaming host. Novel and Manga are independent live apps. Anime and Movies & TV are planned/paused. Do not modify sibling repositories or private Hugging Face datasets without a separate explicit request.
 
-## Current production state (verified baseline)
+## Current production state (verified checkpoint, 24 November 2026)
 
-- Four tiles in order: Novel, Manga, Anime, Movies & TV.
-- Novel and Manga are whole-card HTTPS links to their independent public frontends. Anime and Movies & TV are inert planned tiles.
-- Four exact owner-approved, text-free detailed WebP portraits; real HTML/CSS renders headings, descriptions, availability and CTA content over the lower gradient.
-- The visible Welcome heading, supporting sentence and Explore/Read/Watch/Discover motto were removed. A screen-reader-only H1 remains.
-- Four midsize posters are centred in a desktop 4 × 1 row, with 2 × 2 tablet and 1 × 4 narrow mobile reflow.
-- The production background remains the original sakura/Mount Fuji panorama. The Hub header still uses its own SVG Sun logo/favicon, Georgia typography and the “MY MEDIA GATEWAY” subtitle.
-- Six persistent Hub-local themes: Midnight, Charcoal, Plum, Sepia (default), Paper and Ocean.
-- Strict self-only CSP, local theme bootstrap, keyboard focus, skip link, reduced-motion support and automated WCAG A/AA checks.
+- **Cinematic fantasy-library React/CSS gateway shipped** in [PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) at product commit `f497b62eab04d67b3f2652f9bf55131417d2b708`. The owner approved release of the reviewed design.
+- Four independent sculpted, gold-edged panels with separate high-density local WebP art: `cinematic-*-1600.webp` and `cinematic-*-900.webp`. The repaired `hero-clean.webp` architectural backdrop removes duplicated ghost panels. Titles, statuses, buttons, masks and theming are real React/HTML/CSS, not baked into a screenshot.
+- Novel and Manga remain whole-panel independent HTTPS links; Anime and Movies & TV remain **inert** planned tiles. No central auth, reading history, private data or backend.
+- Desktop cinematic composition, tablet two columns and mobile one column. A locally drawn gold Sun, serif headings, restrained rim highlights, native six-theme selector (Sepia default), header-local destination search and reading shortcuts.
+- Strict CSP, local-storage theme bootstrap, keyboard and reduced motion. Latest matched CI passed Ubuntu/Windows and Chromium/Firefox/WebKit automated accessibility and reflow; public exact-commit smoke verified release manifest and security headers.
+- **Not manually verified:** physical native Safari/touch, NVDA/VoiceOver, real-device browser zoom, owner device appearance and actual public-origin reader navigation/return paths. These remain in [release issue #7](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/7).
+- Historical `*-art.webp`, Golden Archive/Cinematic Passage references (ADR-015), SVG prototype (ADR-016) and reference crops are maintained for provenance, not current rendering. See [release notes](RELEASE_2026-11-24_CINEMATIC_HUB.md) and [ADR-017](adr/ADR-017-cinematic-target-reconstruction.md) / [ADR-018](adr/ADR-018-cinematic-artwork-high-density.md).
 
-The owner is not satisfied with the overall visual direction and has approved exploring a new non-Japanese direction. Do not describe that exploration as shipped.
+## Superseded photographic exploration
 
-## Approved next visual exploration (prototype only)
-
-The owner likes the warm brown/pale-gold/glowing-gold mood from the supplied video, but the crane is not mandatory. Two real photographic concepts were selected:
-
-- **Golden Archive:** historic library, walnut bookshelves and warm light.
-- **Cinematic Passage:** ornate architectural corridor, golden sunlight and a vanishing point.
-
-A credited composite moodboard showing both photo concepts is in docs/assets/; the raw Pexels photos are not separately redistributed. The exact shared Sun logo files used by Novel and Manga are also copied there:
-- sun-light.webp Git blob SHA-1 d292f5b3f8306925b93f1db4b7bee77324072a01
-- sun-dark.webp Git blob SHA-1 565156eb5da784cdf1c4117a5d300b05dae71d35
-
-Read [Featured visual options](FEATURED_VISUAL_OPTIONS.md) for images, authors, source URLs, licences, dimensions and crop notes, and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md) for the accepted scope.
-
-**Next design task:** build two code-rendered prototypes using the same split composition: one prominent photo on the left and four compact tiles on the right in a 2 × 2 group. Use the shared Sun logo in the prototype and remove the redundant header subtitle. Explore a walnut/brown and pale-gold palette. “A Place for Every Story.” is only candidate copy. Preserve the existing four approved card illustrations, links, six themes and accessibility requirements.
-
-The combined photo moodboard and shared Sun WebPs are **documentation references only**, not loaded by the current app. Do not hotlink Pexels. Any selected production photo/font must be self-hosted and locally verified. Do not deploy a new homepage until the owner has reviewed the actual browser screenshots and accepted the result.
+The historical Golden Archive/Cinematic Passage moodboard and shared Sun photo references are preserved in [Featured visual options](FEATURED_VISUAL_OPTIONS.md) and [ADR-015](adr/ADR-015-photographic-split-layout-exploration.md), but are not the live design or an open prototype task. The owner instead chose the separately generated cinematic fantasy-library image and refined the working React implementation until release. Do not mistake the old prototype approval language for an active release blocker.
 
 ## Repository architecture and technology
 
@@ -105,11 +89,11 @@ Do not regenerate the lockfile casually. Require matching-SHA green Ubuntu/Windo
 - Do not create a fake link for planned Anime or Movies & TV.
 - Keep documentation aligned with source and mark old decisions superseded rather than silently deleting history.
 
-## Immediate next steps
+## Immediate next steps (post-release)
 
-1. Prototype Golden Archive and Cinematic Passage with the same split layout and shared Sun header mark.
-2. Capture actual screenshots at 1600 × 900, 1366 × 768, 1280 × 720, 768px, 390px and 320px; inspect image crops, typography, balance, footer and theme variants.
-3. Validate keyboard, focus, screen-reader hierarchy, reduced motion, six themes, 200% zoom, CSP and no horizontal overflow.
-4. Present both real coded variants for owner selection. Only then prepare a focused production implementation PR.
+1. Reconfirm current `master`, latest GitHub Actions and `/release.json` after any further merge.
+2. Use [issue #7](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/issues/7) to complete real-device Safari/touch, 200% zoom, VoiceOver/NVDA, on-origin reader links/return paths, and performance/Core Web Vitals assessment with evidence.
+3. Keep original artwork and historical assets intact until dependency/rollback audit justifies focused removal.
+4. Preserve independent readers, existing security headers, exactly four honest navigation destinations and unpublished local-only shared packages. Treat visual polish as evidence-driven maintenance, not a mandate for another wholesale redesign.
 
-At handover, report exact PR/head SHA, matching CI, deployed SHA, screenshot evidence, what is truly implemented versus prototype-only, and any remaining manual accessibility checks.
+Handover must identify exact PR, SHA, matching CI, independent production smoke, real browser screenshots and manual acceptance gaps.\n
