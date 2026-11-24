@@ -26,6 +26,9 @@ describe('cinematic library world', () => {
     expect(html).not.toContain('reference-novel.webp');
     expect((html.match(/class="portal-mask"/g) ?? [])).toHaveLength(4);
     expect(html).not.toContain('MY MEDIA GATEWAY');
+    // The owner-approved browser reference has plain headings and no footer credit.
+    expect(html).not.toContain('portal-glyph');
+    expect(html).not.toContain('world-signature');
     expect(html).not.toContain('hub-sun-logo.svg');
     expect(html).not.toContain('novels-art.webp');
   });
