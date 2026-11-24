@@ -33,7 +33,7 @@ Visual details were adjusted against browser screenshots; there are unavoidable 
 
 - [PR #25 matching-head CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45344938896) passed Node 22 locked-install build and tests on Ubuntu/Windows, and Chromium/Firefox/WebKit responsive, interaction, keyboard and automated axe WCAG A/AA testing.
 - [Production HTTP/security/deployment smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238) **passed**, matching the live release manifest to `f497b62eab04d67b3f2652f9bf55131417d2b708`, confirming HTTP 200, expected CSP and other security headers, the React mount and early theme bootstrap.
-- [Post-merge production CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) started on that exact product SHA. Check its final result before calling the post-merge build fully green.
+- [Post-merge production CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) **passed all five jobs** on the exact product SHA: Ubuntu/Windows quality and Chromium/Firefox/WebKit browser matrices.
 - The Ubuntu production build log reported a JavaScript entry of **155.64 kB (50.61 kB gzip)** and stylesheet of **15.88 kB (4.62 kB gzip)**. These are **bundle sizes**, not measured real-user page speed, LCP, INP or CLS. No performance score is claimed.
 - Cross-browser screenshot artefacts were captured from the actual React application, including **1648 × 928** desktop and **320/390px** mobile. GitHub screenshot artefacts expire; consult the matching run's artefact list before relying on retained screenshots.
 
