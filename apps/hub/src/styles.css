@@ -167,12 +167,6 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
   stroke-dasharray: 115 4200; stroke-dashoffset:-135;
   filter: drop-shadow(0 0 2px rgba(255,211,121,.62));
 }
-.portal-title { display:flex; align-items:center; gap:clamp(9px, .9vw, 15px); }
-.portal-glyph {
-  color:var(--gold-bright); flex:none;
-  width:clamp(23px,1.95vw,34px); height:clamp(23px,1.95vw,34px);
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.65));
-}
 .portal-content { gap:clamp(8px,.95vw,12px); }
 .portal-content h3 { letter-spacing:-.035em; font-size:clamp(32px,3.24vw,55px); }
 .portal-movies .portal-content h3 { font-size:clamp(28px,2.83vw,49px); }
@@ -193,34 +187,15 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 }
 .ornament { width:clamp(94px,8vw,132px); }
 .ornament::after { left:47%; }
-.world-signature {
-  position:absolute; z-index:8; bottom:clamp(10px,1.8vh,21px);
-  left:53%; transform:translateX(-50%);
-  display:flex; align-items:center; gap:22px;
-  color:rgba(237,186,120,.73); text-transform:uppercase;
-  font:500 10px/1.4 system-ui,sans-serif;
-  letter-spacing:.22em; white-space:nowrap;
-  text-shadow:0 1px 9px rgba(0,0,0,.78);
-  pointer-events:none;
-}
-.world-signature::before,.world-signature::after {
-  content:''; width:clamp(20px,3.8vw,66px); height:1px;
-  background:linear-gradient(90deg,transparent,rgba(229,162,82,.55));
-}
-.world-signature::after { transform:rotate(180deg); }
 @media (max-width:1100px) {
   .environment { inset:0 0 auto; }
   .environment-image { filter:var(--scene-filter) brightness(1.10) saturate(1.06); }
   .environment::after { background:linear-gradient(180deg,rgba(13,7,6,.06),transparent 51%,var(--scene-bg) 100%); }
-  .world-signature { position:relative; left:auto; bottom:auto; transform:none; margin:4px auto 23px; justify-content:center; }
 }
 @media (max-width:670px) {
   .brand-name { font-size:clamp(19px,5.2vw,30px); }
-  .portal-glyph { width:clamp(20px,5.8vw,28px); height:clamp(20px,5.8vw,28px); }
-  .portal-title { gap:8px; }
   .portal-content h3 { font-size:clamp(27px,7.2vw,40px); }
   .portal-movies .portal-content h3 { font-size:clamp(24px,6.65vw,35px); }
-  .world-signature { font-size:9px; gap:10px; }
 }
 @media(prefers-reduced-motion:reduce) { .action-pill { transition:none; } }
 
@@ -232,8 +207,3 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
   filter:drop-shadow(0 0 1.3px rgba(255,216,148,.55));
 }
 .portal-border { filter:drop-shadow(0 0 .75px rgba(255,196,101,.20)); }
-.world-signature {
-  font-size:11px; letter-spacing:.24em;
-  color:rgba(246,200,143,.80);
-}
-@media(max-width:670px){.world-signature{font-size:9px;}}
