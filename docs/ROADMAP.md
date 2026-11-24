@@ -1,6 +1,8 @@
-> **Prototype update (23 November 2026):** The owner selected the new Amber Observatory concept after a fresh creative-direction exploration. The first code-rendered review version is proposed on branch \`design/amber-observatory-hub-20261123\`; see [ADR-016](adr/ADR-016-amber-observatory-hub.md). Previous Golden Archive/Cinematic Passage tasks below are historical and no longer the immediate design priority. Production remains the scenic gallery until the owner reviews the PR and approves release.\n\n# Shared Core and Personal Hub roadmap
+> **Released visual baseline (24 November 2026):** The owner approved the finished cinematic fantasy-library Hub. [PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25) merged to `master` at `f497b62eab04d67b3f2652f9bf55131417d2b708`; [production exact-SHA live smoke](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238) and [post-merge CI](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) passed. The earlier Golden Archive/Cinematic Passage and flat-vector exploration are historical. Full details: [cinematic release record](RELEASE_2026-11-24_CINEMATIC_HUB.md).
 
-**Reconciled: 21 November 2026.** Status keys: `[x]` implemented and verified in code/history; `[ ]` pending or requires additional evidence. For historic reasoning, see [History](PROJECT_HISTORY.md). This roadmap is **not** authorisation to implement deferred features.
+# Shared Core and Personal Hub roadmap
+
+**Reconciled: 24 November 2026.** Status keys: `[x]` implemented and verified in code/history; `[ ]` pending or requires additional evidence. For historic reasoning, see [History](PROJECT_HISTORY.md). This roadmap is **not** authorisation to implement deferred features.
 
 ## P0. Foundation and boundaries: completed
 - [x] Five-repository independent-app design, with Hub hosted inside Shared Core.
@@ -12,30 +14,24 @@
 - [x] Explicit avoidance of cross-app auth, database, private media and runtime dependency.
 - [ ] Review and optionally set GitHub repo description/topics/website metadata if not already set. Do not misrepresent this as code deployment.
 
-## P1. Personal Hub design: implemented, with manual follow-ups
-- [x] Four stable tiles: Novel, Manga, Anime, Movies & TV.
-- [x] Verified production links to independent Novel and Manga readers; planned cards remain noninteractive.
-- [x] More balanced 4 × 1 desktop gallery of midsize illustrated posters, 2 × 2 tablet, 1 × 4 phone and zoom-friendly reflow; prominent scenic background, no visible welcome or motto.
-- [x] Six persistent Hub themes; Sepia default and CSP-compliant theme bootstrap.
-- [x] Sakura sunrise landscape, warm brown/gold masthead and original Hub-specific Sunrise SVG/favicons.
-- [x] **Exact owner-approved detailed WebP artworks** remain unchanged and hash-verified (PR #20). The current hero-free midsize gallery and native HTML card overlays are implemented in PR #23.
-- [x] A credited composite moodboard showing Golden Archive and Cinematic Passage, plus the exact shared Novel/Manga Sun marks, is stored locally in `docs/assets/` with provenance. The raw Pexels photos are not separately redistributed; source pages and licence notes are documented.
-- [ ] Build both photographic split-layout prototypes using the same left-feature/right-2×2-card composition; compare actual browser screenshots and responsive crops.
-- [ ] Use the shared Sun mark in the prototype and remove the current redundant header subtitle; validate the logo variant across all six themes.
-- [ ] Obtain owner visual acceptance of the coded prototype before changing the live homepage. The current production design remains the PR #23 scenic gallery until then.
-- [x] Real semantic links, keyboard focus, skip link, reduced motion and automated accessibility.
-- [x] Desktop viewport-fit/no-horizontal-overflow Playwright tests and image-decoded screenshots.
-- [ ] Manual NVDA/VoiceOver walkthrough with recorded results, across representative themes.
-- [ ] Owner's final visual sign-off on current actual live deployment at varied desktop/mobile sizes.
-- [ ] Targeted 200% browser zoom, touch and native-device Safari manual acceptance.
-- [ ] Periodic performance/Core Web Vitals review after changes; optimise only with measured evidence.
+## P1. Cinematic Personal Hub design: released, with manual follow-ups
+- [x] Four honest destinations in order: Novel, Manga, Anime, Movies & TV. Novel/Manga are whole-panel HTTPS links; future destinations remain noninteractive.
+- [x] Owner-selected golden fantasy-library backdrop, four organically sculpted panels, large serif text and restrained gold strokes, implemented in real React/CSS ([PR #25](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/pull/25)).
+- [x] Four high-resolution cinematic image pairs, responsive `srcSet`, repaired architectural backdrop and retained historical art integrity hashes ([ADR-018](adr/ADR-018-cinematic-artwork-high-density.md)).
+- [x] Desktop cinematic layout, tablet two columns, mobile one column; automated 320/390/768/1280/1648 viewport and zoom-equivalent reflow checks.
+- [x] Six Hub-local persisted themes, Sepia default, strict CSP, reduced-motion, local search/shortcuts, semantic headings and real navigable HTTPS targets.
+- [x] Matching-head Ubuntu/Windows tests and Chromium/Firefox/WebKit screenshot/axe checks plus live release SHA verification.
+- [ ] Physical native Safari/touch, manual NVDA/VoiceOver, real browser 200% zoom and screen-reader walkthrough.
+- [ ] Manual destination navigation/return-path check on the public origin and explicit owner visual acceptance on personal devices.
+- [ ] Measure constrained-network load and Core Web Vitals (LCP, INP, CLS), then prioritise evidenced improvements, not speculation.
+- [ ] Only after safe recovery/source audits, consider pruning archived unused prototype assets; retain the original owner-approved images and any files required by static integrity tests.
 
 ## P2. Release, deployment and resilience: largely implemented
 - [x] Connected Cloudflare Pages Git integration on `master`.
 - [x] Live Hub at `https://taiyous-shared-core.pages.dev/`.
 - [x] Strict `_headers` security response policy, static verifier and live HTTP/security smoke.
 - [x] Public `/release.json` contains exact deployed SHA; smoke compares it with the triggering `master` commit.
-- [x] Latest verified production baseline at the start of this update: `09d4673ba01fb21216fcab8eda2fb01f8c4ebfbc`, with successful [CI run 44923073995](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073995) and [live smoke run 44923073985](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/44923073985). Recheck exact SHA after every later merge.
+- [x] Verified cinematic release checkpoint: `f497b62eab04d67b3f2652f9bf55131417d2b708` with successful [CI run 45443821106](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821106) and [live smoke run 45443821238](https://github.com/AdityaSreevatsaK/Taiyous-Shared-Core/actions/runs/45443821238). Recheck exact SHA after every later merge.
 - [ ] Verify and document Cloudflare dashboard settings/rollback mechanism from the operator account when access is available.
 - [ ] Periodically inspect live links/headers/asset loading and update only with new evidence.
 - [ ] Investigate any real performance, CSP, visual or accessibility regression before accepting a new release.
