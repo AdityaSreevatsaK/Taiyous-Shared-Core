@@ -19,7 +19,7 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .hub{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:var(--scene-bg)}
 .world{position:absolute;inset:0;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#261109 30%,var(--scene-bg) 82%)}
 .environment{position:absolute;inset:0 23% 0 0;overflow:hidden;pointer-events:none}
-.environment-image{position:absolute;inset:0 0 0 -2%;background:url('/art/hero-reference-restored.webp') left 18%/auto 94% no-repeat;filter:var(--scene-filter)}
+.environment-image{position:absolute;inset:0 0 0 -2%;background:url('/art/hero-reference-restored.webp') left 50%/auto 100% no-repeat;filter:var(--scene-filter)}
 .environment:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#110a0916 0%,transparent 57%,#120909cc 90%,var(--scene-bg) 100%),linear-gradient(180deg,#1208067a 0%,transparent 21%,transparent 81%,#11090667 100%);pointer-events:none}
 .environment-glow{position:absolute;top:13%;left:24%;width:70%;height:75%;background:radial-gradient(ellipse at center,#ffd58a38,transparent 61%);mix-blend-mode:screen;opacity:.4;pointer-events:none}
 .world-sweep{position:absolute;z-index:1;top:0;left:0;width:100%;height:92%;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 5px #f6b9628a)}
