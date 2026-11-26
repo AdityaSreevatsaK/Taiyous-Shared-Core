@@ -62,7 +62,7 @@ test('original cinematic panel artwork is locally available, decoded and indepen
   const background = await page.locator('.environment-image').evaluate(
     element => getComputedStyle(element).backgroundImage,
   );
-  expect(background).toContain('hero-clean.webp');
+  expect(background).toContain('hero-reference-restored.webp');
   await expect(page.locator('.portal-content h3')).toHaveText(['Novel','Manga','Anime','Movies & TV']);
 });
 
