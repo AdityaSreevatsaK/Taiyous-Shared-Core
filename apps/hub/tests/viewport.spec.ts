@@ -119,3 +119,26 @@ test('cinematic spacing keeps titles, ornament and status controls deliberately 
     expect(item.actionLeft).toBeGreaterThan(item.left + 12);
   }
 });
+
+test('editorial heading and CTA retain their relative size at ultrawide resolutions', async ({ page }) => {
+  const ratios: number[] = [];
+  for (const [width, height] of [[1648,928],[1920,1080],[2560,1440]] as const) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    const metrics = await page.locator('.portal-novel').evaluate(el => {
+      const box = el.getBoundingClientRect();
+      const title = el.querySelector('h3')!;
+      const cta = el.querySelector('.action-pill')!;
+      return {
+        titleRatio: parseFloat(getComputedStyle(title).fontSize) / box.width,
+        ctaRatio: parseFloat(getComputedStyle(cta).fontSize) / box.width,
+        right: box.right, bottom: box.bottom,
+      };
+    });
+    expect(metrics.right).toBeLessThanOrEqual(width);
+    expect(metrics.bottom).toBeLessThanOrEqual(height);
+    ratios.push(metrics.titleRatio);
+    expect(metrics.ctaRatio).toBeGreaterThan(.022);
+  }
+  expect(Math.max(...ratios) - Math.min(...ratios)).toBeLessThan(.013);
+});
