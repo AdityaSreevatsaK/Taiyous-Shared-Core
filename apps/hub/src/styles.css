@@ -87,8 +87,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
  .environment-image{inset:0;background-size:auto 105%;background-position:left 39%}
  .environment:after{background:linear-gradient(180deg,#110a0850 0%,transparent 55%,var(--scene-bg) 99%)}
  .world-sweep{display:none}
- .portal-stage{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 0;margin:190px auto 28px;width:min(940px,96%);padding:0 6px;align-items:stretch}
- .portal-item{position:relative;left:auto;top:auto;width:auto;height:auto;aspect-ratio:1.42;margin:-9px -1px;filter:drop-shadow(0 8px 10px #000a)}
+ .portal-stage{position:relative;inset:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:190px auto 28px;width:min(940px,96%);padding:0 6px;align-items:stretch}
+ .portal-item{position:relative;left:auto;top:auto;width:auto;height:auto;aspect-ratio:1.42;margin:0;filter:drop-shadow(0 8px 10px #000a)}
  .portal-content{gap:10px}
  .portal-content h3{font-size:clamp(29px,4vw,44px)}
  .portal-movies .portal-content h3{font-size:clamp(25px,3.5vw,39px)}
@@ -104,8 +104,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
  .header-panel{right:10px;top:70px}
  .environment{height:350px}
  .environment-image{background-size:auto 120%;background-position:42% 27%}
- .portal-stage{margin:140px auto 28px;grid-template-columns:1fr;width:min(455px,95%);gap:0;padding:0 2px}
- .portal-item{aspect-ratio:1.52;margin:-2px 0;z-index:4}
+ .portal-stage{margin:140px auto 28px;grid-template-columns:1fr;width:min(455px,95%);gap:7px;padding:0 2px}
+ .portal-item{aspect-ratio:1.52;margin:0;z-index:4}
  .portal-content{gap:8px;bottom:11%}
  .portal-content h3{font-size:clamp(31px,8vw,44px)}
  .portal-movies .portal-content h3{font-size:clamp(27px,7.2vw,38px)}
