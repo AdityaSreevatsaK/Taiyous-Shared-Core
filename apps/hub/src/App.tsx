@@ -109,16 +109,6 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
         height={info.key === 'movies' ? 935 : 992} loading="eager" decoding="async" />
       <div className="portal-vignette" />
     </div>
-    <svg className="portal-border portal-border-desktop"
-      viewBox={`${shape.bounds.x} ${shape.bounds.y} ${shape.bounds.width} ${shape.bounds.height}`}
-      preserveAspectRatio="none" aria-hidden="true">
-      <path data-desktop-boundary={info.key} d={shape.path} />
-      <path className="portal-border-glint" d={shape.path} />
-    </svg>
-    <svg className="portal-border portal-border-mobile" viewBox="0 0 1000 700"
-      preserveAspectRatio="none" aria-hidden="true">
-      <path d={MOBILE_PORTAL_BORDERS[info.key]} />
-    </svg>
     <div className="portal-content">
       <h3>{info.title}</h3>
       <span className="ornament" aria-hidden="true" />
@@ -134,11 +124,26 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
       <span className="visually-hidden">{info.description}</span>
     </div>
   </>;
+  // Deliberately outside the clipped link: every edge remains fully painted.
+  // It uses the SAME path and rectangle as the mask and never receives pointer events.
+  const rim = <div className="portal-rim" aria-hidden="true">
+    <svg className="portal-border portal-border-desktop"
+      viewBox={`${shape.bounds.x} ${shape.bounds.y} ${shape.bounds.width} ${shape.bounds.height}`}
+      preserveAspectRatio="none" aria-hidden="true">
+      <path data-desktop-boundary={info.key} d={shape.path} />
+      <path className="portal-border-glint" d={shape.path} />
+    </svg>
+    <svg className="portal-border portal-border-mobile" viewBox="0 0 1000 700"
+      preserveAspectRatio="none" aria-hidden="true">
+      <path d={MOBILE_PORTAL_BORDERS[info.key]} />
+    </svg>
+  </div>;
   return <li className={`portal-item portal-${info.key}${dimmed ? ' portal-dimmed' : ''}`}
     style={desktopPortalCSS(shape.bounds) as CSSProperties}>
     {available ? <a className="portal-surface" href={safeHref} rel="noopener noreferrer"
       referrerPolicy="no-referrer">{contents}</a>
       : <article className="portal-surface">{contents}</article>}
+    {rim}
   </li>;
 }
 
