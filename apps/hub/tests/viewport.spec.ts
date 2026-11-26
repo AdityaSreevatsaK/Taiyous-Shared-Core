@@ -66,7 +66,7 @@ test('original cinematic panel artwork is locally available, decoded and indepen
   const sceneSize = await page.locator('.environment-image').evaluate(
     element => getComputedStyle(element).backgroundSize,
   );
-  expect(sceneSize).toContain('94%');
+  expect(sceneSize).toContain('100%'); // Covers full scene height, preventing a flat colour band below the architecture.
   await expect(page.locator('.portal-content h3')).toHaveText(['Novel','Manga','Anime','Movies & TV']);
 });
 
