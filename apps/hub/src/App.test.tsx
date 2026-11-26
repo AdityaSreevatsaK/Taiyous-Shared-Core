@@ -19,7 +19,13 @@ describe('cinematic library world', () => {
     for (const file of ['cinematic-novel-1600.webp','cinematic-manga-1600.webp','cinematic-anime-1600.webp','cinematic-movies-tv-1600.webp']) {
       expect(html).toContain('/art/' + file);
     }
-    expect((html.match(/class="portal-border"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="portal-border portal-border-desktop"/g) ?? [])).toHaveLength(4);
+    expect((html.match(/class="portal-border portal-border-mobile"/g) ?? [])).toHaveLength(4);
+    for (const kind of ['novel', 'manga', 'anime', 'movies']) {
+      expect(html).toContain(kind + '-desktop-clip');
+      expect(html).toContain(kind + '-mobile-clip');
+      expect(html).toContain('data-desktop-boundary="' + kind + '"');
+    }
     for (const file of ['cinematic-novel-900.webp', 'cinematic-manga-900.webp', 'cinematic-anime-900.webp', 'cinematic-movies-tv-900.webp']) {
       expect(html).toContain(file);
     }

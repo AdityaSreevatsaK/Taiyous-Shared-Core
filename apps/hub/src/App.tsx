@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { MediaModule, ModuleKey } from '@taiyou/contracts';
 import { modules, publicHttpsDestination } from './catalogue';
 import { applyHubTheme, HUB_THEMES, readInitialHubTheme, type HubTheme } from './theme';
+import { DESKTOP_PORTALS, MOBILE_PORTAL_BORDERS, MOBILE_PORTAL_MASKS, desktopClipTransform, desktopPortalCSS, type PortalKey } from './portalGeometry';
 import './styles.css';
 
-type PanelKey = 'novel' | 'manga' | 'anime' | 'movies';
-
-const portalInfo: Record<ModuleKey, { title: string; key: PanelKey; image: string; description: string }> = {
+const portalInfo: Record<ModuleKey, { title: string; key: PortalKey; image: string; description: string }> = {
   novels: {
     title: 'Novel', key: 'novel', image: '/art/cinematic-novel-1600.webp',
     description: 'Enter your personal collection of novels and stories.',
@@ -25,38 +25,31 @@ const portalInfo: Record<ModuleKey, { title: string; key: PanelKey; image: strin
   },
 };
 
-const portalMasks: Record<PanelKey, string> = {
-  novel: 'M .24 .016 C .49 -.006 .74 .014 .946 .009 C 1.006 .007 1.01 .048 .996 .13 L .933 .768 C .919 .906 .828 .983 .632 .99 L .058 .997 C .006 1.001 .002 .976 .006 .895 L .087 .223 C .107 .107 .156 .037 .24 .016 Z',
-  manga: 'M .18 .046 C .42 -.015 .71 .001 .935 .012 C 1.017 .019 1.006 .114 .998 .223 L .988 .763 C .988 .899 .916 .953 .789 .979 C .564 1.006 .34 .99 .081 .998 C -.002 1 .002 .948 .006 .845 L .074 .227 C .087 .133 .116 .062 .18 .046 Z',
-  anime: 'M .17 .008 C .402 -.012 .722 -.003 .93 .013 C .996 .018 1.007 .073 .99 .18 L .931 .795 C .91 .919 .811 .981 .646 .991 L .085 .997 C -.005 1 .002 .955 .007 .863 L .059 .209 C .076 .104 .105 .031 .17 .008 Z',
-  movies: 'M .185 .048 C .42 -.002 .743 -.006 .934 .014 C .996 .019 1.002 .078 .997 .17 L .999 .864 C .998 .942 .966 .989 .866 .991 L .07 .998 C .008 1.002 .003 .955 .009 .865 L .056 .209 C .071 .115 .114 .059 .185 .048 Z',
-};
-
-const portalBorders: Record<PanelKey, string> = {
-  novel: 'M240 11 C490 -4 740 10 946 6 C1006 5 1010 34 996 91 L933 538 C919 634 828 688 632 693 L58 698 C6 701 2 683 6 627 L87 156 C107 75 156 26 240 11 Z',
-  manga: 'M180 32 C420 -10 710 1 935 8 C1017 13 1006 80 998 156 L988 534 C988 629 916 667 789 685 C564 704 340 693 81 699 C-2 700 2 663 6 592 L74 159 C87 93 116 43 180 32 Z',
-  anime: 'M170 6 C402 -8 722 -2 930 9 C996 13 1007 51 990 126 L931 556 C910 643 811 687 646 694 L85 698 C-5 700 2 668 7 604 L59 146 C76 73 105 22 170 6 Z',
-  movies: 'M185 34 C420 -1 743 -4 934 10 C996 13 1002 55 997 119 L999 604 C998 660 966 692 866 694 L70 698 C8 701 3 668 9 606 L56 146 C71 81 114 41 185 34 Z',
-};
-
 function PortalDefinitions() {
-  return <svg aria-hidden="true" className="svg-definitions" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+  return <svg aria-hidden="true" className="svg-definitions"
+    xmlns="http://www.w3.org/2000/svg" width="0" height="0">
     <defs>
-      {Object.entries(portalMasks).map(([key, d]) =>
-        <clipPath key={key} id={`${key}-clip`} clipPathUnits="objectBoundingBox"><path d={d} /></clipPath>)}
+      {Object.entries(DESKTOP_PORTALS).map(([key, shape]) =>
+        <clipPath key={key} id={`${key}-desktop-clip`} clipPathUnits="objectBoundingBox">
+          <path d={shape.path} transform={desktopClipTransform(shape.bounds)} />
+        </clipPath>)}
+      {Object.entries(MOBILE_PORTAL_MASKS).map(([key, path]) =>
+        <clipPath key={key} id={`${key}-mobile-clip`} clipPathUnits="objectBoundingBox">
+          <path d={path} />
+        </clipPath>)}
       <linearGradient id="portal-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop stopColor="#40220f" />
-        <stop offset=".16" stopColor="#eeb55e" />
-        <stop offset=".4" stopColor="#ffdd8b" />
-        <stop offset=".63" stopColor="#8e4c1b" />
-        <stop offset=".86" stopColor="#ffd277" />
-        <stop offset="1" stopColor="#8b491e" />
+        <stop stopColor="#533016" />
+        <stop offset=".18" stopColor="#8c5c33" />
+        <stop offset=".38" stopColor="#dfb375" />
+        <stop offset=".63" stopColor="#5d351b" />
+        <stop offset=".85" stopColor="#efc184" />
+        <stop offset="1" stopColor="#8b532d" />
       </linearGradient>
       <linearGradient id="portal-glint" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop stopColor="#e3a457" stopOpacity="0" />
-        <stop offset=".3" stopColor="#ffe9b4" />
-        <stop offset=".64" stopColor="#ffc578" stopOpacity=".7" />
-        <stop offset="1" stopColor="#e3a457" stopOpacity="0" />
+        <stop stopColor="#e5ab5b" stopOpacity="0" />
+        <stop offset=".25" stopColor="#fff1cb" stopOpacity=".70" />
+        <stop offset=".56" stopColor="#ffc87d" stopOpacity=".52" />
+        <stop offset="1" stopColor="#e5ab5b" stopOpacity="0" />
       </linearGradient>
       <linearGradient id="sun-fill" x1="0" y1="0" x2="1" y2="1">
         <stop stopColor="#fff6c4" />
@@ -104,6 +97,7 @@ function ShortcutsIcon() {
 
 function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
   const info = portalInfo[module.key];
+  const shape = DESKTOP_PORTALS[info.key];
   const safeHref = module.availability === 'available' ? publicHttpsDestination(module.href) : undefined;
   const available = Boolean(safeHref);
   const contents = <>
@@ -115,24 +109,41 @@ function Portal({ module, dimmed }: { module: MediaModule; dimmed: boolean }) {
         height={info.key === 'movies' ? 935 : 992} loading="eager" decoding="async" />
       <div className="portal-vignette" />
     </div>
-    <svg className="portal-border" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
-      <path d={portalBorders[info.key]} />
-      <path className="portal-border-glint" d={portalBorders[info.key]} />
-    </svg>
     <div className="portal-content">
       <h3>{info.title}</h3>
       <span className="ornament" aria-hidden="true" />
       {available
         ? <span className="action-pill">Enter Library <span aria-hidden="true">›</span></span>
-        : <span className="status-pill"><span aria-hidden="true">{module.key === 'anime' ? '◷' : '▣'}</span>
+        : <span className="status-pill">
+            {module.key === 'anime'
+              ? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+                  aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 5v7l4 3" /></svg>
+              : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+                  aria-hidden="true"><path d="M3 9h18v12H3zM3 9l17-5 1 5M3 13h18M7 7l3 5m5-7 3 6" /></svg>}
             {module.key === 'anime' ? 'Planned' : 'Coming Soon'}</span>}
       <span className="visually-hidden">{info.description}</span>
     </div>
   </>;
-  return <li className={`portal-item portal-${info.key}${dimmed ? ' portal-dimmed' : ''}`}>
+  // Deliberately outside the clipped link: every edge remains fully painted.
+  // It uses the SAME path and rectangle as the mask and never receives pointer events.
+  const rim = <div className="portal-rim" aria-hidden="true">
+    <svg className="portal-border portal-border-desktop"
+      viewBox={`${shape.bounds.x} ${shape.bounds.y} ${shape.bounds.width} ${shape.bounds.height}`}
+      preserveAspectRatio="none" aria-hidden="true">
+      <path data-desktop-boundary={info.key} d={shape.path} />
+      <path className="portal-border-glint" d={shape.path} />
+    </svg>
+    <svg className="portal-border portal-border-mobile" viewBox="0 0 1000 700"
+      preserveAspectRatio="none" aria-hidden="true">
+      <path d={MOBILE_PORTAL_BORDERS[info.key]} />
+    </svg>
+  </div>;
+  return <li className={`portal-item portal-${info.key}${dimmed ? ' portal-dimmed' : ''}`}
+    style={desktopPortalCSS(shape.bounds) as CSSProperties}>
     {available ? <a className="portal-surface" href={safeHref} rel="noopener noreferrer"
       referrerPolicy="no-referrer">{contents}</a>
       : <article className="portal-surface">{contents}</article>}
+    {rim}
   </li>;
 }
 
