@@ -103,3 +103,15 @@ test('actual React page paints the restored cinematic panels at 1648x928', async
   }
   await captureVerifiedArtwork(page, test.info().outputPath('hub-reference-comparison-1648x928.png'));
 });
+for (const [width, height] of [[1280, 720], [1440, 900], [1920, 1080], [2560, 1440]] as const) {
+  test('painted cinematic desktop reference at ' + width + 'x' + height, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    await expect(page.locator('.portal-item')).toHaveCount(4);
+    await expect(page.locator('a.portal-surface')).toHaveCount(2);
+    await expect(page.locator('article.portal-surface')).toHaveCount(2);
+    await captureVerifiedArtwork(
+      page, test.info().outputPath('hub-fidelity-' + width + 'x' + height + '.png'),
+    );
+  });
+}
