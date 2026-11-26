@@ -18,8 +18,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .skip-link:focus{transform:none;outline:3px solid var(--focus)}
 .hub{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:var(--scene-bg)}
 .world{position:absolute;inset:0;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#261109 30%,var(--scene-bg) 82%)}
-.environment{position:absolute;inset:0 35% 0 0;overflow:hidden;pointer-events:none}
-.environment-image{position:absolute;inset:0 7% 0 -2%;background:url('/art/hero-clean.webp') left bottom/auto 100% no-repeat;filter:var(--scene-filter)}
+.environment{position:absolute;inset:0 23% 0 0;overflow:hidden;pointer-events:none}
+.environment-image{position:absolute;inset:0 0 0 -2%;background:url('/art/hero-clean.webp') left 50%/auto 107% no-repeat;filter:var(--scene-filter)}
 .environment:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#110a0916 0%,transparent 57%,#120909cc 90%,var(--scene-bg) 100%),linear-gradient(180deg,#1208067a 0%,transparent 21%,transparent 81%,#11090667 100%);pointer-events:none}
 .environment-glow{position:absolute;top:13%;left:24%;width:70%;height:75%;background:radial-gradient(ellipse at center,#ffd58a38,transparent 61%);mix-blend-mode:screen;opacity:.4;pointer-events:none}
 .world-sweep{position:absolute;z-index:1;top:0;left:0;width:100%;height:92%;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 5px #f6b9628a)}
@@ -47,8 +47,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-item{position:absolute;pointer-events:auto;isolation:isolate;filter:drop-shadow(1px 4px 8px #0006);}
 .portal-novel{left:37.3%;top:11.0%;width:32.8%;height:41.7%;z-index:4}
 .portal-manga{left:65.9%;top:10.9%;width:32.4%;height:41.8%;z-index:5}
-.portal-anime{left:33.4%;top:52.5%;width:32.9%;height:42.7%;z-index:6}
-.portal-movies{left:62.8%;top:52.8%;width:35%;height:42.4%;z-index:7}
+.portal-anime{left:33.4%;top:53.4%;width:32.9%;height:40.2%;z-index:6}
+.portal-movies{left:62.8%;top:53.4%;width:35%;height:40.0%;z-index:7}
 .portal-surface{position:relative;display:block;width:100%;height:100%;color:#fff0dc;text-decoration:none;outline:none;}
 .portal-surface:focus-visible{filter:drop-shadow(0 0 12px #ffdf98)}
 .portal-mask{position:absolute;inset:0;overflow:hidden;filter:none;}
@@ -62,7 +62,7 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-border path{fill:none;stroke:url(#portal-gold);stroke-width:1.75;vector-effect:non-scaling-stroke}
 .portal-content{position:absolute;z-index:7;left:14.2%;bottom:11.5%;display:flex;flex-direction:column;align-items:flex-start;gap:11px;min-width:0;max-width:76%;pointer-events:none;text-shadow:0 2px 9px #000c}
 .portal-content h3{font-weight:500;margin:0;font-size:clamp(32px,3.3vw,58px);letter-spacing:-.027em;line-height:1.1;white-space:nowrap}
-.portal-manga .portal-content{left:13%;bottom:12.1%}.portal-anime .portal-content{left:13.5%;bottom:10%}.portal-movies .portal-content{left:13.5%;bottom:10%}
+.portal-manga .portal-content{left:13%;bottom:12.1%}.portal-anime .portal-content{left:13.5%;bottom:20%}.portal-movies .portal-content{left:13.5%;bottom:19.5%}
 .portal-movies .portal-content h3{font-size:clamp(29px,2.95vw,53px)}
 .ornament{display:block;position:relative;height:1px;width:84px;background:linear-gradient(90deg,var(--gold),#b9803b77,transparent);margin:3px 0}
 .ornament:after{content:"";position:absolute;left:44px;top:-3px;height:7px;width:7px;transform:rotate(45deg);border:1px solid var(--gold);background:#2b1b12}
@@ -74,6 +74,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-surface[href]:hover .action-pill,.portal-surface[href]:focus-visible .action-pill{background:linear-gradient(180deg,#976024,#573015);border-color:#ffe7a5}
 @media(min-width:1700px){.portal-content h3{font-size:58px}.portal-movies .portal-content h3{font-size:53px}}
 @media(max-width:1100px){
+ .portal-anime .portal-content,.portal-movies .portal-content{bottom:10%}
+
  .hub{height:auto;min-height:100svh;overflow:visible}
  .masthead{position:relative;height:82px;background:#170d0cea}
  .world{position:relative;min-height:unset;inset:auto;display:flex;flex-direction:column;overflow:hidden}
@@ -131,19 +133,19 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
     radial-gradient(ellipse at 34% 47%, rgba(150,72,26,.21), transparent 59%),
     linear-gradient(96deg, #281309 16%, #1b0d0a 48%, var(--scene-bg) 92%);
 }
-.environment { inset: 0 28% 0 0; }
+.environment { inset: 0 20% 0 0; }
 .environment-image {
   filter: var(--scene-filter) brightness(1.15) saturate(1.095) contrast(1.055);
 }
 .environment::after {
   background:
-    linear-gradient(90deg, rgba(18,8,6,.045) 0%, transparent 45%, rgba(18,8,6,.19) 73%, var(--scene-bg) 100%),
+    linear-gradient(90deg, rgba(18,8,6,.045) 0%, transparent 52%, rgba(18,8,6,.10) 81%, var(--scene-bg) 100%),
     linear-gradient(180deg, rgba(19,8,6,.23) 0%, transparent 24%, transparent 83%, rgba(19,8,6,.20) 100%);
 }
 .environment-glow {
-  top: 3%; left: 23%; width: 49%; height: 66%; opacity: .57;
+  top: 4%; left: 24%; width: 48%; height: 63%; opacity: .46;
   background: radial-gradient(ellipse at 58% 31%, rgba(255,221,145,.48), rgba(255,183,80,.15) 38%, transparent 70%);
-  filter: blur(16px); mix-blend-mode: screen;
+  filter: blur(12px); mix-blend-mode: screen;
 }
 .masthead {
   background: linear-gradient(180deg, rgba(17,8,6,.73), rgba(22,10,7,.46) 73%, transparent);
@@ -172,8 +174,8 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-movies .portal-content h3 { font-size:clamp(28px,2.83vw,49px); }
 .portal-vignette {
   background:
-    linear-gradient(180deg,rgba(16,8,6,.015) 0%,transparent 30%,rgba(17,8,7,.09) 43%,rgba(18,10,9,.53) 72%,rgba(12,7,7,.82) 100%),
-    linear-gradient(90deg,rgba(17,8,7,.29),transparent 53%,transparent 90%);
+    linear-gradient(180deg,transparent 0%,transparent 37%,rgba(14,8,7,.08) 47%,rgba(16,9,8,.42) 76%,rgba(12,7,7,.76) 100%),
+    radial-gradient(ellipse at 23% 86%,rgba(16,8,6,.36),transparent 61%);
 }
 .action-pill {
   padding:7px 22px; border-color:rgba(242,184,98,.83);
@@ -203,7 +205,12 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 /* Final detailing pass: finely engraved sun and directional highlights rather than flat neon. */
 .brand-symbol { filter: drop-shadow(0 0 4px rgba(255,184,85,.20)); }
 .portal-border .portal-border-glint {
-  stroke-width:2; opacity:.72;
-  filter:drop-shadow(0 0 1.3px rgba(255,216,148,.55));
+  stroke-width:1.75; opacity:.60;
+  filter:drop-shadow(0 0 1px rgba(255,216,148,.42));
 }
 .portal-border { filter:drop-shadow(0 0 .75px rgba(255,196,101,.20)); }
+
+/* Fidelity QA: breathing room beneath the staggered lower portals and deliberate content inset. */
+@media (min-width:1101px) and (min-height:761px) {
+  .portal-anime .portal-content,.portal-movies .portal-content { min-width:0; }
+}
