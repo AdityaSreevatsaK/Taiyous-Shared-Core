@@ -111,7 +111,7 @@ const highDensityHashes = {
   'cinematic-movies-tv-1600.webp': '4978b75b0a7795fe05f0cdcf1746b8b27145d298fb06cacae80c71601dfec9e1',
   'cinematic-movies-tv-900.webp': '6e08c2481693511a71a85d4985f03d6cfeeca01a6a9c908ece0b62a60370a402',
   'hero-clean.webp': '288431f734ec8be1054e5f5f1dd4d0fb92e13b08b30b43aa7c8216b316c1a7e9',
-  'hero-reference-restored.webp': 'b9ce925d12e8c0ecdf803fe9f7960469c41d696d06d74f319511f1ac551659cd',
+  'hero-reference-restored.webp': 'e51accc3525cba746acc6247b56595f9c6ff4fb2b4bf4c064ee7df2038f8dad5',
 };
 for (const [name, digest] of Object.entries(highDensityHashes)) {
   const bytes = await readFile(new URL('art/' + name, dist));

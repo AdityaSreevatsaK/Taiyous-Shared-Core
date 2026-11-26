@@ -19,13 +19,13 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .hub{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:var(--scene-bg)}
 .world{position:absolute;inset:0;isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#261109 30%,var(--scene-bg) 82%)}
 .environment{position:absolute;inset:0 23% 0 0;overflow:hidden;pointer-events:none}
-.environment-image{position:absolute;inset:0 0 0 -2%;background:url('/art/hero-reference-restored.webp') left 50%/auto 100% no-repeat;filter:var(--scene-filter)}
+.environment-image{position:absolute;inset:0 0 0 -2%;background:url('/art/hero-reference-restored.webp') left 18%/auto 94% no-repeat;filter:var(--scene-filter)}
 .environment:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#110a0916 0%,transparent 57%,#120909cc 90%,var(--scene-bg) 100%),linear-gradient(180deg,#1208067a 0%,transparent 21%,transparent 81%,#11090667 100%);pointer-events:none}
 .environment-glow{position:absolute;top:13%;left:24%;width:70%;height:75%;background:radial-gradient(ellipse at center,#ffd58a38,transparent 61%);mix-blend-mode:screen;opacity:.4;pointer-events:none}
 .world-sweep{position:absolute;z-index:1;top:0;left:0;width:100%;height:92%;pointer-events:none;opacity:.9;filter:drop-shadow(0 0 5px #f6b9628a)}
-.masthead{position:absolute;z-index:30;inset:0 0 auto;height:clamp(76px,10.3svh,102px);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:8px clamp(23px,3.65vw,73px);background:linear-gradient(180deg,#150b0ad9,#1b0d08a0 85%,transparent);}
-.brand{display:flex;align-items:center;gap:14px;min-width:0;text-decoration:none;border-radius:5px}
-.brand-symbol{width:clamp(60px,5.3vw,92px);height:clamp(60px,5.3vw,92px);flex:none;filter:drop-shadow(0 0 10px #e8a34a66)}
+.masthead{position:absolute;z-index:30;inset:0 0 auto;height:clamp(76px,10.3svh,102px);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:8px clamp(23px,3.65vw,73px);padding-left:clamp(25px,4.7vw,78px);background:linear-gradient(180deg,#150b0ad9,#1b0d08a0 85%,transparent);}
+.brand{display:flex;align-items:center;gap:clamp(10px,1.25vw,20px);min-width:0;text-decoration:none;border-radius:5px}
+.brand-symbol{width:clamp(54px,3.6vw,68px);height:clamp(54px,3.6vw,68px);flex:none;filter:drop-shadow(0 0 10px #e8a34a66)}
 .brand-name{font-size:clamp(28px,2.7vw,46px);font-weight:500;letter-spacing:-.037em;line-height:1;text-shadow:0 2px 9px #0009;white-space:nowrap}
 .brand:focus-visible{outline:3px solid var(--focus);outline-offset:5px}
 .masthead-right{display:flex;align-items:center;gap:clamp(13px,1.3vw,22px);margin-left:auto}
@@ -60,9 +60,9 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-vignette{position:absolute;inset:0;background:linear-gradient(180deg,#0f0b0800 0%,#0b080800 32%,#120b081c 45%,#140b0b82 71%,#0d0808cb 100%),linear-gradient(90deg,#110b0a56,transparent 48%,transparent 93%);pointer-events:none}
 .portal-border{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 1.4px #f9c27266)}
 .portal-border path{fill:none;stroke:url(#portal-gold);stroke-width:1.75;vector-effect:non-scaling-stroke}
-.portal-content{position:absolute;z-index:7;left:14.2%;bottom:11.5%;display:flex;flex-direction:column;align-items:flex-start;gap:11px;min-width:0;max-width:76%;pointer-events:none;text-shadow:0 2px 9px #000c}
+.portal-content{position:absolute;z-index:7;left:14.2%;bottom:12.6%;display:flex;flex-direction:column;align-items:flex-start;gap:11px;min-width:0;max-width:76%;pointer-events:none;text-shadow:0 2px 9px #000c}
 .portal-content h3{font-weight:500;margin:0;font-size:clamp(32px,3.3vw,58px);letter-spacing:-.027em;line-height:1.1;white-space:nowrap}
-.portal-manga .portal-content{left:13%;bottom:12.1%}.portal-anime .portal-content{left:13.5%;bottom:20%}.portal-movies .portal-content{left:13.5%;bottom:19.5%}
+.portal-manga .portal-content{left:13%;bottom:13.2%}.portal-anime .portal-content{left:13.5%;bottom:15.8%}.portal-movies .portal-content{left:13.5%;bottom:15.8%}
 .portal-movies .portal-content h3{font-size:clamp(29px,2.95vw,53px)}
 .ornament{display:block;position:relative;height:1px;width:84px;background:linear-gradient(90deg,var(--gold),#b9803b77,transparent);margin:3px 0}
 .ornament:after{content:"";position:absolute;left:44px;top:-3px;height:7px;width:7px;transform:rotate(45deg);border:1px solid var(--gold);background:#2b1b12}
