@@ -1,6 +1,6 @@
 # Accepted architecture and product decisions
 
-**Reconciled: 24 November 2026.** The entries below are historical decision summaries, not a substitute for code. New major decisions should use an ADR/RFC and record supersession, trade-offs, security and rollback.
+**Reconciled: 26 November 2026.** The entries below are historical decision summaries, not a substitute for code. New major decisions should use an ADR/RFC and record supersession, trade-offs, security and rollback.
 
 | ID | Decision | State / evidence |
 | --- | --- | --- |
@@ -24,6 +24,7 @@
 | ADR-017 | Recreate the owner's **cinematic fantasy-library reference** as separate React/CSS layers, curved panels and real semantic actions | Released in PR #25, squash commit `f497b62eab04d67b3f2652f9bf55131417d2b708`; [ADR](adr/ADR-017-cinematic-target-reconstruction.md) |
 | ADR-018 | Preserve composition with reference-guided high-resolution source artwork, 900/1600px WebP variants and repaired background | Released in PR #25 with image hashes and responsive browser tests; [ADR](adr/ADR-018-cinematic-artwork-high-density.md) |
 
+| ADR-020 | Replace separate overlapping desktop card bounds/masks/borders with four regions in one shared 1648×928 SVG coordinate system; paired seams have measurable positive gutters, and border paths are no longer clipped by the link's mask | Implemented for cinematic structural fidelity; [ADR](adr/ADR-020-shared-cinematic-portal-geometry.md), PR #28 |
 ## Rationale that must not get lost
 
 **Independent applications:** Novel and Manga control their own private storage, authentication, reading data, progress, offline behaviour, and release process. Shared Core is a build-time library candidate and optional public gateway. Do not introduce coupling by accident.
