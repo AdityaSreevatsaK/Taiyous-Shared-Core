@@ -44,10 +44,10 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .header-panel label,.header-panel strong{font-size:18px;font-weight:500}.header-panel input{border:1px solid #a97842;background:#150c0b;color:#fff4e6;border-radius:8px;padding:12px;width:100%;font:15px system-ui,sans-serif}
 .header-panel p,.header-panel small{margin:0;font:13px/1.4 system-ui,sans-serif;color:#d8c2aa}.header-panel a{color:#ffdda2;min-height:37px;display:flex;align-items:center;border-bottom:1px solid #a9784230;font:15px Georgia,serif;text-decoration:none}.header-panel a:hover{text-decoration:underline}
 .portal-stage{position:absolute;inset:0;z-index:5;pointer-events:none}
-.portal-item{position:absolute;left:var(--portal-x);top:var(--portal-y);width:var(--portal-w);height:var(--portal-h);pointer-events:auto;isolation:isolate;filter:drop-shadow(0 9px 12px #0006);}
-.portal-surface{position:relative;display:block;width:100%;height:100%;color:#fff0dc;text-decoration:none;outline:none;}
+.portal-item{position:absolute;left:var(--portal-x);top:var(--portal-y);width:var(--portal-w);height:var(--portal-h);pointer-events:none;isolation:isolate;filter:drop-shadow(0 9px 12px #0006);}
+.portal-surface{position:relative;display:block;width:100%;height:100%;color:#fff0dc;text-decoration:none;outline:none;pointer-events:auto;}
 .portal-surface:focus-visible{filter:drop-shadow(0 0 3px #ffdf98)}
-.portal-surface:focus-visible .portal-border path{stroke:var(--focus);stroke-width:2.4}
+.portal-surface:focus-visible + .portal-rim .portal-border path{stroke:var(--focus);stroke-width:2.4}
 .portal-mask{position:absolute;inset:0;overflow:hidden;filter:none;}
 .portal-novel .portal-surface,.portal-novel .portal-mask{clip-path:url(#novel-desktop-clip)}
 .portal-manga .portal-surface,.portal-manga .portal-mask{clip-path:url(#manga-desktop-clip)}
@@ -55,6 +55,7 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 .portal-movies .portal-surface,.portal-movies .portal-mask{clip-path:url(#movies-desktop-clip)}
 .portal-image{position:absolute;width:100%;height:100%;inset:0;object-fit:cover;display:block;filter:var(--panel-filter);transition:transform .5s cubic-bezier(.2,.7,.23,1)}
 .portal-vignette{position:absolute;inset:0;background:linear-gradient(180deg,#0f0b0800 0%,#0b080800 32%,#120b081c 45%,#140b0b82 71%,#0d0808cb 100%),linear-gradient(90deg,#110b0a56,transparent 48%,transparent 93%);pointer-events:none}
+.portal-rim{position:absolute;inset:0;pointer-events:none;z-index:5}
 .portal-border{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 .8px #f9c27244)}
 .portal-border-mobile{display:none}
 .portal-border path{fill:none;stroke:url(#portal-gold);stroke-width:1.75;vector-effect:non-scaling-stroke}
@@ -118,7 +119,7 @@ button,select,input{font:inherit}button{cursor:pointer}a{color:inherit}
 
 /* Semantic <ul> and <li> layer without changing the art-directed geometry. */
 .portal-list { position:absolute; inset:0; list-style:none; padding:0; margin:0; pointer-events:none; }
-.portal-list > li { pointer-events:auto; }
+.portal-list > li { pointer-events:none; }
 .portal-dimmed { opacity:.22; }
 @media(max-width:1100px) { .portal-list { position:static; display:contents; } }
 
