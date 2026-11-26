@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-for (const [width, height] of [[1280,720],[1366,768],[1648,928],[1672,851],[1920,900],[1920,1080]] as const) {
+for (const [width, height] of [[1280,720],[1366,768],[1440,900],[1648,928],[1672,851],[1920,900],[1920,1080],[2560,1440]] as const) {
   test('cinematic environment fits desktop ' + width + 'x' + height, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.goto('/');
@@ -62,7 +62,11 @@ test('original cinematic panel artwork is locally available, decoded and indepen
   const background = await page.locator('.environment-image').evaluate(
     element => getComputedStyle(element).backgroundImage,
   );
-  expect(background).toContain('hero-clean.webp');
+  expect(background).toContain('hero-reference-restored.webp');
+  const sceneSize = await page.locator('.environment-image').evaluate(
+    element => getComputedStyle(element).backgroundSize,
+  );
+  expect(sceneSize).toContain('100%'); // Covers full scene height, preventing a flat colour band below the architecture.
   await expect(page.locator('.portal-content h3')).toHaveText(['Novel','Manga','Anime','Movies & TV']);
 });
 
@@ -84,4 +88,32 @@ test('high-DPI desktop selects 1600px art with unchanged panel geometry', async 
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(1648);
   } finally { await context.close(); }
+});
+test('cinematic spacing keeps titles, ornament and status controls deliberately separated', async ({ page }) => {
+  await page.setViewportSize({ width: 1648, height: 928 });
+  await page.goto('/');
+  const layout = await page.locator('.portal-item').evaluateAll(items => items.map(item => {
+    const panel = item.getBoundingClientRect();
+    const heading = item.querySelector('h3')!.getBoundingClientRect();
+    const ornament = item.querySelector('.ornament')!.getBoundingClientRect();
+    const action = item.querySelector('.action-pill,.status-pill')!.getBoundingClientRect();
+    return {
+      top: panel.top, bottom: panel.bottom, left: panel.left, right: panel.right,
+      headingTop: heading.top, headingBottom: heading.bottom, headingRight: heading.right,
+      ornamentTop: ornament.top, ornamentBottom: ornament.bottom,
+      actionTop: action.top, actionBottom: action.bottom, actionLeft: action.left,
+    };
+  }));
+  expect(layout).toHaveLength(4);
+  const [novel, manga, anime, movies] = layout;
+  expect(anime!.top).toBeGreaterThan(novel!.bottom + 2);
+  expect(movies!.top).toBeGreaterThan(manga!.bottom + 2);
+  for (const item of layout) {
+    expect(item.headingTop).toBeGreaterThan(item.top + 15);
+    expect(item.headingRight).toBeLessThan(item.right - 8);
+    expect(item.ornamentTop).toBeGreaterThan(item.headingBottom);
+    expect(item.actionTop).toBeGreaterThan(item.ornamentBottom + 4);
+    expect(item.actionBottom).toBeLessThan(item.bottom - 15);
+    expect(item.actionLeft).toBeGreaterThan(item.left + 12);
+  }
 });

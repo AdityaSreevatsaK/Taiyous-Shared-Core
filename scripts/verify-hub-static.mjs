@@ -96,7 +96,7 @@ for (const [filename, expected] of Object.entries(cinematicArtworkHashes)) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'), expected,
     'Modified reference cinematic artwork: ' + filename);
 }
-assert.ok(index.includes('hero-clean.webp'), 'Preload the repaired cinematic environment');
+assert.ok(index.includes('hero-reference-restored.webp'), 'Preload the accurately restored architectural environment');
 console.log('Verified independently composited original cinematic environment and portal image assets.');
 
 // Reference-guided reconstructions are individually packaged, byte-verified WebP assets.
@@ -111,6 +111,7 @@ const highDensityHashes = {
   'cinematic-movies-tv-1600.webp': '4978b75b0a7795fe05f0cdcf1746b8b27145d298fb06cacae80c71601dfec9e1',
   'cinematic-movies-tv-900.webp': '6e08c2481693511a71a85d4985f03d6cfeeca01a6a9c908ece0b62a60370a402',
   'hero-clean.webp': '288431f734ec8be1054e5f5f1dd4d0fb92e13b08b30b43aa7c8216b316c1a7e9',
+  'hero-reference-restored.webp': 'e51accc3525cba746acc6247b56595f9c6ff4fb2b4bf4c064ee7df2038f8dad5',
 };
 for (const [name, digest] of Object.entries(highDensityHashes)) {
   const bytes = await readFile(new URL('art/' + name, dist));
